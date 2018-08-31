@@ -1,8 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="hotciv.standard.TestAlphaCiv" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-08-27T12:53:16" hostname="Troels-Laptop" time="0.05">
+<testsuite name="hotciv.standard.TestAlphaCiv" tests="29" skipped="0" failures="0" errors="0" timestamp="2018-08-31T10:06:10" hostname="Troels-Laptop" time="0.211">
   <properties/>
-  <testcase name="shouldBeRedAsStartingPlayer" classname="hotciv.standard.TestAlphaCiv" time="0.025"/>
-  <testcase name="shouldDefinetelyBeRemoved" classname="hotciv.standard.TestAlphaCiv" time="0.018"/>
+  <testcase name="thereShouldBeHillsAt0_1" classname="hotciv.standard.TestAlphaCiv" time="0.067"/>
+  <testcase name="ageShouldStartAt4000YearsBeforeChrist" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="citiesShouldHave1Population" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="thereShouldBePlainsAt1_1" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="shouldBeRedAsStartingPlayer" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="ageShouldIncrementWith100AtEndOfTurn" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="thereShouldBeAUnitPlacedOn2_0" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="shouldHaveCityAt11" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="thereShouldBeASettlerAt4_3" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="thereShouldBeABlueCityOn41" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="redShouldOwnAnArcherAt2_0" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="shouldDefinetelyBeRemoved" classname="hotciv.standard.TestAlphaCiv" time="0.088"/>
+  <testcase name="CitiesShouldHaveZeroProductionInitiallyRedCity" classname="hotciv.standard.TestAlphaCiv" time="0.003"/>
+  <testcase name="ShouldHave6ProductionAtEndTurnRedCity" classname="hotciv.standard.TestAlphaCiv" time="0.005"/>
+  <testcase name="shouldBeBlueAfterEndTurn" classname="hotciv.standard.TestAlphaCiv" time="0.008"/>
+  <testcase name="shouldBeRedPlayerWinningIn3000BC" classname="hotciv.standard.TestAlphaCiv" time="0.003"/>
+  <testcase name="ShouldHave12ProductionAfterTwoEndTurnsBlue" classname="hotciv.standard.TestAlphaCiv" time="0.003"/>
+  <testcase name="thereShouldBeAnOceanAt1_0" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="blueShouldOwnALegion3_2" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="thereShouldBeALegionAt3_2" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="thereShouldNotBeACityOn01" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="thereShouldBeACityOn41" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="ShouldHave12ProductionAfterTwoEndTurnRedCity" classname="hotciv.standard.TestAlphaCiv" time="0.003"/>
+  <testcase name="thereShouldBeAnArcherOn2_0" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="thereShouldAlsoBePlainsAt4_2" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="ShouldHave6ProductionAtEndTurnBlueCity" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="thereShouldBeMountainsAt2_2" classname="hotciv.standard.TestAlphaCiv" time="0.002"/>
+  <testcase name="shouldHaveRedCityAt11" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="thereShouldLastlyBePlainsAt15_15" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

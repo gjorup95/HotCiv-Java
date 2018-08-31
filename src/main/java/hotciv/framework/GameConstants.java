@@ -45,4 +45,15 @@ public class GameConstants {
   // Valid production balance types
   public static final String productionFocus = "hammer";
   public static final String foodFocus = "apple";
+  // Positions for cities
+  public static final Position RED_CITY_POSITION = new Position(1,1);
+  public static final Position BLUE_CITY_POSITION = new Position(4,1);
+  // Positions for mountains, oceans etc.
+  public static final Position OCEAN_POSITION = new Position(1,0);
+  public static final Position HILLS_POSITION = new Position(0,1);
+  public static final Position MOUNTAINS_POSITION = new Position(2,2);
+  // Positions for Archers, legionaries and Settlers
+  public static final Position ARCHER_POSITION_RED = new Position(2,0);
+  public static final Position LEGION_POSITION_BLUE = new Position(3,2);
+  public static final Position SETTLER_POSITION_RED = new Position(4,3);
 }

@@ -38,23 +38,180 @@ import java.util.*;
 */
 public class TestAlphaCiv {
   private Game game;
+  private CityImpl redCity;
+  private GameConstants gameConstants;
+
 
   /** Fixture for alphaciv testing. */
   @Before
   public void setUp() {
     game = new GameImpl();
+    redCity = new CityImpl(Player.RED);
   }
 
   // FRS p. 455 states that 'Red is the first player to take a turn'.
   @Test
   public void shouldBeRedAsStartingPlayer() {
     assertThat(game, is(notNullValue()));
-    // TODO: reenable the assert below to get started...
-    // assertThat(game.getPlayerInTurn(), is(Player.RED));
+    assertThat(game.getPlayerInTurn(), is(Player.RED));
+  }
+  @Test
+  public void shouldBeBlueAfterEndTurn(){
+    game.endOfTurn();
+    assertThat(game, is(notNullValue()));
+    assertThat(game.getPlayerInTurn(), is(Player.BLUE));
+
   }
 
+  @Test
+  public void ageShouldStartAt4000YearsBeforeChrist(){
+    assertEquals( -4000, game.getAge());
+
+  }
+  @Test
+  public void ageShouldIncrementWith100AtEndOfTurn(){
+    game.endOfTurn();
+    assertEquals(-3900, game.getAge());
+    game.endOfTurn();
+    game.endOfTurn();
+    game.endOfTurn();
+    game.endOfTurn();
+    game.endOfTurn();
+    assertEquals(-3400, game.getAge());
+  }
+  @Test
+  public void shouldHaveCityAt11() {
+    assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION), notNullValue() );
+  }
+  @Test
+  public void shouldHaveRedCityAt11(){
+      assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION), is(notNullValue()));
+      assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED)  );
+
+  }
+  @Test
+  public void thereShouldNotBeACityOn01(){
+      assertThat(game.getCityAt(new Position(0,1)), is(nullValue())  );
+  }
+  @Test
+  public void thereShouldBeACityOn41(){
+      assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION), is(notNullValue()));
+  }
+@Test
+public void thereShouldBeABlueCityOn41(){
+  assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION), is(notNullValue()));
+      assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
+}
   /** REMOVE ME. Not a test of HotCiv, just an example of what
       matchers the hamcrest library has... */
+  @Test
+  public void CitiesShouldHaveZeroProductionInitiallyRedCity(){
+      assertEquals(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), (0));
+  }
+  @Test
+  public void ShouldHave6ProductionAtEndTurnRedCity() {
+    assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
+    game.endOfTurn();
+    game.endOfTurn();
+    assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
+  }
+  @Test
+  public void ShouldHave12ProductionAfterTwoEndTurnRedCity(){
+    assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
+    game.endOfTurn();
+    game.endOfTurn();
+    game.endOfTurn();
+    game.endOfTurn();
+    assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(12));
+  }
+  @Test
+  public void ShouldHave6ProductionAtEndTurnBlueCity() {
+    assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(0));
+    game.endOfTurn();
+    game.endOfTurn();
+    assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(6));
+  }
+  @Test
+  public void ShouldHave12ProductionAfterTwoEndTurnsBlue(){
+    assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(0));
+    game.endOfTurn();
+    game.endOfTurn();
+    game.endOfTurn();
+    game.endOfTurn();
+    assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(12));
+  }
+  @Test
+  public void citiesShouldHave1Population(){
+    assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getSize(), is(1));
+
+  }
+  @Test
+  public void thereShouldBeAnOceanAt1_0(){
+    assertThat(game.getTileAt(gameConstants.OCEAN_POSITION), is(notNullValue()));
+    assertThat(game.getTileAt(gameConstants.OCEAN_POSITION).getTypeString(), is(gameConstants.OCEANS));
+  }
+  @Test
+  public void thereShouldBeHillsAt0_1(){
+    assertThat(game.getTileAt(gameConstants.HILLS_POSITION), is(notNullValue()));
+    assertThat(game.getTileAt(gameConstants.HILLS_POSITION).getTypeString(),is(gameConstants.HILLS));
+  }
+  @Test
+  public void thereShouldBeMountainsAt2_2(){
+    assertThat(game.getTileAt(gameConstants.MOUNTAINS_POSITION), is(notNullValue()));
+    assertThat(game.getTileAt(gameConstants.MOUNTAINS_POSITION).getTypeString(), is(GameConstants.MOUNTAINS));
+  }
+  @Test
+  public void thereShouldBePlainsAt1_1(){
+    assertThat(game.getTileAt(new Position(1,1)).getTypeString(), is(gameConstants.PLAINS));
+  }
+  @Test
+  public void thereShouldAlsoBePlainsAt4_2(){
+    assertThat(game.getTileAt(new Position(4,2)).getTypeString(), is(gameConstants.PLAINS));
+  }
+  @Test
+  public void thereShouldLastlyBePlainsAt15_15(){
+    assertThat(game.getTileAt(new Position(15,15)).getTypeString(), is(gameConstants.PLAINS));
+  }
+  @Test
+  public void thereShouldBeAUnitPlacedOn2_0(){
+    assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
+  }
+  @Test
+  public void thereShouldBeAnArcherOn2_0(){
+    assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getTypeString(), is(gameConstants.ARCHER));
+  }
+  @Test
+  public void thereShouldBeALegionAt3_2(){
+    assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE), is(notNullValue()));
+    assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE).getTypeString(), is(GameConstants.LEGION) );
+  }
+  @Test
+  public void thereShouldBeASettlerAt4_3(){
+    assertThat(game.getUnitAt(gameConstants.SETTLER_POSITION_RED), is(notNullValue()) );
+    assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getTypeString(), is(GameConstants.SETTLER));
+  }
+  @Test
+  public void redShouldOwnAnArcherAt2_0(){
+    assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getOwner(), is(notNullValue()));
+  }
+  @Test
+  public void blueShouldOwnALegion3_2(){
+    assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(notNullValue()));
+    assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE).getOwner(), is(Player.BLUE));
+  }
+  @Test
+  public void shouldBeRedPlayerWinningIn3000BC(){
+    assertThat(game.getAge(), is(-4000));
+    for (int i=0; i<5; i++){
+      game.endOfTurn();
+    }
+    assertThat(game.getWinner(), is(not(Player.RED)));
+    for (int i=0; i<5; i++){
+      game.endOfTurn();
+    }
+   assertThat(game.getAge(), is(-3000));
+    assertThat(game.getWinner(), is(Player.RED));
+  }
   @Test
   public void shouldDefinetelyBeRemoved() {
     // Matching null and not null values
