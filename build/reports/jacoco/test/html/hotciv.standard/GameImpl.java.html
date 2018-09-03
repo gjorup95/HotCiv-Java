@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="da"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hotciv-tdd-start</a> &gt; <a href="index.source.html" class="el_package">hotciv.standard</a> &gt; <span class="el_source">GameImpl.java</span></div><h1>GameImpl.java</h1><pre class="source lang-java linenums">package hotciv.standard;
+
+import hotciv.framework.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/** Skeleton implementation of HotCiv.
+ 
+   This source code is from the book 
+     &quot;Flexible, Reliable Software:
+       Using Patterns and Agile Development&quot;
+     published 2010 by CRC Press.
+   Author: 
+     Henrik B Christensen 
+     Department of Computer Science
+     Aarhus University
+   
+   Please visit http://www.baerbak.com/ for further information.
+
+   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+ 
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+
+public class GameImpl implements Game {
+  private Player playerInTurn;
+  private int age;
+<span class="fc" id="L38">  Map&lt;Position, TileImpl&gt; worldMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L39">  Map&lt;Position, CityImpl&gt; cityMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L40">  Map&lt;Position, UnitImpl&gt; unitMap = new HashMap&lt;&gt;();</span>
+
+  // Constructor
+<span class="fc" id="L43">  public GameImpl (){</span>
+<span class="fc" id="L44">  playerInTurn = Player.RED;</span>
+<span class="fc" id="L45">  age = -4000;</span>
+  // Creates an 16x16 worldmap of plains.
+<span class="fc bfc" id="L47" title="All 2 branches covered.">  for (int i =0; i&lt;16; i++){</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">      for (int j =0; j&lt;16; j++) {</span>
+<span class="fc" id="L49">    worldMap.put(new Position(i, j), new TileImpl(GameConstants.PLAINS));</span>
+  }
+  }
+<span class="fc" id="L52">  cityMap.put(GameConstants.RED_CITY_POSITION, new CityImpl(Player.RED));</span>
+<span class="fc" id="L53">  cityMap.put(GameConstants.BLUE_CITY_POSITION, new CityImpl(Player.BLUE));</span>
+  // Places the unique spots for oceans, hills and mountains.
+<span class="fc" id="L55">  worldMap.put(GameConstants.OCEAN_POSITION, new TileImpl(GameConstants.OCEANS));</span>
+<span class="fc" id="L56">  worldMap.put(GameConstants.HILLS_POSITION, new TileImpl(GameConstants.HILLS));</span>
+<span class="fc" id="L57">  worldMap.put(GameConstants.MOUNTAINS_POSITION, new TileImpl(GameConstants.MOUNTAINS));</span>
+  // places the initial units on the unitMap
+<span class="fc" id="L59">  unitMap.put(GameConstants.ARCHER_POSITION_RED, new UnitImpl(GameConstants.ARCHER,Player.RED));</span>
+<span class="fc" id="L60">  unitMap.put(GameConstants.LEGION_POSITION_BLUE, new UnitImpl(GameConstants.LEGION, Player.BLUE));</span>
+<span class="fc" id="L61">  unitMap.put(GameConstants.SETTLER_POSITION_RED, new UnitImpl(GameConstants.SETTLER,Player.RED));</span>
+<span class="fc" id="L62">  }</span>
+
+<span class="fc" id="L64">  public Tile getTileAt( Position p ) { return worldMap.get(p); }</span>
+<span class="fc" id="L65">  public Unit getUnitAt( Position p ) { return unitMap.get(p); }</span>
+  
+
+
+
+
+<span class="fc" id="L71">    public City getCityAt(Position p ) { return cityMap.get(p) ; }</span>
+<span class="fc" id="L72">  public Player getPlayerInTurn() { return playerInTurn; }</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">  public Player getWinner() { if (getAge()== -3000){</span>
+<span class="fc" id="L74">    return Player.RED;</span>
+  }
+<span class="fc" id="L76">  return null;</span>
+     }
+<span class="fc" id="L78">  public int getAge() { return age; }</span>
+  public boolean moveUnit( Position from, Position to ) {
+<span class="nc" id="L80">    return false;</span>
+  }
+  public void endOfTurn() {
+<span class="fc bfc" id="L83" title="All 2 branches covered.">      if (getPlayerInTurn() == Player.RED){</span>
+<span class="fc" id="L84">        playerInTurn = Player.BLUE;</span>
+      }
+      else {
+<span class="fc" id="L87">        playerInTurn = Player.RED;</span>
+<span class="fc" id="L88">        endOfRound();</span>
+      }
+<span class="fc" id="L90">    age += 100;</span>
+<span class="fc" id="L91">  }</span>
+
+  private void endOfRound() {
+<span class="fc" id="L94">CityImpl redCity = cityMap.get(GameConstants.RED_CITY_POSITION);</span>
+<span class="fc" id="L95">redCity.addTreasury(6);</span>
+<span class="fc" id="L96">CityImpl blueCity = cityMap.get(GameConstants.BLUE_CITY_POSITION);</span>
+<span class="fc" id="L97">blueCity.addTreasury(6);</span>
+<span class="fc" id="L98">  }</span>
+
+<span class="nc" id="L100">  public void changeWorkForceFocusInCityAt( Position p, String balance ) {}</span>
+<span class="nc" id="L101">  public void changeProductionInCityAt( Position p, String unitType ) {}</span>
+<span class="nc" id="L102">  public void performUnitActionAt( Position p ) {}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
