@@ -199,6 +199,7 @@ public class TestAlphaCiv {
 
   @Test
   public void thereShouldBeAnArcherOn2_0(){
+
     assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getTypeString(), is(gameConstants.ARCHER));
   }
 
@@ -217,6 +218,7 @@ public class TestAlphaCiv {
   @Test
   public void redShouldOwnAnArcherAt2_0(){
     assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getOwner(), is(notNullValue()));
+    assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getOwner(), is(Player.RED));
   }
 
   @Test
