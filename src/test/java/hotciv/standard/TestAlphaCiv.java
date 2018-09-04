@@ -246,6 +246,7 @@ public class TestAlphaCiv {
     assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
     game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2,1));
     assertThat(game.getUnitAt(new Position(2,1)), is(notNullValue()));
+
   }
 
   @Test
