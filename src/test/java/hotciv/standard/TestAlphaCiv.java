@@ -248,6 +248,12 @@ public class TestAlphaCiv {
     assertThat(game.getUnitAt(new Position(2,1)), is(notNullValue()));
 
   }
+  @Test
+  public void unitsShouldBeAbleToMoveFrom2_0TO3_0(){
+    assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
+    game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3,0));
+    assertThat(game.getUnitAt(new Position(3,0)), is(notNullValue()));
+  }
 
   @Test
   public void shouldDefinetelyBeRemoved() {
