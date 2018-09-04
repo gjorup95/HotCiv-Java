@@ -257,7 +257,7 @@ public class TestAlphaCiv {
   @Test public void unitsShouldNotExistInSamePositionAfterMoveUnit(){
     assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
     game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3,0));
-    assertEquals(game.getUnitAt(new Position(2,0)), is(nullValue()));
+    assertThat(game.getUnitAt(new Position(2,0)), is(nullValue()));
 
   }
 
