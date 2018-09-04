@@ -41,8 +41,8 @@ public class TestAlphaCiv {
   private CityImpl redCity;
   private GameConstants gameConstants;
 
-
   /** Fixture for alphaciv testing. */
+
   @Before
   public void setUp() {
     game = new GameImpl();
@@ -89,32 +89,30 @@ public class TestAlphaCiv {
 
   @Test
   public void shouldHaveRedCityAt11(){
-      assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION), is(notNullValue()));
-      assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED)  );
+    assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION), is(notNullValue()));
+    assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED)  );
 
   }
 
   @Test
   public void thereShouldNotBeACityOn01(){
-      assertThat(game.getCityAt(new Position(0,1)), is(nullValue())  );
+    assertThat(game.getCityAt(new Position(0,1)), is(nullValue())  );
   }
 
   @Test
   public void thereShouldBeACityOn41(){
-      assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION), is(notNullValue()));
+    assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION), is(notNullValue()));
   }
 
   @Test
   public void thereShouldBeABlueCityOn41(){
-  assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION), is(notNullValue()));
-  assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
+    assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION), is(notNullValue()));
+    assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
   }
 
-  /** REMOVE ME. Not a test of HotCiv, just an example of what
-      matchers the hamcrest library has... */
   @Test
   public void CitiesShouldHaveZeroProductionInitiallyRedCity(){
-      assertEquals(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), (0));
+    assertEquals(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), (0));
   }
 
   @Test
@@ -156,7 +154,6 @@ public class TestAlphaCiv {
   @Test
   public void citiesShouldHave1Population(){
     assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getSize(), is(1));
-
   }
 
   @Test
@@ -235,7 +232,7 @@ public class TestAlphaCiv {
     for (int i=0; i<5; i++){
       game.endOfTurn();
     }
-   assertThat(game.getAge(), is(-3000));
+    assertThat(game.getAge(), is(-3000));
     assertThat(game.getWinner(), is(Player.RED));
   }
 

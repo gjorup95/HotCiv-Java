@@ -50,9 +50,10 @@ public class GameImpl implements Game {
       }
     }
 
+    // Places the cities in the worldMap
     cityMap.put(GameConstants.RED_CITY_POSITION, new CityImpl(Player.RED));
     cityMap.put(GameConstants.BLUE_CITY_POSITION, new CityImpl(Player.BLUE));
-    // Places the unique spots for oceans, hills and mountains.
+    // Places the unique spots for oceans, hills and mountains and overrides the positions in the worldMap.
     worldMap.put(GameConstants.OCEAN_POSITION, new TileImpl(GameConstants.OCEANS));
     worldMap.put(GameConstants.HILLS_POSITION, new TileImpl(GameConstants.HILLS));
     worldMap.put(GameConstants.MOUNTAINS_POSITION, new TileImpl(GameConstants.MOUNTAINS));
@@ -62,13 +63,17 @@ public class GameImpl implements Game {
     unitMap.put(GameConstants.SETTLER_POSITION_RED, new UnitImpl(GameConstants.SETTLER,Player.RED));
   }
 
+  /*
+  ====== ACCESOR METHODS ===========================================
+   */
+
   public Tile getTileAt( Position p ) {
     return worldMap.get(p); }
 
   public Unit getUnitAt( Position p ) {
     return unitMap.get(p); }
 
-    public City getCityAt(Position p ) {
+  public City getCityAt(Position p ) {
     return cityMap.get(p) ; }
 
   public Player getPlayerInTurn() {
@@ -85,18 +90,22 @@ public class GameImpl implements Game {
     return age;
   }
 
+  /*
+  ====== MUTATOR METHODS ===========================================
+   */
+
   public boolean moveUnit( Position from, Position to ) {
     return false;
   }
 
   public void endOfTurn() {
-      if (getPlayerInTurn() == Player.RED){
-        playerInTurn = Player.BLUE;
-      }
-      else {
-        playerInTurn = Player.RED;
-        endOfRound();
-      }
+    if (getPlayerInTurn() == Player.RED){
+      playerInTurn = Player.BLUE;
+    }
+    else {
+      playerInTurn = Player.RED;
+      endOfRound();
+    }
     age += 100;
   }
 
