@@ -226,10 +226,12 @@ public class TestAlphaCiv {
   @Test
   public void shouldBeRedPlayerWinningIn3000BC(){
     assertThat(game.getAge(), is(-4000));
+    // for loop that decrements the worldAge by 500 years by calling endOfTurn() five times
     for (int i=0; i<5; i++){
       game.endOfTurn();
     }
     assertThat(game.getWinner(), is(not(Player.RED)));
+    // for loop that decrements the worldAge by 500 years by calling endOfTurn() five times
     for (int i=0; i<5; i++){
       game.endOfTurn();
     }
