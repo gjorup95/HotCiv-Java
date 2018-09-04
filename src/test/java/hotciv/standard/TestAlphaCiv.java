@@ -44,13 +44,16 @@ public class TestAlphaCiv {
 
   /** Fixture for alphaciv testing. */
 
-  @Before
+  @Before // Before is run before every @Test
   public void setUp() {
     game = new GameImpl();
     redCity = new CityImpl(Player.RED);
   }
 
-  // FRS p. 455 states that 'Red is the first player to take a turn'.
+  /**
+   *  ======= ALPHA CIV ================================================================================ ///////////
+   */
+
   @Test
   public void shouldBeRedAsStartingPlayer() {
     assertThat(game, is(notNullValue()));
