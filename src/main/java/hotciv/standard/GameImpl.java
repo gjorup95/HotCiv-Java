@@ -101,6 +101,7 @@ public class GameImpl implements Game {
    */
 
   public boolean moveUnit( Position from, Position to ) {
+    unitMap.remove(from, new UnitImpl(GameConstants.ARCHER,Player.RED));
     unitMap.put(to, new UnitImpl(GameConstants.ARCHER, Player.RED));
     return false;
   }
