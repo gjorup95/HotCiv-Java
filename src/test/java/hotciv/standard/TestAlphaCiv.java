@@ -240,6 +240,13 @@ public class TestAlphaCiv {
     assertThat(game.getAge(), is(-3000));
     assertThat(game.getWinner(), is(Player.RED));
   }
+  // Testing for unit at (2,0) and moving to (2,1)
+  @Test
+  public void unitsShouldBeAbleToMove(){
+    assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
+    game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2,1));
+    assertThat(game.getUnitAt(new Position(2,1)), is(notNullValue()));
+  }
 
   @Test
   public void shouldDefinetelyBeRemoved() {

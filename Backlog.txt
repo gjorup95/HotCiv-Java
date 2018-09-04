@@ -34,9 +34,9 @@ Test-list for TDD Iteration 1
 [X] There is ocean at (1,0)
 [X] There is Hills on (0,1)
 [X] There is Mountain on (2,2)
-
+[] Units can actually move
+[] Units cannot move over mountain
 [] Unit attacking
-[] Units cannot move over mountain 
 [] Red cannot move Blue's units
 [] Red's units attack and destory Blue's unit
 [] Unit Production
