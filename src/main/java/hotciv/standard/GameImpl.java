@@ -33,6 +33,8 @@ import java.util.Map;
 */
 
 public class GameImpl implements Game {
+
+  // Fields
   private Player playerInTurn;
   private int age;
   Map<Position, TileImpl> worldMap = new HashMap<>();
@@ -43,7 +45,7 @@ public class GameImpl implements Game {
   public GameImpl (){
     playerInTurn = Player.RED;
     age = -4000;
-    // Creates an 16x16 worldmap of plains through a nested loop.
+    // Creates an 16x16 worldMap of plains through a nested loop.
     for (int i =0; i<16; i++){
       for (int j =0; j<16; j++) {
         worldMap.put(new Position(i, j), new TileImpl(GameConstants.PLAINS));
