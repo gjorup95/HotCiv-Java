@@ -43,7 +43,7 @@ public class GameImpl implements Game {
   public GameImpl (){
     playerInTurn = Player.RED;
     age = -4000;
-    // Creates an 16x16 worldmap of plains.
+    // Creates an 16x16 worldmap of plains through a nested loop.
     for (int i =0; i<16; i++){
       for (int j =0; j<16; j++) {
         worldMap.put(new Position(i, j), new TileImpl(GameConstants.PLAINS));
@@ -63,24 +63,28 @@ public class GameImpl implements Game {
     unitMap.put(GameConstants.SETTLER_POSITION_RED, new UnitImpl(GameConstants.SETTLER,Player.RED));
   }
 
-  /*
+  /**
   ====== ACCESOR METHODS ===========================================
    */
 
   public Tile getTileAt( Position p ) {
-    return worldMap.get(p); }
+    return worldMap.get(p);
+  }
 
   public Unit getUnitAt( Position p ) {
-    return unitMap.get(p); }
+    return unitMap.get(p);
+  }
 
   public City getCityAt(Position p ) {
-    return cityMap.get(p) ; }
+    return cityMap.get(p) ;
+  }
 
   public Player getPlayerInTurn() {
-    return playerInTurn; }
+    return playerInTurn;
+  }
 
   public Player getWinner() {
-    if (getAge()== -3000){
+    if (getAge() == -3000){
       return Player.RED;
     }
     return null;
@@ -90,8 +94,8 @@ public class GameImpl implements Game {
     return age;
   }
 
-  /*
-  ====== MUTATOR METHODS ===========================================
+  /**
+   ====== MUTATOR METHODS ===========================================
    */
 
   public boolean moveUnit( Position from, Position to ) {
