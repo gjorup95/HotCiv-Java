@@ -37,6 +37,7 @@ import java.util.*;
 
 */
 public class TestAlphaCiv {
+
   private Game game;
   private CityImpl redCity;
   private GameConstants gameConstants;
@@ -61,13 +62,11 @@ public class TestAlphaCiv {
     game.endOfTurn();
     assertThat(game, is(notNullValue()));
     assertThat(game.getPlayerInTurn(), is(Player.BLUE));
-
   }
 
   @Test
   public void ageShouldStartAt4000YearsBeforeChrist(){
     assertEquals( -4000, game.getAge());
-
   }
 
   @Test
@@ -91,7 +90,6 @@ public class TestAlphaCiv {
   public void shouldHaveRedCityAt11(){
     assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION), is(notNullValue()));
     assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED)  );
-
   }
 
   @Test
