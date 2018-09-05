@@ -197,7 +197,6 @@ public class TestAlphaCiv {
 
   @Test
   public void thereShouldBeAnArcherOn2_0(){
-
     assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getTypeString(), is(gameConstants.ARCHER));
   }
 
@@ -246,19 +245,19 @@ public class TestAlphaCiv {
     assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
     game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2,1));
     assertThat(game.getUnitAt(new Position(2,1)), is(notNullValue()));
-
   }
+
   @Test
   public void unitsShouldBeAbleToMoveFrom2_0TO3_0(){
     assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
     game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3,0));
     assertThat(game.getUnitAt(new Position(3,0)), is(notNullValue()));
   }
+
   @Test public void unitsShouldNotExistInSamePositionAfterMoveUnit(){
     assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
     game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3,0));
     assertThat(game.getUnitAt(new Position(2,0)), is(nullValue()));
-
   }
 
   @Test
