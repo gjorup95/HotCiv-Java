@@ -262,12 +262,12 @@ public class TestAlphaCiv {
   }
   @Test
   public void unitsShouldNotBeAbleToMoveOverMountains(){
-  assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
-  game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2,2));
-  // there should be a mountain at (2,2)
-  assertThat(game.getUnitAt(new Position(2,2)), is(nullValue()));
-
-  }
+    assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
+    game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2,2));
+    // there should be a mountain at (2,2)
+    assertThat(game.getUnitAt(new Position(2,2)), is(nullValue()));
+    assertThat(game.getUnitAt(new Position(2,0)), is(game.getUnitAt(gameConstants.ARCHER_POSITION_RED)));
+    }
   @Test
   public void shouldDefinetelyBeRemoved() {
     // Matching null and not null values
