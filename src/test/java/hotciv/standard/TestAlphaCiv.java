@@ -42,6 +42,7 @@ public class TestAlphaCiv {
   private CityImpl redCity;
   private GameConstants gameConstants;
 
+
   /** Fixture for alphaciv testing. */
 
   @Before // Before is run before every @Test
@@ -118,7 +119,7 @@ public class TestAlphaCiv {
 
   @Test
   public void ShouldHave6ProductionAtEndTurnRedCity() {
-    assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
+    assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(0));
     game.endOfTurn();
     game.endOfTurn();
     assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
@@ -172,7 +173,7 @@ public class TestAlphaCiv {
   @Test
   public void thereShouldBeMountainsAt2_2(){
     assertThat(game.getTileAt(gameConstants.MOUNTAINS_POSITION), is(notNullValue()));
-    assertThat(game.getTileAt(gameConstants.MOUNTAINS_POSITION).getTypeString(), is(GameConstants.MOUNTAINS));
+    assertThat(game.getTileAt(gameConstants.MOUNTAINS_POSITION).getTypeString(), is(gameConstants.MOUNTAINS));
   }
 
   @Test
@@ -197,30 +198,30 @@ public class TestAlphaCiv {
 
   @Test
   public void thereShouldBeAnArcherOn2_0(){
-    assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getTypeString(), is(gameConstants.ARCHER));
+    assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED).getTypeString(), is(gameConstants.ARCHER));
   }
 
   @Test
   public void thereShouldBeALegionAt3_2(){
     assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE), is(notNullValue()));
-    assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE).getTypeString(), is(GameConstants.LEGION) );
+    assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE).getTypeString(), is(gameConstants.LEGION) );
   }
 
   @Test
   public void thereShouldBeASettlerAt4_3(){
     assertThat(game.getUnitAt(gameConstants.SETTLER_POSITION_RED), is(notNullValue()) );
-    assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getTypeString(), is(GameConstants.SETTLER));
+    assertThat(game.getUnitAt(gameConstants.SETTLER_POSITION_RED).getTypeString(), is(gameConstants.SETTLER));
   }
 
   @Test
   public void redShouldOwnAnArcherAt2_0(){
-    assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getOwner(), is(notNullValue()));
-    assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getOwner(), is(Player.RED));
+    assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED).getOwner(), is(notNullValue()));
+    assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED).getOwner(), is(Player.RED));
   }
 
   @Test
   public void blueShouldOwnALegion3_2(){
-    assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(notNullValue()));
+    assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE).getOwner(), is(notNullValue()));
     assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE).getOwner(), is(Player.BLUE));
   }
 
@@ -250,16 +251,23 @@ public class TestAlphaCiv {
   @Test
   public void unitsShouldBeAbleToMoveFrom2_0TO3_0(){
     assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
-    game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3,0));
+    game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(3,0));
     assertThat(game.getUnitAt(new Position(3,0)), is(notNullValue()));
   }
 
   @Test public void unitsShouldNotExistInSamePositionAfterMoveUnit(){
     assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
-    game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3,0));
+    game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(3,0));
     assertThat(game.getUnitAt(new Position(2,0)), is(nullValue()));
   }
+  @Test
+  public void unitsShouldNotBeAbleToMoveOverMountains(){
+  assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
+  game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2,2));
+  // there should be a mountain at (2,2)
+  assertThat(game.getUnitAt(new Position(2,2)), is(nullValue()));
 
+  }
   @Test
   public void shouldDefinetelyBeRemoved() {
     // Matching null and not null values
