@@ -9,10 +9,12 @@ import hotciv.framework.Tile;
  */
 public class TileImpl implements Tile {
     private final String tileType;
-    public TileImpl (String s){
+
+    public TileImpl(String s) {
         this.tileType = s;
 
     }
+
     @Override
     public String getTypeString() {
         return tileType;

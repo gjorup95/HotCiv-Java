@@ -32,6 +32,8 @@ package hotciv.framework;
 public class GameConstants {
   // The size of the world is set permanently to a 16x16 grid 
   public static final int WORLDSIZE = 16;
+  // The age which the game begins
+  public static final int STARTING_AGE = -4000;
   // Valid unit types
   public static final String ARCHER    = "archer";
   public static final String LEGION    = "legion";

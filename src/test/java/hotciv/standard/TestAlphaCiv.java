@@ -91,7 +91,7 @@ public class TestAlphaCiv {
 
   @Test
   public void shouldHaveRedCityAt11(){
-    assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION), is(notNullValue()));
+    assertThat(game.getCityAt(new Position(1,1)), is(notNullValue()));
     assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED)  );
   }
 

@@ -12,7 +12,7 @@ public class CityImpl implements City {
     private int cityTreasure;
     private int population;
 
-    public CityImpl(Player owner){
+    public CityImpl(Player owner) {
         this.owner = owner;
         population = 1;
     }
@@ -43,6 +43,6 @@ public class CityImpl implements City {
     }
 
     public void addTreasury(int i) {
-        cityTreasure+= i;
+        cityTreasure += i;
     }
 }
