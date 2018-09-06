@@ -101,11 +101,12 @@ public class GameImpl implements Game {
      */
 
     public boolean moveUnit(Position from, Position to) {
-        if(worldMap.get(to) == worldMap.get(GameConstants.MOUNTAINS_POSITION)) {
+        if( getTileAt(to) == getTileAt(GameConstants.MOUNTAINS_POSITION)) {
             return false;
         }
+        UnitImpl temporaryUnitHolder = new UnitImpl(getUnitAt(from).getTypeString(),getUnitAt(from).getOwner());
         unitMap.remove(from);
-        unitMap.put(to, new UnitImpl(GameConstants.ARCHER, Player.RED));
+        unitMap.put(to, temporaryUnitHolder);
         return true;
     }
 
