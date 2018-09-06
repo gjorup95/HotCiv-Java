@@ -101,9 +101,12 @@ public class GameImpl implements Game {
      */
 
     public boolean moveUnit(Position from, Position to) {
+        if(worldMap.get(to) == worldMap.get(GameConstants.MOUNTAINS_POSITION)) {
+            return false;
+        }
         unitMap.remove(from);
         unitMap.put(to, new UnitImpl(GameConstants.ARCHER, Player.RED));
-        return false;
+        return true;
     }
 
     public void endOfTurn() {
