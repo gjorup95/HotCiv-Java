@@ -38,7 +38,7 @@ Test-list for TDD Iteration 1
     [X] Units can move from (2,0) to 2,2)
     [X] There is no unit at (2,0) after unitMOve()
     [X] Units cannot move over mountain
-    [X] Blue cannot move redUnits
+    [] Blue cannot move redUnits
 [] Unit attacking
 [] Red cannot move Blue's units
 [] Red's units attack and destory Blue's unit
