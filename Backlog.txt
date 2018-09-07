@@ -43,6 +43,7 @@ Test-list for TDD Iteration 1
 [X] Red cannot move Blue's units
 
 [X] Cities should produce one unit when it reaches 6 production - **What does unit Cost?
-    [] The cities shold be able to produce different units at 6 production. (legion, settler or archer)
+    [X] The cities should be able to produce different units at production. (legion, settler or archer)
+    [] Units produced should be placed on the nearest non occupied tile from start position City
 [] Unit Production
 
