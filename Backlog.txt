@@ -38,8 +38,8 @@ Test-list for TDD Iteration 1
     [X] Units can move from (2,0) to 2,2)
     [X] There is no unit at (2,0) after unitMOve()
     [X] Units cannot move over mountain
-    [] Blue cannot move redUnits
-[] Unit attacking
+    [X] Blue cannot move redUnits
+[X] Unit attacking - Unit attacking is self implemented by the way hashMap works, whenever a unit moves it overwrites the position, deleting the unit in the place.
 [] Red cannot move Blue's units
 [] Red's units attack and destory Blue's unit
 [] Unit Production
