@@ -101,8 +101,8 @@ public class GameImpl implements Game {
      */
 
     public boolean moveUnit(Position from, Position to) {
-        UnitImpl temporaryUnitHolder = new UnitImpl(getUnitAt(from).getTypeString(),getUnitAt(from).getOwner());
-        if( getTileAt(to) == getTileAt(GameConstants.MOUNTAINS_POSITION) || getPlayerInTurn() != temporaryUnitHolder.getOwner()) {
+        UnitImpl temporaryUnitHolder = new UnitImpl(getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
+        if (getTileAt(to) == getTileAt(GameConstants.MOUNTAINS_POSITION) || getPlayerInTurn() != temporaryUnitHolder.getOwner()) {
             return false;
         }
         unitMap.remove(from);
@@ -129,15 +129,16 @@ public class GameImpl implements Game {
     }
 
     public void unitProduction() {
-        {
-            UnitImpl chosenUnit = new UnitImpl (GameConstants.ARCHER, Player.RED);
-            CityImpl tempCity = (CityImpl) getCityAt(GameConstants.RED_CITY_POSITION);
-            unitMap.put(GameConstants.RED_CITY_POSITION, chosenUnit);
-            tempCity.addTreasury(-GameConstants.UNIT_COST);
-
-
-        }
+        CityImpl tempRedCity = (CityImpl) getCityAt(GameConstants.RED_CITY_POSITION);
+        CityImpl tempBlueCity = (CityImpl) getCityAt(GameConstants.BLUE_CITY_POSITION);
+        UnitImpl chosenRedUnit = new UnitImpl(GameConstants.ARCHER, tempRedCity.getOwner());
+        UnitImpl chosenBlueUnit = new UnitImpl(GameConstants.ARCHER, tempBlueCity.getOwner());
+        unitMap.put(GameConstants.RED_CITY_POSITION, chosenRedUnit);
+        unitMap.put(GameConstants.BLUE_CITY_POSITION, chosenBlueUnit);
+        tempRedCity.addTreasury(-GameConstants.UNIT_COST);
     }
+
+
 
     public void changeWorkForceFocusInCityAt(Position p, String balance) {
     }

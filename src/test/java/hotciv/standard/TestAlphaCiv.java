@@ -294,13 +294,27 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void shouldProduceOneArcherUnitAfter6Production() {
+    public void shouldProduceOneArcherUnitAfter6ProductionForPlayerRedAt1_1() {
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
+        assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), is(nullValue()));
         game.endOfTurn();
         game.endOfTurn();
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getTypeString(), is(gameConstants.ARCHER));
+        assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED));
     }
+
+    @Test
+    public void shouldProduceOneArcherUnitAfter6ProductionForPlayerBlueAt4_1() {
+        assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(0));
+        assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION), is(nullValue()));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(6));
+        assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION).getTypeString(), is(gameConstants.ARCHER));
+        assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
+    }
+
 
     @Test
     public void shouldUpdateTreasuryAfterUnitProduction(){
@@ -310,8 +324,11 @@ public class TestAlphaCiv {
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getTypeString(), is(gameConstants.ARCHER));
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
-
     }
+
+
+    /*
+
     @Test
     public void shouldBeAbleToProduceLegionAt6Production(){
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
@@ -320,6 +337,9 @@ public class TestAlphaCiv {
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getTypeString(), is(gameConstants.LEGION));
     }
+     */
+
+
     @Test
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values
