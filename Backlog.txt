@@ -41,7 +41,8 @@ Test-list for TDD Iteration 1
     [X] Blue cannot move redUnits
 [X] Unit attacking - Unit attacking is self implemented by the way hashMap works, whenever a unit moves it overwrites the position, deleting the unit in the place.
 [X] Red cannot move Blue's units
-[] Red's units attack and destory Blue's unit
 
+[X] Cities should produce one unit when it reaches 6 production - **What does unit Cost?
+    [] The cities shold be able to produce different units at 6 production. (legion, settler or archer)
 [] Unit Production
 

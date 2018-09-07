@@ -129,9 +129,13 @@ public class GameImpl implements Game {
     }
 
     public void unitProduction() {
-        if(getCityAt(GameConstants.RED_CITY_POSITION).getTreasury() == 6) {
-            UnitImpl tempArcher = new UnitImpl (GameConstants.ARCHER, Player.RED);
-            unitMap.put(GameConstants.RED_CITY_POSITION, tempArcher);
+        {
+            UnitImpl chosenUnit = new UnitImpl (GameConstants.ARCHER, Player.RED);
+            CityImpl tempCity = (CityImpl) getCityAt(GameConstants.RED_CITY_POSITION);
+            unitMap.put(GameConstants.RED_CITY_POSITION, chosenUnit);
+            tempCity.addTreasury(-GameConstants.UNIT_COST);
+
+
         }
     }
 
@@ -139,6 +143,7 @@ public class GameImpl implements Game {
     }
 
     public void changeProductionInCityAt(Position p, String unitType) {
+
     }
 
     public void performUnitActionAt(Position p) {
