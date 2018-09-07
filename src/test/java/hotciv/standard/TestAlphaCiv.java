@@ -283,6 +283,14 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(3,3)).getTypeString(),is(gameConstants.LEGION));
 
     }
+    @Test
+    public void redShouldNotBeAbleToMoveBluesUnits(){
+        assertThat(game.getPlayerInTurn(), is(Player.RED));
+        assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE), is(notNullValue()));
+        assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(Player.BLUE));
+        game.moveUnit(gameConstants.LEGION_POSITION_BLUE, new Position(2,1));
+        assertThat(game.getUnitAt(new Position(2,1)), is(nullValue()));
+    }
 
 
     @Test
