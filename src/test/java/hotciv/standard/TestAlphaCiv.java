@@ -277,6 +277,7 @@ public class TestAlphaCiv {
 
     @Test
     public void shouldBeAbleToMoveLegionUnits() {
+        game.endOfTurn();
         assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE), is(notNullValue()));
         game.moveUnit(gameConstants.LEGION_POSITION_BLUE, new Position(3,3));
         assertThat(game.getUnitAt(new Position(3,3)), is(notNullValue()));
