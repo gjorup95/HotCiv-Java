@@ -69,15 +69,15 @@ public class GameImpl implements Game {
      * ====== ACCESOR METHODS ===========================================
      */
 
-    public Tile getTileAt(Position p) {
+    public TileImpl getTileAt(Position p) {
         return worldMap.get(p);
     }
 
-    public Unit getUnitAt(Position p) {
+    public UnitImpl getUnitAt(Position p) {
         return unitMap.get(p);
     }
 
-    public City getCityAt(Position p) {
+    public CityImpl getCityAt(Position p) {
         return cityMap.get(p);
     }
 
@@ -129,10 +129,10 @@ public class GameImpl implements Game {
     }
 
     public void unitProduction() {
-        CityImpl tempRedCity = (CityImpl) getCityAt(GameConstants.RED_CITY_POSITION);
-        CityImpl tempBlueCity = (CityImpl) getCityAt(GameConstants.BLUE_CITY_POSITION);
-        UnitImpl chosenRedUnit = new UnitImpl(GameConstants.ARCHER, tempRedCity.getOwner());
-        UnitImpl chosenBlueUnit = new UnitImpl(GameConstants.ARCHER, tempBlueCity.getOwner());
+        CityImpl tempRedCity = getCityAt(GameConstants.RED_CITY_POSITION);
+        CityImpl tempBlueCity = getCityAt(GameConstants.BLUE_CITY_POSITION);
+        UnitImpl chosenRedUnit = new UnitImpl(getCityAt(GameConstants.RED_CITY_POSITION).getProduction(), tempRedCity.getOwner());
+        UnitImpl chosenBlueUnit = new UnitImpl(getCityAt(GameConstants.BLUE_CITY_POSITION).getProduction(), tempBlueCity.getOwner());
         unitMap.put(GameConstants.RED_CITY_POSITION, chosenRedUnit);
         unitMap.put(GameConstants.BLUE_CITY_POSITION, chosenBlueUnit);
         tempRedCity.addTreasury(-GameConstants.UNIT_COST);
@@ -144,7 +144,7 @@ public class GameImpl implements Game {
     }
 
     public void changeProductionInCityAt(Position p, String unitType) {
-
+        getCityAt(p).setUnitProductionFocus(unitType);
     }
 
     public void performUnitActionAt(Position p) {

@@ -294,9 +294,10 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void shouldProduceOneArcherUnitAfter6ProductionForPlayerRedAt1_1() {
+    public void shouldProduceOneArcherUnitAfterEndOfRoundForPlayerRedAt1_1() {
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), is(nullValue()));
+        game.changeProductionInCityAt(gameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
@@ -305,9 +306,10 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void shouldProduceOneArcherUnitAfter6ProductionForPlayerBlueAt4_1() {
+    public void shouldProduceOneArcherUnitAfterEndOfRoundForPlayerBlueAt4_1() {
         assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(0));
         assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION), is(nullValue()));
+        game.changeProductionInCityAt(gameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
         assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(6));
@@ -315,10 +317,23 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
     }
 
+    @Test
+    public void shouldProduceOneLegionUnitAfterEndOfRoundForPlayerRed() {
+        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
+        assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), is(nullValue()));
+        game.changeProductionInCityAt(gameConstants.RED_CITY_POSITION, GameConstants.LEGION);
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
+        assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getTypeString(), is(gameConstants.LEGION));
+        assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED));
+    }
+
 
     @Test
     public void shouldUpdateTreasuryAfterUnitProduction(){
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
+        game.changeProductionInCityAt(gameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
