@@ -301,15 +301,7 @@ public class TestAlphaCiv {
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getTypeString(), is(gameConstants.ARCHER));
     }
-    @Test
-    public void shouldProduceLegionUnitAfter6Production(){
-        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
-        game.endOfTurn();
-        game.endOfTurn();
-        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
 
-
-    }
     @Test
     public void shouldUpdateTreasuryAfterUnitProduction(){
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
@@ -321,7 +313,13 @@ public class TestAlphaCiv {
 
     }
     @Test
-    public void
+    public void shouldBeAbleToProduceLegionAt6Production(){
+        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
+        assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getTypeString(), is(gameConstants.LEGION));
+    }
     @Test
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values
