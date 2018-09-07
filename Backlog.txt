@@ -40,7 +40,8 @@ Test-list for TDD Iteration 1
     [X] Units cannot move over mountain
     [X] Blue cannot move redUnits
 [X] Unit attacking - Unit attacking is self implemented by the way hashMap works, whenever a unit moves it overwrites the position, deleting the unit in the place.
-[] Red cannot move Blue's units
+[X] Red cannot move Blue's units
 [] Red's units attack and destory Blue's unit
+
 [] Unit Production
 

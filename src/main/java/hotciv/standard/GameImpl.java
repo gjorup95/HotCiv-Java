@@ -125,6 +125,14 @@ public class GameImpl implements Game {
         redCity.addTreasury(6);
         CityImpl blueCity = cityMap.get(GameConstants.BLUE_CITY_POSITION);
         blueCity.addTreasury(6);
+        unitProduction();
+    }
+
+    public void unitProduction() {
+        if(getCityAt(GameConstants.RED_CITY_POSITION).getTreasury() == 6) {
+            UnitImpl tempArcher = new UnitImpl (GameConstants.ARCHER, Player.RED);
+            unitMap.put(GameConstants.RED_CITY_POSITION, tempArcher);
+        }
     }
 
     public void changeWorkForceFocusInCityAt(Position p, String balance) {

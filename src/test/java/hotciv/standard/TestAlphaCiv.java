@@ -293,6 +293,14 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(2,1)), is(nullValue()));
     }
 
+    @Test
+    public void shouldProduceOneArcherUnitAfter6Production() {
+        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
+        assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), is(notNullValue()));
+    }
 
     @Test
     public void shouldDefinetelyBeRemoved() {
