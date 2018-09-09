@@ -353,20 +353,6 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE).getOwner(), is(Player.RED));
     }
 
-
-    /*
-
-    @Test
-    public void shouldBeAbleToProduceLegionAt6Production(){
-        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
-        game.endOfTurn();
-        game.endOfTurn();
-        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
-        assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getTypeString(), is(gameConstants.LEGION));
-    }
-     */
-
-
     @Test
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values

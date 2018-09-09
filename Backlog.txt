@@ -45,6 +45,6 @@ Test-list for TDD Iteration 1
 [X] Cities should produce one unit when it reaches 6 production - **What does unit Cost?
     [X] The cities should be able to produce different units at production. (legion, settler or archer)
     [] Units produced should be placed on the nearest non occupied tile from start position City
-[] Unit Production
-[} Reds unit
+[] Units cannot be placed on occupied tiles.
+[]
 
