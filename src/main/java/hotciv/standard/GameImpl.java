@@ -102,11 +102,11 @@ public class GameImpl implements Game {
 
     public boolean moveUnit(Position from, Position to) {
         UnitImpl temporaryUnitHolder = new UnitImpl(getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
-        if (getTileAt(to).equals(getTileAt(GameConstants.MOUNTAINS_POSITION))){
+        if (getTileAt(to).equals(getTileAt(GameConstants.MOUNTAINS_POSITION))) {
             System.out.println("There is a mountain on the desired to position");
             return false;
         }
-        if (!getPlayerInTurn().equals(temporaryUnitHolder.getOwner())){
+        if (!getPlayerInTurn().equals(temporaryUnitHolder.getOwner())) {
             System.out.println("You are not the owner of the unit");
             return false;
         }
@@ -140,26 +140,24 @@ public class GameImpl implements Game {
         UnitImpl chosenRedUnit = new UnitImpl(getCityAt(GameConstants.RED_CITY_POSITION).getProduction(), tempRedCity.getOwner());
         UnitImpl chosenBlueUnit = new UnitImpl(getCityAt(GameConstants.BLUE_CITY_POSITION).getProduction(), tempBlueCity.getOwner());
         tempRedCity.addTreasury(-GameConstants.UNIT_COST);
-        if (getUnitAt(GameConstants.RED_CITY_POSITION) == null){
+        if (getUnitAt(GameConstants.RED_CITY_POSITION) == null) {
             unitMap.put(GameConstants.RED_CITY_POSITION, chosenRedUnit);
 
-        }
-        else {
+        } else {
             for (Position p : Utility.get8neighborhoodOf(GameConstants.RED_CITY_POSITION)) {
-                if (getUnitAt(p) == null && getTileAt(p).getTypeString()!=GameConstants.MOUNTAINS) {
+                if (getUnitAt(p) == null && getTileAt(p).getTypeString() != GameConstants.MOUNTAINS) {
                     unitMap.put(p, chosenRedUnit);
                     break;
-        }
+                }
 
             }
         }
-        if (getUnitAt(GameConstants.BLUE_CITY_POSITION) == null){
+        if (getUnitAt(GameConstants.BLUE_CITY_POSITION) == null) {
             unitMap.put(GameConstants.BLUE_CITY_POSITION, chosenBlueUnit);
 
-        }
-        else {
+        } else {
             for (Position p : Utility.get8neighborhoodOf(GameConstants.BLUE_CITY_POSITION)) {
-                if (getUnitAt(p) == null && getTileAt(p).getTypeString()!=GameConstants.MOUNTAINS) {
+                if (getUnitAt(p) == null && getTileAt(p).getTypeString() != GameConstants.MOUNTAINS) {
                     unitMap.put(p, chosenBlueUnit);
                     break;
                 }
@@ -168,7 +166,6 @@ public class GameImpl implements Game {
         }
 
     }
-
 
 
     public void changeWorkForceFocusInCityAt(Position p, String balance) {

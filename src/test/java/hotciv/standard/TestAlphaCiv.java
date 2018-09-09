@@ -280,18 +280,19 @@ public class TestAlphaCiv {
     public void shouldBeAbleToMoveLegionUnits() {
         game.endOfTurn();
         assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE), is(notNullValue()));
-        game.moveUnit(gameConstants.LEGION_POSITION_BLUE, new Position(3,3));
-        assertThat(game.getUnitAt(new Position(3,3)), is(notNullValue()));
-        assertThat(game.getUnitAt(new Position(3,3)).getTypeString(),is(gameConstants.LEGION));
+        game.moveUnit(gameConstants.LEGION_POSITION_BLUE, new Position(3, 3));
+        assertThat(game.getUnitAt(new Position(3, 3)), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(3, 3)).getTypeString(), is(gameConstants.LEGION));
 
     }
+
     @Test
-    public void redShouldNotBeAbleToMoveBluesUnits(){
+    public void redShouldNotBeAbleToMoveBluesUnits() {
         assertThat(game.getPlayerInTurn(), is(Player.RED));
         assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE), is(notNullValue()));
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(Player.BLUE));
-        game.moveUnit(gameConstants.LEGION_POSITION_BLUE, new Position(2,1));
-        assertThat(game.getUnitAt(new Position(2,1)), is(nullValue()));
+        game.moveUnit(gameConstants.LEGION_POSITION_BLUE, new Position(2, 1));
+        assertThat(game.getUnitAt(new Position(2, 1)), is(nullValue()));
     }
 
     @Test
@@ -331,7 +332,7 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void shouldUpdateTreasuryAfterUnitProduction(){
+    public void shouldUpdateTreasuryAfterUnitProduction() {
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
         game.changeProductionInCityAt(gameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
@@ -355,7 +356,7 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void checkForEligibleSpawnPositionsAtRedCityWithRelationToUnits(){
+    public void checkForEligibleSpawnPositionsAtRedCityWithRelationToUnits() {
         assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION), is(nullValue()));
         game.changeProductionInCityAt(gameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
@@ -363,20 +364,20 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getTypeString(), is(GameConstants.ARCHER));
         game.endOfTurn();
         game.endOfTurn();
-        assertThat(game.getUnitAt(new Position(0,1)), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(0, 1)), is(notNullValue()));
         game.endOfTurn();
         game.endOfTurn();
-        assertThat(game.getUnitAt(new Position(0,2)), is(notNullValue()));
-        assertThat(game.getUnitAt(new Position(0,1)), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(0, 2)), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(0, 1)), is(notNullValue()));
     }
 
     @Test
-    public void redShouldAlwaysProduceUnitOnCityTileIfPossible(){
+    public void redShouldAlwaysProduceUnitOnCityTileIfPossible() {
         assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION), is(nullValue()));
         game.endOfTurn();
         game.endOfTurn();
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), is(notNullValue()));
-        assertThat(game.getUnitAt(new Position(0,1)), is(nullValue()));
+        assertThat(game.getUnitAt(new Position(0, 1)), is(nullValue()));
     }
 
     @Test
@@ -385,7 +386,7 @@ public class TestAlphaCiv {
         game.endOfTurn();
         game.endOfTurn();
         assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION), is(notNullValue()));
-        assertThat(game.getUnitAt(new Position(3,1)), is(nullValue()));
+        assertThat(game.getUnitAt(new Position(3, 1)), is(nullValue()));
     }
 
     @Test
@@ -394,7 +395,7 @@ public class TestAlphaCiv {
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
-        assertThat(game.getUnitAt(new Position(3,1)), notNullValue());
+        assertThat(game.getUnitAt(new Position(3, 1)), notNullValue());
     }
 
     @Test
@@ -418,6 +419,7 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(2, 2)), is(nullValue()));
         assertThat(game.getUnitAt(new Position(2, 1)), is(notNullValue()));
     }
+
     @Test
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values

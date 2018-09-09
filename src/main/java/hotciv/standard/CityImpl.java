@@ -44,7 +44,7 @@ public class CityImpl implements City {
         return null;
     }
 
-    public void setUnitProductionFocus (String unitFocus) {
+    public void setUnitProductionFocus(String unitFocus) {
         unitProductionFocus = unitFocus;
     }
 
