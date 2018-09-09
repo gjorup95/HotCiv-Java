@@ -355,16 +355,35 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void checkForEligibleSpawnPositionsAtRedCity(){
+    public void checkForEligibleSpawnPositionsAtRedCityWithRelationToUnits(){
         assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION), is(nullValue()));
         game.changeProductionInCityAt(gameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getTypeString(), is(GameConstants.ARCHER));
-        assertThat(game.getUnitAt(new Position(0,1)), is(nullValue()));
         game.endOfTurn();
         game.endOfTurn();
         assertThat(game.getUnitAt(new Position(0,1)), is(notNullValue()));
+        /*assertThat(game.getUnitAt(new Position(0,2)), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(1,2)), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(2,2)), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(2,1)), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(2,0)), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(1,0)), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(0,0)), is(notNullValue()));
+        */
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getUnitAt(new Position(0,2)), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(0,1)), is(notNullValue()));
+    }
+    @Test
+    public void redShouldAlwaysProduceUnitOnCityTileIfPossible(){
+        assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION), is(nullValue()));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(0,1)), is(nullValue()));
     }
     @Test
     public void shouldDefinetelyBeRemoved() {

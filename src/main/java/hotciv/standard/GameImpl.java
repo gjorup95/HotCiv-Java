@@ -139,15 +139,21 @@ public class GameImpl implements Game {
         CityImpl tempBlueCity = getCityAt(GameConstants.BLUE_CITY_POSITION);
         UnitImpl chosenRedUnit = new UnitImpl(getCityAt(GameConstants.RED_CITY_POSITION).getProduction(), tempRedCity.getOwner());
         UnitImpl chosenBlueUnit = new UnitImpl(getCityAt(GameConstants.BLUE_CITY_POSITION).getProduction(), tempBlueCity.getOwner());
-        for (Position p : Utility.get8neighborhoodOf(new Position(1,1))) {
-            if (getUnitAt(p) != null ){
+        tempRedCity.addTreasury(-GameConstants.UNIT_COST);
+        if (getUnitAt(GameConstants.RED_CITY_POSITION) == null){
+            unitMap.put(GameConstants.RED_CITY_POSITION, chosenRedUnit);
+            unitMap.put(GameConstants.BLUE_CITY_POSITION, chosenBlueUnit);
+
+        }
+        else {
+            for (Position p : Utility.get8neighborhoodOf(GameConstants.RED_CITY_POSITION)) {
+                if (getUnitAt(p) == null) {
+                    unitMap.put(p, chosenRedUnit);
+                    break;
+        }
 
             }
         }
-
-        unitMap.put(GameConstants.RED_CITY_POSITION, chosenRedUnit);
-        unitMap.put(GameConstants.BLUE_CITY_POSITION, chosenBlueUnit);
-        tempRedCity.addTreasury(-GameConstants.UNIT_COST);
     }
 
 
