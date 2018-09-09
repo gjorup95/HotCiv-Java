@@ -329,7 +329,6 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED));
     }
 
-
     @Test
     public void shouldUpdateTreasuryAfterUnitProduction(){
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
@@ -339,6 +338,19 @@ public class TestAlphaCiv {
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getTypeString(), is(gameConstants.ARCHER));
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
+    }
+
+    @Test
+    public void shouldHaveRedUnitsDestroyingBlueUnitsWhenAttacking() {
+        // checking both units exists
+        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
+        assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE), is(notNullValue()));
+        // attacking the blue legion unit with the red archer unit
+        game.moveUnit(gameConstants.ARCHER_POSITION_RED, gameConstants.LEGION_POSITION_BLUE);
+        // checking that the red unit moved from its original position
+        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(nullValue()));
+        assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE).getTypeString(), is(gameConstants.ARCHER));
+        assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE).getOwner(), is(Player.RED));
     }
 
 
