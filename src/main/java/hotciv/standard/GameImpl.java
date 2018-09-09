@@ -142,7 +142,6 @@ public class GameImpl implements Game {
         tempRedCity.addTreasury(-GameConstants.UNIT_COST);
         if (getUnitAt(GameConstants.RED_CITY_POSITION) == null){
             unitMap.put(GameConstants.RED_CITY_POSITION, chosenRedUnit);
-            unitMap.put(GameConstants.BLUE_CITY_POSITION, chosenBlueUnit);
 
         }
         else {
@@ -154,6 +153,20 @@ public class GameImpl implements Game {
 
             }
         }
+        if (getUnitAt(GameConstants.BLUE_CITY_POSITION) == null){
+            unitMap.put(GameConstants.BLUE_CITY_POSITION, chosenBlueUnit);
+
+        }
+        else {
+            for (Position p : Utility.get8neighborhoodOf(GameConstants.BLUE_CITY_POSITION)) {
+                if (getUnitAt(p) == null) {
+                    unitMap.put(p, chosenBlueUnit);
+                    break;
+                }
+
+            }
+        }
+
     }
 
 

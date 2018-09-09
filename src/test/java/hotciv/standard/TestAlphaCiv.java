@@ -377,6 +377,7 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(0,2)), is(notNullValue()));
         assertThat(game.getUnitAt(new Position(0,1)), is(notNullValue()));
     }
+
     @Test
     public void redShouldAlwaysProduceUnitOnCityTileIfPossible(){
         assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION), is(nullValue()));
@@ -385,6 +386,25 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), is(notNullValue()));
         assertThat(game.getUnitAt(new Position(0,1)), is(nullValue()));
     }
+
+    @Test
+    public void blueShouldAlwaysProduceUnitOnCityTileIfPossible() {
+        assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION), is(nullValue()));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(3,1)), is(nullValue()));
+    }
+
+    @Test
+    public void blueShouldAlwaysProduceUnitNorthOfCityTileIfItIsOccupiedByAUnit() {
+        game.endOfTurn();
+        game.endOfTurn();
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getUnitAt(new Position(3,1)), notNullValue());
+    }
+
     @Test
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values
