@@ -116,12 +116,12 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void CitiesShouldHaveZeroProductionInitiallyRedCity() {
+    public void citiesShouldHaveZeroProductionInitiallyRedCity() {
         assertEquals(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), (0));
     }
 
     @Test
-    public void ShouldHave6ProductionAtEndTurnRedCity() {
+    public void shouldHave6ProductionAtEndTurnRedCity() {
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(0));
         game.endOfTurn();
         game.endOfTurn();
@@ -129,7 +129,7 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void ShouldHave12ProductionAfterTwoEndTurnRedCity() {
+    public void shouldHave12ProductionAfterTwoEndTurnRedCity() {
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
         game.endOfTurn();
         game.endOfTurn();
@@ -139,7 +139,7 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void ShouldHave6ProductionAtEndTurnBlueCity() {
+    public void shouldHave6ProductionAtEndTurnBlueCity() {
         assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(0));
         game.endOfTurn();
         game.endOfTurn();
@@ -147,7 +147,7 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void ShouldHave12ProductionAfterTwoEndTurnsBlue() {
+    public void shouldHave12ProductionAfterTwoEndTurnsBlue() {
         assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(0));
         game.endOfTurn();
         game.endOfTurn();
