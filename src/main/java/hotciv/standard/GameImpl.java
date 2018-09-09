@@ -102,9 +102,15 @@ public class GameImpl implements Game {
 
     public boolean moveUnit(Position from, Position to) {
         UnitImpl temporaryUnitHolder = new UnitImpl(getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
-        if (getTileAt(to) == getTileAt(GameConstants.MOUNTAINS_POSITION) || getPlayerInTurn() != temporaryUnitHolder.getOwner()) {
+        if (getTileAt(to).equals(getTileAt(GameConstants.MOUNTAINS_POSITION))){
+            System.out.println("There is a mountain on the desired to position");
             return false;
         }
+        if (!getPlayerInTurn().equals(temporaryUnitHolder.getOwner())){
+            System.out.println("You are not the owner of the unit");
+            return false;
+        }
+
         unitMap.remove(from);
         unitMap.put(to, temporaryUnitHolder);
         return true;
@@ -133,7 +139,12 @@ public class GameImpl implements Game {
         CityImpl tempBlueCity = getCityAt(GameConstants.BLUE_CITY_POSITION);
         UnitImpl chosenRedUnit = new UnitImpl(getCityAt(GameConstants.RED_CITY_POSITION).getProduction(), tempRedCity.getOwner());
         UnitImpl chosenBlueUnit = new UnitImpl(getCityAt(GameConstants.BLUE_CITY_POSITION).getProduction(), tempBlueCity.getOwner());
-        Utility.get8neighborhoodOf(GameConstants.RED_CITY_POSITION);
+        for (Position p : Utility.get8neighborhoodOf(new Position(1,1))) {
+            if (getUnitAt(p) != null ){
+
+            }
+        }
+
         unitMap.put(GameConstants.RED_CITY_POSITION, chosenRedUnit);
         unitMap.put(GameConstants.BLUE_CITY_POSITION, chosenBlueUnit);
         tempRedCity.addTreasury(-GameConstants.UNIT_COST);
