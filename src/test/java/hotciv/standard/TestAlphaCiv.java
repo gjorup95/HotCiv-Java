@@ -364,14 +364,6 @@ public class TestAlphaCiv {
         game.endOfTurn();
         game.endOfTurn();
         assertThat(game.getUnitAt(new Position(0,1)), is(notNullValue()));
-        /*assertThat(game.getUnitAt(new Position(0,2)), is(notNullValue()));
-        assertThat(game.getUnitAt(new Position(1,2)), is(notNullValue()));
-        assertThat(game.getUnitAt(new Position(2,2)), is(notNullValue()));
-        assertThat(game.getUnitAt(new Position(2,1)), is(notNullValue()));
-        assertThat(game.getUnitAt(new Position(2,0)), is(notNullValue()));
-        assertThat(game.getUnitAt(new Position(1,0)), is(notNullValue()));
-        assertThat(game.getUnitAt(new Position(0,0)), is(notNullValue()));
-        */
         game.endOfTurn();
         game.endOfTurn();
         assertThat(game.getUnitAt(new Position(0,2)), is(notNullValue()));
@@ -405,6 +397,27 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(3,1)), notNullValue());
     }
 
+    @Test
+    public void redShouldNotBeAbleToSpawnUnitsOnMountains() {
+        assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), is(nullValue()));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), notNullValue());
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getUnitAt(new Position(0, 1)), notNullValue());
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getUnitAt(new Position(0, 2)), notNullValue());
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getUnitAt(new Position(1, 2)), notNullValue());
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getTileAt(new Position(2, 2)).getTypeString(), is(gameConstants.MOUNTAINS));
+        assertThat(game.getUnitAt(new Position(2, 2)), is(nullValue()));
+        assertThat(game.getUnitAt(new Position(2, 1)), is(notNullValue()));
+    }
     @Test
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values

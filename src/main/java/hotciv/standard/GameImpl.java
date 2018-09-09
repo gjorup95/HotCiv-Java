@@ -146,7 +146,7 @@ public class GameImpl implements Game {
         }
         else {
             for (Position p : Utility.get8neighborhoodOf(GameConstants.RED_CITY_POSITION)) {
-                if (getUnitAt(p) == null) {
+                if (getUnitAt(p) == null && getTileAt(p).getTypeString()!=GameConstants.MOUNTAINS) {
                     unitMap.put(p, chosenRedUnit);
                     break;
         }
@@ -159,7 +159,7 @@ public class GameImpl implements Game {
         }
         else {
             for (Position p : Utility.get8neighborhoodOf(GameConstants.BLUE_CITY_POSITION)) {
-                if (getUnitAt(p) == null) {
+                if (getUnitAt(p) == null && getTileAt(p).getTypeString()!=GameConstants.MOUNTAINS) {
                     unitMap.put(p, chosenBlueUnit);
                     break;
                 }
