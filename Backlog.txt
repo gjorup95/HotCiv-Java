@@ -1,1 +1,6 @@
-Alpha Civ Has no missing features.
+Alpha Civ Has no missing basic features.
+
+Additional features:
+[] Refactoring of unitProduction(), removing duplicated code.
+[] moveUnit() has system output in case of errors is it ok?
+[] unitCost is a fixed zero, there has not been given a variable price? is this ok?
