@@ -118,11 +118,10 @@ public class GameImpl implements Game {
     }
 
     private void endOfRound() {
-        CityImpl redCity = cityMap.get(GameConstants.RED_CITY_POSITION);
-        redCity.addTreasury(6);
-        CityImpl blueCity = cityMap.get(GameConstants.BLUE_CITY_POSITION);
-        blueCity.addTreasury(6);
+        getCityAt(GameConstants.RED_CITY_POSITION).addTreasury(GameConstants.PRODUCTION_FIXED6);
+        getCityAt(GameConstants.BLUE_CITY_POSITION).addTreasury(GameConstants.PRODUCTION_FIXED6);
         unitProduction();
+
     }
 
     public void unitProduction() {

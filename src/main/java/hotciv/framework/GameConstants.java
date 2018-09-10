@@ -40,6 +40,8 @@ public class GameConstants {
     public static final String SETTLER = "settler";
     // Unit Cost
     public static final int UNIT_COST = 0;
+    // Fixed Production
+    public static final int PRODUCTION_FIXED6 = 6;
     // Valid terrain types
     public static final String PLAINS = "plains";
     public static final String OCEANS = "ocean";
