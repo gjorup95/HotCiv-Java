@@ -101,10 +101,19 @@ public class GameImpl implements Game {
      */
 
     public boolean moveUnit(Position from, Position to) {
-        UnitImpl unitHolder = new UnitImpl(getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
-        unitMap.put(to, unitHolder);
+        UnitImpl temporaryUnitHolder = new UnitImpl(getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
+        if (getTileAt(to).equals(getTileAt(GameConstants.MOUNTAINS_POSITION))) {
+            System.out.println("There is a mountain on the desired to position");
+            return false;
+        }
+        if (!getPlayerInTurn().equals(temporaryUnitHolder.getOwner())) {
+            System.out.println("You are not the owner of the unit");
+            return false;
+        }
+
         unitMap.remove(from);
-        return false;
+        unitMap.put(to, temporaryUnitHolder);
+        return true;
     }
 
     public void endOfTurn() {
