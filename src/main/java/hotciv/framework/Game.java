@@ -28,6 +28,8 @@ package hotciv.framework;
 
 */
 
+ // “This is the hotfix for release 2.1”
+
 public interface Game {
   // === Accessor methods ===================================
   
