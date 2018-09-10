@@ -1,35 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="hotciv.standard.TestAlphaCiv" tests="29" skipped="0" failures="0" errors="0" timestamp="2018-09-03T12:39:06" hostname="DESKTOP-JP1KH9R" time="0.033">
+<testsuite name="hotciv.standard.TestAlphaCiv" tests="45" skipped="0" failures="0" errors="0" timestamp="2018-09-09T15:01:29" hostname="Troels-Laptop" time="0.191">
   <properties/>
-  <testcase name="thereShouldBeHillsAt0_1" classname="hotciv.standard.TestAlphaCiv" time="0.012"/>
-  <testcase name="ageShouldStartAt4000YearsBeforeChrist" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="citiesShouldHave1Population" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="thereShouldBePlainsAt1_1" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="shouldBeRedAsStartingPlayer" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="ageShouldIncrementWith100AtEndOfTurn" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="thereShouldBeAUnitPlacedOn2_0" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="shouldHaveCityAt11" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="thereShouldBeASettlerAt4_3" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="thereShouldBeABlueCityOn41" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="redShouldOwnAnArcherAt2_0" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="shouldDefinetelyBeRemoved" classname="hotciv.standard.TestAlphaCiv" time="0.009"/>
-  <testcase name="CitiesShouldHaveZeroProductionInitiallyRedCity" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="ShouldHave6ProductionAtEndTurnRedCity" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="shouldUpdateTreasuryAfterUnitProduction" classname="hotciv.standard.TestAlphaCiv" time="0.026"/>
+  <testcase name="thereShouldBeHillsAt0_1" classname="hotciv.standard.TestAlphaCiv" time="0.007"/>
+  <testcase name="ageShouldStartAt4000YearsBeforeChrist" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="citiesShouldHave1Population" classname="hotciv.standard.TestAlphaCiv" time="0.002"/>
+  <testcase name="thereShouldBePlainsAt1_1" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="shouldBeRedAsStartingPlayer" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="shouldHave6ProductionAtEndTurnBlueCity" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="shouldHave6ProductionAtEndTurnRedCity" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="ageShouldIncrementWith100AtEndOfTurn" classname="hotciv.standard.TestAlphaCiv" time="0.003"/>
+  <testcase name="redShouldAlwaysProduceUnitOnCityTileIfPossible" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="thereShouldBeAUnitPlacedOn2_0" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="redShouldNotBeAbleToSpawnUnitsOnMountains" classname="hotciv.standard.TestAlphaCiv" time="0.002"/>
+  <testcase name="blueShouldAlwaysProduceUnitOnCityTileIfPossible" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="blueShouldAlwaysProduceUnitNorthOfCityTileIfItIsOccupiedByAUnit" classname="hotciv.standard.TestAlphaCiv" time="0.002"/>
+  <testcase name="shouldHave12ProductionAfterTwoEndTurnRedCity" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="unitsShouldNotBeAbleToMoveOverMountains" classname="hotciv.standard.TestAlphaCiv" time="0.02"/>
+  <testcase name="shouldHaveCityAt11" classname="hotciv.standard.TestAlphaCiv" time="0.002"/>
+  <testcase name="thereShouldBeASettlerAt4_3" classname="hotciv.standard.TestAlphaCiv" time="0.002"/>
+  <testcase name="unitsShouldBeAbleToMove" classname="hotciv.standard.TestAlphaCiv" time="0.002"/>
+  <testcase name="thereShouldBeABlueCityOn41" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="redShouldOwnAnArcherAt2_0" classname="hotciv.standard.TestAlphaCiv" time="0.002"/>
+  <testcase name="shouldProduceOneLegionUnitAfterEndOfRoundForPlayerRed" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="shouldDefinetelyBeRemoved" classname="hotciv.standard.TestAlphaCiv" time="0.02"/>
+  <testcase name="shouldHaveRedUnitsDestroyingBlueUnitsWhenAttacking" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="unitsShouldNotExistInSamePositionAfterMoveUnit" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="shouldHave12ProductionAfterTwoEndTurnsBlue" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
   <testcase name="shouldBeBlueAfterEndTurn" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="shouldProduceOneArcherUnitAfterEndOfRoundForPlayerRedAt1_1" classname="hotciv.standard.TestAlphaCiv" time="0.002"/>
   <testcase name="shouldBeRedPlayerWinningIn3000BC" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
-  <testcase name="ShouldHave12ProductionAfterTwoEndTurnsBlue" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
   <testcase name="thereShouldBeAnOceanAt1_0" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="blueShouldOwnALegion3_2" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="thereShouldBeALegionAt3_2" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="thereShouldNotBeACityOn01" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="blueShouldOwnALegion3_2" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="citiesShouldHaveZeroProductionInitiallyRedCity" classname="hotciv.standard.TestAlphaCiv" time="0.004"/>
+  <testcase name="thereShouldBeALegionAt3_2" classname="hotciv.standard.TestAlphaCiv" time="0.002"/>
+  <testcase name="thereShouldNotBeACityOn01" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
+  <testcase name="checkForEligibleSpawnPositionsAtRedCityWithRelationToUnits" classname="hotciv.standard.TestAlphaCiv" time="0.002"/>
   <testcase name="thereShouldBeACityOn41" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="ShouldHave12ProductionAfterTwoEndTurnRedCity" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="thereShouldBeAnArcherOn2_0" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
-  <testcase name="thereShouldAlsoBePlainsAt4_2" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <testcase name="ShouldHave6ProductionAtEndTurnBlueCity" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="unitsShouldBeAbleToMoveFrom2_0TO3_0" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="shouldProduceOneArcherUnitAfterEndOfRoundForPlayerBlueAt4_1" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="thereShouldBeAnArcherOn2_0" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="thereShouldAlsoBePlainsAt4_2" classname="hotciv.standard.TestAlphaCiv" time="0.003"/>
+  <testcase name="redShouldNotBeAbleToMoveBluesUnits" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
   <testcase name="thereShouldBeMountainsAt2_2" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
-  <testcase name="shouldHaveRedCityAt11" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
+  <testcase name="shouldHaveRedCityAt11" classname="hotciv.standard.TestAlphaCiv" time="0.001"/>
   <testcase name="thereShouldLastlyBePlainsAt15_15" classname="hotciv.standard.TestAlphaCiv" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="shouldBeAbleToMoveLegionUnits" classname="hotciv.standard.TestAlphaCiv" time="0.002"/>
+  <system-out><![CDATA[There is a mountain on the desired to position
+You are not the owner of the unit
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -6,4 +6,4 @@ Additional features:
 [] unitCost is a fixed zero, there has not been given a variable price? is this ok?
 [] We expect GUI to handle productionFocus? is this correct?
 [] Testlist p. 462 says "Reds unit attack and destory blue units", should this be implemented? or is it ok with general attacking? It occurs ambiguitious to p. 458.
-
+[] Should we test for the Iterator algorithm? It appears on jacocotestReport

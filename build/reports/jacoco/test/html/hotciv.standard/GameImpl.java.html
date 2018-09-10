@@ -1,104 +1,181 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="da"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hotciv-tdd-start</a> &gt; <a href="index.source.html" class="el_package">hotciv.standard</a> &gt; <span class="el_source">GameImpl.java</span></div><h1>GameImpl.java</h1><pre class="source lang-java linenums">package hotciv.standard;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="da"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HotCiv</a> &gt; <a href="index.source.html" class="el_package">hotciv.standard</a> &gt; <span class="el_source">GameImpl.java</span></div><h1>GameImpl.java</h1><pre class="source lang-java linenums">package hotciv.standard;
 
 import hotciv.framework.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/** Skeleton implementation of HotCiv.
- 
-   This source code is from the book 
-     &quot;Flexible, Reliable Software:
-       Using Patterns and Agile Development&quot;
-     published 2010 by CRC Press.
-   Author: 
-     Henrik B Christensen 
-     Department of Computer Science
-     Aarhus University
-   
-   Please visit http://www.baerbak.com/ for further information.
-
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
- 
-       http://www.apache.org/licenses/LICENSE-2.0
- 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-
-*/
+/**
+ * Skeleton implementation of HotCiv.
+ * &lt;p&gt;
+ * This source code is from the book
+ * &quot;Flexible, Reliable Software:
+ * Using Patterns and Agile Development&quot;
+ * published 2010 by CRC Press.
+ * Author:
+ * Henrik B Christensen
+ * Department of Computer Science
+ * Aarhus University
+ * &lt;p&gt;
+ * Please visit http://www.baerbak.com/ for further information.
+ * &lt;p&gt;
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * &lt;p&gt;
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * &lt;p&gt;
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 public class GameImpl implements Game {
-  private Player playerInTurn;
-  private int age;
-<span class="fc" id="L38">  Map&lt;Position, TileImpl&gt; worldMap = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L39">  Map&lt;Position, CityImpl&gt; cityMap = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L40">  Map&lt;Position, UnitImpl&gt; unitMap = new HashMap&lt;&gt;();</span>
 
-  // Constructor
-<span class="fc" id="L43">  public GameImpl (){</span>
-<span class="fc" id="L44">  playerInTurn = Player.RED;</span>
-<span class="fc" id="L45">  age = -4000;</span>
-  // Creates an 16x16 worldmap of plains.
-<span class="fc bfc" id="L47" title="All 2 branches covered.">  for (int i =0; i&lt;16; i++){</span>
-<span class="fc bfc" id="L48" title="All 2 branches covered.">      for (int j =0; j&lt;16; j++) {</span>
-<span class="fc" id="L49">    worldMap.put(new Position(i, j), new TileImpl(GameConstants.PLAINS));</span>
-  }
-  }
-<span class="fc" id="L52">  cityMap.put(GameConstants.RED_CITY_POSITION, new CityImpl(Player.RED));</span>
-<span class="fc" id="L53">  cityMap.put(GameConstants.BLUE_CITY_POSITION, new CityImpl(Player.BLUE));</span>
-  // Places the unique spots for oceans, hills and mountains.
-<span class="fc" id="L55">  worldMap.put(GameConstants.OCEAN_POSITION, new TileImpl(GameConstants.OCEANS));</span>
-<span class="fc" id="L56">  worldMap.put(GameConstants.HILLS_POSITION, new TileImpl(GameConstants.HILLS));</span>
-<span class="fc" id="L57">  worldMap.put(GameConstants.MOUNTAINS_POSITION, new TileImpl(GameConstants.MOUNTAINS));</span>
-  // places the initial units on the unitMap
-<span class="fc" id="L59">  unitMap.put(GameConstants.ARCHER_POSITION_RED, new UnitImpl(GameConstants.ARCHER,Player.RED));</span>
-<span class="fc" id="L60">  unitMap.put(GameConstants.LEGION_POSITION_BLUE, new UnitImpl(GameConstants.LEGION, Player.BLUE));</span>
-<span class="fc" id="L61">  unitMap.put(GameConstants.SETTLER_POSITION_RED, new UnitImpl(GameConstants.SETTLER,Player.RED));</span>
-<span class="fc" id="L62">  }</span>
+    // Fields
+    private Player playerInTurn;
+    private int age;
+<span class="fc" id="L40">    Map&lt;Position, TileImpl&gt; worldMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L41">    Map&lt;Position, CityImpl&gt; cityMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L42">    Map&lt;Position, UnitImpl&gt; unitMap = new HashMap&lt;&gt;();</span>
 
-<span class="fc" id="L64">  public Tile getTileAt( Position p ) { return worldMap.get(p); }</span>
-<span class="fc" id="L65">  public Unit getUnitAt( Position p ) { return unitMap.get(p); }</span>
-  
+    // Constructor
+<span class="fc" id="L45">    public GameImpl() {</span>
+<span class="fc" id="L46">        playerInTurn = Player.RED;</span>
+<span class="fc" id="L47">        age = GameConstants.STARTING_AGE;</span>
+        // Creates an 16x16 worldMap of plains through a nested loop.
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        for (int i = 0; i &lt; GameConstants.WORLDSIZE; i++) {</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">            for (int j = 0; j &lt; GameConstants.WORLDSIZE; j++) {</span>
+<span class="fc" id="L51">                worldMap.put(new Position(i, j), new TileImpl(GameConstants.PLAINS));</span>
+            }
+        }
+
+        // Places the cities in the worldMap
+<span class="fc" id="L56">        cityMap.put(GameConstants.RED_CITY_POSITION, new CityImpl(Player.RED));</span>
+<span class="fc" id="L57">        cityMap.put(GameConstants.BLUE_CITY_POSITION, new CityImpl(Player.BLUE));</span>
+        // Places the unique spots for oceans, hills and mountains and overrides the positions in the worldMap.
+<span class="fc" id="L59">        worldMap.put(GameConstants.OCEAN_POSITION, new TileImpl(GameConstants.OCEANS));</span>
+<span class="fc" id="L60">        worldMap.put(GameConstants.HILLS_POSITION, new TileImpl(GameConstants.HILLS));</span>
+<span class="fc" id="L61">        worldMap.put(GameConstants.MOUNTAINS_POSITION, new TileImpl(GameConstants.MOUNTAINS));</span>
+        // places the initial units on the unitMap
+<span class="fc" id="L63">        unitMap.put(GameConstants.ARCHER_POSITION_RED, new UnitImpl(GameConstants.ARCHER, Player.RED));</span>
+<span class="fc" id="L64">        unitMap.put(GameConstants.LEGION_POSITION_BLUE, new UnitImpl(GameConstants.LEGION, Player.BLUE));</span>
+<span class="fc" id="L65">        unitMap.put(GameConstants.SETTLER_POSITION_RED, new UnitImpl(GameConstants.SETTLER, Player.RED));</span>
+<span class="fc" id="L66">    }</span>
+
+    /**
+     * ====== ACCESOR METHODS ===========================================
+     */
+
+    public TileImpl getTileAt(Position p) {
+<span class="fc" id="L73">        return worldMap.get(p);</span>
+    }
+
+    public UnitImpl getUnitAt(Position p) {
+<span class="fc" id="L77">        return unitMap.get(p);</span>
+    }
+
+    public CityImpl getCityAt(Position p) {
+<span class="fc" id="L81">        return cityMap.get(p);</span>
+    }
+
+    public Player getPlayerInTurn() {
+<span class="fc" id="L85">        return playerInTurn;</span>
+    }
+
+    public Player getWinner() {
+<span class="fc bfc" id="L89" title="All 2 branches covered.">        if (getAge() == -3000) {</span>
+<span class="fc" id="L90">            return Player.RED;</span>
+        }
+<span class="fc" id="L92">        return null;</span>
+    }
+
+    public int getAge() {
+<span class="fc" id="L96">        return age;</span>
+    }
+
+    /**
+     * ====== MUTATOR METHODS ===========================================
+     */
+
+    public boolean moveUnit(Position from, Position to) {
+<span class="fc" id="L104">        UnitImpl temporaryUnitHolder = new UnitImpl(getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        if (getTileAt(to).equals(getTileAt(GameConstants.MOUNTAINS_POSITION))) {</span>
+<span class="fc" id="L106">            System.out.println(&quot;There is a mountain on the desired to position&quot;);</span>
+<span class="fc" id="L107">            return false;</span>
+        }
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (!getPlayerInTurn().equals(temporaryUnitHolder.getOwner())) {</span>
+<span class="fc" id="L110">            System.out.println(&quot;You are not the owner of the unit&quot;);</span>
+<span class="fc" id="L111">            return false;</span>
+        }
+
+<span class="fc" id="L114">        unitMap.remove(from);</span>
+<span class="fc" id="L115">        unitMap.put(to, temporaryUnitHolder);</span>
+<span class="fc" id="L116">        return true;</span>
+    }
+
+    public void endOfTurn() {
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        if (getPlayerInTurn() == Player.RED) {</span>
+<span class="fc" id="L121">            playerInTurn = Player.BLUE;</span>
+        } else {
+<span class="fc" id="L123">            playerInTurn = Player.RED;</span>
+<span class="fc" id="L124">            endOfRound();</span>
+        }
+<span class="fc" id="L126">        age += 100;</span>
+<span class="fc" id="L127">    }</span>
+
+    private void endOfRound() {
+<span class="fc" id="L130">        CityImpl redCity = cityMap.get(GameConstants.RED_CITY_POSITION);</span>
+<span class="fc" id="L131">        redCity.addTreasury(6);</span>
+<span class="fc" id="L132">        CityImpl blueCity = cityMap.get(GameConstants.BLUE_CITY_POSITION);</span>
+<span class="fc" id="L133">        blueCity.addTreasury(6);</span>
+<span class="fc" id="L134">        unitProduction();</span>
+<span class="fc" id="L135">    }</span>
+
+    public void unitProduction() {
+<span class="fc" id="L138">        CityImpl tempRedCity = getCityAt(GameConstants.RED_CITY_POSITION);</span>
+<span class="fc" id="L139">        CityImpl tempBlueCity = getCityAt(GameConstants.BLUE_CITY_POSITION);</span>
+<span class="fc" id="L140">        UnitImpl chosenRedUnit = new UnitImpl(getCityAt(GameConstants.RED_CITY_POSITION).getProduction(), tempRedCity.getOwner());</span>
+<span class="fc" id="L141">        UnitImpl chosenBlueUnit = new UnitImpl(getCityAt(GameConstants.BLUE_CITY_POSITION).getProduction(), tempBlueCity.getOwner());</span>
+<span class="fc" id="L142">        tempRedCity.addTreasury(-GameConstants.UNIT_COST);</span>
+<span class="fc bfc" id="L143" title="All 2 branches covered.">        if (getUnitAt(GameConstants.RED_CITY_POSITION) == null) {</span>
+<span class="fc" id="L144">            unitMap.put(GameConstants.RED_CITY_POSITION, chosenRedUnit);</span>
+
+        } else {
+<span class="pc bpc" id="L147" title="1 of 2 branches missed.">            for (Position p : Utility.get8neighborhoodOf(GameConstants.RED_CITY_POSITION)) {</span>
+<span class="fc bfc" id="L148" title="All 4 branches covered.">                if (getUnitAt(p) == null &amp;&amp; getTileAt(p).getTypeString() != GameConstants.MOUNTAINS) {</span>
+<span class="fc" id="L149">                    unitMap.put(p, chosenRedUnit);</span>
+<span class="fc" id="L150">                    break;</span>
+                }
+
+<span class="fc" id="L153">            }</span>
+        }
+<span class="fc bfc" id="L155" title="All 2 branches covered.">        if (getUnitAt(GameConstants.BLUE_CITY_POSITION) == null) {</span>
+<span class="fc" id="L156">            unitMap.put(GameConstants.BLUE_CITY_POSITION, chosenBlueUnit);</span>
+
+        } else {
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">            for (Position p : Utility.get8neighborhoodOf(GameConstants.BLUE_CITY_POSITION)) {</span>
+<span class="pc bpc" id="L160" title="1 of 4 branches missed.">                if (getUnitAt(p) == null &amp;&amp; getTileAt(p).getTypeString() != GameConstants.MOUNTAINS) {</span>
+<span class="fc" id="L161">                    unitMap.put(p, chosenBlueUnit);</span>
+<span class="fc" id="L162">                    break;</span>
+                }
+
+<span class="fc" id="L165">            }</span>
+        }
+
+<span class="fc" id="L168">    }</span>
 
 
+    public void changeWorkForceFocusInCityAt(Position p, String balance) {
+<span class="nc" id="L172">    }</span>
 
+    public void changeProductionInCityAt(Position p, String unitType) {
+<span class="fc" id="L175">        getCityAt(p).setUnitProductionFocus(unitType);</span>
+<span class="fc" id="L176">    }</span>
 
-<span class="fc" id="L71">    public City getCityAt(Position p ) { return cityMap.get(p) ; }</span>
-<span class="fc" id="L72">  public Player getPlayerInTurn() { return playerInTurn; }</span>
-<span class="fc bfc" id="L73" title="All 2 branches covered.">  public Player getWinner() { if (getAge()== -3000){</span>
-<span class="fc" id="L74">    return Player.RED;</span>
-  }
-<span class="fc" id="L76">  return null;</span>
-     }
-<span class="fc" id="L78">  public int getAge() { return age; }</span>
-  public boolean moveUnit( Position from, Position to ) {
-<span class="nc" id="L80">    return false;</span>
-  }
-  public void endOfTurn() {
-<span class="fc bfc" id="L83" title="All 2 branches covered.">      if (getPlayerInTurn() == Player.RED){</span>
-<span class="fc" id="L84">        playerInTurn = Player.BLUE;</span>
-      }
-      else {
-<span class="fc" id="L87">        playerInTurn = Player.RED;</span>
-<span class="fc" id="L88">        endOfRound();</span>
-      }
-<span class="fc" id="L90">    age += 100;</span>
-<span class="fc" id="L91">  }</span>
-
-  private void endOfRound() {
-<span class="fc" id="L94">CityImpl redCity = cityMap.get(GameConstants.RED_CITY_POSITION);</span>
-<span class="fc" id="L95">redCity.addTreasury(6);</span>
-<span class="fc" id="L96">CityImpl blueCity = cityMap.get(GameConstants.BLUE_CITY_POSITION);</span>
-<span class="fc" id="L97">blueCity.addTreasury(6);</span>
-<span class="fc" id="L98">  }</span>
-
-<span class="nc" id="L100">  public void changeWorkForceFocusInCityAt( Position p, String balance ) {}</span>
-<span class="nc" id="L101">  public void changeProductionInCityAt( Position p, String unitType ) {}</span>
-<span class="nc" id="L102">  public void performUnitActionAt( Position p ) {}</span>
+    public void performUnitActionAt(Position p) {
+<span class="nc" id="L179">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

@@ -245,55 +245,12 @@ public class TestAlphaCiv {
     }
 
     // Testing for unit at (2,0) and moving to (2,1)
-    @Test
-    public void unitsShouldBeAbleToMove() {
-        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
-        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2, 1));
-        assertThat(game.getUnitAt(new Position(2, 1)), is(notNullValue()));
-    }
 
-    @Test
-    public void unitsShouldBeAbleToMoveFrom2_0TO3_0() {
-        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
-        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(3, 0));
-        assertThat(game.getUnitAt(new Position(3, 0)), is(notNullValue()));
-    }
 
-    @Test
-    public void unitsShouldNotExistInSamePositionAfterMoveUnit() {
-        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
-        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(3, 0));
-        assertThat(game.getUnitAt(new Position(2, 0)), is(nullValue()));
-    }
 
-    @Test
-    public void unitsShouldNotBeAbleToMoveOverMountains() {
-        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
-        assertThat(game.getPlayerInTurn(), is(Player.RED));
-        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2, 2));
-        // there should be a mountain at (2,2)
-        assertThat(game.getUnitAt(new Position(2, 2)), is(nullValue()));
-        assertThat(game.getUnitAt(new Position(2, 0)), is(game.getUnitAt(gameConstants.ARCHER_POSITION_RED)));
-    }
 
-    @Test
-    public void shouldBeAbleToMoveLegionUnits() {
-        game.endOfTurn();
-        assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE), is(notNullValue()));
-        game.moveUnit(gameConstants.LEGION_POSITION_BLUE, new Position(3, 3));
-        assertThat(game.getUnitAt(new Position(3, 3)), is(notNullValue()));
-        assertThat(game.getUnitAt(new Position(3, 3)).getTypeString(), is(gameConstants.LEGION));
 
-    }
 
-    @Test
-    public void redShouldNotBeAbleToMoveBluesUnits() {
-        assertThat(game.getPlayerInTurn(), is(Player.RED));
-        assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE), is(notNullValue()));
-        assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(Player.BLUE));
-        game.moveUnit(gameConstants.LEGION_POSITION_BLUE, new Position(2, 1));
-        assertThat(game.getUnitAt(new Position(2, 1)), is(nullValue()));
-    }
 
     @Test
     public void shouldProduceOneArcherUnitAfterEndOfRoundForPlayerRedAt1_1() {
@@ -342,18 +299,7 @@ public class TestAlphaCiv {
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
     }
 
-    @Test
-    public void shouldHaveRedUnitsDestroyingBlueUnitsWhenAttacking() {
-        // checking both units exists
-        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
-        assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE), is(notNullValue()));
-        // attacking the blue legion unit with the red archer unit
-        game.moveUnit(gameConstants.ARCHER_POSITION_RED, gameConstants.LEGION_POSITION_BLUE);
-        // checking that the red unit moved from its original position
-        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(nullValue()));
-        assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE).getTypeString(), is(gameConstants.ARCHER));
-        assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE).getOwner(), is(Player.RED));
-    }
+
 
     @Test
     public void checkForEligibleSpawnPositionsAtRedCityWithRelationToUnits() {
@@ -419,7 +365,26 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(2, 2)), is(nullValue()));
         assertThat(game.getUnitAt(new Position(2, 1)), is(notNullValue()));
     }
-
+@Test
+public void shouldBeableToMoveUnitfromRedArcherPositionTo2_2(){
+        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
+        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2,2));
+        assertThat(game.getUnitAt(new Position(2,2)), is(notNullValue()));
+}
+@Test
+public void shouldRemoveUnitFromOldPosition(){
+        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
+    game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2,2));
+    assertThat(game.getUnitAt(new Position(2,2)), is(notNullValue()));
+    assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(nullValue()));
+}
+@Test
+public void legionShouldBeAbleToMoveAswell(){
+        assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE), is(notNullValue()));
+        game.moveUnit(gameConstants.LEGION_POSITION_BLUE, new Position(2,2));
+        assertThat(game.getUnitAt(new Position(2,2)), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(2,2)).getTypeString(), is(gameConstants.LEGION));
+}
     @Test
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values
