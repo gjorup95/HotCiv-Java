@@ -430,6 +430,12 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(2, 2)), is(nullValue()));
         assertThat(game.getUnitAt(new Position(2, 1)), is(notNullValue()));
     }
+    @Test
+    public void unitsShouldNotBeAbleToMoveOnOceanTiles(){
+        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED, GameConstants.OCEAN_POSITION);
+        assertThat(game.getUnitAt(GameConstants.OCEAN_POSITION), is(nullValue()));
+    }
 
     @Test
     public void shouldDefinetelyBeRemoved() {
