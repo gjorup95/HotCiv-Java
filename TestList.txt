@@ -66,4 +66,10 @@ Test-list for TDD Iteration 1
     [] After 1970, 1 year pass per round.
 
 ======= GAMMA CIV =============================
+[] refactor AlphaCiv to use a compositional design
+[] Setller should could perform build city
+[] Archer should could perform fortify, thus doubling its defensive strength
+
 ======= DELTA CIV =============================
+[] refactor AlphaCiv to use a compositional design
+[] The world's layout is that shown in Figure 36.1 on page 454.
