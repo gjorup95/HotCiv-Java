@@ -1,5 +1,7 @@
 Test-list for TDD Iteration 1
 
+======= ALPHA CIV =============================
+
 [X] Red is the first player in turn
 	[X] It should be blue's turn after red
 	[X] Red wins in year 3000 BC
@@ -49,3 +51,13 @@ Test-list for TDD Iteration 1
 [X] Units cannot be spawned on mountains.
 
 
+======= BETA CIV =============================
+
+[] refactor AlphaCiv to use a compositional design
+[] handle winner condition for AlphaCiv
+	[] implement winning condition for AlphaCiv in AlphaCiv
+[] handle winner condition for BetaCiv
+[] handle world ageing for BetaCiv
+
+======= GAMMA CIV =============================
+======= DELTA CIV =============================
