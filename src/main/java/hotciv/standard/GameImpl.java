@@ -4,6 +4,7 @@ import hotciv.framework.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Skeleton implementation of HotCiv.
@@ -109,9 +110,20 @@ public class GameImpl implements Game {
             return false;
         }
 
-        unitMap.remove(from);
-        unitMap.put(to, temporaryUnitHolder);
+        if (legalMoveCounts(from)) {
+            unitMap.remove(from);
+            unitMap.put(to, temporaryUnitHolder);
+            unitMap.get(to).setMoveCount(0);
+        }
         return true;
+    }
+
+    public boolean legalMoveCounts(Position p) {
+        if (unitMap.get(p).getMoveCount() == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void endOfTurn() {
@@ -129,6 +141,15 @@ public class GameImpl implements Game {
         getCityAt(GameConstants.BLUE_CITY_POSITION).addTreasury(GameConstants.PRODUCTION_FIXED6);
         unitProduction();
 
+         // Itterares the entire unitMap and checks whether or not there is a unit.
+         // If there is a unit on the position, it's moveCount is reset to 1.
+        for (int i = 0; i < GameConstants.WORLDSIZE; i++) {
+            for (int j = 0; j < GameConstants.WORLDSIZE; j++) {
+                if (getUnitAt(new Position(i, j)) != null) {
+                    unitMap.get(new Position(i, j)).setMoveCount(1);
+                }
+            }
+        }
     }
 
     public void unitProduction() {
