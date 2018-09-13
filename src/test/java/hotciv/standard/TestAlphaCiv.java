@@ -129,13 +129,13 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void shouldHave12ProductionAfterTwoEndTurnRedCity() {
+    public void shouldHave2ProductionAfterTwoEndTurnRedCity() {
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
-        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(12));
+        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(2));
     }
 
     @Test
@@ -147,13 +147,17 @@ public class TestAlphaCiv {
     }
 
     @Test
-    public void shouldHave12ProductionAfterTwoEndTurnsBlue() {
+    public void shouldHave4ProductionAfter4EndTurnsBlue() {
         assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(0));
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
-        assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(12));
+        game.endOfTurn();
+        game.endOfTurn();
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(4));
     }
 
     @Test
@@ -302,31 +306,37 @@ public class TestAlphaCiv {
         game.changeProductionInCityAt(gameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
-        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(2));
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getTypeString(), is(gameConstants.ARCHER));
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED));
     }
 
     @Test
-    public void shouldProduceOneArcherUnitAfterEndOfRoundForPlayerBlueAt4_1() {
+    public void shouldProduceOneArcherUnitAfterTwoEndOfRoundForPlayerBlueAt4_1() {
         assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(0));
         assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION), is(nullValue()));
         game.changeProductionInCityAt(gameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
-        assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(6));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getTreasury(), is(2));
         assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION).getTypeString(), is(gameConstants.ARCHER));
         assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
     }
 
     @Test
-    public void shouldProduceOneLegionUnitAfterEndOfRoundForPlayerRed() {
+    public void shouldProduceOneLegionUnitAfterTwoEndOfRoundForPlayerRed() {
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), is(nullValue()));
         game.changeProductionInCityAt(gameConstants.RED_CITY_POSITION, GameConstants.LEGION);
         game.endOfTurn();
         game.endOfTurn();
-        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(2));
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getTypeString(), is(gameConstants.LEGION));
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED));
     }
@@ -338,8 +348,10 @@ public class TestAlphaCiv {
         game.endOfTurn();
         game.endOfTurn();
         assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
-        assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getTypeString(), is(gameConstants.ARCHER));
-        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(6));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), is(notNullValue()));
+        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(2));
     }
 
     @Test
@@ -359,7 +371,7 @@ public class TestAlphaCiv {
     public void shouldHaveBlueUnitsDestroyingRedUnitsWhenAttacking() {
         game.endOfTurn();
         // attacking the blue legion unit with the red archer unit
-        game.moveUnit(gameConstants.LEGION_POSITION_BLUE,gameConstants.ARCHER_POSITION_RED );
+        game.moveUnit(gameConstants.LEGION_POSITION_BLUE, gameConstants.ARCHER_POSITION_RED);
         // checking that the red unit moved from its original position
         assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE), is(nullValue()));
         assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED).getTypeString(), is(gameConstants.LEGION));
@@ -372,10 +384,16 @@ public class TestAlphaCiv {
         game.changeProductionInCityAt(gameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
+        game.endOfTurn();
+        game.endOfTurn();
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION).getTypeString(), is(GameConstants.ARCHER));
         game.endOfTurn();
         game.endOfTurn();
+        game.endOfTurn();
+        game.endOfTurn();
         assertThat(game.getUnitAt(new Position(0, 1)), is(notNullValue()));
+        game.endOfTurn();
+        game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
         assertThat(game.getUnitAt(new Position(0, 2)), is(notNullValue()));
@@ -387,6 +405,8 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION), is(nullValue()));
         game.endOfTurn();
         game.endOfTurn();
+        game.endOfTurn();
+        game.endOfTurn();
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), is(notNullValue()));
         assertThat(game.getUnitAt(new Position(0, 1)), is(nullValue()));
     }
@@ -394,6 +414,8 @@ public class TestAlphaCiv {
     @Test
     public void blueShouldAlwaysProduceUnitOnCityTileIfPossible() {
         assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION), is(nullValue()));
+        game.endOfTurn();
+        game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
         assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION), is(notNullValue()));
@@ -406,6 +428,10 @@ public class TestAlphaCiv {
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
+        game.endOfTurn();
+        game.endOfTurn();
+        game.endOfTurn();
+        game.endOfTurn();
         assertThat(game.getUnitAt(new Position(3, 1)), notNullValue());
     }
 
@@ -414,27 +440,53 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), is(nullValue()));
         game.endOfTurn();
         game.endOfTurn();
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(2));
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), notNullValue());
         game.endOfTurn();
         game.endOfTurn();
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(4));
         assertThat(game.getUnitAt(new Position(0, 1)), notNullValue());
         game.endOfTurn();
         game.endOfTurn();
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(6));
         assertThat(game.getUnitAt(new Position(0, 2)), notNullValue());
         game.endOfTurn();
         game.endOfTurn();
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(8));
         assertThat(game.getUnitAt(new Position(1, 2)), notNullValue());
+        game.endOfTurn();
+        game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
         assertThat(game.getTileAt(new Position(2, 2)).getTypeString(), is(gameConstants.MOUNTAINS));
         assertThat(game.getUnitAt(new Position(2, 2)), is(nullValue()));
         assertThat(game.getUnitAt(new Position(2, 1)), is(notNullValue()));
+        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(0));
     }
+
     @Test
-    public void unitsShouldNotBeAbleToMoveOnOceanTiles(){
+    public void unitsShouldNotBeAbleToMoveOnOceanTiles() {
         assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, GameConstants.OCEAN_POSITION);
         assertThat(game.getUnitAt(GameConstants.OCEAN_POSITION), is(nullValue()));
+    }
+
+    @Test
+    public void citiesShouldOnlyProduceUnitsIfItHasEnoughTreasury() {
+        assertThat(game.getCityAt(gameConstants.RED_CITY_POSITION).getTreasury(), is(0));
+        game.changeProductionInCityAt(gameConstants.RED_CITY_POSITION, gameConstants.ARCHER);
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(6));
+        assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), is(nullValue()));
     }
 
     @Test

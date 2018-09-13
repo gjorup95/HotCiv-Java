@@ -11,6 +11,7 @@ public class UnitImpl implements Unit {
     private final String unitType;
     private final Player owner;
 
+
     public UnitImpl(String s, Player owner) {
         this.unitType = s;
         this.owner = owner;

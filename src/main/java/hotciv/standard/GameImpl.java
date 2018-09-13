@@ -125,10 +125,32 @@ public class GameImpl implements Game {
     }
 
     private void endOfRound() {
+
         getCityAt(GameConstants.RED_CITY_POSITION).addTreasury(GameConstants.PRODUCTION_FIXED6);
         getCityAt(GameConstants.BLUE_CITY_POSITION).addTreasury(GameConstants.PRODUCTION_FIXED6);
-        unitProduction();
+        if(getCityAt(GameConstants.RED_CITY_POSITION).getTreasury() >= GameConstants.UNIT_COST){
+            legalProduction(new UnitImpl(getCityAt(GameConstants.RED_CITY_POSITION).getProduction(), Player.RED), GameConstants.RED_CITY_POSITION);
+            getCityAt(GameConstants.RED_CITY_POSITION).addTreasury(-GameConstants.UNIT_COST);
+        }
 
+        if(getCityAt(GameConstants.BLUE_CITY_POSITION).getTreasury() >= GameConstants.UNIT_COST){
+            legalProduction(new UnitImpl(getCityAt(GameConstants.BLUE_CITY_POSITION).getProduction(),Player.BLUE), GameConstants.BLUE_CITY_POSITION);
+            getCityAt(GameConstants.BLUE_CITY_POSITION).addTreasury(-GameConstants.UNIT_COST);
+        }
+
+    }
+
+    private void legalProduction(UnitImpl chosenUnit, Position inCity) {
+        if (getUnitAt(inCity) == null) {
+            unitMap.put(inCity, chosenUnit);
+        } else {
+            for (Position p : Utility.get8neighborhoodOf(inCity)) {
+                if (getUnitAt(p) == null && getTileAt(p).getTypeString() != GameConstants.MOUNTAINS) {
+                    unitMap.put(p, chosenUnit);
+                    break;
+                }
+            }
+        }
     }
 
     public void unitProduction() {
