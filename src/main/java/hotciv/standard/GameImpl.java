@@ -4,6 +4,7 @@ import hotciv.framework.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Skeleton implementation of HotCiv.
@@ -109,9 +110,20 @@ public class GameImpl implements Game {
             return false;
         }
 
-        unitMap.remove(from);
-        unitMap.put(to, temporaryUnitHolder);
+        if (legalMoveCounts(from)) {
+            unitMap.remove(from);
+            unitMap.put(to, temporaryUnitHolder);
+            unitMap.get(to).setMoveCount(0);
+        }
         return true;
+    }
+
+    public boolean legalMoveCounts(Position p) {
+        if (unitMap.get(p).getMoveCount() == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void endOfTurn() {
@@ -128,16 +140,16 @@ public class GameImpl implements Game {
 
         getCityAt(GameConstants.RED_CITY_POSITION).addTreasury(GameConstants.PRODUCTION_FIXED6);
         getCityAt(GameConstants.BLUE_CITY_POSITION).addTreasury(GameConstants.PRODUCTION_FIXED6);
-        if(getCityAt(GameConstants.RED_CITY_POSITION).getTreasury() >= GameConstants.UNIT_COST){
+        if (getCityAt(GameConstants.RED_CITY_POSITION).getTreasury() >= GameConstants.UNIT_COST) {
             legalProduction(new UnitImpl(getCityAt(GameConstants.RED_CITY_POSITION).getProduction(), Player.RED), GameConstants.RED_CITY_POSITION);
             getCityAt(GameConstants.RED_CITY_POSITION).addTreasury(-GameConstants.UNIT_COST);
         }
 
-        if(getCityAt(GameConstants.BLUE_CITY_POSITION).getTreasury() >= GameConstants.UNIT_COST){
-            legalProduction(new UnitImpl(getCityAt(GameConstants.BLUE_CITY_POSITION).getProduction(),Player.BLUE), GameConstants.BLUE_CITY_POSITION);
+        if (getCityAt(GameConstants.BLUE_CITY_POSITION).getTreasury() >= GameConstants.UNIT_COST) {
+            legalProduction(new UnitImpl(getCityAt(GameConstants.BLUE_CITY_POSITION).getProduction(), Player.BLUE), GameConstants.BLUE_CITY_POSITION);
             getCityAt(GameConstants.BLUE_CITY_POSITION).addTreasury(-GameConstants.UNIT_COST);
         }
-
+    resetMoveCount();
     }
 
     private void legalProduction(UnitImpl chosenUnit, Position inCity) {
@@ -153,38 +165,16 @@ public class GameImpl implements Game {
         }
     }
 
-    public void unitProduction() {
-        CityImpl tempRedCity = getCityAt(GameConstants.RED_CITY_POSITION);
-        CityImpl tempBlueCity = getCityAt(GameConstants.BLUE_CITY_POSITION);
-        UnitImpl chosenRedUnit = new UnitImpl(getCityAt(GameConstants.RED_CITY_POSITION).getProduction(), tempRedCity.getOwner());
-        UnitImpl chosenBlueUnit = new UnitImpl(getCityAt(GameConstants.BLUE_CITY_POSITION).getProduction(), tempBlueCity.getOwner());
-        tempRedCity.addTreasury(-GameConstants.UNIT_COST);
-        tempBlueCity.addTreasury(-GameConstants.UNIT_COST);
-        if (getUnitAt(GameConstants.RED_CITY_POSITION) == null) {
-            unitMap.put(GameConstants.RED_CITY_POSITION, chosenRedUnit);
-
-        } else {
-            for (Position p : Utility.get8neighborhoodOf(GameConstants.RED_CITY_POSITION)) {
-                if (getUnitAt(p) == null && getTileAt(p).getTypeString() != GameConstants.MOUNTAINS) {
-                    unitMap.put(p, chosenRedUnit);
-                    break;
+    private void resetMoveCount() {
+        // Itterares the entire unitMap and checks whether or not there is a unit.
+        // If there is a unit on the position, it's moveCount is reset to 1.
+        for (int i = 0; i < GameConstants.WORLDSIZE; i++) {
+            for (int j = 0; j < GameConstants.WORLDSIZE; j++) {
+                if (getUnitAt(new Position(i, j)) != null) {
+                    unitMap.get(new Position(i, j)).setMoveCount(1);
                 }
-
             }
         }
-        if (getUnitAt(GameConstants.BLUE_CITY_POSITION) == null) {
-            unitMap.put(GameConstants.BLUE_CITY_POSITION, chosenBlueUnit);
-
-        } else {
-            for (Position p : Utility.get8neighborhoodOf(GameConstants.BLUE_CITY_POSITION)) {
-                if (getUnitAt(p) == null && getTileAt(p).getTypeString() != GameConstants.MOUNTAINS) {
-                    unitMap.put(p, chosenBlueUnit);
-                    break;
-                }
-
-            }
-        }
-
     }
 
 

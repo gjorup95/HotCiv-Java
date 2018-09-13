@@ -488,6 +488,36 @@ public class TestAlphaCiv {
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(6));
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), is(nullValue()));
     }
+    @Test
+    public void unitsShouldHaveMoveCount() {
+        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED).getMoveCount(), is(not(0)));
+        assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE).getMoveCount(), is(not(0)));
+    }
+
+    @Test
+    public void unitsShouldHaveTheirMovedCountReducedByOneWhenMovingOneTile() {
+        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED).getMoveCount(), is(1));
+        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(1,2));
+        assertThat(game.getUnitAt(new Position(1,2)).getMoveCount(), is(0));
+    }
+
+    @Test
+    public void unitsShouldOnlyBeAbleToMoveTheirMoveCount() {
+        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED).getMoveCount(), is(1));
+        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(1,2));
+        assertThat(game.getUnitAt(new Position(1,2)).getMoveCount(), is(0));
+        game.moveUnit(new Position(1,2), gameConstants.ARCHER_POSITION_RED);
+        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED),is(nullValue()));
+    }
+
+    @Test
+    public void unitsShouldHaveTheirMoveCountResetAfterEndOfRound() {
+        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(1,2));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getUnitAt(new Position(1,2)).getMoveCount(), is(1));
+
+    }
 
     @Test
     public void shouldDefinetelyBeRemoved() {
