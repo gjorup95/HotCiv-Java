@@ -33,11 +33,13 @@ import java.util.Set;
  * limitations under the License.
  */
 
-public class GameImpl implements Game {
+public class GameImpl implements Game, WinningCondition {
 
     // Fields
     private Player playerInTurn;
     private int age;
+    private WinningCondition winningCondition = new WinningConditionAlphaCiv();
+
     Map<Position, TileImpl> worldMap = new HashMap<>();
     Map<Position, CityImpl> cityMap = new HashMap<>();
     Map<Position, UnitImpl> unitMap = new HashMap<>();
@@ -87,10 +89,7 @@ public class GameImpl implements Game {
     }
 
     public Player getWinner() {
-        if (getAge() == -3000) {
-            return Player.RED;
-        }
-        return null;
+        return winningCondition.getWinner();
     }
 
     public int getAge() {

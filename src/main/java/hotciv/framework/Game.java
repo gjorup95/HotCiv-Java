@@ -70,7 +70,7 @@ public interface Game {
    * age BC (-4000 equals 4000 BC) while positive numbers are AD.
    *  @return world age.
    */
-  public int getAge();  
+  public int getAge();
     
   // === Mutator methods ======================================
   
