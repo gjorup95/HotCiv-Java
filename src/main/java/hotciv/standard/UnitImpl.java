@@ -10,6 +10,8 @@ import hotciv.framework.Unit;
 public class UnitImpl implements Unit {
     private final String unitType;
     private final Player owner;
+    private int moveCount = 1;
+
 
     public UnitImpl(String s, Player owner) {
         this.unitType = s;
@@ -28,7 +30,7 @@ public class UnitImpl implements Unit {
 
     @Override
     public int getMoveCount() {
-        return 0;
+        return moveCount;
     }
 
     @Override
@@ -39,5 +41,9 @@ public class UnitImpl implements Unit {
     @Override
     public int getAttackingStrength() {
         return 0;
+    }
+
+    public void setMoveCount(int moveCountAfterMovement) {
+        moveCount = moveCountAfterMovement;
     }
 }
