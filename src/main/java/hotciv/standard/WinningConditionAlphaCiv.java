@@ -6,14 +6,19 @@ import hotciv.framework.WinningCondition;
 
 public class WinningConditionAlphaCiv implements WinningCondition {
 
-    public WinningConditionAlphaCiv() {
+    private final Game game;
+
+    public WinningConditionAlphaCiv(Game game) {
+        this.game = game;
+
+    }
+        @Override
+        public Player getWinner () {
+            if (game.getAge() == -3000) {
+                return Player.RED;
+            }
+            return null;
+        }
+
     }
 
-    @Override
-    public Player getWinner() {
-        if (Game.getAge() == -3000) {
-            return Player.RED;
-        }
-        return null;
-    }
-}

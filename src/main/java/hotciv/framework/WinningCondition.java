@@ -13,6 +13,5 @@ package hotciv.framework;
 */
 
 public interface WinningCondition {
-
     public Player getWinner();
 }

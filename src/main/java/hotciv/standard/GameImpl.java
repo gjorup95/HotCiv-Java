@@ -38,7 +38,7 @@ public class GameImpl implements Game, WinningCondition {
     // Fields
     private Player playerInTurn;
     private int age;
-    private WinningCondition winningCondition = new WinningConditionAlphaCiv();
+    private WinningCondition winningCondition;
 
     Map<Position, TileImpl> worldMap = new HashMap<>();
     Map<Position, CityImpl> cityMap = new HashMap<>();
@@ -46,6 +46,7 @@ public class GameImpl implements Game, WinningCondition {
 
     // Constructor
     public GameImpl() {
+        winningCondition = new WinningConditionAlphaCiv(this);
         playerInTurn = Player.RED;
         age = GameConstants.STARTING_AGE;
         // Creates an 16x16 worldMap of plains through a nested loop.

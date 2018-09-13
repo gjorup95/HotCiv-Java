@@ -50,7 +50,7 @@ public class TestAlphaCiv {
 
     @Before // Before is run before every @Test
     public void setUp() {
-        game = new GameImpl(new WinningConditionAlphaCiv(game));
+        game = new GameImpl();
         redCity = new CityImpl(Player.RED);
     }
 
