@@ -35,16 +35,17 @@ import java.util.Set;
 
 public class GameImpl implements Game, WinningCondition {
 
-    // Fields
+    /** Fields */
     private Player playerInTurn;
     private int age;
     private WinningCondition winningCondition;
 
+    /** HashMaps that together make up the World in the Game. */
     Map<Position, TileImpl> worldMap = new HashMap<>();
     Map<Position, CityImpl> cityMap = new HashMap<>();
     Map<Position, UnitImpl> unitMap = new HashMap<>();
 
-    // Constructor
+    /** Constructor */
     public GameImpl() {
         winningCondition = new WinningConditionAlphaCiv(this);
         playerInTurn = Player.RED;
