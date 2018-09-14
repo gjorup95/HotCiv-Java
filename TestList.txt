@@ -66,7 +66,7 @@ Test-list for TDD Iteration 1
     [X] Between 50AD and 1750, 50 years pass per round
     [X] Between 1750 and 1900, 25 years pass per round
     [X] Between 1900 and 1970, 5 years pass per round.
-    [] After 1970, 1 year pass per round.
+    [X] After 1970, 1 year pass per round.
 
 ======= GAMMA CIV =============================
 [] refactor AlphaCiv to use a compositional design
