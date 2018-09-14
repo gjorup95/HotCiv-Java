@@ -34,10 +34,27 @@ public class TestBetaCiv {
         assertThat(winningConditionBeta.getWinner(), is(nullValue()));
     }
     @Test
-    public void redShouldWinWhenConqueringBlueCity(){
-        game.moveUnit(GameConstants.ARCHER_POSITION_RED, GameConstants.BLUE_CITY_POSITION);
-        assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION), is(nullValue()));
+    public void redShouldBeAbleToConquerBlueCity(){
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3,1));
+        game.endOfTurn();
+        game.endOfTurn();
+        game.moveUnit(new Position(3,1), GameConstants.BLUE_CITY_POSITION);
+        assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION), is(notNullValue()));
+        assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.RED));
 
-
+    }
+    @Test
+    public void blueShouldBeAbleToConquerRedCity() {
+        game.endOfTurn();
+        game.moveUnit(GameConstants.LEGION_POSITION_BLUE, new Position(2, 1));
+        assertThat(game.getUnitAt(new Position(2,1)).getTypeString(),is(GameConstants.LEGION));
+        game.endOfTurn();
+        game.endOfTurn();
+        game.moveUnit(new Position(2,1), GameConstants.RED_CITY_POSITION);
+        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner(), is(Player.BLUE));
+      /*  game.moveUnit(new Position(3, 1), GameConstants.BLUE_CITY_POSITION);
+        assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION), is(notNullValue()));
+        assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.RED));
+        */
     }
 }

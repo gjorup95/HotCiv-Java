@@ -119,11 +119,19 @@ public class GameImpl implements Game, WinningCondition {
         }
 
         if (legalMove(from, to)) {
+            conquerCity(to);
             unitMap.remove(from);
             unitMap.put(to, temporaryUnitHolder);
             unitMap.get(to).setMoveCount(0);
         }
         return true;
+    }
+
+    private void conquerCity(Position toConquer) {
+        if (getCityAt(toConquer) != null && getCityAt(toConquer).getOwner() != playerInTurn) {
+            getCityAt(toConquer).setOwner(playerInTurn);
+        }
+
     }
 
     public boolean legalMove(Position from, Position to) {

@@ -52,4 +52,8 @@ public class CityImpl implements City {
     public void addTreasury(int i) {
         cityTreasure += i;
     }
+
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
 }
