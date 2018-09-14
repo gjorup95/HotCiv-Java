@@ -50,7 +50,7 @@ public class TestAlphaCiv {
 
     @Before // Before is run before every @Test
     public void setUp() {
-        game = new GameImpl();
+        game = new GameImpl(GameType.ALPHA);
         redCity = new CityImpl(Player.RED);
     }
 
@@ -81,13 +81,15 @@ public class TestAlphaCiv {
     @Test
     public void ageShouldIncrementWith100AtEndOfTurn() {
         game.endOfTurn();
+        game.endOfTurn();
         assertEquals(-3900, game.getAge());
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
-        assertEquals(-3400, game.getAge());
+        game.endOfTurn();
+        assertEquals(-3600, game.getAge());
     }
 
     @Test
@@ -238,12 +240,12 @@ public class TestAlphaCiv {
     public void shouldBeRedPlayerWinningIn3000BC() {
         assertThat(game.getAge(), is(-4000));
         // for loop that decrements the worldAge by 500 years by calling endOfTurn() five times
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             game.endOfTurn();
         }
         assertThat(game.getWinner(), is(not(Player.RED)));
         // for loop that decrements the worldAge by 500 years by calling endOfTurn() five times
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             game.endOfTurn();
         }
         assertThat(game.getAge(), is(-3000));

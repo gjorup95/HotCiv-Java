@@ -54,9 +54,15 @@ public class GameImpl implements Game {
     /**
      * Constructor
      */
-    public GameImpl() {
-        winningCondition = new WinningConditionAlphaCiv(this);
-        ageing = new AgeingAlphaCiv();
+    public GameImpl(GameType version) {
+        if(version == GameType.ALPHA){
+         winningCondition = new WinningConditionAlphaCiv(this);
+         ageing = new AgeingAlphaCiv();
+        }
+        if (version == GameType.BETA){
+            winningCondition = new WinningConditionBetaCiv(this);
+            ageing = new AgeingBetaCiv();
+        }
         playerInTurn = Player.RED;
         age = GameConstants.STARTING_AGE;
         // Creates an 16x16 worldMap of plains through a nested loop.
@@ -150,8 +156,8 @@ public class GameImpl implements Game {
         } else {
             playerInTurn = Player.RED;
             endOfRound();
+            age += ageing.calculateAge();
         }
-        age += ageing.calculateAge();
     }
 
     private void endOfRound() {

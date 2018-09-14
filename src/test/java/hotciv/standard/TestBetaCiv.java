@@ -15,22 +15,21 @@ import java.util.*;
  */
 public class TestBetaCiv {
     private Game game;
-    private CityImpl redCity;
-    private GameConstants gameConstants;
     private WinningCondition winningConditionBeta;
-
+    private Ageing ageing;
+    private GameConstants gameConstants;
     @Before // Before is run before every @Test
     public void setUp() {
-        game = new GameImpl();
-        redCity = new CityImpl(Player.RED);
+        game = new GameImpl(GameType.BETA);
         winningConditionBeta = new WinningConditionBetaCiv(game);
+        ageing = new AgeingBetaCiv();
     }
 
     @Test
     public void gameShouldProperlyTestBetaImplementation() {
         assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED));
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             game.endOfTurn();
         }
         assertThat(game.getAge(), is(-3000));
@@ -82,5 +81,12 @@ public class TestBetaCiv {
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner(), is(Player.BLUE));
         assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
         assertThat(winningConditionBeta.getWinner(), is(Player.BLUE));
+    }
+    @Test
+    public void betweenYear4000And100BCAgeShouldIncrementWith100(){
+        assertThat(game.getAge(), is(gameConstants.STARTING_AGE));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getAge(),is(0));
     }
 }

@@ -76,3 +76,6 @@ Test-list for TDD Iteration 1
 ======= DELTA CIV =============================
 [] refactor AlphaCiv to use a compositional design
 [] The world's layout is that shown in Figure 36.1 on page 454.
+
+======GENERALLY ================
+Add fixtures to gameImpl so that it uses different versions of the game depending on the parameter set in gameImpl with a function
