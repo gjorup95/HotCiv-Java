@@ -5,6 +5,7 @@ import hotciv.framework.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.lang.Math;
 
 /**
  * Skeleton implementation of HotCiv.
@@ -35,17 +36,23 @@ import java.util.Set;
 
 public class GameImpl implements Game, WinningCondition {
 
-    /** Fields */
+    /**
+     * Fields
+     */
     private Player playerInTurn;
     private int age;
     private WinningCondition winningCondition;
 
-    /** HashMaps that together make up the World in the Game. */
+    /**
+     * HashMaps that together make up the World in the Game.
+     */
     Map<Position, TileImpl> worldMap = new HashMap<>();
     Map<Position, CityImpl> cityMap = new HashMap<>();
     Map<Position, UnitImpl> unitMap = new HashMap<>();
 
-    /** Constructor */
+    /**
+     * Constructor
+     */
     public GameImpl() {
         winningCondition = new WinningConditionAlphaCiv(this);
         playerInTurn = Player.RED;
@@ -111,7 +118,7 @@ public class GameImpl implements Game, WinningCondition {
             return false;
         }
 
-        if (legalMoveCounts(from)) {
+        if (legalMove(from, to)) {
             unitMap.remove(from);
             unitMap.put(to, temporaryUnitHolder);
             unitMap.get(to).setMoveCount(0);
@@ -119,8 +126,8 @@ public class GameImpl implements Game, WinningCondition {
         return true;
     }
 
-    public boolean legalMoveCounts(Position p) {
-        if (unitMap.get(p).getMoveCount() == 1) {
+    public boolean legalMove(Position from, Position to) {
+        if (Math.abs(from.getColumn() - to.getColumn()) >= 1 && Math.abs(from.getRow() - to.getRow()) >= 1) {
             return true;
         } else {
             return false;
@@ -150,7 +157,7 @@ public class GameImpl implements Game, WinningCondition {
             legalProduction(new UnitImpl(getCityAt(GameConstants.BLUE_CITY_POSITION).getProduction(), Player.BLUE), GameConstants.BLUE_CITY_POSITION);
             getCityAt(GameConstants.BLUE_CITY_POSITION).addTreasury(-GameConstants.UNIT_COST);
         }
-    resetMoveCount();
+        resetMoveCount();
     }
 
     private void legalProduction(UnitImpl chosenUnit, Position inCity) {

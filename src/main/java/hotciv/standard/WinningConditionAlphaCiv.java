@@ -12,13 +12,14 @@ public class WinningConditionAlphaCiv implements WinningCondition {
         this.game = game;
 
     }
-        @Override
-        public Player getWinner () {
-            if (game.getAge() == -3000) {
-                return Player.RED;
-            }
-            return null;
-        }
 
+    @Override
+    public Player getWinner() {
+        if (game.getAge() == -3000) {
+            return Player.RED;
+        }
+        return null;
     }
+
+}
 
