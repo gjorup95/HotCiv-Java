@@ -61,7 +61,7 @@ public class GameImpl implements Game {
         }
         if (version == GameType.BETA){
             winningCondition = new WinningConditionBetaCiv(this);
-            ageing = new AgeingBetaCiv();
+            ageing = new AgeingBetaCiv(this);
         }
         playerInTurn = Player.RED;
         age = GameConstants.STARTING_AGE;

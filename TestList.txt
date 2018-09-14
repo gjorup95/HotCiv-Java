@@ -61,11 +61,11 @@ Test-list for TDD Iteration 1
 	[X] a player can now conquer another players city
 [X] handle winner condition for BetaCiv
 [] handle world ageing for BetaCiv
-    [] Between 4000BC and 100BC, 100 years pass per round
-    [] Around birth of Christs, the sequence is -100, -1, +1, +50
-    [] Between 50AD and 1750, 50 years pass per round
-    [] Between 1750 and 1900, 25 years pass per round
-    [] Between 1900 and 1970, 5 years pass per round.
+    [X] Between 4000BC and 100BC, 100 years pass per round
+    [x] Around birth of Christs, the sequence is -100, -1, +1, +50
+    [X] Between 50AD and 1750, 50 years pass per round
+    [X] Between 1750 and 1900, 25 years pass per round
+    [X] Between 1900 and 1970, 5 years pass per round.
     [] After 1970, 1 year pass per round.
 
 ======= GAMMA CIV =============================
@@ -78,4 +78,5 @@ Test-list for TDD Iteration 1
 [] The world's layout is that shown in Figure 36.1 on page 454.
 
 ======GENERALLY ================
-Add fixtures to gameImpl so that it uses different versions of the game depending on the parameter set in gameImpl with a function
+ [X] Fixed versions of the game at setup for alpha and beta.
+ Add fixtures to gameImpl so that it uses different versions of the game depending on the parameter set in gameImpl with a function
