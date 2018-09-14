@@ -127,7 +127,7 @@ public class GameImpl implements Game, WinningCondition {
     }
 
     public boolean legalMove(Position from, Position to) {
-        if (Math.abs(from.getColumn() - to.getColumn()) >= 1 && Math.abs(from.getRow() - to.getRow()) >= 1) {
+        if (Math.abs(from.getColumn() - to.getColumn()) <= getUnitAt(from).getMoveCount() && Math.abs(from.getRow() - to.getRow()) <= getUnitAt(from).getMoveCount()) {
             return true;
         } else {
             return false;
