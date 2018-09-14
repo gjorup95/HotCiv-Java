@@ -59,7 +59,7 @@ Test-list for TDD Iteration 1
 [X] handle winner condition for AlphaCiv
 	[X] implement winning condition for AlphaCiv in AlphaCiv
 	[X] a player can now conquer another players city
-[] handle winner condition for BetaCiv
+[X] handle winner condition for BetaCiv
 [] handle world ageing for BetaCiv
     [] Between 4000BC and 100BC, 100 years pass per round
     [] Around birth of Christs, the sequence is -100, -1, +1, +50

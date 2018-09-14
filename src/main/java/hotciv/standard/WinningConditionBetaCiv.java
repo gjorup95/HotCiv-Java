@@ -19,8 +19,11 @@ public class WinningConditionBetaCiv implements WinningCondition {
 
     @Override
     public Player getWinner() {
-        if (game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner().equals(Player.RED) && game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner().equals(Player.RED)){
+        if (game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner().equals(Player.RED) && game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner().equals(Player.RED)) {
             return Player.RED;
+        } else if ((game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner().equals(Player.BLUE) &&
+                game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner().equals(Player.BLUE))) {
+            return Player.BLUE;
         }
         return null;
     }
