@@ -10,7 +10,6 @@ public class WinningConditionAlphaCiv implements WinningCondition {
 
     public WinningConditionAlphaCiv(Game game) {
         this.game = game;
-
     }
 
     @Override

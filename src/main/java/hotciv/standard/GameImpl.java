@@ -34,7 +34,7 @@ import java.lang.Math;
  * limitations under the License.
  */
 
-public class GameImpl implements Game, WinningCondition {
+public class GameImpl implements Game {
 
     /**
      * Fields
@@ -42,6 +42,7 @@ public class GameImpl implements Game, WinningCondition {
     private Player playerInTurn;
     private int age;
     private WinningCondition winningCondition;
+    private Ageing ageing;
 
     /**
      * HashMaps that together make up the World in the Game.
@@ -55,6 +56,7 @@ public class GameImpl implements Game, WinningCondition {
      */
     public GameImpl() {
         winningCondition = new WinningConditionAlphaCiv(this);
+        ageing = new AgeingAlphaCiv();
         playerInTurn = Player.RED;
         age = GameConstants.STARTING_AGE;
         // Creates an 16x16 worldMap of plains through a nested loop.
@@ -149,7 +151,7 @@ public class GameImpl implements Game, WinningCondition {
             playerInTurn = Player.RED;
             endOfRound();
         }
-        age += 100;
+        age += ageing.calculateAge();
     }
 
     private void endOfRound() {
@@ -173,7 +175,7 @@ public class GameImpl implements Game, WinningCondition {
             unitMap.put(inCity, chosenUnit);
         } else {
             for (Position p : Utility.get8neighborhoodOf(inCity)) {
-                if (getUnitAt(p) == null && getTileAt(p).getTypeString() != GameConstants.MOUNTAINS) {
+                if (getUnitAt(p) == null && getTileAt(p).getTypeString() != GameConstants.MOUNTAINS && getTileAt(p).getTypeString() != GameConstants.OCEANS) {
                     unitMap.put(p, chosenUnit);
                     break;
                 }
@@ -203,4 +205,5 @@ public class GameImpl implements Game, WinningCondition {
 
     public void performUnitActionAt(Position p) {
     }
+
 }

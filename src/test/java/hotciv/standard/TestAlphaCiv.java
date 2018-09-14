@@ -58,6 +58,8 @@ public class TestAlphaCiv {
      * ======= ALPHA CIV ================================================================================ ///////////
      */
 
+    /** UNITCOST ARE A FIXED AMOUNT */
+
     @Test
     public void shouldBeRedAsStartingPlayer() {
         assertThat(game, is(notNullValue()));
@@ -479,6 +481,21 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(2, 2)), is(nullValue()));
         assertThat(game.getUnitAt(new Position(2, 1)), is(notNullValue()));
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(0));
+    }
+
+    @Test
+    public void redShouldNotBeAbleToSpawnUnitsOnOceanTile() {
+        assertThat(game.getUnitAt(new Position(2,1)), is(nullValue()));
+        assertThat(game.getUnitAt(new Position(0,0)), is(nullValue()));
+        assertThat(game.getTileAt(new Position(1,0)).getTypeString(), is(gameConstants.OCEANS));
+        // After 10 endOfRounds the redCity should have accumulated enough production to produce 2 archerUnits
+        for(int i = 0; i < 20; i++) {
+        game.endOfTurn();
+        }
+        assertThat(game.getUnitAt(gameConstants.OCEAN_POSITION), is(nullValue()));
+        // redCity should also produce units on the tiles not occupied by redArcherUnit(2,0) and the ocean tile (1,1)
+        assertThat(game.getUnitAt(new Position(2,1)), is(not(nullValue())));
+        assertThat(game.getUnitAt(new Position(0,0)), is(not(nullValue())));
     }
 
     @Test
