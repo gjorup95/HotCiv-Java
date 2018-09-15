@@ -43,13 +43,14 @@ public class GameImpl implements Game {
     private int age;
     private WinningCondition winningCondition;
     private Ageing ageing;
+    private WorldCreator worldCreator;
 
     /**
      * HashMaps that together make up the World in the Game.
      */
-    Map<Position, TileImpl> worldMap = new HashMap<>();
-    Map<Position, CityImpl> cityMap = new HashMap<>();
-    Map<Position, UnitImpl> unitMap = new HashMap<>();
+    private Map<Position, TileImpl> worldMap = new HashMap<>();
+    private Map<Position, CityImpl> cityMap = new HashMap<>();
+    private Map<Position, UnitImpl> unitMap = new HashMap<>();
 
     /**
      * Constructor
@@ -58,6 +59,7 @@ public class GameImpl implements Game {
         if(version == GameType.ALPHA){
          winningCondition = new WinningConditionAlphaCiv(this);
          ageing = new AgeingAlphaCiv();
+         worldCreator = new WorldCreatorAlphaCiv(this);
         }
         if (version == GameType.BETA){
             winningCondition = new WinningConditionBetaCiv(this);
