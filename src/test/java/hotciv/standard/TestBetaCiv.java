@@ -16,6 +16,7 @@ import java.util.*;
 public class TestBetaCiv {
     private Game game;
     private GameConstants gameConstants;
+
     @Before // Before is run before every @Test
     public void setUp() {
         game = new GameImpl(GameType.BETA);
@@ -79,75 +80,85 @@ public class TestBetaCiv {
         assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
         assertThat(game.getWinner(), is(Player.BLUE));
     }
+
     @Test
-    public void betweenYear4000And100BCAgeShouldIncrementWith100(){
+    public void betweenYear4000And100BCAgeShouldIncrementWith100() {
         assertThat(game.getAge(), is(gameConstants.STARTING_AGE));
         game.endOfTurn();
         game.endOfTurn();
-        assertThat(game.getAge(),is(-3900));
+        assertThat(game.getAge(), is(-3900));
     }
+
     @Test
-    public void after78EndOfTurnsShouldBe100BC(){
+    public void after78EndOfTurnsShouldBe100BC() {
         assertThat(game.getAge(), is(GameConstants.STARTING_AGE));
-        for (int i =0; i<78; i++){
+        for (int i = 0; i < 78; i++) {
             game.endOfTurn();
         }
-        assertThat(game.getAge(),is(-100));
+        assertThat(game.getAge(), is(-100));
     }
+
     @Test
-    public void untilAge100BCAgeShouldIncrementBy100Years(){
+    public void untilAge100BCAgeShouldIncrementBy100Years() {
         assertThat(game.getAge(), is(GameConstants.STARTING_AGE));
-        for (int i =0; i<78; i++){
+        for (int i = 0; i < 78; i++) {
             game.endOfTurn();
         }
-        assertThat(game.getAge(),is(-100));
+        assertThat(game.getAge(), is(-100));
 
     }
+
     @Test
-    public void atAge100BCShouldincrementYearwith99(){
-        for (int i=0; i<80; i++){
+    public void atAge100BCShouldincrementYearwith99() {
+        for (int i = 0; i < 80; i++) {
             game.endOfTurn();
         }
-        assertThat(game.getAge(),is(-1));
+        assertThat(game.getAge(), is(-1));
     }
+
     @Test
-    public void atAge1BCShouldIncrementWith2Years(){
-        for (int i=0; i<82; i++){
+    public void atAge1BCShouldIncrementWith2Years() {
+        for (int i = 0; i < 82; i++) {
             game.endOfTurn();
         }
-        assertThat(game.getAge(),is(1));
+        assertThat(game.getAge(), is(1));
     }
+
     @Test
-    public void atAge1ShouldIncrementWith49(){
-        for (int i=0; i<84; i++){
+    public void atAge1ShouldIncrementWith49() {
+        for (int i = 0; i < 84; i++) {
             game.endOfTurn();
         }
-        assertThat(game.getAge(),is(50));
+        assertThat(game.getAge(), is(50));
     }
+
     @Test
-    public void atAge50ShouldIncrementYearWith50(){
-        for (int i =0; i<86; i++){
+    public void atAge50ShouldIncrementYearWith50() {
+        for (int i = 0; i < 86; i++) {
             game.endOfTurn();
         }
-        assertThat(game.getAge(),is(100));
+        assertThat(game.getAge(), is(100));
     }
+
     @Test
-    public void atAge1750ShouldIncrementWith25Years(){
-        for (int i=0; i<154; i++){
+    public void atAge1750ShouldIncrementWith25Years() {
+        for (int i = 0; i < 154; i++) {
             game.endOfTurn();
         }
-        assertThat(game.getAge(),is(1775));
+        assertThat(game.getAge(), is(1775));
     }
+
     @Test
-    public void atAge1900ShouldIncrementWith5Years(){
-        for (int i=0; i<166; i++){
+    public void atAge1900ShouldIncrementWith5Years() {
+        for (int i = 0; i < 166; i++) {
             game.endOfTurn();
         }
-        assertThat(game.getAge(),is(1905));
+        assertThat(game.getAge(), is(1905));
     }
+
     @Test
-    public void after1970ShouldIncrementWith1Year(){
-        for (int i=0; i<194; i++){
+    public void after1970ShouldIncrementWith1Year() {
+        for (int i = 0; i < 194; i++) {
             game.endOfTurn();
         }
         assertThat(game.getAge(), is(1971));

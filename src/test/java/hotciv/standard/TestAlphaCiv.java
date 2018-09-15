@@ -58,7 +58,9 @@ public class TestAlphaCiv {
      * ======= ALPHA CIV ================================================================================ ///////////
      */
 
-    /** UNITCOST ARE A FIXED AMOUNT */
+    /**
+     * UNITCOST ARE A FIXED AMOUNT
+     */
 
     @Test
     public void shouldBeRedAsStartingPlayer() {
@@ -364,12 +366,12 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(notNullValue()));
         assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE), is(notNullValue()));
         // attacking the blue legion unit with the red archer unit
-        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(3,1));
-        assertThat(game.getUnitAt(new Position(3,1)).getTypeString(), is(gameConstants.ARCHER));
+        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(3, 1));
+        assertThat(game.getUnitAt(new Position(3, 1)).getTypeString(), is(gameConstants.ARCHER));
         // Needs endOfRound to reset Red Players moveCount
         game.endOfTurn();
         game.endOfTurn();
-        game.moveUnit(new Position(3,1), gameConstants.LEGION_POSITION_BLUE);
+        game.moveUnit(new Position(3, 1), gameConstants.LEGION_POSITION_BLUE);
         // checking that the red unit moved from its original position
         assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(nullValue()));
         assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE).getTypeString(), is(gameConstants.ARCHER));
@@ -380,13 +382,13 @@ public class TestAlphaCiv {
     public void shouldHaveBlueUnitsDestroyingRedUnitsWhenAttacking() {
         game.endOfTurn();
         // moving the blue legion unit closer to the red archer unit
-        game.moveUnit(gameConstants.LEGION_POSITION_BLUE, new Position(3,1));
-        assertThat(game.getUnitAt(new Position(3,1)).getTypeString(), is(gameConstants.LEGION));
+        game.moveUnit(gameConstants.LEGION_POSITION_BLUE, new Position(3, 1));
+        assertThat(game.getUnitAt(new Position(3, 1)).getTypeString(), is(gameConstants.LEGION));
         game.endOfTurn();
         game.endOfTurn();
         // checking that the blue unit moved from its original position
         assertThat(game.getUnitAt(gameConstants.LEGION_POSITION_BLUE), is(nullValue()));
-        game.moveUnit(new Position(3,1), gameConstants.ARCHER_POSITION_RED);
+        game.moveUnit(new Position(3, 1), gameConstants.ARCHER_POSITION_RED);
         assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED).getTypeString(), is(gameConstants.LEGION));
         assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED).getOwner(), is(Player.BLUE));
     }
@@ -487,17 +489,17 @@ public class TestAlphaCiv {
 
     @Test
     public void redShouldNotBeAbleToSpawnUnitsOnOceanTile() {
-        assertThat(game.getUnitAt(new Position(2,1)), is(nullValue()));
-        assertThat(game.getUnitAt(new Position(0,0)), is(nullValue()));
-        assertThat(game.getTileAt(new Position(1,0)).getTypeString(), is(gameConstants.OCEANS));
+        assertThat(game.getUnitAt(new Position(2, 1)), is(nullValue()));
+        assertThat(game.getUnitAt(new Position(0, 0)), is(nullValue()));
+        assertThat(game.getTileAt(new Position(1, 0)).getTypeString(), is(gameConstants.OCEANS));
         // After 10 endOfRounds the redCity should have accumulated enough production to produce 2 archerUnits
-        for(int i = 0; i < 20; i++) {
-        game.endOfTurn();
+        for (int i = 0; i < 20; i++) {
+            game.endOfTurn();
         }
         assertThat(game.getUnitAt(gameConstants.OCEAN_POSITION), is(nullValue()));
         // redCity should also produce units on the tiles not occupied by redArcherUnit(2,0) and the ocean tile (1,1)
-        assertThat(game.getUnitAt(new Position(2,1)), is(not(nullValue())));
-        assertThat(game.getUnitAt(new Position(0,0)), is(not(nullValue())));
+        assertThat(game.getUnitAt(new Position(2, 1)), is(not(nullValue())));
+        assertThat(game.getUnitAt(new Position(0, 0)), is(not(nullValue())));
     }
 
     @Test
@@ -516,6 +518,7 @@ public class TestAlphaCiv {
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(6));
         assertThat(game.getUnitAt(gameConstants.RED_CITY_POSITION), is(nullValue()));
     }
+
     @Test
     public void unitsShouldHaveMoveCount() {
         assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED).getMoveCount(), is(not(0)));
@@ -525,25 +528,25 @@ public class TestAlphaCiv {
     @Test
     public void unitsShouldHaveTheirMovedCountReducedByOneWhenMovingOneTile() {
         assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED).getMoveCount(), is(1));
-        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2,1));
-        assertThat(game.getUnitAt(new Position(2,1)).getMoveCount(), is(0));
+        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2, 1));
+        assertThat(game.getUnitAt(new Position(2, 1)).getMoveCount(), is(0));
     }
 
     @Test
     public void unitsShouldOnlyBeAbleToMoveTheirMoveCount() {
         assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED).getMoveCount(), is(1));
-        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2,1));
-        assertThat(game.getUnitAt(new Position(2,1)).getMoveCount(), is(0));
-        game.moveUnit(new Position(2,1), gameConstants.ARCHER_POSITION_RED);
-        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED),is(nullValue()));
+        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2, 1));
+        assertThat(game.getUnitAt(new Position(2, 1)).getMoveCount(), is(0));
+        game.moveUnit(new Position(2, 1), gameConstants.ARCHER_POSITION_RED);
+        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED), is(nullValue()));
     }
 
     @Test
     public void unitsShouldHaveTheirMoveCountResetAfterEndOfRound() {
-        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2,1));
+        game.moveUnit(gameConstants.ARCHER_POSITION_RED, new Position(2, 1));
         game.endOfTurn();
         game.endOfTurn();
-        assertThat(game.getUnitAt(new Position(2,1)).getMoveCount(), is(1));
+        assertThat(game.getUnitAt(new Position(2, 1)).getMoveCount(), is(1));
 
     }
 

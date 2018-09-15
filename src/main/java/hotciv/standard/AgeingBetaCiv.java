@@ -9,35 +9,37 @@ import hotciv.framework.Game;
  */
 public class AgeingBetaCiv implements Ageing {
     private final Game game;
-    public AgeingBetaCiv(Game game){
+
+    public AgeingBetaCiv(Game game) {
         this.game = game;
     }
+
     @Override
     public int calculateAge() {
-       if (game.getAge()<-100){
-           return 100;
-       }
-       if (game.getAge() == -100){
-           return 99;
-       }
-        if (game.getAge() == -1){
+        if (game.getAge() < -100) {
+            return 100;
+        }
+        if (game.getAge() == -100) {
+            return 99;
+        }
+        if (game.getAge() == -1) {
             return 2;
         }
-        if (game.getAge() == 1){
+        if (game.getAge() == 1) {
             return 49;
         }
-        if (game.getAge() >= 50 && game.getAge() <1750){
+        if (game.getAge() >= 50 && game.getAge() < 1750) {
             return 50;
         }
-        if (game.getAge() >= 1750 && game.getAge() <1900){
+        if (game.getAge() >= 1750 && game.getAge() < 1900) {
             return 25;
         }
-        if (game.getAge() >=1900 && game.getAge() < 1970){
+        if (game.getAge() >= 1900 && game.getAge() < 1970) {
             return 5;
         }
-        if (game.getAge() >=1970){
+        if (game.getAge() >= 1970) {
             return 1;
         }
-       return 0;
+        return 0;
     }
 }

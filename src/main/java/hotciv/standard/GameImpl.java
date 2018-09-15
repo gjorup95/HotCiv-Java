@@ -48,43 +48,32 @@ public class GameImpl implements Game {
     /**
      * HashMaps that together make up the World in the Game.
      */
-    private Map<Position, TileImpl> worldMap = new HashMap<>();
-    private Map<Position, CityImpl> cityMap = new HashMap<>();
-    private Map<Position, UnitImpl> unitMap = new HashMap<>();
+    Map<Position, TileImpl> worldMap = new HashMap<>();
+    Map<Position, CityImpl> cityMap = new HashMap<>();
+    Map<Position, UnitImpl> unitMap = new HashMap<>();
 
     /**
      * Constructor
      */
     public GameImpl(GameType version) {
-        if(version == GameType.ALPHA){
-         winningCondition = new WinningConditionAlphaCiv(this);
-         ageing = new AgeingAlphaCiv();
-         worldCreator = new WorldCreatorAlphaCiv(this);
+        if (version == GameType.ALPHA) {
+            winningCondition = new WinningConditionAlphaCiv(this);
+            ageing = new AgeingAlphaCiv();
+            worldCreator = new WorldCreatorAlphaCiv(this);
+            worldMap.putAll(worldCreator.getWorldMap());
+            cityMap.putAll(worldCreator.getCityMap());
+            unitMap.putAll(worldCreator.getUnitMap());
         }
-        if (version == GameType.BETA){
+        if (version == GameType.BETA) {
             winningCondition = new WinningConditionBetaCiv(this);
             ageing = new AgeingBetaCiv(this);
+            worldCreator = new WorldCreatorAlphaCiv(this);
+            worldMap.putAll(worldCreator.getWorldMap());
+            cityMap.putAll(worldCreator.getCityMap());
+            unitMap.putAll(worldCreator.getUnitMap());
         }
         playerInTurn = Player.RED;
         age = GameConstants.STARTING_AGE;
-        // Creates an 16x16 worldMap of plains through a nested loop.
-        for (int i = 0; i < GameConstants.WORLDSIZE; i++) {
-            for (int j = 0; j < GameConstants.WORLDSIZE; j++) {
-                worldMap.put(new Position(i, j), new TileImpl(GameConstants.PLAINS));
-            }
-        }
-
-        // Places the cities in the worldMap
-        cityMap.put(GameConstants.RED_CITY_POSITION, new CityImpl(Player.RED));
-        cityMap.put(GameConstants.BLUE_CITY_POSITION, new CityImpl(Player.BLUE));
-        // Places the unique spots for oceans, hills and mountains and overrides the positions in the worldMap.
-        worldMap.put(GameConstants.OCEAN_POSITION, new TileImpl(GameConstants.OCEANS));
-        worldMap.put(GameConstants.HILLS_POSITION, new TileImpl(GameConstants.HILLS));
-        worldMap.put(GameConstants.MOUNTAINS_POSITION, new TileImpl(GameConstants.MOUNTAINS));
-        // places the initial units on the unitMap
-        unitMap.put(GameConstants.ARCHER_POSITION_RED, new UnitImpl(GameConstants.ARCHER, Player.RED));
-        unitMap.put(GameConstants.LEGION_POSITION_BLUE, new UnitImpl(GameConstants.LEGION, Player.BLUE));
-        unitMap.put(GameConstants.SETTLER_POSITION_RED, new UnitImpl(GameConstants.SETTLER, Player.RED));
     }
 
     /**
