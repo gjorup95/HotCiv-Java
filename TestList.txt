@@ -74,9 +74,9 @@ Test-list for TDD Iteration 1
 [] Archer should could perform fortify, thus doubling its defensive strength
 
 ======= DELTA CIV =============================
-[] AlphaCiv Layout Should be handled by a compositional structure
-[] refactor AlphaCiv to use a compositional design
-[] The world's layout is that shown in Figure 36.1 on page 454.
+[X] AlphaCiv Layout Should be handled by a compositional structure
+[X] refactor AlphaCiv to use a compositional design
+[X] The world's layout is that shown in Figure 36.1 on page 454.
 
 ======GENERALLY ================
  [X] Fixed versions of the game at setup for alpha and beta.

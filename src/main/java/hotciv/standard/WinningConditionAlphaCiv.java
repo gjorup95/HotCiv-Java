@@ -2,6 +2,7 @@ package hotciv.standard;
 
 import hotciv.framework.Game;
 import hotciv.framework.Player;
+import hotciv.framework.Position;
 import hotciv.framework.WinningCondition;
 
 public class WinningConditionAlphaCiv implements WinningCondition {
@@ -18,6 +19,12 @@ public class WinningConditionAlphaCiv implements WinningCondition {
             return Player.RED;
         }
         return null;
+    }
+
+    @Override
+    public boolean legalConquerCity(Position toConquer) {
+    // Do nothing
+        return false;
     }
 
 }

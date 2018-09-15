@@ -1,5 +1,10 @@
 package hotciv.framework;
 
+import hotciv.standard.CityImpl;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Represents a winning condition in the game.
  * <p>
@@ -14,4 +19,5 @@ package hotciv.framework;
 
 public interface WinningCondition {
     public Player getWinner();
+    public boolean legalConquerCity(Position toConquer);
 }

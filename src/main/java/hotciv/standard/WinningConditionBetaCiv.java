@@ -1,9 +1,6 @@
 package hotciv.standard;
 
-import hotciv.framework.GameConstants;
-import hotciv.framework.Player;
-import hotciv.framework.WinningCondition;
-import hotciv.framework.Game;
+import hotciv.framework.*;
 
 /**
  * @ author Troels Gjørup
@@ -26,5 +23,16 @@ public class WinningConditionBetaCiv implements WinningCondition {
             return Player.BLUE;
         }
         return null;
+    }
+
+    @Override
+    public boolean legalConquerCity(Position toConquer) {
+        if (game.getCityAt(toConquer) != null && game.getCityAt(toConquer).getOwner() != game.getPlayerInTurn()) {
+           return true;
+
+        }
+        else {
+            return false;
+        }
     }
 }

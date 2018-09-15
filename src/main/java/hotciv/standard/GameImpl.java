@@ -127,7 +127,9 @@ public class GameImpl implements Game {
         }
 
         if (legalMove(from, to)) {
-            conquerCity(to);
+            if(legalConquerCity(to)){
+                getCityAt(to).setOwner(playerInTurn);
+            }
             unitMap.remove(from);
             unitMap.put(to, temporaryUnitHolder);
             unitMap.get(to).setMoveCount(0);
@@ -135,11 +137,8 @@ public class GameImpl implements Game {
         return true;
     }
 
-    private void conquerCity(Position toConquer) {
-        if (getCityAt(toConquer) != null && getCityAt(toConquer).getOwner() != playerInTurn) {
-            getCityAt(toConquer).setOwner(playerInTurn);
-        }
-
+    private boolean legalConquerCity(Position toConquer) {
+     return winningCondition.legalConquerCity(toConquer);
     }
 
     public boolean legalMove(Position from, Position to) {

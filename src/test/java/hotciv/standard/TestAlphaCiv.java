@@ -549,6 +549,15 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(2, 1)).getMoveCount(), is(1));
 
     }
+    @Test
+    public void shouldNotBePossibleToConquerCitiesInAlphaCiv(){
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
+        game.endOfTurn();
+        game.endOfTurn();
+        game.moveUnit(new Position(3, 1), GameConstants.BLUE_CITY_POSITION);
+        assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION), is(notNullValue()));
+        assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
+    }
 
     @Test
     public void shouldDefinetelyBeRemoved() {
