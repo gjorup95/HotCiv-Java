@@ -7,8 +7,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-import java.util.*;
-
 /**
  * @ author Troels Gjørup
  * 14-09-2018
@@ -19,7 +17,7 @@ public class TestBetaCiv {
 
     @Before // Before is run before every @Test
     public void setUp() {
-        game = new GameImpl(GameType.BETA);
+        game = new GameImpl(Unit.GameType.BETA);
 
     }
 

@@ -4,7 +4,6 @@ import hotciv.framework.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.lang.Math;
 
 /**
@@ -55,22 +54,32 @@ public class GameImpl implements Game {
     /**
      * Constructor
      */
-    public GameImpl(GameType version) {
-        if (version == GameType.ALPHA) {
+    public GameImpl(Unit.GameType version) {
+        if (version == Unit.GameType.ALPHA) {
             winningCondition = new WinningConditionAlphaCiv(this);
             ageing = new AgeingAlphaCiv();
-            worldCreator = new WorldCreatorAlphaCiv(this);
+            worldCreator = new WorldCreatorAlphaCiv();
             worldMap.putAll(worldCreator.getWorldMap());
             cityMap.putAll(worldCreator.getCityMap());
             unitMap.putAll(worldCreator.getUnitMap());
         }
-        if (version == GameType.BETA) {
+        if (version == Unit.GameType.BETA) {
             winningCondition = new WinningConditionBetaCiv(this);
             ageing = new AgeingBetaCiv(this);
-            worldCreator = new WorldCreatorAlphaCiv(this);
+            worldCreator = new WorldCreatorAlphaCiv();
             worldMap.putAll(worldCreator.getWorldMap());
             cityMap.putAll(worldCreator.getCityMap());
             unitMap.putAll(worldCreator.getUnitMap());
+        }
+
+        if (version == Unit.GameType.DELTA){
+            winningCondition = new WinningConditionAlphaCiv(this);
+            ageing = new AgeingAlphaCiv();
+            worldCreator = new WorldCreatorDeltaCiv();
+            worldMap.putAll(worldCreator.getWorldMap());
+            unitMap.putAll(worldCreator.getUnitMap());
+            cityMap.putAll(worldCreator.getCityMap());
+
         }
         playerInTurn = Player.RED;
         age = GameConstants.STARTING_AGE;

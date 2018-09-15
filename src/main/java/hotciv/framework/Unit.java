@@ -63,4 +63,13 @@ public interface Unit {
    * @return attack strength
    */
   public int getAttackingStrength();
+
+    /**
+     * @ author Troels Gjørup
+     * 14-09-2018
+     */
+    enum GameType {
+        ALPHA, BETA, GAMMA, DELTA
+
+    }
 }
