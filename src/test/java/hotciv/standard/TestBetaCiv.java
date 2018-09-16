@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 /**
- * @ author Troels Gjørup
+ * @ author Troels Gjørup, Christoffer Ashorn
  * 14-09-2018
  */
 public class TestBetaCiv {
