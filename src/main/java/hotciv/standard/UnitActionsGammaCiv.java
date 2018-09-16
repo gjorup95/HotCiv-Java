@@ -37,7 +37,7 @@ public class UnitActionsGammaCiv implements UnitActions {
 
     @Override
     public boolean legalDisableArcherFortifyActionAt(Position performPosition) {
-        if (game.getUnitAt(performPosition) != null && game.getUnitAt(performPosition).getTypeString().equals(GameConstants.ARCHER) && game.getUnitAt(performPosition).getDefensiveStrength() <2) {
+        if (game.getUnitAt(performPosition) != null && game.getUnitAt(performPosition).getTypeString().equals(GameConstants.ARCHER) && game.getUnitAt(performPosition).getDefensiveStrength() ==2) {
             return true;
         }
         return false;
