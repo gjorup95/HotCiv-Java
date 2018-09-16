@@ -21,6 +21,7 @@ public class TestDeltaCiv {
 
     }
 
+
     @Test
     public void shouldProperlyImplementTheWorldMapHorizontally() {
         // Testing Horizontally
