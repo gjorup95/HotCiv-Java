@@ -55,8 +55,8 @@ public class GameImpl implements Game {
     /**
      * Constructor
      */
-    public GameImpl(Unit.GameType version) {
-        if (version == Unit.GameType.ALPHA) {
+    public GameImpl(GameType version) {
+        if (version == GameType.ALPHA) {
             winningCondition = new WinningConditionAlphaCiv(this);
             ageing = new AgeingAlphaCiv();
             worldCreator = new WorldCreatorAlphaCiv();
@@ -65,7 +65,7 @@ public class GameImpl implements Game {
             unitMap.putAll(worldCreator.getUnitMap());
             unitActions = new UnitActionsAlphaCiv();
         }
-        if (version == Unit.GameType.BETA) {
+        if (version == GameType.BETA) {
             winningCondition = new WinningConditionBetaCiv(this);
             ageing = new AgeingBetaCiv(this);
             worldCreator = new WorldCreatorAlphaCiv();
@@ -74,7 +74,7 @@ public class GameImpl implements Game {
             unitMap.putAll(worldCreator.getUnitMap());
             unitActions = new UnitActionsAlphaCiv();
         }
-        if (version == Unit.GameType.GAMMA) {
+        if (version == GameType.GAMMA) {
             winningCondition = new WinningConditionAlphaCiv(this);
             ageing = new AgeingAlphaCiv();
             worldCreator = new WorldCreatorAlphaCiv();
@@ -84,7 +84,7 @@ public class GameImpl implements Game {
             unitActions = new UnitActionsGammaCiv(this);
 
         }
-        if (version == Unit.GameType.DELTA) {
+        if (version == GameType.DELTA) {
             winningCondition = new WinningConditionAlphaCiv(this);
             ageing = new AgeingAlphaCiv();
             worldCreator = new WorldCreatorDeltaCiv();
@@ -102,9 +102,9 @@ public class GameImpl implements Game {
      * ====== ACCESOR METHODS ===========================================
      */
     public Map<Position, CityImpl> returnCityMap() {
+
         return cityMap;
     }
-
     public TileImpl getTileAt(Position p) {
         return worldMap.get(p);
     }

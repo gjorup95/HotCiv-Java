@@ -22,6 +22,7 @@ public class UnitActionsGammaCiv implements UnitActions {
         if (game.getUnitAt(performPosition) != null && game.getUnitAt(performPosition).getTypeString().equals(GameConstants.SETTLER) && game.getCityAt(performPosition) == null && game.getPlayerInTurn().equals(game.getUnitAt(performPosition).getOwner())) {
             return true;
         }
+
         return false;
     }
 
