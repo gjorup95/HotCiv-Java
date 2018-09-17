@@ -231,12 +231,12 @@ public class GameImpl implements Game {
         }
         if (unitActions.legalPerformArcherFortifyActionAt(p)){
             if (getUnitAt(p).getIsActionUsed()){
-                getUnitAt(p).setDefensiveStrength(1);
+                getUnitAt(p).setDefensiveStrength(getUnitAt(p).getDefensiveStrength()/2);
                 getUnitAt(p).setMoveCount(1);
                 getUnitAt(p).changeIfActionUsed(false);
             }
             else {
-                getUnitAt(p).setDefensiveStrength( 2);
+                getUnitAt(p).setDefensiveStrength(getUnitAt(p).getDefensiveStrength()*2);
                 getUnitAt(p).setMoveCount(0);
                 getUnitAt(p).changeIfActionUsed(true);
             }
