@@ -549,8 +549,9 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(2, 1)).getMoveCount(), is(1));
 
     }
+
     @Test
-    public void shouldNotBePossibleToConquerCitiesInAlphaCiv(){
+    public void shouldNotBePossibleToConquerCitiesInAlphaCiv() {
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
         game.endOfTurn();
         game.endOfTurn();

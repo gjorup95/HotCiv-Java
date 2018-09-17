@@ -27,13 +27,12 @@ public class UnitActionsGammaCiv implements UnitActions {
     @Override
     public void performArcherFortifyActionAt(Position performPosition) {
         if (game.getUnitAt(performPosition) != null && game.getUnitAt(performPosition).getTypeString().equals(GameConstants.ARCHER) && game.getUnitAt(performPosition).getOwner().equals(game.getPlayerInTurn())) {
-            if(game.getUnitAt(performPosition).getIsActionUsed()) {
-                game.getUnitAt(performPosition).setDefensiveStrength(game.getUnitAt(performPosition).getDefensiveStrength()/2);
+            if (game.getUnitAt(performPosition).getIsActionUsed()) {
+                game.getUnitAt(performPosition).setDefensiveStrength(game.getUnitAt(performPosition).getDefensiveStrength() / 2);
                 game.getUnitAt(performPosition).setMoveCount(1);
                 game.getUnitAt(performPosition).changeIfActionUsed(false);
-            }
-            else {
-                game.getUnitAt(performPosition).setDefensiveStrength(game.getUnitAt(performPosition).getDefensiveStrength()*2);
+            } else {
+                game.getUnitAt(performPosition).setDefensiveStrength(game.getUnitAt(performPosition).getDefensiveStrength() * 2);
                 game.getUnitAt(performPosition).setMoveCount(0);
                 game.getUnitAt(performPosition).changeIfActionUsed(true);
             }
