@@ -225,19 +225,21 @@ public class GameImpl implements Game {
     }
 
     public void performUnitActionAt(Position p) {
-        boolean fortifyArcherStatus;
         if (unitActions.legalPerformSettlerActionAt(p)) {
             cityMap.put(p, new CityImpl(getPlayerInTurn()));
             unitMap.remove(p);
         }
-        if (unitActions.legalPerformArcherFortifyActionAt(p)) {
-            getUnitAt(p).setMoveCount(0);
-            getUnitAt(p).setDefensiveStrength(2);
-
-        }
-        if (unitActions.legalDisableArcherFortifyActionAt(p) && !unitActions.legalPerformArcherFortifyActionAt(p)){
-            getUnitAt(p).setMoveCount(1);
-            getUnitAt(p).setDefensiveStrength(1);
+        if (unitActions.legalPerformArcherFortifyActionAt(p)){
+            if (getUnitAt(p).getIsActionUsed()){
+                getUnitAt(p).setDefensiveStrength(1);
+                getUnitAt(p).setMoveCount(1);
+                getUnitAt(p).changeIfActionUsed(false);
+            }
+            else {
+                getUnitAt(p).setDefensiveStrength( 2);
+                getUnitAt(p).setMoveCount(0);
+                getUnitAt(p).changeIfActionUsed(true);
+            }
         }
 
     }

@@ -12,12 +12,14 @@ public class UnitImpl implements Unit {
     private final Player owner;
     private int moveCount = 1;
     private int defensiveStrength;
+    private boolean actionUsed;
 
 
     public UnitImpl(String s, Player owner) {
         this.unitType = s;
         this.owner = owner;
         defensiveStrength = 1;
+        actionUsed = false;
     }
 
     @Override
@@ -51,5 +53,16 @@ public class UnitImpl implements Unit {
 
     public void setDefensiveStrength(int defensiveStrength) {
         this.defensiveStrength = defensiveStrength;
+    }
+
+    public void changeIfActionUsed(boolean state) {
+
+        actionUsed = state;
+    }
+
+    public boolean getIsActionUsed() {
+
+        return actionUsed;
+
     }
 }

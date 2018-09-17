@@ -15,60 +15,59 @@ public class WorldCreatorDeltaCiv implements WorldCreator {
     Map<Position, CityImpl> tempCityMap = new HashMap<>();
 
     public WorldCreatorDeltaCiv() {
-        tempUnitMap.put(new Position(5,5), new UnitImpl(GameConstants.SETTLER, Player.RED));
-        tempUnitMap.put(new Position(4,4), new UnitImpl(GameConstants.LEGION, Player.BLUE));
-        tempUnitMap.put(new Position(4,8), new UnitImpl(GameConstants.ARCHER, Player.RED));
-        tempCityMap.put(new Position(8,12), new CityImpl(Player.RED));
-        tempCityMap.put(new Position(4,5), new CityImpl(Player.BLUE));
+        tempUnitMap.put(new Position(5, 5), new UnitImpl(GameConstants.SETTLER, Player.RED));
+        tempUnitMap.put(new Position(4, 4), new UnitImpl(GameConstants.LEGION, Player.BLUE));
+        tempUnitMap.put(new Position(4, 8), new UnitImpl(GameConstants.ARCHER, Player.RED));
+        tempCityMap.put(new Position(8, 12), new CityImpl(Player.RED));
+        tempCityMap.put(new Position(4, 5), new CityImpl(Player.BLUE));
 
-            String[] layout =
-                    new String[]{
-                            "...ooMooooo.....",
-                            "..ohhoooofffoo..",
-                            ".oooooMooo...oo.",
-                            ".ooMMMoooo..oooo",
-                            "...ofooohhoooo..",
-                            ".ofoofooooohhoo.",
-                            "...ooo..........",
-                            ".ooooo.ooohooM..",
-                            ".ooooo.oohooof..",
-                            "offfoooo.offoooo",
-                            "oooooooo...ooooo",
-                            ".ooMMMoooo......",
-                            "..ooooooffoooo..",
-                            "....ooooooooo...",
-                            "..ooohhoo.......",
-                            ".....ooooooooo..",
-                    };
-            // Conversion...
-            String line;
-            for (int r = 0; r < GameConstants.WORLDSIZE; r++) {
-                line = layout[r];
-                for (int c = 0; c < GameConstants.WORLDSIZE; c++) {
-                    char tileChar = line.charAt(c);
-                    String type = "error";
-                    if (tileChar == '.') {
-                        type = GameConstants.OCEANS;
-                    }
-                    if (tileChar == 'o') {
-                        type = GameConstants.PLAINS;
-                    }
-                    if (tileChar == 'M') {
-                        type = GameConstants.MOUNTAINS;
-                    }
-                    if (tileChar == 'f') {
-                        type = GameConstants.FOREST;
-                    }
-                    if (tileChar == 'h') {
-                        type = GameConstants.HILLS;
-                    }
-                    Position p = new Position(r, c);
-                    tempWorldMap.put(p, new TileImpl(type));
+        String[] layout =
+                new String[]{
+                        "...ooMooooo.....",
+                        "..ohhoooofffoo..",
+                        ".oooooMooo...oo.",
+                        ".ooMMMoooo..oooo",
+                        "...ofooohhoooo..",
+                        ".ofoofooooohhoo.",
+                        "...ooo..........",
+                        ".ooooo.ooohooM..",
+                        ".ooooo.oohooof..",
+                        "offfoooo.offoooo",
+                        "oooooooo...ooooo",
+                        ".ooMMMoooo......",
+                        "..ooooooffoooo..",
+                        "....ooooooooo...",
+                        "..ooohhoo.......",
+                        ".....ooooooooo..",
+                };
+        // Conversion...
+        String line;
+        for (int r = 0; r < GameConstants.WORLDSIZE; r++) {
+            line = layout[r];
+            for (int c = 0; c < GameConstants.WORLDSIZE; c++) {
+                char tileChar = line.charAt(c);
+                String type = "error";
+                if (tileChar == '.') {
+                    type = GameConstants.OCEANS;
                 }
+                if (tileChar == 'o') {
+                    type = GameConstants.PLAINS;
+                }
+                if (tileChar == 'M') {
+                    type = GameConstants.MOUNTAINS;
+                }
+                if (tileChar == 'f') {
+                    type = GameConstants.FOREST;
+                }
+                if (tileChar == 'h') {
+                    type = GameConstants.HILLS;
+                }
+                Position p = new Position(r, c);
+                tempWorldMap.put(p, new TileImpl(type));
             }
+        }
 
     }
-
 
 
     @Override

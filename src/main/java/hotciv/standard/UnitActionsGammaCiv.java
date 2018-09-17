@@ -24,21 +24,12 @@ public class UnitActionsGammaCiv implements UnitActions {
         }
         return false;
     }
-// && game.getUnitAt(performPosition).getDefensiveStrength() <2
 
     @Override
     public boolean legalPerformArcherFortifyActionAt(Position performPosition) {
-        if (game.getUnitAt(performPosition) != null && game.getUnitAt(performPosition).getTypeString().equals(GameConstants.ARCHER) && game.getUnitAt(performPosition).getDefensiveStrength() == 1) {
+        if (game.getUnitAt(performPosition) != null && game.getUnitAt(performPosition).getTypeString().equals(GameConstants.ARCHER) && game.getUnitAt(performPosition).getOwner().equals(game.getPlayerInTurn())) {
             return true;
 
-        }
-        return false;
-    }
-
-    @Override
-    public boolean legalDisableArcherFortifyActionAt(Position performPosition) {
-        if (game.getUnitAt(performPosition) != null && game.getUnitAt(performPosition).getTypeString().equals(GameConstants.ARCHER) && game.getUnitAt(performPosition).getDefensiveStrength() ==2) {
-            return true;
         }
         return false;
     }
