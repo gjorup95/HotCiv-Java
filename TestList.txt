@@ -77,7 +77,7 @@ Test-list for TDD Iteration 1
 [X] AlphaCiv Layout Should be handled by a compositional structure
 [X] refactor AlphaCiv to use a compositional design
 [X] The world's layout is that shown in Figure 36.1 on page 454.
-
+[] Make accessor and mutator methods for different hashmaps so they can be used in interfaces subclasses.
 ======GENERALLY ================
  [X] Fixed versions of the game at setup for all versions.
  Add fixtures to gameImpl so that it uses different versions of the game depending on the parameter set in gameImpl with a function

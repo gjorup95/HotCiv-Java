@@ -17,7 +17,7 @@ public class TestBetaCiv {
 
     @Before // Before is run before every @Test
     public void setUp() {
-        game = new GameImpl(Unit.GameType.BETA);
+        game = new GameImpl(GameType.BETA);
 
     }
 
