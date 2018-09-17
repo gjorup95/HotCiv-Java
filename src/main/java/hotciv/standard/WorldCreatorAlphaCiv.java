@@ -45,6 +45,4 @@ public class WorldCreatorAlphaCiv implements WorldCreator {
     public Map<Position, UnitImpl> getUnitMap() {
         return tempUnitMap;
     }
-
-
 }

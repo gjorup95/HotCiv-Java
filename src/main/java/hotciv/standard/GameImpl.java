@@ -65,6 +65,7 @@ public class GameImpl implements Game {
             unitMap.putAll(worldCreator.getUnitMap());
             unitActions = new UnitActionsAlphaCiv();
         }
+
         if (version == GameType.BETA) {
             winningCondition = new WinningConditionBetaCiv(this);
             ageing = new AgeingBetaCiv(this);
@@ -74,6 +75,7 @@ public class GameImpl implements Game {
             unitMap.putAll(worldCreator.getUnitMap());
             unitActions = new UnitActionsAlphaCiv();
         }
+
         if (version == GameType.GAMMA) {
             winningCondition = new WinningConditionAlphaCiv(this);
             ageing = new AgeingAlphaCiv();
@@ -82,8 +84,8 @@ public class GameImpl implements Game {
             cityMap.putAll(worldCreator.getCityMap());
             unitMap.putAll(worldCreator.getUnitMap());
             unitActions = new UnitActionsGammaCiv(this);
-
         }
+
         if (version == GameType.DELTA) {
             winningCondition = new WinningConditionAlphaCiv(this);
             ageing = new AgeingAlphaCiv();
@@ -92,7 +94,6 @@ public class GameImpl implements Game {
             unitMap.putAll(worldCreator.getUnitMap());
             cityMap.putAll(worldCreator.getCityMap());
             unitActions = new UnitActionsAlphaCiv();
-
         }
         playerInTurn = Player.RED;
         age = GameConstants.STARTING_AGE;
@@ -234,19 +235,6 @@ public class GameImpl implements Game {
     public void performUnitActionAt(Position p) {
         unitActions.performSettlerActionAt(p);
         unitActions.performArcherFortifyActionAt(p);
-
-            /* if (getUnitAt(p).getIsActionUsed()){
-                getUnitAt(p).setDefensiveStrength(getUnitAt(p).getDefensiveStrength()/2);
-                getUnitAt(p).setMoveCount(1);
-                getUnitAt(p).changeIfActionUsed(false);
-            }
-            else {
-                getUnitAt(p).setDefensiveStrength(getUnitAt(p).getDefensiveStrength()*2);
-                getUnitAt(p).setMoveCount(0);
-                getUnitAt(p).changeIfActionUsed(true);
-            }
-        }*/
-
     }
 }
 
