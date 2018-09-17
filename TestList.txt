@@ -55,12 +55,12 @@ Test-list for TDD Iteration 1
 
 [] refactor AlphaCiv to use a compositional design
     [X] For winning different winning conditions
-    [] For different ageing conditions
+    [X] For different ageing conditions
 [X] handle winner condition for AlphaCiv
 	[X] implement winning condition for AlphaCiv in AlphaCiv
 	[X] a player can now conquer another players city
 [X] handle winner condition for BetaCiv
-[] handle world ageing for BetaCiv
+[X] handle world ageing for BetaCiv
     [X] Between 4000BC and 100BC, 100 years pass per round
     [x] Around birth of Christs, the sequence is -100, -1, +1, +50
     [X] Between 50AD and 1750, 50 years pass per round
@@ -69,9 +69,9 @@ Test-list for TDD Iteration 1
     [X] After 1970, 1 year pass per round.
 
 ======= GAMMA CIV =============================
-[] refactor AlphaCiv to use a compositional design
-[] Setller should could perform build city
-[] Archer should could perform fortify, thus doubling its defensive strength
+[X] refactor AlphaCiv to use a compositional design
+[X] Setller should could perform build city
+[X] Archer should could perform fortify, thus doubling its defensive strength
 
 ======= DELTA CIV =============================
 [X] AlphaCiv Layout Should be handled by a compositional structure
@@ -79,5 +79,5 @@ Test-list for TDD Iteration 1
 [X] The world's layout is that shown in Figure 36.1 on page 454.
 
 ======GENERALLY ================
- [X] Fixed versions of the game at setup for alpha and beta.
+ [X] Fixed versions of the game at setup for all versions.
  Add fixtures to gameImpl so that it uses different versions of the game depending on the parameter set in gameImpl with a function
