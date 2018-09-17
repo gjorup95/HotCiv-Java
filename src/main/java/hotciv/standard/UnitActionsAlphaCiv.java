@@ -9,15 +9,12 @@ import hotciv.framework.UnitActions;
  */
 public class UnitActionsAlphaCiv implements UnitActions {
 
-
     @Override
-    public boolean legalPerformSettlerActionAt(Position performPosition) {
-        return false;
+    public void performSettlerActionAt(Position performPosition) {
+
     }
 
     @Override
-    public boolean legalPerformArcherFortifyActionAt(Position performPosition) {
-        return false;
+    public void performArcherFortifyActionAt(Position performPosition) {
     }
-
 }

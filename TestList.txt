@@ -53,7 +53,7 @@ Test-list for TDD Iteration 1
 
 ======= BETA CIV =============================
 
-[] refactor AlphaCiv to use a compositional design
+[X] refactor AlphaCiv to use a compositional design
     [X] For winning different winning conditions
     [X] For different ageing conditions
 [X] handle winner condition for AlphaCiv

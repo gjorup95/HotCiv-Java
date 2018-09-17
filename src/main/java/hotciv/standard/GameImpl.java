@@ -105,6 +105,7 @@ public class GameImpl implements Game {
 
         return cityMap;
     }
+
     public TileImpl getTileAt(Position p) {
         return worldMap.get(p);
     }
@@ -133,6 +134,14 @@ public class GameImpl implements Game {
      * ====== MUTATOR METHODS ===========================================
      */
 
+    public void removeUnit(Position p) {
+        unitMap.remove(p);
+    }
+
+    public void addCity(Position p, Player owner) {
+        cityMap.put(p, new CityImpl(owner));
+    }
+
     public boolean moveUnit(Position from, Position to) {
         UnitImpl temporaryUnitHolder = new UnitImpl(getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
         if (getTileAt(to).equals(getTileAt(GameConstants.MOUNTAINS_POSITION)) || getTileAt(to).equals(getTileAt(GameConstants.OCEAN_POSITION))) {
@@ -143,9 +152,7 @@ public class GameImpl implements Game {
         }
 
         if (legalMove(from, to)) {
-            if (legalConquerCity(to)) {
-                getCityAt(to).setOwner(playerInTurn);
-            }
+            conquerCity(to);
             unitMap.remove(from);
             unitMap.put(to, temporaryUnitHolder);
             unitMap.get(to).setMoveCount(0);
@@ -153,8 +160,8 @@ public class GameImpl implements Game {
         return true;
     }
 
-    private boolean legalConquerCity(Position toConquer) {
-        return winningCondition.legalConquerCity(toConquer);
+    private void conquerCity(Position toConquer) {
+        winningCondition.conquerCity(toConquer);
     }
 
     public boolean legalMove(Position from, Position to) {
@@ -225,12 +232,10 @@ public class GameImpl implements Game {
     }
 
     public void performUnitActionAt(Position p) {
-        if (unitActions.legalPerformSettlerActionAt(p)) {
-            cityMap.put(p, new CityImpl(getPlayerInTurn()));
-            unitMap.remove(p);
-        }
-        if (unitActions.legalPerformArcherFortifyActionAt(p)){
-            if (getUnitAt(p).getIsActionUsed()){
+        unitActions.performSettlerActionAt(p);
+        unitActions.performArcherFortifyActionAt(p);
+
+            /* if (getUnitAt(p).getIsActionUsed()){
                 getUnitAt(p).setDefensiveStrength(getUnitAt(p).getDefensiveStrength()/2);
                 getUnitAt(p).setMoveCount(1);
                 getUnitAt(p).changeIfActionUsed(false);
@@ -240,9 +245,9 @@ public class GameImpl implements Game {
                 getUnitAt(p).setMoveCount(0);
                 getUnitAt(p).changeIfActionUsed(true);
             }
-        }
+        }*/
 
     }
-
-
 }
+
+

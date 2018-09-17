@@ -20,5 +20,5 @@ import java.util.Map;
 public interface WinningCondition {
     public Player getWinner();
 
-    public boolean legalConquerCity(Position toConquer);
+    public void conquerCity(Position toConquer);
 }

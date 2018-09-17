@@ -7,11 +7,10 @@ import hotciv.framework.*;
  * 14-09-2018
  */
 public class WinningConditionBetaCiv implements WinningCondition {
-    private final Game game;
+    private final GameImpl game;
 
-    public WinningConditionBetaCiv(Game game) {
+    public WinningConditionBetaCiv(GameImpl game) {
         this.game = game;
-
     }
 
     @Override
@@ -26,12 +25,9 @@ public class WinningConditionBetaCiv implements WinningCondition {
     }
 
     @Override
-    public boolean legalConquerCity(Position toConquer) {
+    public void conquerCity(Position toConquer) {
         if (game.getCityAt(toConquer) != null && game.getCityAt(toConquer).getOwner() != game.getPlayerInTurn()) {
-            return true;
-
-        } else {
-            return false;
+            game.getCityAt(toConquer).setOwner(game.getPlayerInTurn());
         }
     }
 }

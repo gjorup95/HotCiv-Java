@@ -22,9 +22,8 @@ public class WinningConditionAlphaCiv implements WinningCondition {
     }
 
     @Override
-    public boolean legalConquerCity(Position toConquer) {
-        // Do nothing
-        return false;
+    public void conquerCity(Position toConquer) {
+
     }
 
 }

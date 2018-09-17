@@ -5,8 +5,10 @@ package hotciv.framework;
  * 16-09-2018
  */
 public interface UnitActions {
-    public boolean legalPerformSettlerActionAt(Position performPosition);
 
-    public boolean legalPerformArcherFortifyActionAt(Position performPosition);
+    public void performSettlerActionAt(Position performPosition);
+
+    public void performArcherFortifyActionAt(Position performPosition);
+
 
 }
