@@ -13,7 +13,7 @@ public class CityImpl implements City {
     private int cityTreasure;
     private int population;
     private String unitProductionFocus;
-    
+
 
     public CityImpl(Player owner) {
         this.owner = owner;

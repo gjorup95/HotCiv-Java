@@ -43,6 +43,7 @@ public class GameImpl implements Game {
     private WinningCondition winningCondition;
     private Ageing ageing;
     private WorldCreator worldCreator;
+    private UnitActions unitActions;
 
     /**
      * HashMaps that together make up the World in the Game.
@@ -62,6 +63,7 @@ public class GameImpl implements Game {
             worldMap.putAll(worldCreator.getWorldMap());
             cityMap.putAll(worldCreator.getCityMap());
             unitMap.putAll(worldCreator.getUnitMap());
+            unitActions = new UnitActionsAlphaCiv();
         }
         if (version == Unit.GameType.BETA) {
             winningCondition = new WinningConditionBetaCiv(this);
@@ -70,15 +72,26 @@ public class GameImpl implements Game {
             worldMap.putAll(worldCreator.getWorldMap());
             cityMap.putAll(worldCreator.getCityMap());
             unitMap.putAll(worldCreator.getUnitMap());
+            unitActions = new UnitActionsAlphaCiv();
         }
+        if (version == Unit.GameType.GAMMA) {
+            winningCondition = new WinningConditionAlphaCiv(this);
+            ageing = new AgeingAlphaCiv();
+            worldCreator = new WorldCreatorAlphaCiv();
+            worldMap.putAll(worldCreator.getWorldMap());
+            cityMap.putAll(worldCreator.getCityMap());
+            unitMap.putAll(worldCreator.getUnitMap());
+            unitActions = new UnitActionsGammaCiv(this);
 
-        if (version == Unit.GameType.DELTA){
+        }
+        if (version == Unit.GameType.DELTA) {
             winningCondition = new WinningConditionAlphaCiv(this);
             ageing = new AgeingAlphaCiv();
             worldCreator = new WorldCreatorDeltaCiv();
             worldMap.putAll(worldCreator.getWorldMap());
             unitMap.putAll(worldCreator.getUnitMap());
             cityMap.putAll(worldCreator.getCityMap());
+            unitActions = new UnitActionsAlphaCiv();
 
         }
         playerInTurn = Player.RED;
@@ -88,6 +101,9 @@ public class GameImpl implements Game {
     /**
      * ====== ACCESOR METHODS ===========================================
      */
+    public Map<Position, CityImpl> returnCityMap() {
+        return cityMap;
+    }
 
     public TileImpl getTileAt(Position p) {
         return worldMap.get(p);
@@ -127,7 +143,7 @@ public class GameImpl implements Game {
         }
 
         if (legalMove(from, to)) {
-            if(legalConquerCity(to)){
+            if (legalConquerCity(to)) {
                 getCityAt(to).setOwner(playerInTurn);
             }
             unitMap.remove(from);
@@ -138,7 +154,7 @@ public class GameImpl implements Game {
     }
 
     private boolean legalConquerCity(Position toConquer) {
-     return winningCondition.legalConquerCity(toConquer);
+        return winningCondition.legalConquerCity(toConquer);
     }
 
     public boolean legalMove(Position from, Position to) {
@@ -209,6 +225,24 @@ public class GameImpl implements Game {
     }
 
     public void performUnitActionAt(Position p) {
+        if (unitActions.legalPerformSettlerActionAt(p)) {
+            cityMap.put(p, new CityImpl(getPlayerInTurn()));
+            unitMap.remove(p);
+        }
+        if (unitActions.legalPerformArcherFortifyActionAt(p)){
+            if (getUnitAt(p).getIsActionUsed()){
+                getUnitAt(p).setDefensiveStrength(getUnitAt(p).getDefensiveStrength()/2);
+                getUnitAt(p).setMoveCount(1);
+                getUnitAt(p).changeIfActionUsed(false);
+            }
+            else {
+                getUnitAt(p).setDefensiveStrength(getUnitAt(p).getDefensiveStrength()*2);
+                getUnitAt(p).setMoveCount(0);
+                getUnitAt(p).changeIfActionUsed(true);
+            }
+        }
+
     }
+
 
 }

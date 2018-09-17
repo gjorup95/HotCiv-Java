@@ -28,10 +28,9 @@ public class WinningConditionBetaCiv implements WinningCondition {
     @Override
     public boolean legalConquerCity(Position toConquer) {
         if (game.getCityAt(toConquer) != null && game.getCityAt(toConquer).getOwner() != game.getPlayerInTurn()) {
-           return true;
+            return true;
 
-        }
-        else {
+        } else {
             return false;
         }
     }
