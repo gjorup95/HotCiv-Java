@@ -17,8 +17,11 @@ public class WinningConditionBetaCiv implements WinningCondition {
 
     @Override
     public Player getWinner() {
+        // Creates an ArrayList which contains all the CityImpl from the cityMap in GameImpl.
         ArrayList<CityImpl> tempCityValueList = new ArrayList<>(game.getCityMapValues());
+        // Local variable that is inistialized as the first Player who owns a City.
         Player cityOwner = tempCityValueList.get(0).getOwner();
+        // Iterates the ArrayList and checks whether the owner of all the cities are identical to the local Player variable.
         for (CityImpl c : tempCityValueList) {
             if (!c.getOwner().equals(cityOwner))
                 return null;
