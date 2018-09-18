@@ -2,6 +2,8 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
+import java.util.ArrayList;
+
 /**
  * @ author Troels Gjørup
  * 14-09-2018
@@ -15,13 +17,13 @@ public class WinningConditionBetaCiv implements WinningCondition {
 
     @Override
     public Player getWinner() {
-        if (game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner().equals(Player.RED) && game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner().equals(Player.RED)) {
-            return Player.RED;
-        } else if ((game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner().equals(Player.BLUE) &&
-                game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner().equals(Player.BLUE))) {
-            return Player.BLUE;
+        ArrayList<CityImpl> tempCityValueList = new ArrayList<>(game.getCityMapValues());
+        Player cityOwner = tempCityValueList.get(0).getOwner();
+        for (CityImpl c : tempCityValueList) {
+            if (!c.getOwner().equals(cityOwner))
+                return null;
         }
-        return null;
+        return cityOwner;
     }
 
     @Override

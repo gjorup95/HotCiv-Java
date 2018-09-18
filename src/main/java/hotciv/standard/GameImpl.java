@@ -2,6 +2,7 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.Math;
@@ -102,6 +103,10 @@ public class GameImpl implements Game {
     /**
      * ====== ACCESOR METHODS ===========================================
      */
+
+    public Collection<CityImpl> getCityMapValues() {
+        return cityMap.values();
+    }
 
     public TileImpl getTileAt(Position p) {
         return worldMap.get(p);
