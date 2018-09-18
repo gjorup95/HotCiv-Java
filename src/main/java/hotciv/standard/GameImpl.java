@@ -102,10 +102,6 @@ public class GameImpl implements Game {
     /**
      * ====== ACCESOR METHODS ===========================================
      */
-    public Map<Position, CityImpl> returnCityMap() {
-
-        return cityMap;
-    }
 
     public TileImpl getTileAt(Position p) {
         return worldMap.get(p);
@@ -223,7 +219,6 @@ public class GameImpl implements Game {
             }
         }
     }
-
 
     public void changeWorkForceFocusInCityAt(Position p, String balance) {
     }
