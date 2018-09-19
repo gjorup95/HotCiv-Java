@@ -137,6 +137,9 @@ public class GameImpl implements Game {
      * ====== MUTATOR METHODS ===========================================
      */
 
+    public void addUnit(Position placeUnitAt, String unitType, Player owner){
+        unitMap.put(placeUnitAt, new UnitImpl(unitType, owner));
+    }
     public void removeUnit(Position p) {
         unitMap.remove(p);
     }
@@ -146,24 +149,20 @@ public class GameImpl implements Game {
     }
 
     public boolean moveUnit(Position from, Position to) {
-        UnitImpl temporaryUnitHolder = new UnitImpl(getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
-
         // Checks if the moveTo tile is a illegal tile type.
-        if(getTileAt(to).getTypeString().equals(GameConstants.MOUNTAINS) || getTileAt(to).getTypeString().equals(GameConstants.OCEANS)) {
+        if (tileIsNotLegal(to)) {
             return false;
         }
-
-        // Checks if the Player in turn owns the unit which is about to move.
-        if (!getPlayerInTurn().equals(temporaryUnitHolder.getOwner())) {
+        if (playerInTurnIsNotOwnerOfUnit(from)) {
             return false;
         }
 
         // Checks that the unit has sufficient MoveCount to move to the destinated position.
         if (legalMoveCounts(from, to)) {
             conquerCity(to);
-            unitMap.remove(from);
-            unitMap.put(to, temporaryUnitHolder);
-            unitMap.get(to).setMoveCount(0);
+            addUnit(to, getUnitAt(from).getTypeString(),getUnitAt(from).getOwner());
+            removeUnit(from);
+            getUnitAt(to).setMoveCount(0);
         }
         return true;
     }
@@ -255,11 +254,18 @@ public class GameImpl implements Game {
         unitActions.performArcherFortifyActionAt(p);
     }
 
-    public boolean moveToIsALegalTile(Position moveTo) {
+    public boolean tileIsNotLegal(Position moveTo) {
         if (getTileAt(moveTo).getTypeString().equals(GameConstants.MOUNTAINS) || getTileAt(moveTo).getTypeString().equals(GameConstants.OCEANS)) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
+    }
+
+    public boolean playerInTurnIsNotOwnerOfUnit(Position unitPosition) {
+        if (!getPlayerInTurn().equals(getUnitAt(unitPosition).getOwner())) {
+            return true;
+        }
+        return false;
     }
 }
 
