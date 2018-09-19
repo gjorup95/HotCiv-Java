@@ -49,7 +49,7 @@ public class UnitImpl implements Unit {
     }
 
     public void setMoveCount(int moveCountAfterMovement) {
-        moveCount += moveCountAfterMovement;
+        moveCount = moveCountAfterMovement;
     }
 
     public void setDefensiveStrength(int defensiveStrength) {

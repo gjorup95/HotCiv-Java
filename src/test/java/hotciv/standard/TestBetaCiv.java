@@ -14,10 +14,14 @@ import static org.hamcrest.CoreMatchers.*;
 public class TestBetaCiv {
     private GameImpl game;
     private GameConstants gameConstants;
+    private Ageing ageing;
 
     @Before // Before is run before every @Test
     public void setUp() {
         game = new GameImpl(GameType.BETA);
+        ageing = new AgeingBetaCiv();
+
+
 
     }
 
@@ -161,4 +165,11 @@ public class TestBetaCiv {
         }
         assertThat(game.getAge(), is(1971));
     }
+    // EXAMPLE OF UNIT TESTING OF AGING STRATEGY
+    @Test
+    public void unitTestingOfAgeingStrategy(){
+       assertThat(ageing.calculateAge(-3000), is(100));
+
+    }
+
 }

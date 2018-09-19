@@ -70,7 +70,7 @@ public class GameImpl implements Game {
 
         if (version == GameType.BETA) {
             winningCondition = new WinningConditionBetaCiv(this);
-            ageing = new AgeingBetaCiv(this);
+            ageing = new AgeingBetaCiv();
             worldCreator = new WorldCreatorAlphaCiv();
             worldMap.putAll(worldCreator.getWorldMap());
             cityMap.putAll(worldCreator.getCityMap());
@@ -163,8 +163,7 @@ public class GameImpl implements Game {
             conquerCity(to);
             addUnit(to, getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
             removeUnit(from);
-
-            getUnitAt(to).setMoveCount(-calculateMoveCounts(from,to));
+            getUnitAt(to).setMoveCount(0);
 
         }
         return true;
@@ -205,7 +204,7 @@ public class GameImpl implements Game {
         } else {
             playerInTurn = Player.RED;
             endOfRound();
-            age += ageing.calculateAge();
+            age += ageing.calculateAge(getAge());
         }
     }
 
