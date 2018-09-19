@@ -12,7 +12,7 @@ import static org.hamcrest.CoreMatchers.*;
  * 14-09-2018
  */
 public class TestDeltaCiv {
-    private Game game;
+    private GameImpl game;
     private GameConstants gameConstants;
 
     @Before // Before is run before every @Test

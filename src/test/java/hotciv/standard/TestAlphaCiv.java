@@ -39,7 +39,7 @@ import java.util.*;
  */
 public class TestAlphaCiv {
 
-    private Game game;
+    private GameImpl game;
     private CityImpl redCity;
     private GameConstants gameConstants;
 
@@ -559,7 +559,21 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION), is(notNullValue()));
         assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
     }
-
+    @Test
+    public void shouldBeAbleToMoveSouthThenEastInSameRound(){
+    game.getUnitAt(GameConstants.ARCHER_POSITION_RED).setMoveCount(2);
+    game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3,0));
+    assertThat(game.getUnitAt(new Position(3,0)).getMoveCount(), is(1));
+    game.moveUnit(new Position(3,0), new Position(3,1));
+    assertThat(game.getUnitAt(new Position(3,1)),is(notNullValue()));
+    assertThat(game.getUnitAt(new Position(3,1)).getMoveCount(),is(0));
+    }
+    @Test
+    public void canMoveTwoTilesWithAUnit(){
+        game.getUnitAt(GameConstants.ARCHER_POSITION_RED).setMoveCount(2);
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(4,0));
+        assertThat(game.getUnitAt(new Position(4,0)), is(notNullValue()));
+    }
     @Test
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values

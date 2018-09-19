@@ -137,9 +137,10 @@ public class GameImpl implements Game {
      * ====== MUTATOR METHODS ===========================================
      */
 
-    public void addUnit(Position placeUnitAt, String unitType, Player owner){
+    public void addUnit(Position placeUnitAt, String unitType, Player owner) {
         unitMap.put(placeUnitAt, new UnitImpl(unitType, owner));
     }
+
     public void removeUnit(Position p) {
         unitMap.remove(p);
     }
@@ -160,9 +161,11 @@ public class GameImpl implements Game {
         // Checks that the unit has sufficient MoveCount to move to the destinated position.
         if (legalMoveCounts(from, to)) {
             conquerCity(to);
-            addUnit(to, getUnitAt(from).getTypeString(),getUnitAt(from).getOwner());
+            addUnit(to, getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
             removeUnit(from);
-            getUnitAt(to).setMoveCount(0);
+
+            getUnitAt(to).setMoveCount(-calculateMoveCounts(from,to));
+
         }
         return true;
     }
@@ -177,8 +180,25 @@ public class GameImpl implements Game {
         } else {
             return false;
         }
+
     }
 
+    public int calculateMoveCounts(Position from, Position to){
+        int columnDifference = Math.abs(from.getColumn() - to.getColumn());
+        System.out.println("columndifference is " + columnDifference);
+        int rowDifference = Math.abs(from.getRow() - to.getRow());
+        System.out.println("rowdifference is " + rowDifference);
+
+        if (columnDifference> rowDifference){
+            System.out.println();
+            return columnDifference - rowDifference;
+        }
+        if (rowDifference > columnDifference){
+            System.out.println(rowDifference -columnDifference);
+            return rowDifference -columnDifference;
+        }
+        return 1;
+    }
     public void endOfTurn() {
         if (getPlayerInTurn() == Player.RED) {
             playerInTurn = Player.BLUE;

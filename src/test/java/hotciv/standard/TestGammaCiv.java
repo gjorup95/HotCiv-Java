@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.*;
  * 14-09-2018
  */
 public class TestGammaCiv {
-    private Game game;
+    private GameImpl game;
     private GameConstants gameConstants;
 
 
