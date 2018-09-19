@@ -154,7 +154,7 @@ public class GameImpl implements Game {
             return false;
         }
 
-        if (legalMove(from, to)) {
+        if (legalMoveCounts(from, to)) {
             conquerCity(to);
             unitMap.remove(from);
             unitMap.put(to, temporaryUnitHolder);
@@ -167,7 +167,7 @@ public class GameImpl implements Game {
         winningCondition.conquerCity(toConquer);
     }
 
-    public boolean legalMove(Position from, Position to) {
+    public boolean legalMoveCounts(Position from, Position to) {
         if (Math.abs(from.getColumn() - to.getColumn()) <= getUnitAt(from).getMoveCount() && Math.abs(from.getRow() - to.getRow()) <= getUnitAt(from).getMoveCount()) {
             return true;
         } else {
@@ -188,26 +188,32 @@ public class GameImpl implements Game {
     private void endOfRound() {
 
         addTreasuryInAllCities();
-        if (getCityAt(GameConstants.RED_CITY_POSITION).getTreasury() >= GameConstants.UNIT_COST) {
-            legalProduction(new UnitImpl(getCityAt(GameConstants.RED_CITY_POSITION).getProduction(), Player.RED), GameConstants.RED_CITY_POSITION);
-            getCityAt(GameConstants.RED_CITY_POSITION).addTreasury(-GameConstants.UNIT_COST);
-        }
-
-        if (getCityAt(GameConstants.BLUE_CITY_POSITION).getTreasury() >= GameConstants.UNIT_COST) {
-            legalProduction(new UnitImpl(getCityAt(GameConstants.BLUE_CITY_POSITION).getProduction(), Player.BLUE), GameConstants.BLUE_CITY_POSITION);
-            getCityAt(GameConstants.BLUE_CITY_POSITION).addTreasury(-GameConstants.UNIT_COST);
-        }
+        buyUnitsInAllCitiesForAllPlayers();
         resetMoveCount();
     }
 
     private void addTreasuryInAllCities() {
         ArrayList<CityImpl> tempCityValueList = new ArrayList<>(getCityMapValues());
-        for(CityImpl c : tempCityValueList) {
+        for (CityImpl c : tempCityValueList) {
             c.addTreasury(GameConstants.PRODUCTION_FIXED6);
         }
     }
 
-    private void legalProduction(UnitImpl chosenUnit, Position inCity) {
+    private void buyUnitsInAllCitiesForAllPlayers() {
+        for (int i = 0; i < GameConstants.WORLDSIZE; i++) {
+            for (int j = 0; j < GameConstants.WORLDSIZE; j++) {
+                if (getCityAt(new Position(i, j)) != null) {
+                    if (getCityAt(new Position(i, j)).getTreasury() >= GameConstants.UNIT_COST) {
+                        placeUnitsForProduction(new UnitImpl(getCityAt(new Position(i, j)).getProduction(), (getCityAt(new Position(i, j)).getOwner())), new Position(i, j));
+                        getCityAt(new Position(i,j)).addTreasury(-GameConstants.UNIT_COST);
+                    }
+                }
+            }
+        }
+
+    }
+
+    private void placeUnitsForProduction(UnitImpl chosenUnit, Position inCity) {
         if (getUnitAt(inCity) == null) {
             unitMap.put(inCity, chosenUnit);
         } else {
