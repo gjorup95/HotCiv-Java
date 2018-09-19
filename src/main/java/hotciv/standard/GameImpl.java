@@ -147,13 +147,18 @@ public class GameImpl implements Game {
 
     public boolean moveUnit(Position from, Position to) {
         UnitImpl temporaryUnitHolder = new UnitImpl(getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
-        if (getTileAt(to).equals(getTileAt(GameConstants.MOUNTAINS_POSITION)) || getTileAt(to).equals(getTileAt(GameConstants.OCEAN_POSITION))) {
+
+        // Checks if the moveTo tile is a illegal tile type.
+        if(getTileAt(to).getTypeString().equals(GameConstants.MOUNTAINS) || getTileAt(to).getTypeString().equals(GameConstants.OCEANS)) {
             return false;
         }
+
+        // Checks if the Player in turn owns the unit which is about to move.
         if (!getPlayerInTurn().equals(temporaryUnitHolder.getOwner())) {
             return false;
         }
 
+        // Checks that the unit has sufficient MoveCount to move to the destinated position.
         if (legalMoveCounts(from, to)) {
             conquerCity(to);
             unitMap.remove(from);
@@ -205,7 +210,7 @@ public class GameImpl implements Game {
                 if (getCityAt(new Position(i, j)) != null) {
                     if (getCityAt(new Position(i, j)).getTreasury() >= GameConstants.UNIT_COST) {
                         placeUnitsForProduction(new UnitImpl(getCityAt(new Position(i, j)).getProduction(), (getCityAt(new Position(i, j)).getOwner())), new Position(i, j));
-                        getCityAt(new Position(i,j)).addTreasury(-GameConstants.UNIT_COST);
+                        getCityAt(new Position(i, j)).addTreasury(-GameConstants.UNIT_COST);
                     }
                 }
             }
@@ -248,6 +253,13 @@ public class GameImpl implements Game {
     public void performUnitActionAt(Position p) {
         unitActions.performSettlerActionAt(p);
         unitActions.performArcherFortifyActionAt(p);
+    }
+
+    public boolean moveToIsALegalTile(Position moveTo) {
+        if (getTileAt(moveTo).getTypeString().equals(GameConstants.MOUNTAINS) || getTileAt(moveTo).getTypeString().equals(GameConstants.OCEANS)) {
+            return false;
+        }
+        return true;
     }
 }
 
