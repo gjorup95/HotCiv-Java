@@ -232,11 +232,11 @@ public class GameImpl implements Game {
 
     private void placeUnitsForProduction(UnitImpl chosenUnit, Position inCity) {
         if (getUnitAt(inCity) == null) {
-            unitMap.put(inCity, chosenUnit);
+            addUnit(inCity, chosenUnit.getTypeString(), chosenUnit.getOwner());
         } else {
             for (Position p : Utility.get8neighborhoodOf(inCity)) {
                 if (getUnitAt(p) == null && !tileIsNotLegal(p)) {
-                    unitMap.put(p, chosenUnit);
+                    addUnit(p, chosenUnit.getTypeString(), chosenUnit.getOwner());
                     break;
                 }
             }
