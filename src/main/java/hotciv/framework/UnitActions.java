@@ -6,9 +6,9 @@ package hotciv.framework;
  */
 public interface UnitActions {
 
-    public void performSettlerActionAt(Position performPosition);
+    public boolean performSettlerActionAt(Position performPosition);
 
-    public void performArcherFortifyActionAt(Position performPosition);
+    public boolean performArcherFortifyActionAt(Position performPosition);
 
     public void performAction(Position performActionAt);
 

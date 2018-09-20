@@ -60,14 +60,11 @@ public class GameImpl implements Game {
     public GameImpl(GameType version) {
         winningCondition = new WinningConditionAlphaCiv(this);
         ageing = new AgeingAlphaCiv();
-        worldCreator = new WorldCreatorAlphaCiv();
-        worldMap.putAll(worldCreator.getWorldMap());
-        cityMap.putAll(worldCreator.getCityMap());
-        unitMap.putAll(worldCreator.getUnitMap());
+        worldCreator = new WorldCreatorAlphaCiv(this);
         unitActions = new UnitActionsAlphaCiv();
+        setUpGame(version);
         playerInTurn = Player.RED;
         age = GameConstants.STARTING_AGE;
-        setUpGame(version);
 
 
     }
@@ -82,10 +79,7 @@ public class GameImpl implements Game {
                 unitActions = new UnitActionsGammaCiv(this);
                 break;
             case DELTA:
-                worldCreator = new WorldCreatorDeltaCiv();
-                worldMap.putAll(worldCreator.getWorldMap());
-                cityMap.putAll(worldCreator.getCityMap());
-                unitMap.putAll(worldCreator.getUnitMap());
+                worldCreator = new WorldCreatorDeltaCiv(this);
                 break;
         }
 
@@ -137,6 +131,10 @@ public class GameImpl implements Game {
 
     public void addCity(Position p, Player owner) {
         cityMap.put(p, new CityImpl(owner));
+    }
+
+    public void addTile(Position p, String tileType) {
+        worldMap.put(p, new TileImpl(tileType));
     }
 
     public boolean moveUnit(Position from, Position to) {
@@ -266,6 +264,18 @@ public class GameImpl implements Game {
 
     public boolean playerInTurnIsNotOwnerOfUnit(Position unitPosition) {
         if (!getPlayerInTurn().equals(getUnitAt(unitPosition).getOwner())) {
+            return true;
+        }
+        return false;
+    }
+    public boolean unitIsNotNull(Position p){
+        if (getUnitAt(p) != null ){
+            return true;
+        }
+        return false;
+    }
+    public boolean cityIsNotNull(Position p){
+        if (getCityAt(p) != null){
             return true;
         }
         return false;
