@@ -213,11 +213,13 @@ public class GameImpl implements Game {
             c.addTreasury(GameConstants.PRODUCTION_FIXED6);
         }
     }
-
+// TODO SHOULD WE INCLUDE LOCAL BOOLEANS EVEN THOUGH THEY INCLUDE EXTRA CODE
     private void buyUnitsInAllCitiesForAllPlayers() {
         for (int i = 0; i < GameConstants.WORLDSIZE; i++) {
             for (int j = 0; j < GameConstants.WORLDSIZE; j++) {
-                if (getCityAt(new Position(i, j)) != null) {
+                boolean cityPositionIsNotNull = getCityAt(new Position(i,j))!= null;
+                if (cityPositionIsNotNull){
+                //if (getCityAt(new Position(i, j)) != null) {
                     if (getCityAt(new Position(i, j)).getTreasury() >= GameConstants.UNIT_COST) {
                         placeUnitsForProduction(new UnitImpl(getCityAt(new Position(i, j)).getProduction(), (getCityAt(new Position(i, j)).getOwner())), new Position(i, j));
                         getCityAt(new Position(i, j)).addTreasury(-GameConstants.UNIT_COST);
