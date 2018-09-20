@@ -562,6 +562,7 @@ public class TestAlphaCiv {
     @Test
     public void shouldBeAbleToMoveSouthThenEastInSameRound(){
     game.getUnitAt(GameConstants.ARCHER_POSITION_RED).setMoveCount(2);
+    assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED).getMoveCount(),is(2));
     game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3,0));
     assertThat(game.getUnitAt(new Position(3,0)).getMoveCount(), is(1));
     game.moveUnit(new Position(3,0), new Position(3,1));
@@ -569,12 +570,52 @@ public class TestAlphaCiv {
     assertThat(game.getUnitAt(new Position(3,1)).getMoveCount(),is(0));
     }
     @Test
-    public void canMoveTwoTilesWithAUnit(){
+    public void canMoveTheNumberOfMoveCountsButOnly1TileAtATime(){
         game.getUnitAt(GameConstants.ARCHER_POSITION_RED).setMoveCount(2);
-        game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(4,0));
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3,0));
+        game.moveUnit(new Position(3,0), new Position(4,0));
         assertThat(game.getUnitAt(new Position(4,0)), is(notNullValue()));
     }
     @Test
+    public void has6MoveCountsAndCanUseThem(){
+        game.getUnitAt(GameConstants.ARCHER_POSITION_RED).setMoveCount(6);
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3,0));
+        game.moveUnit(new Position(3,0), new Position(4,0));
+        game.moveUnit(new Position(4,0), new Position(5,0));
+        game.moveUnit(new Position(5,0), new Position(6,0));
+        game.moveUnit(new Position(6,0), new Position(7,0));
+        game.moveUnit(new Position(7,0), new Position(8,0));
+        assertThat(game.getUnitAt(new Position(8,0)), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(8,0)).getMoveCount(), is(0));
+    }
+    @Test
+    public void canMove4TimesDiagonal(){
+        game.getUnitAt(GameConstants.ARCHER_POSITION_RED).setMoveCount(6);
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3,1));
+        game.moveUnit(new Position(3,1), new Position(4,2));
+        game.moveUnit(new Position(4,2), new Position(5,3));
+        game.moveUnit(new Position(5,3), new Position(6,4));
+        game.moveUnit(new Position(6,4), new Position(7,5));
+        game.moveUnit(new Position(7,5), new Position(8,6));
+        assertThat(game.getUnitAt(new Position(8,6)), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(8,6)).getMoveCount(), is(0));
+
+    }
+    @Test
+    public void hasMoveCount2ButShouldOnlyBeAbleToMove1TileAtATime(){
+        game.getUnitAt(GameConstants.ARCHER_POSITION_RED).setMoveCount(2);
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(4,2));
+        assertThat(game.getUnitAt(new Position(4,2)), is(nullValue()));
+        assertThat(game.getUnitAt(new Position(2,0)).getMoveCount(), is(2));
+
+    }
+    @Test public void cannotMoveInTheSameSpot(){
+        game.getUnitAt(GameConstants.ARCHER_POSITION_RED).setMoveCount(6);
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(2,0));
+        assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED).getMoveCount(), is(6));
+
+
+    }
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values
         // 'is' require an exact match

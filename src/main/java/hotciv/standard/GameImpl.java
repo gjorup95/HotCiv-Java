@@ -159,11 +159,11 @@ public class GameImpl implements Game {
         }
 
         // Checks that the unit has sufficient MoveCount to move to the destinated position.
-        if (legalMoveCounts(from, to)) {
+        if (isLegalMove(from, to)) {
             conquerCity(to);
             addUnit(to, getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
+            getUnitAt(to).setMoveCount(getUnitAt(from).getMoveCount() -1);
             removeUnit(from);
-            getUnitAt(to).setMoveCount(0);
 
         }
         return true;
@@ -172,32 +172,24 @@ public class GameImpl implements Game {
     private void conquerCity(Position toConquer) {
         winningCondition.conquerCity(toConquer);
     }
-
-    public boolean legalMoveCounts(Position from, Position to) {
-        if (Math.abs(from.getColumn() - to.getColumn()) <= getUnitAt(from).getMoveCount() && Math.abs(from.getRow() - to.getRow()) <= getUnitAt(from).getMoveCount()) {
+ // TODO ASK IF IT IS OK OR IT SHOULD BE REFACTORED.
+    public boolean isLegalMove(Position from, Position to) {
+        if (calculateLegalMove(from, to) && getUnitAt(from).getMoveCount() >=1) {
             return true;
-        } else {
-            return false;
         }
-
+        return false;
     }
 
-    public int calculateMoveCounts(Position from, Position to){
+    public boolean calculateLegalMove(Position from, Position to) {
         int columnDifference = Math.abs(from.getColumn() - to.getColumn());
-        System.out.println("columndifference is " + columnDifference);
         int rowDifference = Math.abs(from.getRow() - to.getRow());
-        System.out.println("rowdifference is " + rowDifference);
-
-        if (columnDifference> rowDifference){
-            System.out.println();
-            return columnDifference - rowDifference;
+        if (columnDifference < 2 && rowDifference < 2 && !from.equals(to)  ){
+            return true;
         }
-        if (rowDifference > columnDifference){
-            System.out.println(rowDifference -columnDifference);
-            return rowDifference -columnDifference;
-        }
-        return 1;
+        else
+        return false;
     }
+
     public void endOfTurn() {
         if (getPlayerInTurn() == Player.RED) {
             playerInTurn = Player.BLUE;
