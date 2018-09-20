@@ -58,47 +58,37 @@ public class GameImpl implements Game {
      * Constructor
      */
     public GameImpl(GameType version) {
-        if (version == GameType.ALPHA) {
-            winningCondition = new WinningConditionAlphaCiv(this);
-            ageing = new AgeingAlphaCiv();
-            worldCreator = new WorldCreatorAlphaCiv();
-            worldMap.putAll(worldCreator.getWorldMap());
-            cityMap.putAll(worldCreator.getCityMap());
-            unitMap.putAll(worldCreator.getUnitMap());
-            unitActions = new UnitActionsAlphaCiv();
-        }
-
-        if (version == GameType.BETA) {
-            winningCondition = new WinningConditionBetaCiv(this);
-            ageing = new AgeingBetaCiv();
-            worldCreator = new WorldCreatorAlphaCiv();
-            worldMap.putAll(worldCreator.getWorldMap());
-            cityMap.putAll(worldCreator.getCityMap());
-            unitMap.putAll(worldCreator.getUnitMap());
-            unitActions = new UnitActionsAlphaCiv();
-        }
-
-        if (version == GameType.GAMMA) {
-            winningCondition = new WinningConditionAlphaCiv(this);
-            ageing = new AgeingAlphaCiv();
-            worldCreator = new WorldCreatorAlphaCiv();
-            worldMap.putAll(worldCreator.getWorldMap());
-            cityMap.putAll(worldCreator.getCityMap());
-            unitMap.putAll(worldCreator.getUnitMap());
-            unitActions = new UnitActionsGammaCiv(this);
-        }
-
-        if (version == GameType.DELTA) {
-            winningCondition = new WinningConditionAlphaCiv(this);
-            ageing = new AgeingAlphaCiv();
-            worldCreator = new WorldCreatorDeltaCiv();
-            worldMap.putAll(worldCreator.getWorldMap());
-            unitMap.putAll(worldCreator.getUnitMap());
-            cityMap.putAll(worldCreator.getCityMap());
-            unitActions = new UnitActionsAlphaCiv();
-        }
+        winningCondition = new WinningConditionAlphaCiv(this);
+        ageing = new AgeingAlphaCiv();
+        worldCreator = new WorldCreatorAlphaCiv();
+        worldMap.putAll(worldCreator.getWorldMap());
+        cityMap.putAll(worldCreator.getCityMap());
+        unitMap.putAll(worldCreator.getUnitMap());
+        unitActions = new UnitActionsAlphaCiv();
         playerInTurn = Player.RED;
         age = GameConstants.STARTING_AGE;
+        setUpGame(version);
+
+
+    }
+
+    private void setUpGame(GameType version) {
+        switch (version) {
+            case BETA:
+                winningCondition = new WinningConditionBetaCiv(this);
+                ageing = new AgeingBetaCiv();
+                break;
+            case GAMMA:
+                unitActions = new UnitActionsGammaCiv(this);
+                break;
+            case DELTA:
+                worldCreator = new WorldCreatorDeltaCiv();
+                worldMap.putAll(worldCreator.getWorldMap());
+                cityMap.putAll(worldCreator.getCityMap());
+                unitMap.putAll(worldCreator.getUnitMap());
+                break;
+        }
+
     }
 
     /**
@@ -213,13 +203,14 @@ public class GameImpl implements Game {
             c.addTreasury(GameConstants.PRODUCTION_FIXED6);
         }
     }
-// TODO SHOULD WE INCLUDE LOCAL BOOLEANS EVEN THOUGH THEY INCLUDE EXTRA CODE
+
+    // TODO SHOULD WE INCLUDE LOCAL BOOLEANS EVEN THOUGH THEY INCLUDE EXTRA CODE
     private void buyUnitsInAllCitiesForAllPlayers() {
         for (int i = 0; i < GameConstants.WORLDSIZE; i++) {
             for (int j = 0; j < GameConstants.WORLDSIZE; j++) {
-                boolean cityPositionIsNotNull = getCityAt(new Position(i,j))!= null;
-                if (cityPositionIsNotNull){
-                //if (getCityAt(new Position(i, j)) != null) {
+                boolean cityPositionIsNotNull = getCityAt(new Position(i, j)) != null;
+                if (cityPositionIsNotNull) {
+                    //if (getCityAt(new Position(i, j)) != null) {
                     if (getCityAt(new Position(i, j)).getTreasury() >= GameConstants.UNIT_COST) {
                         placeUnitsForProduction(new UnitImpl(getCityAt(new Position(i, j)).getProduction(), (getCityAt(new Position(i, j)).getOwner())), new Position(i, j));
                         getCityAt(new Position(i, j)).addTreasury(-GameConstants.UNIT_COST);
