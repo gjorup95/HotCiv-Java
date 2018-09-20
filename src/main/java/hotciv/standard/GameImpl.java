@@ -247,7 +247,7 @@ public class GameImpl implements Game {
         for (int i = 0; i < GameConstants.WORLDSIZE; i++) {
             for (int j = 0; j < GameConstants.WORLDSIZE; j++) {
                 if (getUnitAt(new Position(i, j)) != null) {
-                    unitMap.get(new Position(i, j)).setMoveCount(1);
+                    getUnitAt(new Position(i, j)).setMoveCount(1);
                 }
             }
         }
