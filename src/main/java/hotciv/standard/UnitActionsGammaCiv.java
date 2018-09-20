@@ -38,4 +38,14 @@ public class UnitActionsGammaCiv implements UnitActions {
             }
         }
     }
+
+    @Override
+    public void performAction(Position p) {
+        if(game.getUnitAt(p).getTypeString() == GameConstants.ARCHER) {
+            performArcherFortifyActionAt(p);
+        }
+        if(game.getUnitAt(p).getTypeString() == GameConstants.SETTLER) {
+            performSettlerActionAt(p);
+        }
+    }
 }

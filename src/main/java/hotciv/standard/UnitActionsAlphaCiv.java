@@ -17,4 +17,9 @@ public class UnitActionsAlphaCiv implements UnitActions {
     @Override
     public void performArcherFortifyActionAt(Position performPosition) {
     }
+
+    @Override
+    public void performAction(Position performActionAt) {
+
+    }
 }

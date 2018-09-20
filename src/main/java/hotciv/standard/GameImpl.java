@@ -261,8 +261,7 @@ public class GameImpl implements Game {
     }
 
     public void performUnitActionAt(Position p) {
-        unitActions.performSettlerActionAt(p);
-        unitActions.performArcherFortifyActionAt(p);
+        unitActions.performAction(p);
     }
 
     public boolean tileIsNotLegal(Position moveTo) {

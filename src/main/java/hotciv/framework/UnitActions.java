@@ -10,5 +10,7 @@ public interface UnitActions {
 
     public void performArcherFortifyActionAt(Position performPosition);
 
+    public void performAction(Position performActionAt);
+
 
 }
