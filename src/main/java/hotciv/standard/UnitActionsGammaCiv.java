@@ -18,7 +18,7 @@ public class UnitActionsGammaCiv implements UnitActions {
 
     @Override
     public void performSettlerActionAt(Position performPosition) {
-        if (game.getUnitAt(performPosition) != null && game.getUnitAt(performPosition).getTypeString().equals(GameConstants.SETTLER) && game.getCityAt(performPosition) == null && game.getPlayerInTurn().equals(game.getUnitAt(performPosition).getOwner())) {
+        if (game.getUnitAt(performPosition) != null && game.getCityAt(performPosition) == null && game.getPlayerInTurn().equals(game.getUnitAt(performPosition).getOwner())) {
             game.addCity(performPosition, game.getPlayerInTurn());
             game.removeUnit(performPosition);
         }
@@ -26,7 +26,7 @@ public class UnitActionsGammaCiv implements UnitActions {
 
     @Override
     public void performArcherFortifyActionAt(Position performPosition) {
-        if (game.getUnitAt(performPosition) != null && game.getUnitAt(performPosition).getTypeString().equals(GameConstants.ARCHER) && game.getUnitAt(performPosition).getOwner().equals(game.getPlayerInTurn())) {
+        if (game.getUnitAt(performPosition) != null && game.getUnitAt(performPosition).getOwner().equals(game.getPlayerInTurn())) {
             if (game.getUnitAt(performPosition).getIsActionUsed()) {
                 game.getUnitAt(performPosition).setDefensiveStrength(game.getUnitAt(performPosition).getDefensiveStrength() / 2);
                 game.getUnitAt(performPosition).setMoveCount(1);
@@ -41,11 +41,14 @@ public class UnitActionsGammaCiv implements UnitActions {
 
     @Override
     public void performAction(Position p) {
-        if(game.getUnitAt(p).getTypeString() == GameConstants.ARCHER) {
-            performArcherFortifyActionAt(p);
-        }
-        if(game.getUnitAt(p).getTypeString() == GameConstants.SETTLER) {
-            performSettlerActionAt(p);
+        switch (game.getUnitAt(p).getTypeString()) {
+            case GameConstants.ARCHER:
+                performArcherFortifyActionAt(p);
+                break;
+            case GameConstants.SETTLER:
+                performSettlerActionAt(p);
+                break;
+            default:
         }
     }
 }

@@ -162,7 +162,7 @@ public class GameImpl implements Game {
         if (isLegalMove(from, to)) {
             conquerCity(to);
             addUnit(to, getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
-            getUnitAt(to).setMoveCount(getUnitAt(from).getMoveCount() -1);
+            getUnitAt(to).setMoveCount(getUnitAt(from).getMoveCount() - 1);
             removeUnit(from);
 
         }
@@ -172,9 +172,10 @@ public class GameImpl implements Game {
     private void conquerCity(Position toConquer) {
         winningCondition.conquerCity(toConquer);
     }
- // TODO ASK IF IT IS OK OR IT SHOULD BE REFACTORED.
+
+    // TODO ASK IF IT IS OK OR IT SHOULD BE REFACTORED.
     public boolean isLegalMove(Position from, Position to) {
-        if (calculateLegalMove(from, to) && getUnitAt(from).getMoveCount() >=1) {
+        if (calculateLegalMove(from, to) && getUnitAt(from).getMoveCount() >= 1) {
             return true;
         }
         return false;
@@ -183,11 +184,10 @@ public class GameImpl implements Game {
     public boolean calculateLegalMove(Position from, Position to) {
         int columnDifference = Math.abs(from.getColumn() - to.getColumn());
         int rowDifference = Math.abs(from.getRow() - to.getRow());
-        if (columnDifference < 2 && rowDifference < 2 && !from.equals(to)  ){
+        if (columnDifference < 2 && rowDifference < 2 && !from.equals(to)) {
             return true;
-        }
-        else
-        return false;
+        } else
+            return false;
     }
 
     public void endOfTurn() {
@@ -233,7 +233,7 @@ public class GameImpl implements Game {
             unitMap.put(inCity, chosenUnit);
         } else {
             for (Position p : Utility.get8neighborhoodOf(inCity)) {
-                if (getUnitAt(p) == null && getTileAt(p).getTypeString() != GameConstants.MOUNTAINS && getTileAt(p).getTypeString() != GameConstants.OCEANS) {
+                if (getUnitAt(p) == null && !tileIsNotLegal(p)) {
                     unitMap.put(p, chosenUnit);
                     break;
                 }
@@ -264,8 +264,8 @@ public class GameImpl implements Game {
         unitActions.performAction(p);
     }
 
-    public boolean tileIsNotLegal(Position moveTo) {
-        if (getTileAt(moveTo).getTypeString().equals(GameConstants.MOUNTAINS) || getTileAt(moveTo).getTypeString().equals(GameConstants.OCEANS)) {
+    public boolean tileIsNotLegal(Position p) {
+        if (getTileAt(p).getTypeString().equals(GameConstants.MOUNTAINS) || getTileAt(p).getTypeString().equals(GameConstants.OCEANS)) {
             return true;
         }
         return false;
