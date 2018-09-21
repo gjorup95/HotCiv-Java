@@ -65,8 +65,6 @@ public class GameImpl implements Game {
         setUpGame(version);
         playerInTurn = Player.RED;
         age = GameConstants.STARTING_AGE;
-
-
     }
 
     private void setUpGame(GameType version) {
@@ -146,7 +144,9 @@ public class GameImpl implements Game {
             return false;
         }
 
-        // Checks that the unit has sufficient MoveCount to move to the destinated position.
+        /** First checks whether the unit has sufficient moveCount to move to the destination. Returns false if that's the case. Then creates
+         *  a new unit on the destination and removes the old unit. The new unit's moveCount is reduced by a static 1, since only ONE tile can
+         *  be moved at a time. */
         if (isLegalMove(from, to)) {
             conquerCity(to);
             addUnit(to, getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
@@ -169,6 +169,8 @@ public class GameImpl implements Game {
         return false;
     }
 
+    /** Checks if the move is legal. The column and row difference must be less than 2, since unit's can only move one tile at a time. Also
+     * the from position cannot be equal to the to position. */
     public boolean calculateLegalMove(Position from, Position to) {
         int columnDifference = Math.abs(from.getColumn() - to.getColumn());
         int rowDifference = Math.abs(from.getRow() - to.getRow());
@@ -189,7 +191,6 @@ public class GameImpl implements Game {
     }
 
     private void endOfRound() {
-
         addTreasuryInAllCities();
         buyUnitsInAllCitiesForAllPlayers();
         resetMoveCount();
@@ -216,14 +217,13 @@ public class GameImpl implements Game {
                 }
             }
         }
-
     }
 
-    private void placeUnitsForProduction(UnitImpl chosenUnit, Position inCity) {
-        if (getUnitAt(inCity) == null) {
-            addUnit(inCity, chosenUnit.getTypeString(), chosenUnit.getOwner());
+    private void placeUnitsForProduction(UnitImpl chosenUnit, Position insideCity) {
+        if (getUnitAt(insideCity) == null) {
+            addUnit(insideCity, chosenUnit.getTypeString(), chosenUnit.getOwner());
         } else {
-            for (Position p : Utility.get8neighborhoodOf(inCity)) {
+            for (Position p : Utility.get8neighborhoodOf(insideCity)) {
                 if (getUnitAt(p) == null && !tileIsNotLegal(p)) {
                     addUnit(p, chosenUnit.getTypeString(), chosenUnit.getOwner());
                     break;
