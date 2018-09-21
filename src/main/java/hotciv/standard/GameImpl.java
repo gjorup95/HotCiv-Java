@@ -135,10 +135,9 @@ public class GameImpl implements Game {
         worldMap.put(p, new TileImpl(tileType));
     }
 
+    /** Creates a new unit on the destination and removes the old unit. The new unit's moveCount is reduced by a static 1, since only ONE tile can
+     *  be moved at a time. */
     public boolean moveUnit(Position from, Position to) {
-        /** First checks whether the unit has sufficient moveCount to move to the destination. Returns false if that's the case. Then creates
-         *  a new unit on the destination and removes the old unit. The new unit's moveCount is reduced by a static 1, since only ONE tile can
-         *  be moved at a time. */
         if (isLegalMove(from, to)) {
             conquerCity(to);
             addUnit(to, getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
@@ -151,10 +150,7 @@ public class GameImpl implements Game {
         return false;
     }
 
-    private void conquerCity(Position toConquer) {
-        winningCondition.conquerCity(toConquer);
-    }
-
+   /** First checks whether the unit has sufficient moveCount to move to the destination. Returns false if that's the case. */
     public boolean isLegalMove(Position from, Position to) {
         if (tileIsNotLegal(to)) {
             return false;
@@ -174,8 +170,8 @@ public class GameImpl implements Game {
     }
 
     /**
-     * Checks if the move is legal. The column and row difference must be less than 2, since unit's can only move one tile at a time. Also
-     * the from position cannot be equal to the to position.
+     * Checks if the move is legal. The column and row difference must be less than 2, since units can only move one tile at a time. Also
+     * the from position cannot be equal to the to position, since its illegal to move on the same tile as the original position.
      */
     public boolean calculateLegalMove(Position from, Position to) {
         int columnDifference = Math.abs(from.getColumn() - to.getColumn());
@@ -184,6 +180,10 @@ public class GameImpl implements Game {
             return true;
         } else
             return false;
+    }
+
+    private void conquerCity(Position toConquer) {
+        winningCondition.conquerCity(toConquer);
     }
 
     public void endOfTurn() {
@@ -207,6 +207,7 @@ public class GameImpl implements Game {
         for (CityImpl c : tempCityValueList) c.addTreasury(GameConstants.PRODUCTION_FIXED6);
     }
 
+    /** Uses a double for-loop to itterate the cityMap and buy units in that city, if the city have accumulated enough production.*/
     private void buyUnitsInAllCitiesForAllPlayers() {
         for (int i = 0; i < GameConstants.WORLDSIZE; i++)
             for (int j = 0; j < GameConstants.WORLDSIZE; j++)
@@ -218,6 +219,7 @@ public class GameImpl implements Game {
                 }
     }
 
+    /** Determines where to place the unit that was purchased by the city. */
     private void placeUnitsForProduction(UnitImpl chosenUnit, Position insideCity) {
         if (!unitIsNotNull(insideCity)) {
             addUnit(insideCity, chosenUnit.getTypeString(), chosenUnit.getOwner());
