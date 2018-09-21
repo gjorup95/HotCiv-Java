@@ -616,6 +616,15 @@ public class TestAlphaCiv {
 
 
     }
+    @Test
+    public void notAbleToMoveOnToTilesWhereOwnUnitsAre(){
+        game.addUnit(new Position(3,0),gameConstants.LEGION, Player.RED);
+        assertThat(game.getUnitAt(new Position(3,0)).getTypeString(),is(GameConstants.LEGION));
+        assertThat(game.getUnitAt(new Position(3,0)).getOwner(), is(Player.RED));
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3,0));
+        assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getTypeString(), is(GameConstants.ARCHER));
+        assertThat(game.getUnitAt(new Position(3,0)).getTypeString(), is(GameConstants.LEGION));
+    }
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values
         // 'is' require an exact match

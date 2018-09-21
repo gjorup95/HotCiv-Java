@@ -136,21 +136,14 @@ public class GameImpl implements Game {
     }
 
     public boolean moveUnit(Position from, Position to) {
-        // Checks if the moveTo tile is a illegal tile type.
-        if (tileIsNotLegal(to)) {
-            return false;
-        }
-        if (playerInTurnIsNotOwnerOfUnit(from)) {
-            return false;
-        }
-
         /** First checks whether the unit has sufficient moveCount to move to the destination. Returns false if that's the case. Then creates
          *  a new unit on the destination and removes the old unit. The new unit's moveCount is reduced by a static 1, since only ONE tile can
          *  be moved at a time. */
         if (isLegalMove(from, to)) {
             conquerCity(to);
             addUnit(to, getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
-            getUnitAt(to).setMoveCount(getUnitAt(from).getMoveCount() - 1);
+            /** Making sure that the moveCount is decremented by 1 */
+            decrementMoveCount(from, to);
             removeUnit(from);
 
         }
@@ -161,16 +154,28 @@ public class GameImpl implements Game {
         winningCondition.conquerCity(toConquer);
     }
 
-    // TODO ASK IF IT IS OK OR IT SHOULD BE REFACTORED.
     public boolean isLegalMove(Position from, Position to) {
-        if (calculateLegalMove(from, to) && getUnitAt(from).getMoveCount() >= 1) {
-            return true;
+        if (tileIsNotLegal(to)) {
+            return false;
         }
+        if (playerInTurnIsNotOwnerOfUnit(from)) {
+            return false;
+        }
+        if (unitIsNotNull(to) && !playerInTurnIsNotOwnerOfUnit(to)) {
+            return false;
+        }
+        if (!calculateLegalMove(from, to)) {
+            return false;
+        }
+        boolean unitHasSufficientMoveCount = getUnitAt(from).getMoveCount() >= 1;
+        if (unitHasSufficientMoveCount) return true;
         return false;
     }
 
-    /** Checks if the move is legal. The column and row difference must be less than 2, since unit's can only move one tile at a time. Also
-     * the from position cannot be equal to the to position. */
+    /**
+     * Checks if the move is legal. The column and row difference must be less than 2, since unit's can only move one tile at a time. Also
+     * the from position cannot be equal to the to position.
+     */
     public boolean calculateLegalMove(Position from, Position to) {
         int columnDifference = Math.abs(from.getColumn() - to.getColumn());
         int rowDifference = Math.abs(from.getRow() - to.getRow());
@@ -198,33 +203,26 @@ public class GameImpl implements Game {
 
     private void addTreasuryInAllCities() {
         ArrayList<CityImpl> tempCityValueList = new ArrayList<>(getCityMapValues());
-        for (CityImpl c : tempCityValueList) {
-            c.addTreasury(GameConstants.PRODUCTION_FIXED6);
-        }
+        for (CityImpl c : tempCityValueList) c.addTreasury(GameConstants.PRODUCTION_FIXED6);
     }
 
-    // TODO SHOULD WE INCLUDE LOCAL BOOLEANS EVEN THOUGH THEY INCLUDE EXTRA CODE
     private void buyUnitsInAllCitiesForAllPlayers() {
-        for (int i = 0; i < GameConstants.WORLDSIZE; i++) {
-            for (int j = 0; j < GameConstants.WORLDSIZE; j++) {
-                boolean cityPositionIsNotNull = getCityAt(new Position(i, j)) != null;
-                if (cityPositionIsNotNull) {
-                    //if (getCityAt(new Position(i, j)) != null) {
+        for (int i = 0; i < GameConstants.WORLDSIZE; i++)
+            for (int j = 0; j < GameConstants.WORLDSIZE; j++)
+                if (cityIsNotNull(new Position(i, j))) {
                     if (getCityAt(new Position(i, j)).getTreasury() >= GameConstants.UNIT_COST) {
                         placeUnitsForProduction(new UnitImpl(getCityAt(new Position(i, j)).getProduction(), (getCityAt(new Position(i, j)).getOwner())), new Position(i, j));
-                        getCityAt(new Position(i, j)).addTreasury(-GameConstants.UNIT_COST);
+                        addTreasury(new Position(i, j));
                     }
                 }
-            }
-        }
     }
 
     private void placeUnitsForProduction(UnitImpl chosenUnit, Position insideCity) {
-        if (getUnitAt(insideCity) == null) {
+        if (!unitIsNotNull(insideCity)) {
             addUnit(insideCity, chosenUnit.getTypeString(), chosenUnit.getOwner());
         } else {
             for (Position p : Utility.get8neighborhoodOf(insideCity)) {
-                if (getUnitAt(p) == null && !tileIsNotLegal(p)) {
+                if (!unitIsNotNull(p) && !tileIsNotLegal(p)) {
                     addUnit(p, chosenUnit.getTypeString(), chosenUnit.getOwner());
                     break;
                 }
@@ -233,11 +231,9 @@ public class GameImpl implements Game {
     }
 
     private void resetMoveCount() {
-        // Itterares the entire unitMap and checks whether or not there is a unit.
-        // If there is a unit on the position, it's moveCount is reset to 1.
         for (int i = 0; i < GameConstants.WORLDSIZE; i++) {
             for (int j = 0; j < GameConstants.WORLDSIZE; j++) {
-                if (getUnitAt(new Position(i, j)) != null) {
+                if (unitIsNotNull(new Position(i, j))) {
                     getUnitAt(new Position(i, j)).setMoveCount(1);
                 }
             }
@@ -268,17 +264,27 @@ public class GameImpl implements Game {
         }
         return false;
     }
-    public boolean unitIsNotNull(Position p){
-        if (getUnitAt(p) != null ){
+
+    public boolean unitIsNotNull(Position p) {
+        if (getUnitAt(p) != null) {
             return true;
         }
         return false;
     }
-    public boolean cityIsNotNull(Position p){
-        if (getCityAt(p) != null){
+
+    public boolean cityIsNotNull(Position p) {
+        if (getCityAt(p) != null) {
             return true;
         }
         return false;
+    }
+
+    private void decrementMoveCount(Position from, Position to) {
+        getUnitAt(to).setMoveCount(getUnitAt(from).getMoveCount() - 1);
+    }
+
+    private void addTreasury(Position p) {
+        getCityAt(p).addTreasury(-GameConstants.UNIT_COST);
     }
 }
 
