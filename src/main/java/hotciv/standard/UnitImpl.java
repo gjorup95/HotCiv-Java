@@ -57,12 +57,10 @@ public class UnitImpl implements Unit {
     }
 
     public void changeIfActionUsed(boolean state) {
-
         actionUsed = state;
     }
 
     public boolean getIsActionUsed() {
-
         return actionUsed;
 
     }

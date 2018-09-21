@@ -559,6 +559,7 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION), is(notNullValue()));
         assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
     }
+
     @Test
     public void shouldBeAbleToMoveSouthThenEastInSameRound(){
     game.getUnitAt(GameConstants.ARCHER_POSITION_RED).setMoveCount(2);
@@ -569,6 +570,7 @@ public class TestAlphaCiv {
     assertThat(game.getUnitAt(new Position(3,1)),is(notNullValue()));
     assertThat(game.getUnitAt(new Position(3,1)).getMoveCount(),is(0));
     }
+
     @Test
     public void canMoveTheNumberOfMoveCountsButOnly1TileAtATime(){
         game.getUnitAt(GameConstants.ARCHER_POSITION_RED).setMoveCount(2);
@@ -576,6 +578,7 @@ public class TestAlphaCiv {
         game.moveUnit(new Position(3,0), new Position(4,0));
         assertThat(game.getUnitAt(new Position(4,0)), is(notNullValue()));
     }
+
     @Test
     public void has6MoveCountsAndCanUseThem(){
         game.getUnitAt(GameConstants.ARCHER_POSITION_RED).setMoveCount(6);
@@ -588,6 +591,7 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(8,0)), is(notNullValue()));
         assertThat(game.getUnitAt(new Position(8,0)).getMoveCount(), is(0));
     }
+
     @Test
     public void canMove4TimesDiagonal(){
         game.getUnitAt(GameConstants.ARCHER_POSITION_RED).setMoveCount(6);
@@ -601,6 +605,7 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(8,6)).getMoveCount(), is(0));
 
     }
+
     @Test
     public void hasMoveCount2ButShouldOnlyBeAbleToMove1TileAtATime(){
         game.getUnitAt(GameConstants.ARCHER_POSITION_RED).setMoveCount(2);
@@ -609,13 +614,29 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(2,0)).getMoveCount(), is(2));
 
     }
-    @Test public void cannotMoveInTheSameSpot(){
+
+    @Test
+    public void cannotMoveInTheSameSpot(){
         game.getUnitAt(GameConstants.ARCHER_POSITION_RED).setMoveCount(6);
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(2,0));
         assertThat(game.getUnitAt(gameConstants.ARCHER_POSITION_RED).getMoveCount(), is(6));
-
-
     }
+
+    @Test
+    public void settlerUnitShouldPerformUnitActionButNothingShouldHappen() {
+        game.performUnitActionAt(GameConstants.SETTLER_POSITION_RED);
+        assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getTypeString(), is(GameConstants.SETTLER));
+        assertThat(game.getCityAt(GameConstants.SETTLER_POSITION_RED), is(nullValue()));
+    }
+
+    @Test
+    public void archerUnitShouldPerformUnitActionButNothingShouldHappen() {
+        assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getDefensiveStrength(), is(1));
+        game.performUnitActionAt(GameConstants.ARCHER_POSITION_RED);
+        assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getDefensiveStrength(), is(1));
+    }
+
+
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values
         // 'is' require an exact match
