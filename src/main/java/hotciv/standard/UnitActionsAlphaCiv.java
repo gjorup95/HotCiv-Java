@@ -12,7 +12,6 @@ public class UnitActionsAlphaCiv implements UnitActions {
     @Override
     public boolean performSettlerActionAt(Position performPosition) {
         return false;
-
     }
 
     @Override
@@ -22,6 +21,5 @@ public class UnitActionsAlphaCiv implements UnitActions {
 
     @Override
     public void performAction(Position performActionAt) {
-
     }
 }

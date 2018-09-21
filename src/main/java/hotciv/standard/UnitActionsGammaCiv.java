@@ -16,40 +16,40 @@ public class UnitActionsGammaCiv implements UnitActions {
     }
 
     @Override
-    public boolean performSettlerActionAt(Position performPosition) {
+    public boolean performSettlerActionAt(Position performActionAt) {
 
-        if (!game.unitIsNotNull(performPosition)) {
+        if (!game.unitIsNotNull(performActionAt)) {
             return false;
         }
-        if (game.playerInTurnIsNotOwnerOfUnit(performPosition)) {
+        if (game.playerInTurnIsNotOwnerOfUnit(performActionAt)) {
             return false;
         }
-        if (game.cityIsNotNull(performPosition)) {
+        if (game.cityIsNotNull(performActionAt)) {
             return false;
         }
-        game.addCity(performPosition, game.getPlayerInTurn());
-        game.removeUnit(performPosition);
+        game.addCity(performActionAt, game.getPlayerInTurn());
+        game.removeUnit(performActionAt);
         return true;
     }
 
     @Override
-    public boolean performArcherFortifyActionAt(Position performPosition) {
-        if (!game.unitIsNotNull(performPosition)) {
+    public boolean performArcherFortifyActionAt(Position performActionAt) {
+        if (!game.unitIsNotNull(performActionAt)) {
             return false;
         }
 
-        if (game.playerInTurnIsNotOwnerOfUnit(performPosition)) {
+        if (game.playerInTurnIsNotOwnerOfUnit(performActionAt)) {
             return false;
         }
 
-        if (game.getUnitAt(performPosition).getIsActionUsed()) {
-            game.getUnitAt(performPosition).setDefensiveStrength(game.getUnitAt(performPosition).getDefensiveStrength() / 2);
-            game.getUnitAt(performPosition).setMoveCount(1);
-            game.getUnitAt(performPosition).changeIfActionUsed(false);
+        if (game.getUnitAt(performActionAt).getIsActionUsed()) {
+            game.getUnitAt(performActionAt).setDefensiveStrength(game.getUnitAt(performActionAt).getDefensiveStrength() / 2);
+            game.getUnitAt(performActionAt).setMoveCount(1);
+            game.getUnitAt(performActionAt).changeIfActionUsed(false);
         } else {
-            game.getUnitAt(performPosition).setDefensiveStrength(game.getUnitAt(performPosition).getDefensiveStrength() * 2);
-            game.getUnitAt(performPosition).setMoveCount(0);
-            game.getUnitAt(performPosition).changeIfActionUsed(true);
+            game.getUnitAt(performActionAt).setDefensiveStrength(game.getUnitAt(performActionAt).getDefensiveStrength() * 2);
+            game.getUnitAt(performActionAt).setMoveCount(0);
+            game.getUnitAt(performActionAt).changeIfActionUsed(true);
         }
         return true;
     }
