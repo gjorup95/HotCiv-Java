@@ -145,9 +145,10 @@ public class GameImpl implements Game {
             /** Making sure that the moveCount is decremented by 1 */
             decrementMoveCount(from, to);
             removeUnit(from);
+            return true;
 
         }
-        return true;
+        return false;
     }
 
     private void conquerCity(Position toConquer) {
