@@ -80,7 +80,6 @@ public class GameImpl implements Game {
                 worldCreator = new WorldCreatorDeltaCiv(this);
                 break;
         }
-
     }
 
     /**
@@ -204,7 +203,9 @@ public class GameImpl implements Game {
 
     private void addTreasuryInAllCities() {
         ArrayList<CityImpl> tempCityValueList = new ArrayList<>(getCityMapValues());
-        for (CityImpl c : tempCityValueList) c.addTreasury(GameConstants.PRODUCTION_FIXED6);
+        for (CityImpl c : tempCityValueList) {
+            c.addTreasury(GameConstants.PRODUCTION_FIXED6);
+        }
     }
 
     /** Uses a double for-loop to itterate the cityMap and buy units in that city, if the city have accumulated enough production.*/
