@@ -79,6 +79,8 @@ public class GameImpl implements Game {
             case DELTA:
                 worldCreator = new WorldCreatorDeltaCiv(this);
                 break;
+            case EPSILON:
+                break;
         }
     }
 
@@ -114,9 +116,17 @@ public class GameImpl implements Game {
         return age;
     }
 
+    public int getAttackingBattlesWon() {
+        return playerInTurn.getAttackingBattlesWon();
+    }
+
     /**
      * ====== MUTATOR METHODS ===========================================
      */
+
+    public void incrementAttackBattlesWon(int battlesWon) {
+        playerInTurn.setAttackingBattlesWon(battlesWon);
+    }
 
     public void addUnit(Position placeUnitAt, String unitType, Player owner) {
         unitMap.put(placeUnitAt, new UnitImpl(unitType, owner));
