@@ -81,3 +81,7 @@ Test-list for TDD Iteration 1
 ======GENERALLY ================
  [X] Fixed versions of the game at setup for all versions.
  Add fixtures to gameImpl so that it uses different versions of the game depending on the parameter set in gameImpl with a function
+
+============== EPSILON CIV ===================================================================================================
+[X] Give each player a total amount of won battles
+
