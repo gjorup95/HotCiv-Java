@@ -30,5 +30,21 @@ package hotciv.framework;
  * limitations under the License.
  */
 public enum Player {
-    RED, BLUE, YELLOW, GREEN
+    // Players are initialized with 0 wins from the start.
+    RED(0), BLUE(0), YELLOW(0), GREEN(0);
+
+    // Fields
+    private int attackingBattlesWon;
+
+    Player(int attackBattlesWon) {
+        this.attackingBattlesWon = attackBattlesWon;
+    }
+
+    public int getAttackingBattlesWon() {
+        return attackingBattlesWon;
+    }
+
+    public void setAttackingBattlesWon(int amount) {
+        attackingBattlesWon += amount;
+    }
 }

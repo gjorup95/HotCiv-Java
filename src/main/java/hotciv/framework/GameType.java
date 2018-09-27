@@ -5,6 +5,6 @@ package hotciv.framework;
  * 14-09-2018
  */
 public enum GameType {
-    ALPHA, BETA, GAMMA, DELTA
+    ALPHA, BETA, GAMMA, DELTA, EPSILON
 
 }
