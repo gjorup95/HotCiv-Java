@@ -83,6 +83,9 @@ public class GameImpl implements Game {
                 break;
             case EPSILON:
                 break;
+            case ZETA:
+                winningCondition = new WinningConditionAlternating(new WinningConditionBetaCiv(this), new WinningConditionAlphaCiv(this));
+                break;
         }
     }
 
