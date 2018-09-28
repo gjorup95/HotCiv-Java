@@ -85,3 +85,7 @@ Test-list for TDD Iteration 1
 ============== EPSILON CIV ===================================================================================================
 [X] Give each player a total amount of won battles
 
+
+============== ZETA CIV ===================================================================================================
+[] Should use BetaCivWinningConditions before 20 rounds
+[] Should use EpsilonCivWinningCondition after 20 rounds

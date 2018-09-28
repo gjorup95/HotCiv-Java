@@ -46,6 +46,7 @@ public class GameImpl implements Game {
     private Ageing ageing;
     private WorldCreator worldCreator;
     private UnitActions unitActions;
+    private int noOfRounds;
 
     /**
      * HashMaps that together make up the World in the Game.
@@ -65,6 +66,7 @@ public class GameImpl implements Game {
         setUpGame(version);
         playerInTurn = Player.RED;
         age = GameConstants.STARTING_AGE;
+        noOfRounds = 0;
     }
 
     private void setUpGame(GameType version) {
@@ -209,6 +211,7 @@ public class GameImpl implements Game {
         addTreasuryInAllCities();
         buyUnitsInAllCitiesForAllPlayers();
         resetMoveCount();
+        noOfRounds ++;
     }
 
     private void addTreasuryInAllCities() {
@@ -299,6 +302,13 @@ public class GameImpl implements Game {
 
     private void addTreasury(Position p) {
         getCityAt(p).addTreasury(-GameConstants.UNIT_COST);
+    }
+
+    public boolean isBefore20Rounds() {
+        if (noOfRounds <= 20) {
+            return true;
+        }
+        return false;
     }
 }
 
