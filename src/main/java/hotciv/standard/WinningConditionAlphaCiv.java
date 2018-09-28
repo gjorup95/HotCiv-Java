@@ -1,22 +1,19 @@
 package hotciv.standard;
 
-import hotciv.framework.Game;
-import hotciv.framework.Player;
-import hotciv.framework.Position;
-import hotciv.framework.WinningCondition;
+import hotciv.framework.*;
 
 public class WinningConditionAlphaCiv implements WinningCondition {
 
-    private final Game game;
+    private final GameImpl game;
 
-    public WinningConditionAlphaCiv(Game game) {
+    public WinningConditionAlphaCiv(GameImpl game) {
         this.game = game;
     }
 
     @Override
     public Player getWinner() {
         if (game.getAge() == -3000) {
-            return Player.RED;
+            return game.getPlayer(GameConstants.RED);
         }
         return null;
     }

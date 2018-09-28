@@ -16,16 +16,16 @@ public class WorldCreatorAlphaCiv implements WorldCreator {
         }
 
         // Places the cities in the worldMap
-        game.addCity(GameConstants.RED_CITY_POSITION, Player.RED);
-        game.addCity(GameConstants.BLUE_CITY_POSITION, Player.BLUE);
+        game.addCity(GameConstants.RED_CITY_POSITION, game.getPlayer(GameConstants.RED));
+        game.addCity(GameConstants.BLUE_CITY_POSITION, game.getPlayer(GameConstants.BLUE));
         // Places the unique spots for oceans, hills and mountains and overrides the positions in the worldMap.
         game.addTile(GameConstants.OCEAN_POSITION, GameConstants.OCEANS);
         game.addTile(GameConstants.HILLS_POSITION, GameConstants.HILLS);
         game.addTile(GameConstants.MOUNTAINS_POSITION, GameConstants.MOUNTAINS);
         // places the initial units on the unitMap
-        game.addUnit(GameConstants.ARCHER_POSITION_RED, GameConstants.ARCHER, Player.RED);
-        game.addUnit(GameConstants.LEGION_POSITION_BLUE, GameConstants.LEGION, Player.BLUE);
-        game.addUnit(GameConstants.SETTLER_POSITION_RED, GameConstants.SETTLER, Player.RED);
+        game.addUnit(GameConstants.ARCHER_POSITION_RED, GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
+        game.addUnit(GameConstants.LEGION_POSITION_BLUE, GameConstants.LEGION, game.getPlayer(GameConstants.BLUE));
+        game.addUnit(GameConstants.SETTLER_POSITION_RED, GameConstants.SETTLER, game.getPlayer(GameConstants.RED));
     }
 }
 

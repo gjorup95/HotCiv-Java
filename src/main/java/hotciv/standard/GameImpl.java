@@ -2,10 +2,7 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.lang.Math;
 
 /**
@@ -46,7 +43,7 @@ public class GameImpl implements Game {
     private Ageing ageing;
     private WorldCreator worldCreator;
     private UnitActions unitActions;
-
+    Map<String, Player> playerList = new TreeMap<>();
     /**
      * HashMaps that together make up the World in the Game.
      */
@@ -58,12 +55,15 @@ public class GameImpl implements Game {
      * Constructor
      */
     public GameImpl(GameType version) {
+        playerList.put(GameConstants.RED, new Player(GameConstants.RED));
+        playerList.put(GameConstants.BLUE, new Player(GameConstants.BLUE));
+
         winningCondition = new WinningConditionAlphaCiv(this);
         ageing = new AgeingAlphaCiv();
         worldCreator = new WorldCreatorAlphaCiv(this);
         unitActions = new UnitActionsAlphaCiv();
         setUpGame(version);
-        playerInTurn = Player.RED;
+        playerInTurn = playerList.get(GameConstants.RED);
         age = GameConstants.STARTING_AGE;
     }
 
@@ -80,6 +80,7 @@ public class GameImpl implements Game {
                 worldCreator = new WorldCreatorDeltaCiv(this);
                 break;
             case EPSILON:
+                winningCondition = new WinningConditionEpsilonCiv(this);
                 break;
         }
     }
@@ -87,7 +88,9 @@ public class GameImpl implements Game {
     /**
      * ====== ACCESOR METHODS ===========================================
      */
-
+    public Player getPlayer (String color){
+      return playerList.get(color);
+    }
     public Collection<CityImpl> getCityMapValues() {
         return cityMap.values();
     }
@@ -116,7 +119,7 @@ public class GameImpl implements Game {
         return age;
     }
 
-    public int getAttackingBattlesWon() {
+    public int getCurrentPlayersAttackingBattlesWon() {
         return playerInTurn.getAttackingBattlesWon();
     }
 
@@ -124,8 +127,8 @@ public class GameImpl implements Game {
      * ====== MUTATOR METHODS ===========================================
      */
 
-    public void incrementAttackBattlesWon(int battlesWon) {
-        playerInTurn.setAttackingBattlesWon(battlesWon);
+    public void incrementCurrentPlayersAttackBattlesWon(int battlesWon) {
+       playerInTurn.setAttackingBattlesWon(playerInTurn.getAttackingBattlesWon() + battlesWon);
     }
 
     public void addUnit(Position placeUnitAt, String unitType, Player owner) {
@@ -196,10 +199,10 @@ public class GameImpl implements Game {
     }
 
     public void endOfTurn() {
-        if (getPlayerInTurn() == Player.RED) {
-            playerInTurn = Player.BLUE;
+        if (getPlayerInTurn().equals(getPlayer(GameConstants.RED))) {
+            playerInTurn = getPlayer(GameConstants.BLUE);
         } else {
-            playerInTurn = Player.RED;
+            playerInTurn =getPlayer(GameConstants.RED);
             endOfRound();
             age += ageing.calculateAge(getAge());
         }

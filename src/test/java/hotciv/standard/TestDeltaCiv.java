@@ -67,20 +67,20 @@ public class TestDeltaCiv {
     public void shouldProperlyImplementTheUnitMap() {
         assertThat(game.getUnitAt(new Position(5, 5)), is(notNullValue()));
         assertThat(game.getUnitAt(new Position(5, 5)).getTypeString(), is(GameConstants.SETTLER));
-        assertThat(game.getUnitAt(new Position(5, 5)).getOwner(), is(Player.RED));
+        assertThat(game.getUnitAt(new Position(5, 5)).getOwner(), is(game.getPlayer(GameConstants.RED)));
         assertThat(game.getUnitAt(new Position(4, 4)), is(notNullValue()));
         assertThat(game.getUnitAt(new Position(4, 4)).getTypeString(), is(GameConstants.LEGION));
-        assertThat(game.getUnitAt(new Position(4, 4)).getOwner(), is(Player.BLUE));
+        assertThat(game.getUnitAt(new Position(4, 4)).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
         assertThat(game.getUnitAt(new Position(4, 8)), is(notNullValue()));
         assertThat(game.getUnitAt(new Position(4, 8)).getTypeString(), is(GameConstants.ARCHER));
-        assertThat(game.getUnitAt(new Position(4, 8)).getOwner(), is(Player.RED));
+        assertThat(game.getUnitAt(new Position(4, 8)).getOwner(), is(game.getPlayer(GameConstants.RED)));
     }
 
     @Test
     public void shouldProperlyImplementTheCityMap() {
         assertThat(game.getCityAt(new Position(8, 12)), is(notNullValue()));
-        assertThat(game.getCityAt(new Position(8, 12)).getOwner(), is(Player.RED));
+        assertThat(game.getCityAt(new Position(8, 12)).getOwner(), is(game.getPlayer(GameConstants.RED)));
         assertThat(game.getCityAt(new Position(4, 5)), is(notNullValue()));
-        assertThat(game.getCityAt(new Position(4, 5)).getOwner(), is(Player.BLUE));
+        assertThat(game.getCityAt(new Position(4, 5)).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
     }
 }

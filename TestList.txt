@@ -84,4 +84,4 @@ Test-list for TDD Iteration 1
 
 ============== EPSILON CIV ===================================================================================================
 [X] Give each player a total amount of won battles
-
+ [] implement winning strategy that allows players to win based on their total wins.
