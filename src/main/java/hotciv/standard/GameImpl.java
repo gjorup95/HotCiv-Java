@@ -44,6 +44,8 @@ public class GameImpl implements Game {
     private WorldCreator worldCreator;
     private UnitActions unitActions;
     Map<String, Player> playerList = new TreeMap<>();
+    private int noOfRounds;
+
     /**
      * HashMaps that together make up the World in the Game.
      */
@@ -65,6 +67,7 @@ public class GameImpl implements Game {
         setUpGame(version);
         playerInTurn = playerList.get(GameConstants.RED);
         age = GameConstants.STARTING_AGE;
+        noOfRounds = 0;
     }
 
     private void setUpGame(GameType version) {
@@ -81,6 +84,9 @@ public class GameImpl implements Game {
                 break;
             case EPSILON:
                 winningCondition = new WinningConditionEpsilonCiv(this);
+                break;
+            case ZETA:
+                winningCondition = new WinningConditionAlternating(new WinningConditionBetaCiv(this), new WinningConditionAlphaCiv(this));
                 break;
         }
     }
@@ -212,6 +218,7 @@ public class GameImpl implements Game {
         addTreasuryInAllCities();
         buyUnitsInAllCitiesForAllPlayers();
         resetMoveCount();
+        noOfRounds ++;
     }
 
     private void addTreasuryInAllCities() {
@@ -302,6 +309,13 @@ public class GameImpl implements Game {
 
     private void addTreasury(Position p) {
         getCityAt(p).addTreasury(-GameConstants.UNIT_COST);
+    }
+
+    public boolean isBefore20Rounds() {
+        if (noOfRounds <= 20) {
+            return true;
+        }
+        return false;
     }
 }
 
