@@ -20,9 +20,6 @@ public class TestBetaCiv {
     public void setUp() {
         game = new GameImpl(GameType.BETA);
         ageing = new AgeingBetaCiv();
-
-
-
     }
 
     @Test

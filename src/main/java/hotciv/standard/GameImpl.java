@@ -86,7 +86,7 @@ public class GameImpl implements Game {
                 winningCondition = new WinningConditionEpsilonCiv(this);
                 break;
             case ZETA:
-                winningCondition = new WinningConditionAlternating(new WinningConditionBetaCiv(this), new WinningConditionAlphaCiv(this));
+                winningCondition = new WinningConditionAlternating(new WinningConditionBetaCiv(this), new WinningConditionEpsilonCiv(this), this);
                 break;
         }
     }
