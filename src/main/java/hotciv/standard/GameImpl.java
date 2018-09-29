@@ -43,8 +43,10 @@ public class GameImpl implements Game {
     private Ageing ageing;
     private WorldCreator worldCreator;
     private UnitActions unitActions;
-    Map<String, Player> playerList = new TreeMap<>();
+    private AttackingStrat attackingStrat;
+    Map<Integer, Player> playerList = new TreeMap<>();
     private int noOfRounds;
+
 
     /**
      * HashMaps that together make up the World in the Game.
@@ -57,9 +59,9 @@ public class GameImpl implements Game {
      * Constructor
      */
     public GameImpl(GameType version) {
-        playerList.put(GameConstants.RED, new Player(GameConstants.RED));
-        playerList.put(GameConstants.BLUE, new Player(GameConstants.BLUE));
-
+        playerList.put(GameConstants.RED, new Player("RED"));
+        playerList.put(GameConstants.BLUE, new Player("BLUE"));
+        attackingStrat = new AttackingStratAlphaCiv();
         winningCondition = new WinningConditionAlphaCiv(this);
         ageing = new AgeingAlphaCiv();
         worldCreator = new WorldCreatorAlphaCiv(this);
@@ -84,6 +86,7 @@ public class GameImpl implements Game {
                 break;
             case EPSILON:
                 winningCondition = new WinningConditionEpsilonCiv(this);
+                attackingStrat = new AttackingStratEpsilonCiv(this);
                 break;
             case ZETA:
                 winningCondition = new WinningConditionAlternating(new WinningConditionBetaCiv(this), new WinningConditionAlphaCiv(this));
@@ -94,8 +97,8 @@ public class GameImpl implements Game {
     /**
      * ====== ACCESOR METHODS ===========================================
      */
-    public Player getPlayer (String color){
-      return playerList.get(color);
+    public Player getPlayer (Integer player){
+      return playerList.get(player);
     }
     public Collection<CityImpl> getCityMapValues() {
         return cityMap.values();
@@ -152,20 +155,26 @@ public class GameImpl implements Game {
     public void addTile(Position p, String tileType) {
         worldMap.put(p, new TileImpl(tileType));
     }
-
+ // TODO HOW to implement the adding and removing of units related to attacking? ask TA.
     /** Creates a new unit on the destination and removes the old unit. The new unit's moveCount is reduced by a static 1, since only ONE tile can
      *  be moved at a time. */
     public boolean moveUnit(Position from, Position to) {
         if (isLegalMove(from, to)) {
+
             conquerCity(to);
             addUnit(to, getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
             /** Making sure that the moveCount is decremented by 1 */
             decrementMoveCount(from, to);
             removeUnit(from);
+            //attackUnit(from, to);
             return true;
 
         }
         return false;
+    }
+    public boolean attackUnit(Position from, Position to){
+      return attackingStrat.attack(from, to);
+
     }
 
    /** First checks whether the unit has sufficient moveCount to move to the destination. Returns false if that's the case. */
@@ -186,7 +195,6 @@ public class GameImpl implements Game {
         if (unitHasSufficientMoveCount) return true;
         return false;
     }
-
     /**
      * Checks if the move is legal. The column and row difference must be less than 2, since units can only move one tile at a time. Also
      * the from position cannot be equal to the to position, since its illegal to move on the same tile as the original position.

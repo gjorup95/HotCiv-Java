@@ -13,6 +13,7 @@ public class UnitImpl implements Unit {
     private int moveCount;
     private int defensiveStrength;
     private boolean actionUsed;
+    private int attackingStrength;
 
 
     public UnitImpl(String s, Player owner) {
@@ -21,6 +22,7 @@ public class UnitImpl implements Unit {
         defensiveStrength = 1;
         actionUsed = false;
         moveCount = 1;
+        attackingStrength =1;
     }
 
     @Override
@@ -45,7 +47,7 @@ public class UnitImpl implements Unit {
 
     @Override
     public int getAttackingStrength() {
-        return 0;
+        return attackingStrength;
     }
 
     public void setMoveCount(int moveCountAfterMovement) {
@@ -64,4 +66,8 @@ public class UnitImpl implements Unit {
         return actionUsed;
 
     }
+    public void setAttackingStrength(int attackingStrength) {
+        this.attackingStrength = attackingStrength;
+    }
+
 }

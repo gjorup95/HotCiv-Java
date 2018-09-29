@@ -84,11 +84,11 @@ Test-list for TDD Iteration 1
 
 ============== EPSILON CIV ===================================================================================================
 [X] Give each player a total amount of won battles
- [] implement winning strategy that allows players to win based on their total wins.
+ [/] implement winning strategy that allows players to win based on their total wins. CHECK TODO SHOULD ATTACKING STRATEGY MOVE ASWELL.
+ [X] Implement strategy for handling the attacking algorithm
 =======
 
 
 ============== ZETA CIV ===================================================================================================
 [] Should use BetaCivWinningConditions before 20 rounds
 [] Should use EpsilonCivWinningCondition after 20 rounds
->>>>>>> 4cc8f7760dd3fc913cbd0591227666c9f91ac863

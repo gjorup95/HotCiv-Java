@@ -1,9 +1,5 @@
 package hotciv.framework;
 
-import hotciv.standard.CityImpl;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Represents a winning condition in the game.
