@@ -12,7 +12,6 @@ import java.util.*;
 public class TestEpsilonCiv {
 
     private GameImpl game;
-    private AttackingStrat attackingStrat;
 
     /**
      * Fixture for alphaciv testing.
@@ -21,7 +20,6 @@ public class TestEpsilonCiv {
     @Before // Before is run before every @Test
     public void setUp() {
         game = new GameImpl(new EpsilonCivFactory());
-        attackingStrat = new AttackingStratEpsilonCiv(this.game);
     }
 
 
@@ -57,7 +55,7 @@ public class TestEpsilonCiv {
         assertThat(game.getUnitAt(new Position(3, 1)), is(notNullValue()));
         // adding an unit to extend att by 1
         game.addUnit(new Position(3, 0), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
-        assertThat(attackingStrat.calculateAttackerStr(new Position(3, 1)), is(2));
+        assertThat(game.calculateAttackerStr(new Position(3, 1)), is(2));
 
     }
 
@@ -67,7 +65,7 @@ public class TestEpsilonCiv {
         assertThat(game.getUnitAt(new Position(3, 1)), is(notNullValue()));
         // adding an unit to extend att by 1
         game.addUnit(new Position(3, 0), GameConstants.ARCHER, game.getPlayer(GameConstants.BLUE));
-        assertThat(attackingStrat.calculateAttackerStr(new Position(3, 1)), is(1));
+        assertThat(game.calculateAttackerStr(new Position(3, 1)), is(1));
     }
 
     @Test
@@ -76,7 +74,7 @@ public class TestEpsilonCiv {
         assertThat(game.getUnitAt(new Position(3, 1)), is(notNullValue()));
         game.addTile(new Position(3, 1), GameConstants.HILLS);
         assertThat(game.getTileAt(new Position(3, 1)).getTypeString(), is(GameConstants.HILLS));
-        assertThat(attackingStrat.calculateAttackerStr(new Position(3, 1)), is(2));
+        assertThat(game.calculateAttackerStr(new Position(3, 1)), is(2));
     }
 
     @Test
@@ -85,7 +83,7 @@ public class TestEpsilonCiv {
         assertThat(game.getUnitAt(new Position(3, 1)), is(notNullValue()));
         game.addTile(new Position(3, 1), GameConstants.FOREST);
         assertThat(game.getTileAt(new Position(3, 1)).getTypeString(), is(GameConstants.FOREST));
-        assertThat(attackingStrat.calculateAttackerStr(new Position(3, 1)), is(2));
+        assertThat(game.calculateAttackerStr(new Position(3, 1)), is(2));
     }
 
     @Test
@@ -94,27 +92,27 @@ public class TestEpsilonCiv {
         assertThat(game.getUnitAt(new Position(3, 1)), is(notNullValue()));
         game.addCity(new Position(3, 1), game.getPlayer(GameConstants.RED));
         assertThat(game.getCityAt(new Position(3, 1)), is(notNullValue()));
-        assertThat(attackingStrat.calculateAttackerStr(new Position(3, 1)), is(3));
+        assertThat(game.calculateAttackerStr(new Position(3, 1)), is(3));
     }
 
     // Seeing that the calculation of Defensive and Attacking Str is 100% similar only few test will be produced for the calculation.
     @Test
     public void shouldAccountForFriendlyDefendUnits() {
         game.addUnit(new Position(3, 3), GameConstants.LEGION, game.getPlayer(GameConstants.BLUE));
-        assertThat(attackingStrat.calculateDefensiveStr(GameConstants.LEGION_POSITION_BLUE), is(2));
+        assertThat(game.calculateDefensiveStr(GameConstants.LEGION_POSITION_BLUE), is(2));
     }
 
     @Test
     public void shouldAccountForHillsOnDefensivePosition() {
         game.addTile(GameConstants.LEGION_POSITION_BLUE, GameConstants.HILLS);
         assertThat(game.getTileAt(GameConstants.LEGION_POSITION_BLUE).getTypeString(), is(GameConstants.HILLS));
-        assertThat(attackingStrat.calculateDefensiveStr(GameConstants.LEGION_POSITION_BLUE), is(2));
+        assertThat(game.calculateDefensiveStr(GameConstants.LEGION_POSITION_BLUE), is(2));
     }
 
     @Test
     public void shouldAccountForDefensiveCityMultiply() {
         game.addCity(GameConstants.LEGION_POSITION_BLUE, game.getPlayer(GameConstants.BLUE));
-        assertThat(attackingStrat.calculateDefensiveStr(GameConstants.LEGION_POSITION_BLUE), is(3));
+        assertThat(game.calculateDefensiveStr(GameConstants.LEGION_POSITION_BLUE), is(3));
     }
 
     @Test
@@ -122,7 +120,7 @@ public class TestEpsilonCiv {
         game.addCity(GameConstants.LEGION_POSITION_BLUE, game.getPlayer(GameConstants.BLUE));
         game.addUnit(new Position(3, 3), GameConstants.LEGION, game.getPlayer(GameConstants.BLUE));
         game.addUnit(new Position(2, 3), GameConstants.LEGION, game.getPlayer(GameConstants.BLUE));
-        assertThat(attackingStrat.calculateDefensiveStr(GameConstants.LEGION_POSITION_BLUE), is(9));
+        assertThat(game.calculateDefensiveStr(GameConstants.LEGION_POSITION_BLUE), is(9));
     }
 
     @Test
@@ -130,19 +128,19 @@ public class TestEpsilonCiv {
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
         assertThat(game.getUnitAt(new Position(3, 1)).getTypeString(), is(GameConstants.ARCHER));
         game.addUnit(new Position(3, 0), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
-        assertThat(attackingStrat.calculateDefensiveStr(GameConstants.LEGION_POSITION_BLUE), is(1));
-        assertThat(attackingStrat.calculateAttackerStr(new Position(3, 1)), is(2));
+        assertThat(game.calculateDefensiveStr(GameConstants.LEGION_POSITION_BLUE), is(1));
+        assertThat(game.calculateAttackerStr(new Position(3, 1)), is(2));
         int redWins = 0;
         int blueWins = 0;
         for (int i = 0; i < 100; i++) {
-            if (attackingStrat.attackResult(new Position(3, 1), GameConstants.LEGION_POSITION_BLUE) > 0) {
+            if (game.attackResult(new Position(3, 1), GameConstants.LEGION_POSITION_BLUE) > 0) {
                 redWins += 1;
             } else {
                 blueWins += 1;
             }
         }
         assertThat(redWins > blueWins, is(true));
-        assertThat(redWins > 70, is(true));
+        assertThat(redWins > 65, is(true));
     }
   /*
     @Test

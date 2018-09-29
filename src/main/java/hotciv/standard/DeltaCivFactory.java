@@ -22,4 +22,9 @@ public class DeltaCivFactory implements Factory {
     public WorldCreator createWorldCreator(Game game) {
         return new WorldCreatorDeltaCiv((GameImpl) game);
     }
+
+    @Override
+    public AttackingStrat createAttackingStrat(GameImpl game) {
+        return new AttackingStratAlphaCiv();
+    }
 }

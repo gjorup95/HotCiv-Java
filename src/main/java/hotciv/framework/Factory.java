@@ -1,5 +1,7 @@
 package hotciv.framework;
 
+import hotciv.standard.GameImpl;
+
 public interface Factory {
 
     public Ageing createAgeingStrategy();
@@ -9,4 +11,6 @@ public interface Factory {
     public WinningCondition createWinningCondition(Game game);
 
     public WorldCreator createWorldCreator(Game game);
+
+    public AttackingStrat createAttackingStrat(GameImpl game);
 }

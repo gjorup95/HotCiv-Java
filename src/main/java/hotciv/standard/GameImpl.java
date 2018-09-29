@@ -72,6 +72,7 @@ public class GameImpl implements Game {
         this.ageing = factory.createAgeingStrategy();
         this.worldCreator = factory.createWorldCreator(this);
         this.unitActions = factory.createUnitActionsStrategy(this);
+        this.attackingStrat = factory.createAttackingStrat(this);
         playerInTurn = playerList.get(GameConstants.RED);
         age = GameConstants.STARTING_AGE;
         noOfRounds = 0;
@@ -319,6 +320,22 @@ public class GameImpl implements Game {
             return true;
         }
         return false;
+    }
+
+    public int calculateAttackerStr(Position from) {
+        return attackingStrat.calculateAttackerStr(from);
+    }
+
+    public int calculateDefensiveStr(Position to) {
+        return attackingStrat.calculateDefensiveStr(to);
+    }
+
+    public int attackResult(Position from, Position to) {
+        return attackingStrat.attackResult(from, to);
+    }
+
+    public boolean attack(Position from, Position to) {
+        return attackingStrat.attack(from, to);
     }
 }
 

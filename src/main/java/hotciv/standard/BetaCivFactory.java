@@ -22,4 +22,9 @@ public class BetaCivFactory implements Factory {
     public WorldCreator createWorldCreator(Game game) {
         return new WorldCreatorAlphaCiv((GameImpl) game);
     }
+
+    @Override
+    public AttackingStrat createAttackingStrat(GameImpl game) {
+        return new AttackingStratAlphaCiv();
+    }
 }
