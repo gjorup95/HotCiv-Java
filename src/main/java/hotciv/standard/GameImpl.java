@@ -45,6 +45,7 @@ public class GameImpl implements Game {
     private UnitActions unitActions;
     Map<String, Player> playerList = new TreeMap<>();
     private int noOfRounds;
+    private Factory factory;
 
     /**
      * HashMaps that together make up the World in the Game.
@@ -55,41 +56,23 @@ public class GameImpl implements Game {
 
     /**
      * Constructor
+     * @param
      */
-    public GameImpl(GameType version) {
+    public GameImpl(Factory factory) {
+        //TODO Refactor this into worldCreator
         playerList.put(GameConstants.RED, new Player(GameConstants.RED));
         playerList.put(GameConstants.BLUE, new Player(GameConstants.BLUE));
 
-        winningCondition = new WinningConditionAlphaCiv(this);
-        ageing = new AgeingAlphaCiv();
-        worldCreator = new WorldCreatorAlphaCiv(this);
-        unitActions = new UnitActionsAlphaCiv();
-        setUpGame(version);
+        this.factory = factory;
+        this.winningCondition = factory.createWinningCondition(this);
+        this.ageing = factory.createAgeingStrategy();
+        this.worldCreator = factory.createWorldCreator(this);
+        this.unitActions = factory.createUnitActionsStrategy(this);
         playerInTurn = playerList.get(GameConstants.RED);
         age = GameConstants.STARTING_AGE;
         noOfRounds = 0;
     }
 
-    private void setUpGame(GameType version) {
-        switch (version) {
-            case BETA:
-                winningCondition = new WinningConditionBetaCiv(this);
-                ageing = new AgeingBetaCiv();
-                break;
-            case GAMMA:
-                unitActions = new UnitActionsGammaCiv(this);
-                break;
-            case DELTA:
-                worldCreator = new WorldCreatorDeltaCiv(this);
-                break;
-            case EPSILON:
-                winningCondition = new WinningConditionEpsilonCiv(this);
-                break;
-            case ZETA:
-                winningCondition = new WinningConditionAlternating(new WinningConditionBetaCiv(this), new WinningConditionEpsilonCiv(this), this);
-                break;
-        }
-    }
 
     /**
      * ====== ACCESOR METHODS ===========================================

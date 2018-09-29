@@ -20,8 +20,7 @@ public class TestEpsilonCiv {
 
         @Before // Before is run before every @Test
         public void setUp() {
-            game = new GameImpl(GameType.EPSILON);
-
+            game = new GameImpl(new EpsilonCivFactory());
         }
 
         @After
