@@ -1,5 +1,6 @@
 package hotciv.standard;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import hotciv.framework.*;
 
 import org.junit.*;
@@ -13,16 +14,10 @@ import static org.hamcrest.CoreMatchers.*;
  */
 public class TestBetaCiv {
     private GameImpl game;
-    private GameConstants gameConstants;
-    private Ageing ageing;
 
     @Before // Before is run before every @Test
     public void setUp() {
-        game = new GameImpl(GameType.BETA);
-        ageing = new AgeingBetaCiv();
-
-
-
+        game = new GameImpl(new BetaCivFactory());
     }
 
     @Test
@@ -42,8 +37,8 @@ public class TestBetaCiv {
         game.endOfTurn();
         game.endOfTurn();
         game.moveUnit(new Position(3, 1), GameConstants.BLUE_CITY_POSITION);
-        assertThat(game.getUnitAt(gameConstants.BLUE_CITY_POSITION), is(notNullValue()));
-        assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION), is(notNullValue()));
+        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.RED)));
 
     }
 
@@ -65,7 +60,7 @@ public class TestBetaCiv {
         game.endOfTurn();
         game.endOfTurn();
         game.moveUnit(new Position(3, 1), GameConstants.BLUE_CITY_POSITION);
-        assertThat(game.getCityAt(gameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.RED)));
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.RED)));
         assertThat(game.getWinner(), is(game.getPlayer(GameConstants.RED)));
     }
@@ -84,7 +79,7 @@ public class TestBetaCiv {
 
     @Test
     public void betweenYear4000And100BCAgeShouldIncrementWith100() {
-        assertThat(game.getAge(), is(gameConstants.STARTING_AGE));
+        assertThat(game.getAge(), is(GameConstants.STARTING_AGE));
         game.endOfTurn();
         game.endOfTurn();
         assertThat(game.getAge(), is(-3900));
@@ -164,11 +159,14 @@ public class TestBetaCiv {
         }
         assertThat(game.getAge(), is(1971));
     }
+
+    /**
+    //TODO
     // EXAMPLE OF UNIT TESTING OF AGING STRATEGY
     @Test
     public void unitTestingOfAgeingStrategy(){
        assertThat(ageing.calculateAge(-3000), is(100));
-
     }
+    */
 
 }

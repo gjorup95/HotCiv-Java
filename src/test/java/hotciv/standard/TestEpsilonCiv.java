@@ -20,7 +20,7 @@ public class TestEpsilonCiv {
 
     @Before // Before is run before every @Test
     public void setUp() {
-        game = new GameImpl(GameType.EPSILON);
+        game = new GameImpl(new EpsilonCivFactory());
         attackingStrat = new AttackingStratEpsilonCiv(this.game);
     }
 
@@ -140,43 +140,52 @@ public class TestEpsilonCiv {
             } else {
                 blueWins += 1;
             }
+=======
+            @Before // Before is run before every @Test
+            public void setUp () {
+                game = new GameImpl(new EpsilonCivFactory());
+            }
+>>>>>>>2 ccf0030aa1c3212167b64368ed02d6bb9ba98b5
 
         }
         assertThat(redWins > blueWins, is(true));
         assertThat(redWins > 70, is(true));
     }
+
     @Test
-    public void shouldRemoveAttackerIfAttackIsUnsuccesful(){
+    public void shouldRemoveAttackerIfAttackIsUnsuccesful() {
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
         assertThat(game.getUnitAt(new Position(3, 1)).getTypeString(), is(GameConstants.ARCHER));
-        assertThat(game.getUnitAt(new Position(3,1)).getAttackingStrength(), is(1));
+        assertThat(game.getUnitAt(new Position(3, 1)).getAttackingStrength(), is(1));
         // making it so that the attacking unit is mathematically not able to win
         game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).setDefensiveStrength(7);
-        game.attackUnit(new Position(3,1), GameConstants.LEGION_POSITION_BLUE);
-        assertThat(game.getUnitAt(new Position(3,1)),is(nullValue()));
+        game.attackUnit(new Position(3, 1), GameConstants.LEGION_POSITION_BLUE);
+        assertThat(game.getUnitAt(new Position(3, 1)), is(nullValue()));
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getTypeString(), is(GameConstants.LEGION));
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
 
     }
+
     @Test
-    public void shouldOverwriteDefenderAndMoveAttackerWhenAttackIsSuccesful(){
+    public void shouldOverwriteDefenderAndMoveAttackerWhenAttackIsSuccesful() {
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
         assertThat(game.getUnitAt(new Position(3, 1)).getTypeString(), is(GameConstants.ARCHER));
-        game.getUnitAt(new Position(3,1)).setAttackingStrength(7);
-        assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getDefensiveStrength(),is(1));
-        game.attackUnit(new Position(3,1), GameConstants.LEGION_POSITION_BLUE);
-        assertThat(game.getUnitAt(new Position(3,1)), is(nullValue()));
+        game.getUnitAt(new Position(3, 1)).setAttackingStrength(7);
+        assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getDefensiveStrength(), is(1));
+        game.attackUnit(new Position(3, 1), GameConstants.LEGION_POSITION_BLUE);
+        assertThat(game.getUnitAt(new Position(3, 1)), is(nullValue()));
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getTypeString(), is(GameConstants.ARCHER));
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(game.getPlayer(GameConstants.RED)));
     }
+
     @Test
-    public void shouldIncrementAPlayersBattlesWonIfHeWinsAnAttack(){
+    public void shouldIncrementAPlayersBattlesWonIfHeWinsAnAttack() {
         assertThat(game.getPlayer(GameConstants.RED).getAttackingBattlesWon(), is(0));
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
         assertThat(game.getUnitAt(new Position(3, 1)).getTypeString(), is(GameConstants.ARCHER));
-        game.getUnitAt(new Position(3,1)).setAttackingStrength(7);
-        assertThat(game.getPlayerInTurn(),is(game.getPlayer(GameConstants.RED)));
-        game.attackUnit(new Position(3,1), GameConstants.LEGION_POSITION_BLUE);
+        game.getUnitAt(new Position(3, 1)).setAttackingStrength(7);
+        assertThat(game.getPlayerInTurn(), is(game.getPlayer(GameConstants.RED)));
+        game.attackUnit(new Position(3, 1), GameConstants.LEGION_POSITION_BLUE);
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(game.getPlayer(GameConstants.RED)));
         assertThat(game.getPlayer(GameConstants.RED).getAttackingBattlesWon(), is(1));
 

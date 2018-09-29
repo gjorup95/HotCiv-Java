@@ -14,11 +14,9 @@ public class TestGammaCiv {
     private GameImpl game;
     private GameConstants gameConstants;
 
-
     @Before // Before is run before every @Test
     public void setUp() {
-        game = new GameImpl(GameType.GAMMA);
-
+        game = new GameImpl(new GammaCivFactory());
     }
 
     @Test

@@ -46,6 +46,7 @@ public class GameImpl implements Game {
     private AttackingStrat attackingStrat;
     Map<Integer, Player> playerList = new TreeMap<>();
     private int noOfRounds;
+    private Factory factory;
 
 
     /**
@@ -57,49 +58,32 @@ public class GameImpl implements Game {
 
     /**
      * Constructor
+     *
+     * @param
      */
-    public GameImpl(GameType version) {
-        playerList.put(GameConstants.RED, new Player("RED"));
-        playerList.put(GameConstants.BLUE, new Player("BLUE"));
-        attackingStrat = new AttackingStratAlphaCiv();
-        winningCondition = new WinningConditionAlphaCiv(this);
-        ageing = new AgeingAlphaCiv();
-        worldCreator = new WorldCreatorAlphaCiv(this);
-        unitActions = new UnitActionsAlphaCiv();
-        setUpGame(version);
+
+    public GameImpl(Factory factory) {
+        //TODO Refactor this into worldCreator
+        playerList.put(GameConstants.RED, new Player(GameConstants.RED));
+        playerList.put(GameConstants.BLUE, new Player(GameConstants.BLUE));
+
+        this.factory = factory;
+        this.winningCondition = factory.createWinningCondition(this);
+        this.ageing = factory.createAgeingStrategy();
+        this.worldCreator = factory.createWorldCreator(this);
+        this.unitActions = factory.createUnitActionsStrategy(this);
         playerInTurn = playerList.get(GameConstants.RED);
         age = GameConstants.STARTING_AGE;
         noOfRounds = 0;
     }
 
-    private void setUpGame(GameType version) {
-        switch (version) {
-            case BETA:
-                winningCondition = new WinningConditionBetaCiv(this);
-                ageing = new AgeingBetaCiv();
-                break;
-            case GAMMA:
-                unitActions = new UnitActionsGammaCiv(this);
-                break;
-            case DELTA:
-                worldCreator = new WorldCreatorDeltaCiv(this);
-                break;
-            case EPSILON:
-                winningCondition = new WinningConditionEpsilonCiv(this);
-                attackingStrat = new AttackingStratEpsilonCiv(this);
-                break;
-            case ZETA:
-                winningCondition = new WinningConditionAlternating(new WinningConditionBetaCiv(this), new WinningConditionAlphaCiv(this));
-                break;
-        }
-    }
-
     /**
      * ====== ACCESOR METHODS ===========================================
      */
-    public Player getPlayer (Integer player){
-      return playerList.get(player);
+    public Player getPlayer(Integer player) {
+        return playerList.get(player);
     }
+
     public Collection<CityImpl> getCityMapValues() {
         return cityMap.values();
     }
@@ -137,7 +121,7 @@ public class GameImpl implements Game {
      */
 
     public void incrementCurrentPlayersAttackBattlesWon(int battlesWon) {
-       playerInTurn.setAttackingBattlesWon(playerInTurn.getAttackingBattlesWon() + battlesWon);
+        playerInTurn.setAttackingBattlesWon(playerInTurn.getAttackingBattlesWon() + battlesWon);
     }
 
     public void addUnit(Position placeUnitAt, String unitType, Player owner) {
@@ -155,9 +139,12 @@ public class GameImpl implements Game {
     public void addTile(Position p, String tileType) {
         worldMap.put(p, new TileImpl(tileType));
     }
- // TODO HOW to implement the adding and removing of units related to attacking? ask TA.
-    /** Creates a new unit on the destination and removes the old unit. The new unit's moveCount is reduced by a static 1, since only ONE tile can
-     *  be moved at a time. */
+    // TODO HOW to implement the adding and removing of units related to attacking? ask TA.
+
+    /**
+     * Creates a new unit on the destination and removes the old unit. The new unit's moveCount is reduced by a static 1, since only ONE tile can
+     * be moved at a time.
+     */
     public boolean moveUnit(Position from, Position to) {
         if (isLegalMove(from, to)) {
 
@@ -172,12 +159,15 @@ public class GameImpl implements Game {
         }
         return false;
     }
-    public boolean attackUnit(Position from, Position to){
-      return attackingStrat.attack(from, to);
+
+    public boolean attackUnit(Position from, Position to) {
+        return attackingStrat.attack(from, to);
 
     }
 
-   /** First checks whether the unit has sufficient moveCount to move to the destination. Returns false if that's the case. */
+    /**
+     * First checks whether the unit has sufficient moveCount to move to the destination. Returns false if that's the case.
+     */
     public boolean isLegalMove(Position from, Position to) {
         if (tileIsNotLegal(to)) {
             return false;
@@ -195,6 +185,7 @@ public class GameImpl implements Game {
         if (unitHasSufficientMoveCount) return true;
         return false;
     }
+
     /**
      * Checks if the move is legal. The column and row difference must be less than 2, since units can only move one tile at a time. Also
      * the from position cannot be equal to the to position, since its illegal to move on the same tile as the original position.
@@ -216,7 +207,7 @@ public class GameImpl implements Game {
         if (getPlayerInTurn().equals(getPlayer(GameConstants.RED))) {
             playerInTurn = getPlayer(GameConstants.BLUE);
         } else {
-            playerInTurn =getPlayer(GameConstants.RED);
+            playerInTurn = getPlayer(GameConstants.RED);
             endOfRound();
             age += ageing.calculateAge(getAge());
         }
@@ -226,7 +217,7 @@ public class GameImpl implements Game {
         addTreasuryInAllCities();
         buyUnitsInAllCitiesForAllPlayers();
         resetMoveCount();
-        noOfRounds ++;
+        noOfRounds++;
     }
 
     private void addTreasuryInAllCities() {
@@ -236,7 +227,9 @@ public class GameImpl implements Game {
         }
     }
 
-    /** Uses a double for-loop to itterate the cityMap and buy units in that city, if the city have accumulated enough production.*/
+    /**
+     * Uses a double for-loop to itterate the cityMap and buy units in that city, if the city have accumulated enough production.
+     */
     private void buyUnitsInAllCitiesForAllPlayers() {
         for (int i = 0; i < GameConstants.WORLDSIZE; i++)
             for (int j = 0; j < GameConstants.WORLDSIZE; j++)
@@ -248,7 +241,9 @@ public class GameImpl implements Game {
                 }
     }
 
-    /** Determines where to place the unit that was purchased by the city. */
+    /**
+     * Determines where to place the unit that was purchased by the city.
+     */
     private void placeUnitsForProduction(UnitImpl chosenUnit, Position insideCity) {
         if (!unitIsNotNull(insideCity)) {
             addUnit(insideCity, chosenUnit.getTypeString(), chosenUnit.getOwner());
