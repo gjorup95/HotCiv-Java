@@ -64,8 +64,8 @@ public class GameImpl implements Game {
 
     public GameImpl(Factory factory) {
         //TODO Refactor this into worldCreator
-        playerList.put(GameConstants.RED, new Player(GameConstants.RED));
-        playerList.put(GameConstants.BLUE, new Player(GameConstants.BLUE));
+        playerList.put(GameConstants.RED, new Player("RED"));
+        playerList.put(GameConstants.BLUE, new Player("BLUE"));
 
         this.factory = factory;
         this.winningCondition = factory.createWinningCondition(this);

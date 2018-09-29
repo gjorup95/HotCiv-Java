@@ -140,18 +140,11 @@ public class TestEpsilonCiv {
             } else {
                 blueWins += 1;
             }
-=======
-            @Before // Before is run before every @Test
-            public void setUp () {
-                game = new GameImpl(new EpsilonCivFactory());
-            }
->>>>>>>2 ccf0030aa1c3212167b64368ed02d6bb9ba98b5
-
         }
         assertThat(redWins > blueWins, is(true));
         assertThat(redWins > 70, is(true));
     }
-
+  /*
     @Test
     public void shouldRemoveAttackerIfAttackIsUnsuccesful() {
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
@@ -189,7 +182,7 @@ public class TestEpsilonCiv {
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(game.getPlayer(GameConstants.RED)));
         assertThat(game.getPlayer(GameConstants.RED).getAttackingBattlesWon(), is(1));
 
-    }
+    }*/
 }
 
 
