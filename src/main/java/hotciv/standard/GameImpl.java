@@ -62,10 +62,6 @@ public class GameImpl implements Game {
      */
 
     public GameImpl(Factory factory) {
-        //TODO Refactor this into worldCreator
-        playerMap.put(GameConstants.RED, new Player("RED"));
-        playerMap.put(GameConstants.BLUE, new Player("BLUE"));
-
         this.factory = factory;
         this.winningCondition = factory.createWinningCondition(this);
         this.ageing = factory.createAgeingStrategy();

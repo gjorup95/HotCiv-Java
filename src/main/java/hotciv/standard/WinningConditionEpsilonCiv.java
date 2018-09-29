@@ -22,7 +22,6 @@ public class WinningConditionEpsilonCiv implements WinningCondition {
             if (p.getAttackingBattlesWon() >= 3) {
                 return p;
             }
-
         }
         return null;
     }
