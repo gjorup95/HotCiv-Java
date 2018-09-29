@@ -6,11 +6,11 @@ public interface Factory {
 
     public Ageing createAgeingStrategy();
 
-    public UnitActions createUnitActionsStrategy(Game game);
+    public UnitActions createUnitActionsStrategy(GameImpl game);
 
-    public WinningCondition createWinningCondition(Game game);
+    public WinningCondition createWinningCondition(GameImpl game);
 
-    public WorldCreator createWorldCreator(Game game);
+    public WorldCreator createWorldCreator(GameImpl game);
 
     public AttackingStrat createAttackingStrat(GameImpl game);
 }

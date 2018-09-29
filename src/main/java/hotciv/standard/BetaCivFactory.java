@@ -9,18 +9,18 @@ public class BetaCivFactory implements Factory {
     }
 
     @Override
-    public UnitActions createUnitActionsStrategy(Game game) {
+    public UnitActions createUnitActionsStrategy(GameImpl game) {
         return new UnitActionsAlphaCiv();
     }
 
     @Override
-    public WinningCondition createWinningCondition(Game game) {
-        return new WinningConditionBetaCiv((GameImpl) game);
+    public WinningCondition createWinningCondition(GameImpl game) {
+        return new WinningConditionBetaCiv(game);
     }
 
     @Override
-    public WorldCreator createWorldCreator(Game game) {
-        return new WorldCreatorAlphaCiv((GameImpl) game);
+    public WorldCreator createWorldCreator(GameImpl game) {
+        return new WorldCreatorAlphaCiv(game);
     }
 
     @Override
