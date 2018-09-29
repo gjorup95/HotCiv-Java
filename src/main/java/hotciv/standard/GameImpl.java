@@ -44,7 +44,6 @@ public class GameImpl implements Game {
     private WorldCreator worldCreator;
     private UnitActions unitActions;
     private AttackingStrat attackingStrat;
-    Map<Integer, Player> playerList = new TreeMap<>();
     private int noOfRounds;
     private Factory factory;
 
@@ -55,17 +54,17 @@ public class GameImpl implements Game {
     Map<Position, TileImpl> worldMap = new HashMap<>();
     Map<Position, CityImpl> cityMap = new HashMap<>();
     Map<Position, UnitImpl> unitMap = new HashMap<>();
+    // Map for Players
+    Map<Integer, Player> playerMap = new TreeMap<>();
 
     /**
      * Constructor
-     *
-     * @param
      */
 
     public GameImpl(Factory factory) {
         //TODO Refactor this into worldCreator
-        playerList.put(GameConstants.RED, new Player("RED"));
-        playerList.put(GameConstants.BLUE, new Player("BLUE"));
+        playerMap.put(GameConstants.RED, new Player("RED"));
+        playerMap.put(GameConstants.BLUE, new Player("BLUE"));
 
         this.factory = factory;
         this.winningCondition = factory.createWinningCondition(this);
@@ -73,7 +72,7 @@ public class GameImpl implements Game {
         this.worldCreator = factory.createWorldCreator(this);
         this.unitActions = factory.createUnitActionsStrategy(this);
         this.attackingStrat = factory.createAttackingStrat(this);
-        playerInTurn = playerList.get(GameConstants.RED);
+        playerInTurn = playerMap.get(GameConstants.RED);
         age = GameConstants.STARTING_AGE;
         noOfRounds = 0;
     }
@@ -81,12 +80,25 @@ public class GameImpl implements Game {
     /**
      * ====== ACCESOR METHODS ===========================================
      */
-    public Player getPlayer(Integer player) {
-        return playerList.get(player);
+
+    public int getAge() {
+        return age;
     }
 
-    public Collection<CityImpl> getCityMapValues() {
-        return cityMap.values();
+    public int getCurrentPlayersAttackingBattlesWon() {
+        return playerInTurn.getAttackingBattlesWon();
+    }
+
+    public Player getPlayer(Integer player) {
+        return playerMap.get(player);
+    }
+
+    public Player getPlayerInTurn() {
+        return playerInTurn;
+    }
+
+    public Player getWinner() {
+        return winningCondition.getWinner();
     }
 
     public TileImpl getTileAt(Position p) {
@@ -101,21 +113,14 @@ public class GameImpl implements Game {
         return cityMap.get(p);
     }
 
-    public Player getPlayerInTurn() {
-        return playerInTurn;
+    public Map<Integer, Player> getPlayerMap() {
+        return playerMap;
     }
 
-    public Player getWinner() {
-        return winningCondition.getWinner();
+    public Collection<CityImpl> getCityMapValues() {
+        return cityMap.values();
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public int getCurrentPlayersAttackingBattlesWon() {
-        return playerInTurn.getAttackingBattlesWon();
-    }
 
     /**
      * ====== MUTATOR METHODS ===========================================
@@ -154,16 +159,10 @@ public class GameImpl implements Game {
             /** Making sure that the moveCount is decremented by 1 */
             decrementMoveCount(from, to);
             removeUnit(from);
-            //attackUnit(from, to);
             return true;
 
         }
         return false;
-    }
-
-    public boolean attackUnit(Position from, Position to) {
-        return attackingStrat.attack(from, to);
-
     }
 
     /**
@@ -315,6 +314,8 @@ public class GameImpl implements Game {
         getCityAt(p).addTreasury(-GameConstants.UNIT_COST);
     }
 
+
+    /** Method used in the WinningConditionAlternating subclass */
     public boolean isBefore20Rounds() {
         if (noOfRounds <= 20) {
             return true;
@@ -322,6 +323,7 @@ public class GameImpl implements Game {
         return false;
     }
 
+    /** Methods from the  AttackingStrat Interface */
     public int calculateAttackerStr(Position from) {
         return attackingStrat.calculateAttackerStr(from);
     }

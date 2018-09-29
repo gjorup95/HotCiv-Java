@@ -18,7 +18,7 @@ public class WinningConditionEpsilonCiv implements WinningCondition {
 
     @Override
     public Player getWinner() {
-        for (Player p : game.playerList.values()) {
+        for (Player p : game.playerMap.values()) {
             if (p.getAttackingBattlesWon() >= 3) {
                 return p;
             }

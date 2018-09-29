@@ -15,6 +15,9 @@ public class WorldCreatorAlphaCiv implements WorldCreator {
             }
         }
 
+        // Places the current players in the playerMap
+        game.getPlayerMap().put(GameConstants.RED, new Player("RED"));
+        game.getPlayerMap().put(GameConstants.BLUE, new Player("BLUE"));
         // Places the cities in the worldMap
         game.addCity(GameConstants.RED_CITY_POSITION, game.getPlayer(GameConstants.RED));
         game.addCity(GameConstants.BLUE_CITY_POSITION, game.getPlayer(GameConstants.BLUE));
