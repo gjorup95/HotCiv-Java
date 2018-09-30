@@ -20,7 +20,6 @@ public class GameImpl implements Game {
     private int noOfRounds;
     private Factory factory;
 
-
     /**
      * HashMaps that together make up the World in the Game.
      */
