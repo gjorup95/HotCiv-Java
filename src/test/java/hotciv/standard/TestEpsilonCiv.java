@@ -56,7 +56,6 @@ public class TestEpsilonCiv {
         // adding an unit to extend att by 1
         game.addUnit(new Position(3, 0), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
         assertThat(game.calculateAttackerStr(new Position(3, 1)), is(2));
-
     }
 
     @Test
