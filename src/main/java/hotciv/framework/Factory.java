@@ -1,6 +1,8 @@
 package hotciv.framework;
 
+import hotciv.standard.AttackCalculationStrat;
 import hotciv.standard.GameImpl;
+import hotciv.standard.RandomAttackCalculationStrat;
 
 public interface Factory {
 

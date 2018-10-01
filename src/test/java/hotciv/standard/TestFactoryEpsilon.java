@@ -2,7 +2,11 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-public class EpsilonCivFactory implements Factory {
+/**
+ * @ author Troels Gjørup
+ * 01-10-2018
+ */
+public class TestFactoryEpsilon implements Factory {
     @Override
     public Ageing createAgeingStrategy() {
         return new AgeingAlphaCiv();
@@ -25,6 +29,6 @@ public class EpsilonCivFactory implements Factory {
 
     @Override
     public AttackingStrat createAttackingStrat(GameImpl game) {
-        return new AttackingStratEpsilonCiv(game, new RandomAttackCalculationStrat());
+        return new AttackingStratEpsilonCiv(game, new FixedAttackCalculationStrat());
     }
 }

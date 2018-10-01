@@ -13,9 +13,11 @@ import java.util.Random;
  */
 public class AttackingStratEpsilonCiv implements AttackingStrat {
     private GameImpl game;
+    private AttackCalculationStrat attackCalculationStrat;
 
-    public AttackingStratEpsilonCiv(GameImpl game) {
+    public AttackingStratEpsilonCiv(GameImpl game, AttackCalculationStrat strat) {
         this.game = game;
+        this.attackCalculationStrat = strat;
     }
 
     @Override
@@ -57,11 +59,10 @@ public class AttackingStratEpsilonCiv implements AttackingStrat {
 
     @Override
     public int attackResult(Position from, Position to) {
-        Random random = new Random();
         int attackerStr = calculateAttackerStr(from);
         int defenderStr = calculateDefensiveStr(to);
-        int attRandom = random.nextInt(6) + 1;
-        int defRandom = random.nextInt(6) + 1;
+        int attRandom = attackCalculationStrat.getCalculationVariable();
+        int defRandom = attackCalculationStrat.getCalculationVariable();
         attackerStr = attackerStr * attRandom;
         defenderStr = defenderStr * defRandom;
         attackerStr = attackerStr - defenderStr;

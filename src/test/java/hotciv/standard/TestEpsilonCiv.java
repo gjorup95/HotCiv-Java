@@ -12,7 +12,7 @@ import java.util.*;
 public class TestEpsilonCiv {
 
     private GameImpl game;
-
+    private AttackCalculationStrat attackCalculationStrat;
     /**
      * Fixture for alphaciv testing.
      */
@@ -142,6 +142,24 @@ public class TestEpsilonCiv {
         assertThat(redWins > blueWins, is(true));
         assertThat(redWins > 65, is(true));
     }
+    /** Testing with Fixed Test stub */
+    @Test
+    public void testingWithTheTestStubOneUnit(){
+        game = new GameImpl(new TestFactoryEpsilon());
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
+        assertThat(game.getUnitAt(new Position(3, 1)).getTypeString(), is(GameConstants.ARCHER));
+        assertThat(game.attackResult(new Position(3,1), GameConstants.LEGION_POSITION_BLUE), is(0));
+    }
+    @Test
+    public void ShouldReturn2When2AlliedUnits(){
+        game = new GameImpl(new TestFactoryEpsilon());
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
+        assertThat(game.getUnitAt(new Position(3, 1)).getTypeString(), is(GameConstants.ARCHER));
+        game.addUnit(new Position(3,0), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
+        game.addUnit(new Position(4,2), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
+        assertThat(game.attackResult(new Position(3,1), GameConstants.LEGION_POSITION_BLUE), is(2));
+    }
+
   /*
     @Test
     public void shouldRemoveAttackerIfAttackIsUnsuccesful() {
