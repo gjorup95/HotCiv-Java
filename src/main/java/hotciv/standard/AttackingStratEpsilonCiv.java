@@ -22,6 +22,9 @@ public class AttackingStratEpsilonCiv implements AttackingStrat {
 
     @Override
     public int calculateAttackerStr(Position from) {
+        if (game.getUnitAt(from) == null) {
+            return 0;
+        }
         int attStrUnits = game.getUnitAt(from).getAttackingStrength();
         int attTerrainMultiplyStr = 1;
         if (game.getTileAt(from).getTypeString().equals(GameConstants.HILLS) || game.getTileAt(from).getTypeString().equals(GameConstants.FOREST)) {
@@ -40,6 +43,9 @@ public class AttackingStratEpsilonCiv implements AttackingStrat {
 
     @Override
     public int calculateDefensiveStr(Position to) {
+        if (game.getUnitAt(to) == null) {
+            return 0;
+        }
         int defStrUnits = game.getUnitAt(to).getDefensiveStrength();
         int defTerrainMultiplyStr = 1;
         if (game.getTileAt(to).getTypeString().equals(GameConstants.HILLS) || game.getTileAt(to).getTypeString().equals(GameConstants.FOREST)) {
@@ -72,9 +78,9 @@ public class AttackingStratEpsilonCiv implements AttackingStrat {
     @Override
     public boolean attack(Position from, Position to) {
         if (attackResult(from, to) > 0) {
-            game.incrementCurrentPlayersAttackBattlesWon(1);
-            game.addUnit(to, game.getUnitAt(from).getTypeString(), game.getUnitAt(from).getOwner());
-            game.removeUnit(from);
+            if (game.getUnitAt(to) != null) {
+                game.incrementCurrentPlayersAttackBattlesWon(1);
+            }
             return true;
         }
         game.removeUnit(from);

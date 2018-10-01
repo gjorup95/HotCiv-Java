@@ -12,7 +12,6 @@ import java.util.*;
 public class TestEpsilonCiv {
 
     private GameImpl game;
-    private AttackCalculationStrat attackCalculationStrat;
     /**
      * Fixture for alphaciv testing.
      */
@@ -139,7 +138,7 @@ public class TestEpsilonCiv {
             }
         }
         assertThat(redWins > blueWins, is(true));
-        assertThat(redWins > 65, is(true));
+        assertThat(redWins > 60, is(true));
     }
     /** Testing with Fixed Test stub */
     @Test
@@ -159,15 +158,18 @@ public class TestEpsilonCiv {
         assertThat(game.attackResult(new Position(3,1), GameConstants.LEGION_POSITION_BLUE), is(2));
     }
 
-  /*
     @Test
     public void shouldRemoveAttackerIfAttackIsUnsuccesful() {
+        game = new GameImpl(new TestFactoryEpsilon());
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
         assertThat(game.getUnitAt(new Position(3, 1)).getTypeString(), is(GameConstants.ARCHER));
         assertThat(game.getUnitAt(new Position(3, 1)).getAttackingStrength(), is(1));
+        assertThat(game.getUnitAt(new Position(3,1)).getMoveCount(), is(0));
+        game.endOfTurn();
+        game.endOfTurn();
         // making it so that the attacking unit is mathematically not able to win
-        game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).setDefensiveStrength(7);
-        game.attackUnit(new Position(3, 1), GameConstants.LEGION_POSITION_BLUE);
+        game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).setDefensiveStrength(2);
+        game.moveUnit(new Position(3, 1), GameConstants.LEGION_POSITION_BLUE);
         assertThat(game.getUnitAt(new Position(3, 1)), is(nullValue()));
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getTypeString(), is(GameConstants.LEGION));
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
@@ -176,11 +178,14 @@ public class TestEpsilonCiv {
 
     @Test
     public void shouldOverwriteDefenderAndMoveAttackerWhenAttackIsSuccesful() {
+        game = new GameImpl(new TestFactoryEpsilon());
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
         assertThat(game.getUnitAt(new Position(3, 1)).getTypeString(), is(GameConstants.ARCHER));
-        game.getUnitAt(new Position(3, 1)).setAttackingStrength(7);
+        game.getUnitAt(new Position(3, 1)).setAttackingStrength(2);
+        game.endOfTurn();
+        game.endOfTurn();
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getDefensiveStrength(), is(1));
-        game.attackUnit(new Position(3, 1), GameConstants.LEGION_POSITION_BLUE);
+        game.moveUnit(new Position(3, 1), GameConstants.LEGION_POSITION_BLUE);
         assertThat(game.getUnitAt(new Position(3, 1)), is(nullValue()));
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getTypeString(), is(GameConstants.ARCHER));
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(game.getPlayer(GameConstants.RED)));
@@ -188,16 +193,28 @@ public class TestEpsilonCiv {
 
     @Test
     public void shouldIncrementAPlayersBattlesWonIfHeWinsAnAttack() {
+        game = new GameImpl(new TestFactoryEpsilon());
         assertThat(game.getPlayer(GameConstants.RED).getAttackingBattlesWon(), is(0));
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
         assertThat(game.getUnitAt(new Position(3, 1)).getTypeString(), is(GameConstants.ARCHER));
-        game.getUnitAt(new Position(3, 1)).setAttackingStrength(7);
+        game.getUnitAt(new Position(3, 1)).setAttackingStrength(2);
         assertThat(game.getPlayerInTurn(), is(game.getPlayer(GameConstants.RED)));
-        game.attackUnit(new Position(3, 1), GameConstants.LEGION_POSITION_BLUE);
+        game.endOfTurn();
+        game.endOfTurn();
+        game.moveUnit(new Position(3, 1), GameConstants.LEGION_POSITION_BLUE);
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(game.getPlayer(GameConstants.RED)));
         assertThat(game.getPlayer(GameConstants.RED).getAttackingBattlesWon(), is(1));
 
-    }*/
+    }
+    @Test
+    public void shouldNotIncrementBattlesWonWhenMovingUnitToEmptyTile(){
+        game = new GameImpl(new TestFactoryEpsilon());
+        assertThat(game.getPlayer(GameConstants.RED).getAttackingBattlesWon(), is(0));
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
+        assertThat(game.getPlayerInTurn().getAttackingBattlesWon(), is(0));
+
+
+    }
 }
 
 

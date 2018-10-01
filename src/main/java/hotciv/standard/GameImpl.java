@@ -131,14 +131,14 @@ public class GameImpl implements Game {
      */
     public boolean moveUnit(Position from, Position to) {
         if (isLegalMove(from, to)) {
-
-            conquerCity(to);
-            addUnit(to, getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
-            /** Making sure that the moveCount is decremented by 1 */
-            decrementMoveCount(from, to);
-            removeUnit(from);
-            return true;
-
+            if (attack(from, to)) {
+                conquerCity(to);
+                addUnit(to, getUnitAt(from).getTypeString(), getUnitAt(from).getOwner());
+                /** Making sure that the moveCount is decremented by 1 */
+                decrementMoveCount(from, to);
+                removeUnit(from);
+                return true;
+            }
         }
         return false;
     }

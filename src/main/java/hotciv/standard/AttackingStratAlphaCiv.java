@@ -25,6 +25,6 @@ public class AttackingStratAlphaCiv implements AttackingStrat {
 
     @Override
     public boolean attack(Position from, Position to) {
-        return false;
+        return true;
     }
 }
