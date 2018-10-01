@@ -18,10 +18,8 @@ public class WinningConditionAlternating implements WinningCondition {
         this.game = game;
     }
 
-
     @Override
     public Player getWinner() {
-        // Gets nullpointer when run because currently no game object is provided. Maybe overkill to pass an entire game object to this class?
         if(game.isBefore20Rounds()) {
             currentState = winningConditionBefore20Rounds;
         }
