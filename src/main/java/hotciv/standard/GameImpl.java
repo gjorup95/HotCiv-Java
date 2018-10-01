@@ -49,6 +49,10 @@ public class GameImpl implements Game {
      * ====== ACCESOR METHODS ===========================================
      */
 
+    public int getNoOfRounds() {
+        return noOfRounds;
+    }
+
     public int getAge() {
         return age;
     }
