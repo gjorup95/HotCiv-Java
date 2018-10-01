@@ -10,7 +10,6 @@ import org.junit.Test;
 
 public class TestZetaCiv {
     private GameImpl game;
-    private GameConstants gameConstants;
 
     @Before // Before is run before every @Test
     public void setUp() {
@@ -66,9 +65,14 @@ public class TestZetaCiv {
 
     @Test
     public void shouldBeEpsilonCivWinningConditionAfter20Round() {
-        for (int i = 0; i < 42; i++) {
+        game.incrementCurrentPlayersAttackBattlesWon(3);
+        for (int i = 0; i < 40; i++) {
             game.endOfTurn();
         }
+        game.endOfTurn();
+        game.endOfTurn();
+        System.out.println(game.getNoOfRounds());
+        game.getWinner();
         game.incrementCurrentPlayersAttackBattlesWon(3);
         assertThat(game.getWinner(), is(game.getPlayer(GameConstants.RED)));
     }

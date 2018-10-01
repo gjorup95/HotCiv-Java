@@ -20,4 +20,8 @@ public class Player {
     public void setAttackingBattlesWon(int attackingBattlesWon) {
         this.attackingBattlesWon = attackingBattlesWon;
     }
+
+    public void resetAttackingBattlesWon() {
+        attackingBattlesWon = 0;
+    }
 }

@@ -10,20 +10,21 @@ public class WinningConditionAlternating implements WinningCondition {
     private WinningCondition winningConditionAfter20Rounds;
     private WinningCondition currentState;
     private GameImpl game;
+
     /** This winning condition is a combination of both Beta and Epsilon Winning conditions, so both WinningConditions are imported. */
+
     public WinningConditionAlternating(WinningCondition winningConditionBefore20Rounds, WinningCondition winningConditionAfter20Rounds, GameImpl game) {
         this.winningConditionBefore20Rounds = winningConditionBefore20Rounds;
         this.winningConditionAfter20Rounds = winningConditionAfter20Rounds;
-        this.currentState = null;
+        this.currentState = winningConditionBefore20Rounds;
         this.game = game;
     }
 
     @Override
     public Player getWinner() {
-        if(game.isBefore20Rounds()) {
-            currentState = winningConditionBefore20Rounds;
-        }
-        else {
+
+        if(game.getNoOfRounds() >= 20 && currentState == winningConditionBefore20Rounds) {
+            game.resetAttackingBattlesForAllPlayers();
             currentState = winningConditionAfter20Rounds;
         }
         return currentState.getWinner();

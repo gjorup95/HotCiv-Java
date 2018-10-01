@@ -98,6 +98,12 @@ public class GameImpl implements Game {
      * ====== MUTATOR METHODS ===========================================
      */
 
+    public void resetAttackingBattlesForAllPlayers() {
+        for (Player p : playerMap.values()) {
+            p.resetAttackingBattlesWon();
+        }
+    }
+
     public void incrementCurrentPlayersAttackBattlesWon(int battlesWon) {
         playerInTurn.setAttackingBattlesWon(playerInTurn.getAttackingBattlesWon() + battlesWon);
     }
