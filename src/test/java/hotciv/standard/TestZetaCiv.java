@@ -2,7 +2,7 @@ package hotciv.standard;
 
 import hotciv.framework.GameConstants;
 import hotciv.framework.Position;
-import org.junit.*;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.Before;
