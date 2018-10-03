@@ -10,8 +10,6 @@ import hotciv.framework.*;
 public class WorldCreatorDeltaCiv implements WorldCreator {
     private GameImpl game;
 
-
-
     public WorldCreatorDeltaCiv(GameImpl game) {
         this.game = game;
         game.addUnit(new Position(5, 5), GameConstants.SETTLER, game.getPlayer(GameConstants.RED));
@@ -19,8 +17,6 @@ public class WorldCreatorDeltaCiv implements WorldCreator {
         game.addUnit(new Position(4, 8), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
         game.addCity(new Position(8, 12), game.getPlayer(GameConstants.RED));
         game.addCity(new Position(4, 5), game.getPlayer(GameConstants.BLUE));
-
-
 
         String[] layout =
                 new String[]{
