@@ -2,10 +2,14 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-public class BetaCivFactory implements Factory {
+/**
+ * @ author Troels Gjørup
+ * 03-10-2018
+ */
+public class EtaCivFactory implements Factory {
     @Override
     public Ageing createAgeingStrategy() {
-        return new AgeingBetaCiv();
+        return new AgeingAlphaCiv();
     }
 
     @Override
@@ -15,7 +19,7 @@ public class BetaCivFactory implements Factory {
 
     @Override
     public WinningCondition createWinningCondition(GameImpl game) {
-        return new WinningConditionBetaCiv(game);
+        return new WinningConditionAlphaCiv(game);
     }
 
     @Override
@@ -30,6 +34,6 @@ public class BetaCivFactory implements Factory {
 
     @Override
     public CityHandlingStrategy createCityHandlingStrategy(GameImpl game) {
-        return new CityHandlingStrategyAlphaCiv();
+        return new CityHandlingStrategyEtaCiv();
     }
 }

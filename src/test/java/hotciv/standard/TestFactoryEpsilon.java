@@ -31,4 +31,9 @@ public class TestFactoryEpsilon implements Factory {
     public AttackingStrat createAttackingStrat(GameImpl game) {
         return new AttackingStratEpsilonCiv(game, new FixedAttackCalculationStrat());
     }
+
+    @Override
+    public CityHandlingStrategy createCityHandlingStrategy(GameImpl game) {
+        return new CityHandlingStrategyAlphaCiv();
+    }
 }

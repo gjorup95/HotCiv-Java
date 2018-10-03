@@ -92,7 +92,7 @@ Test-list for TDD Iteration 1
 [X] Should use EpsilonCivWinningCondition after 20 rounds
 
 =============== ETA CIV ============================================================================
-[] City Workforce Focus - A city can establish
+[] City Workforce Focus - A city can establish a food or production focus.
 ============== SEMI CIV =============================================================================
 [] World aging use BetaCiv
 [] Settlers can build cites as in GammaCiv

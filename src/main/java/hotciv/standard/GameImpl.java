@@ -19,6 +19,7 @@ public class GameImpl implements Game {
     private AttackingStrat attackingStrat;
     private int noOfRounds;
     private Factory factory;
+    private CityHandlingStrategy cityHandlingStrategy;
 
     /**
      * HashMaps that together make up the World in the Game.
@@ -43,6 +44,7 @@ public class GameImpl implements Game {
         this.worldCreator = factory.createWorldCreator(this);
         this.unitActions = factory.createUnitActionsStrategy(this);
         this.attackingStrat = factory.createAttackingStrat(this);
+        this.cityHandlingStrategy = factory.createCityHandlingStrategy(this);
         playerInTurn = playerMap.get(GameConstants.RED);
         age = GameConstants.STARTING_AGE;
         noOfRounds = 0;
