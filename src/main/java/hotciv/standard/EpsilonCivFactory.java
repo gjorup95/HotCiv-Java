@@ -27,4 +27,9 @@ public class EpsilonCivFactory implements Factory {
     public AttackingStrat createAttackingStrat(GameImpl game) {
         return new AttackingStratEpsilonCiv(game, new RandomAttackCalculationStrat());
     }
+
+    @Override
+    public CityHandlingStrategy createCityHandlingStrategy(GameImpl game) {
+        return new CityHandlingStrategyAlphaCiv();
+    }
 }

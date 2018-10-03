@@ -28,4 +28,10 @@ public class AlphaCivFactory implements Factory {
     public AttackingStrat createAttackingStrat(GameImpl game) {
         return new AttackingStratAlphaCiv();
     }
+
+    @Override
+    public CityHandlingStrategy createCityHandlingStrategy(GameImpl game) {
+        return new CityHandlingStrategyAlphaCiv();
+    }
+
 }

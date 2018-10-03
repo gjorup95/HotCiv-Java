@@ -15,4 +15,6 @@ public interface Factory {
     public WorldCreator createWorldCreator(GameImpl game);
 
     public AttackingStrat createAttackingStrat(GameImpl game);
+
+    public CityHandlingStrategy createCityHandlingStrategy(GameImpl game);
 }
