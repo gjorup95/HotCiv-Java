@@ -123,7 +123,6 @@ public class GameImpl implements Game {
     public void addTile(Position p, String tileType) {
         worldMap.put(p, new TileImpl(tileType));
     }
-    // TODO HOW to implement the adding and removing of units related to attacking? ask TA.
 
     /**
      * Creates a new unit on the destination and removes the old unit. The new unit's moveCount is reduced by a static 1, since only ONE tile can

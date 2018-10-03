@@ -84,11 +84,19 @@ Test-list for TDD Iteration 1
 
 ============== EPSILON CIV ===================================================================================================
 [X] Give each player a total amount of won battles
- [/] implement winning strategy that allows players to win based on their total wins. CHECK TODO SHOULD ATTACKING STRATEGY MOVE ASWELL.
+ [X] implement winning strategy that allows players to win based on their total wins.
  [X] Implement strategy for handling the attacking algorithm
-=======
-
 
 ============== ZETA CIV ===================================================================================================
-[] Should use BetaCivWinningConditions before 20 rounds
-[] Should use EpsilonCivWinningCondition after 20 rounds
+[X] Should use BetaCivWinningConditions before 20 rounds
+[X] Should use EpsilonCivWinningCondition after 20 rounds
+
+=============== ETA CIV ============================================================================
+[] City Workforce Focus - A city can establish
+============== SEMI CIV =============================================================================
+[] World aging use BetaCiv
+[] Settlers can build cites as in GammaCiv
+[] World layout is as specified in DeltaCiv
+[] Winner is Defined as specified in EpsilonCiv
+[] Attack is handled by EpsilonCiv
+[] City Workforce focus and population increase. As specified in EtaCiv

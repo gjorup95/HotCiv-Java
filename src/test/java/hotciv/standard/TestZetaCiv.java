@@ -71,7 +71,6 @@ public class TestZetaCiv {
         }
         game.endOfTurn();
         game.endOfTurn();
-        System.out.println(game.getNoOfRounds());
         game.getWinner();
         game.incrementCurrentPlayersAttackBattlesWon(3);
         assertThat(game.getWinner(), is(game.getPlayer(GameConstants.RED)));
