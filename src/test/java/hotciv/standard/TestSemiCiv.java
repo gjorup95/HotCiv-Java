@@ -70,7 +70,7 @@ public class TestSemiCiv {
         assertThat(game.getCityAt(new Position(4,5)).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
         // removes the blueArcher unit so it is easier to attack the city.
         game.removeUnit(new Position(4,4));
-        game.addUnit(new Position(4,4), GameConstants.ARCHER, game.getPlayer(GameConstants.RED))
+        game.addUnit(new Position(4,4), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
     }
 
 
