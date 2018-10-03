@@ -35,6 +35,9 @@ public class GameImpl implements Game {
      */
 
     public GameImpl(Factory factory) {
+        //TODO This should be refactored with a strategy patteren for the variablity of x number of players.
+        playerMap.put(GameConstants.RED, new Player("RED"));
+        playerMap.put(GameConstants.BLUE, new Player("BLUE"));
         this.factory = factory;
         this.winningCondition = factory.createWinningCondition(this);
         this.ageing = factory.createAgeingStrategy();
