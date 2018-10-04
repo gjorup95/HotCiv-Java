@@ -124,5 +124,4 @@ public class TestGammaCiv {
     public void shouldReturnNullWhenUsingGameUnitIsNotNullMethod() {
         assertThat(game.unitIsNotNull(new Position(8,8)), is(false));
     }
-
 }

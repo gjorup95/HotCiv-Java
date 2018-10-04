@@ -646,6 +646,18 @@ public class TestAlphaCiv {
         assertThat(game.getPlayerMap(), is(notNullValue()));
     }
 
+    @Test
+    public void shouldReturnFalseWhenCallingPerformSettlerActionAlphaCiv() {
+       UnitActionsAlphaCiv unitActions = new UnitActionsAlphaCiv();
+       assertThat(unitActions.performSettlerActionAt(new Position(1,1)), is(false));
+    }
+
+    @Test
+    public void shouldReturnFalseWhenCallingPerformArcherActionAlphaCiv() {
+        UnitActionsAlphaCiv unitActions = new UnitActionsAlphaCiv();
+        assertThat(unitActions.performArcherFortifyActionAt(new Position(1,1)), is(false));
+    }
+
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values
         // 'is' require an exact match
