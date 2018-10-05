@@ -57,14 +57,16 @@ public class UnitActionsGammaCiv implements UnitActions {
 
     @Override
     public void performAction(Position p) {
-        switch (game.getUnitAt(p).getTypeString()) {
-            case GameConstants.ARCHER:
-                performArcherFortifyActionAt(p);
-                break;
-            case GameConstants.SETTLER:
-                performSettlerActionAt(p);
-                break;
-            default:
+        if (game.getUnitAt(p) != null) {
+            switch (game.getUnitAt(p).getTypeString()) {
+                case GameConstants.ARCHER:
+                    performArcherFortifyActionAt(p);
+                    break;
+                case GameConstants.SETTLER:
+                    performSettlerActionAt(p);
+                    break;
+                default:
+            }
         }
     }
 }

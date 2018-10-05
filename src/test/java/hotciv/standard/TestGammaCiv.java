@@ -112,4 +112,16 @@ public class TestGammaCiv {
         assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getDefensiveStrength(), is(1));
         assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getMoveCount(), is(1));
     }
+
+    @Test
+    public void shouldReturnFalseIfUnitIsNullWhenPerformingAction() {
+        assertThat(game.getUnitAt(new Position(8,8)), is(nullValue()));
+        game.performUnitActionAt(new Position(8,8));
+        assertThat(game.getUnitAt(new Position(8,8)), is(nullValue()));
+    }
+
+    @Test
+    public void shouldReturnNullWhenUsingGameUnitIsNotNullMethod() {
+        assertThat(game.unitIsNotNull(new Position(8,8)), is(false));
+    }
 }
