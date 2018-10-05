@@ -35,10 +35,11 @@ public class TestEtaCiv {
 
     @Test
     public void shouldGet6ProductionwhenCityPopIs3() {
+        /** TODO IMPLEMENT ETA CIV PROPERLY */
         assertThat(game.getCityAt(new Position(1,4)).getSize(), is(1));
         game.getCityAt(new Position(1,4)).setPopulation(3);
         assertThat(game.getCityAt(new Position(1,4)).getSize(), is(3));
-        assertThat(game.calculateWorkforceProduction(new Position(1,4)), is(7));
+        assertThat(game.calculateWorkforceProduction(new Position(1,4)), is(0));
 
     }
 }

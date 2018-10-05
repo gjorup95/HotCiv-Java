@@ -37,10 +37,10 @@ public class GameImpl implements Game {
 
     public GameImpl(Factory factory) {
         //TODO This should be refactored with a strategy patteren for the variablity of x number of players.
-        unitPriceList.put(GameConstants.ARCHER, 10);
-        unitPriceList.put(GameConstants.LEGION, 10);
-        unitPriceList.put(GameConstants.SETTLER, 10);
-        unitPriceList.put(GameConstants.BOMB, 60);
+        unitPriceList.put(GameConstants.ARCHER, GameConstants.ARCHER_COST);
+        unitPriceList.put(GameConstants.LEGION, GameConstants.ARCHER_COST);
+        unitPriceList.put(GameConstants.SETTLER, GameConstants.ARCHER_COST);
+        unitPriceList.put(GameConstants.BOMB, GameConstants.BOMB_COST);
         playerMap.put(GameConstants.RED, new Player("RED"));
         playerMap.put(GameConstants.BLUE, new Player("BLUE"));
         this.factory = factory;
@@ -123,7 +123,7 @@ public class GameImpl implements Game {
     public void addUnit(Position placeUnitAt, String unitType, Player owner) {
         unitMap.put(placeUnitAt, new UnitImpl(unitType, owner));
     }
-
+    public void removeCity(Position p){cityMap.remove(p);}
     public void removeUnit(Position p) {
         unitMap.remove(p);
     }
@@ -158,8 +158,10 @@ public class GameImpl implements Game {
      * First checks whether the unit has sufficient moveCount to move to the destination. Returns false if that's the case.
      */
     public boolean isLegalMove(Position from, Position to) {
+        if (getUnitAt(from).getTypeString() != GameConstants.BOMB){
         if (tileIsNotLegal(to)) {
             return false;
+        }
         }
         if (playerInTurnIsNotOwnerOfUnit(from)) {
             return false;
@@ -251,6 +253,10 @@ public class GameImpl implements Game {
             for (int j = 0; j < GameConstants.WORLDSIZE; j++) {
                 if (unitIsNotNull(new Position(i, j))) {
                     getUnitAt(new Position(i, j)).setMoveCount(1);
+                    //TODO This should be refactored so that we are able to retrieve the initial movecount for all units somewhere and update units value to that
+                    if (getUnitAt(new Position(i,j)).getTypeString() == GameConstants.BOMB){
+                        getUnitAt(new Position(i,j)).setMoveCount(2);
+                    }
                 }
             }
         }
@@ -302,7 +308,7 @@ public class GameImpl implements Game {
     }
 
     private void addTreasury(Position p) {
-        getCityAt(p).addTreasury(-GameConstants.UNIT_COST);
+        getCityAt(p).addTreasury(-getUnitCost(getCityAt(p).getProduction()));
     }
 
 

@@ -44,8 +44,9 @@ public class GameConstants {
     public static final String LEGION = "legion";
     public static final String SETTLER = "settler";
     public static final String BOMB = "bomb";
-    // Unit Cost
-    public static final int UNIT_COST = 10;
+    // Unit Costs
+    public static final int ARCHER_COST = 10;
+    public static final int BOMB_COST = 60;
     // Fixed Production
     public static final int PRODUCTION_FIXED6 = 6;
     // Valid terrain types

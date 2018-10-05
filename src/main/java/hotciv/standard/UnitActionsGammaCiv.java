@@ -54,6 +54,11 @@ public class UnitActionsGammaCiv implements UnitActions {
         return true;
     }
 
+    @Override
+    public boolean performBombActionAt(Position performPosition) {
+        return false;
+    }
+
 
     @Override
     public void performAction(Position p) {
@@ -66,6 +71,7 @@ public class UnitActionsGammaCiv implements UnitActions {
                     performSettlerActionAt(p);
                     break;
                 default:
+                    break;
             }
         }
     }

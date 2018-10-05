@@ -101,3 +101,9 @@ Test-list for TDD Iteration 1
 [X] Attack is handled by EpsilonCiv
 [X] City Workforce focus and population increase. As specified in EtaCiv
 ==================== THETA CIV ===================================================
+[X] Refactor UnitCost to be of type hashmap that holds key price and entry String unitType
+[X] added functionality to create individual units in UnitImpl where archer, settler and legion still are similar, but bombs are different.
+[X] Make it so Bombs ignore oceans and mountains when moving - implemented by making only standard units (NOT BOMB) respect the mountain and ocean tiles
+[X] make it so bombs have proper resetmovecount to 2 after end of round.
+[X] Implemented all requirements for ThetaCiv, Using parametric design for the bomb variants in gameImpl and using a state pattern for the performAction method making
+a delegate UnitActionsThetaCiv that combines behavior of gamma and adds newly Theta unique behaviour to it.

@@ -9,6 +9,7 @@ public interface UnitActions {
     public boolean performSettlerActionAt(Position performPosition);
 
     public boolean performArcherFortifyActionAt(Position performPosition);
+    public boolean performBombActionAt(Position performPosition);
 
     public void performAction(Position performActionAt);
 

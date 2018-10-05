@@ -701,6 +701,17 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(1,1)).getTypeString(), is(GameConstants.BOMB));
         assertThat(game.getUnitAt(new Position(1,1)).getMoveCount(), is(2));
    }
+   @Test
+   public void shouldBeAbleToProduceBombs(){
+       game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.BOMB);
+       game.endOfTurn();
+       game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.BOMB);
+       for (int i=0; i<20; i++){
+           game.endOfTurn();
+       }
+
+       assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION).getTypeString(), is(GameConstants.BOMB));
+   }
 
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values

@@ -20,6 +20,12 @@ public class UnitActionsAlphaCiv implements UnitActions {
     }
 
     @Override
+    public boolean performBombActionAt(Position performPosition) {
+
+        return false;
+    }
+
+    @Override
     public void performAction(Position performActionAt) {
     }
 }
