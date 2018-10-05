@@ -21,6 +21,8 @@ public class TestSemiCiv {
     @Test
     public void shouldIntegrateBetaCivWorldAgeingCorrectly() {
         assertThat(game.getAge(), is(GameConstants.STARTING_AGE));
+        game.changeProductionInCityAt(new Position(8,12), GameConstants.ARCHER);
+        game.changeProductionInCityAt(new Position(4, 5), GameConstants.ARCHER);
         for (int i = 0; i < 78; i++) {
             game.endOfTurn();
         }
@@ -66,6 +68,8 @@ public class TestSemiCiv {
     @Test
     public void shouldIntegrateTheEpsilonCivWinningConditionProperlyAndNotAlphaCiv() {
         assertThat(game.getAge(), is(GameConstants.STARTING_AGE));
+        game.changeProductionInCityAt(new Position(8,12), GameConstants.ARCHER);
+        game.changeProductionInCityAt(new Position(4, 5), GameConstants.ARCHER);
         for(int i = 0; i<20; i++) {
             game.endOfTurn();
         }

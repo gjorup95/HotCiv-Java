@@ -485,7 +485,7 @@ public class TestAlphaCiv {
 
     @Test
     public void redShouldNotBeAbleToSpawnUnitsOnOceanTile() {
-        game.changeProductionInCityAt();
+
         assertThat(game.getUnitAt(new Position(2, 1)), is(nullValue()));
         assertThat(game.getUnitAt(new Position(0, 0)), is(nullValue()));
         assertThat(game.getTileAt(new Position(1, 0)).getTypeString(), is(GameConstants.OCEANS));
