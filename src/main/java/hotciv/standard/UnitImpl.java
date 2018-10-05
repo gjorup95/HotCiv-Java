@@ -1,15 +1,18 @@
 package hotciv.standard;
-
+import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 import hotciv.framework.Unit;
+
+import static hotciv.framework.GameConstants.ARCHER;
+import static hotciv.framework.GameConstants.BOMB;
 
 /**
  * @ author Troels Gjørup
  * 31-08-2018
  */
 public class UnitImpl implements Unit {
-    private final String unitType;
-    private final Player owner;
+    private String unitType;
+    private Player owner;
     private int moveCount;
     private int defensiveStrength;
     private boolean actionUsed;
@@ -23,8 +26,12 @@ public class UnitImpl implements Unit {
         actionUsed = false;
         moveCount = 1;
         attackingStrength =1;
+        if (s == BOMB){
+            attackingStrength =0;
+            defensiveStrength = 1;
+            moveCount = 2;
+        }
     }
-
     @Override
     public String getTypeString() {
         return unitType;

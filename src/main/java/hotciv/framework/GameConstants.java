@@ -43,6 +43,7 @@ public class GameConstants {
     public static final String ARCHER = "archer";
     public static final String LEGION = "legion";
     public static final String SETTLER = "settler";
+    public static final String BOMB = "bomb";
     // Unit Cost
     public static final int UNIT_COST = 10;
     // Fixed Production

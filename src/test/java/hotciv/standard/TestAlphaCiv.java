@@ -485,6 +485,7 @@ public class TestAlphaCiv {
 
     @Test
     public void redShouldNotBeAbleToSpawnUnitsOnOceanTile() {
+        game.changeProductionInCityAt();
         assertThat(game.getUnitAt(new Position(2, 1)), is(nullValue()));
         assertThat(game.getUnitAt(new Position(0, 0)), is(nullValue()));
         assertThat(game.getTileAt(new Position(1, 0)).getTypeString(), is(GameConstants.OCEANS));
@@ -657,6 +658,12 @@ public class TestAlphaCiv {
         UnitActionsAlphaCiv unitActions = new UnitActionsAlphaCiv();
         assertThat(unitActions.performArcherFortifyActionAt(new Position(1,1)), is(false));
     }
+   @Test
+   public void constructorForUnitsShouldBeAbleToCreateAUniqueBomb(){
+        game.addUnit(new Position(1,1),GameConstants.BOMB, game.getPlayer(GameConstants.RED));
+        assertThat(game.getUnitAt(new Position(1,1)).getTypeString(), is(GameConstants.BOMB));
+        assertThat(game.getUnitAt(new Position(1,1)).getMoveCount(), is(2));
+   }
 
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values

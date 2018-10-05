@@ -28,6 +28,7 @@ public class GameImpl implements Game {
     Map<Position, CityImpl> cityMap = new HashMap<>();
     Map<Position, UnitImpl> unitMap = new HashMap<>();
     // Map for Players
+    public final Map<String, Integer> unitPriceList = new HashMap<>();
     Map<Integer, Player> playerMap = new TreeMap<>();
 
     /**
@@ -36,6 +37,10 @@ public class GameImpl implements Game {
 
     public GameImpl(Factory factory) {
         //TODO This should be refactored with a strategy patteren for the variablity of x number of players.
+        unitPriceList.put(GameConstants.ARCHER, 10);
+        unitPriceList.put(GameConstants.LEGION, 10);
+        unitPriceList.put(GameConstants.SETTLER, 10);
+        unitPriceList.put(GameConstants.BOMB, 60);
         playerMap.put(GameConstants.RED, new Player("RED"));
         playerMap.put(GameConstants.BLUE, new Player("BLUE"));
         this.factory = factory;
@@ -53,7 +58,9 @@ public class GameImpl implements Game {
     /**
      * ====== ACCESOR METHODS ===========================================
      */
-
+    public int getUnitCost(String unitType){
+        return unitPriceList.get(unitType);
+    }
     public int getNoOfRounds() {
         return noOfRounds;
     }
@@ -216,7 +223,7 @@ public class GameImpl implements Game {
         for (int i = 0; i < GameConstants.WORLDSIZE; i++)
             for (int j = 0; j < GameConstants.WORLDSIZE; j++)
                 if (cityIsNotNull(new Position(i, j))) {
-                    if (getCityAt(new Position(i, j)).getTreasury() >= GameConstants.UNIT_COST) {
+                    if (getCityAt(new Position(i, j)).getTreasury() >= getUnitCost(getCityAt(new Position(i,j)).getProduction())) {
                         placeUnitsForProduction(new UnitImpl(getCityAt(new Position(i, j)).getProduction(), (getCityAt(new Position(i, j)).getOwner())), new Position(i, j));
                         addTreasury(new Position(i, j));
                     }
