@@ -1,6 +1,7 @@
 package hotciv.standard;
 
 import hotciv.framework.GameConstants;
+import hotciv.framework.Player;
 import hotciv.framework.Position;
 
 import static org.junit.Assert.*;
@@ -51,15 +52,18 @@ public class TestZetaCiv {
 
     @Test
     public void shouldNotBeBetaCivWinningConditionIfAfter20Round() {
-        for (int i = 0; i < 42; i++) {
+        game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.LEGION);
+        for (int i = 0; i < 41; i++) {
             game.endOfTurn();
         }
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 0));
         game.endOfTurn();
         game.endOfTurn();
+        assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION).getTypeString(), is(GameConstants.LEGION));
         game.moveUnit(new Position(3, 0), GameConstants.BLUE_CITY_POSITION);
-        assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION).getTypeString(), is(GameConstants.ARCHER));
-        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getUnitAt(new Position(4,1)), is(notNullValue()));
+        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
         assertThat(game.getWinner(), is(nullValue()));
     }
 
@@ -84,5 +88,33 @@ public class TestZetaCiv {
         game.incrementCurrentPlayersAttackBattlesWon(2);
         assertThat(game.getWinner(), is(nullValue()));
     }
+
+    @Test
+    public void shouldBeEpsilonCivAttackingStratAfter20Rounds() {
+        game.incrementCurrentPlayersAttackBattlesWon(3);
+        for (int i = 0; i < 50; i++) {
+            game.endOfTurn();
+        }
+        // red units
+        game.addUnit(new Position(5, 1), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
+        game.addUnit(new Position(6, 1), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
+        game.addUnit(new Position(5, 3), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
+        game.addUnit(new Position(6, 3), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
+        game.addUnit(new Position(6, 2), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
+        // blue units
+        game.addUnit(new Position(5, 2), GameConstants.LEGION, game.getPlayer(GameConstants.BLUE));
+        int redWins = 0;
+        int blueWins = 0;
+        for (int i = 0; i < 10000; i++) {
+            if (game.attackResult(new Position(6, 2), new Position(5, 2)) > 0) {
+                redWins += 1;
+            } else {
+                blueWins += 1;
+            }
+        }
+        assertThat(redWins > blueWins, is(true));
+        assertThat(redWins > 75, is(true));
+    }
 }
+
 

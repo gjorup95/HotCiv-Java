@@ -25,7 +25,7 @@ public class ZetaCivFactory implements Factory {
 
     @Override
     public AttackingStrat createAttackingStrat(GameImpl game) {
-        return new AttackingStratAlphaCiv();
+        return new AttackingStratAlternating(new AttackingStratAlphaCiv(), new AttackingStratEpsilonCiv(game, new RandomAttackCalculationStrat()), game);
     }
 
     @Override
