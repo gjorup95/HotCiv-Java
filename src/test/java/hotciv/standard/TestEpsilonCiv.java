@@ -215,6 +215,17 @@ public class TestEpsilonCiv {
 
 
     }
+    @Test
+    public void shouldBeAbleToAttackEmptyTiles(){
+        game = new GameImpl(new TestFactoryEpsilon());
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3,0));
+        game.endOfTurn();
+        game.endOfTurn();
+        assertThat(game.getUnitAt(new Position(3,0)), is(notNullValue()));
+        game.moveUnit((new Position(3,0)), GameConstants.BLUE_CITY_POSITION);
+        assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION), is(notNullValue()));
+        assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION).getTypeString(), is(GameConstants.ARCHER));
+    }
 }
 
 

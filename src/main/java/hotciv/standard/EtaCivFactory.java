@@ -34,6 +34,6 @@ public class EtaCivFactory implements Factory {
 
     @Override
     public CityHandlingStrategy createCityHandlingStrategy(GameImpl game) {
-        return new CityHandlingStrategyEtaCiv();
+        return new CityHandlingStrategyEtaCiv(game);
     }
 }

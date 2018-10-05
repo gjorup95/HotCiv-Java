@@ -251,7 +251,9 @@ public class GameImpl implements Game {
 
     public void changeWorkForceFocusInCityAt(Position p, String balance) {
     }
-
+    public int calculateWorkforceProduction(Position city){
+        return cityHandlingStrategy.calculateWorkforceProduction(city);
+    }
     public void changeProductionInCityAt(Position p, String unitType) {
         getCityAt(p).setUnitProductionFocus(unitType);
     }

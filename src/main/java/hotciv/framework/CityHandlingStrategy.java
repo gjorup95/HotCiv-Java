@@ -5,8 +5,8 @@ package hotciv.framework;
  * 03-10-2018
  */
 public interface CityHandlingStrategy {
-public int calculateWorkforceProduction();
-public int calculateWorkforceFood();
-public int calculateCityGrowth();
+public int calculateWorkforceProduction(Position city);
+public int calculateWorkforceFood(Position city);
+public int calculateCityGrowth(Position city);
 
 }

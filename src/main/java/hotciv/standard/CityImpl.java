@@ -13,6 +13,7 @@ public class CityImpl implements City {
     private int cityTreasure;
     private int population;
     private String unitProductionFocus;
+    private String workforceFocus;
 
 
     public CityImpl(Player owner) {
@@ -42,7 +43,7 @@ public class CityImpl implements City {
 
     @Override
     public String getWorkforceFocus() {
-        return null;
+        return workforceFocus;
     }
 
     public void setUnitProductionFocus(String unitFocus) {
@@ -55,5 +56,12 @@ public class CityImpl implements City {
 
     public void setOwner(Player owner) {
         this.owner = owner;
+    }
+
+    public void setWorkforceFocus(String workforceFocus) {
+        this.workforceFocus = workforceFocus;
+    }
+    public void setPopulation(int newPopulation){
+        this.population = newPopulation;
     }
 }
