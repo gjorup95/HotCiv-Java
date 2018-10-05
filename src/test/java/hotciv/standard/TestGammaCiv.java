@@ -53,6 +53,10 @@ public class TestGammaCiv {
         assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getOwner(), is(game.getPlayer(GameConstants.RED)));
         game.moveUnit(GameConstants.SETTLER_POSITION_RED, new Position(4, 2));
         assertThat(game.getUnitAt(new Position(4, 2)).getTypeString(), is(gameConstants.SETTLER));
+
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
+
         game.endOfTurn();
         game.endOfTurn();
         game.moveUnit(new Position(4, 2), gameConstants.BLUE_CITY_POSITION);

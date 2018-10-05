@@ -24,6 +24,8 @@ public class TestZetaCiv {
 
     @Test
     public void isBefore20RoundsShouldReturnTrueOnThe20Round() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         for (int i = 0; i < 40; i++) {
             game.endOfTurn();
         }
@@ -32,6 +34,8 @@ public class TestZetaCiv {
 
     @Test
     public void isBefore20RoundsShouldReturnFalseAfterThe20Round() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         for (int i = 0; i < 42; i++) {
             game.endOfTurn();
         }
@@ -41,8 +45,10 @@ public class TestZetaCiv {
     @Test
     public void shouldBeBetaCivWinningConditionIfBefore20Round() {
         // Moves the redArcher to attack the blueCity and by that winning the game.
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 0));
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.moveUnit(new Position(3, 0), GameConstants.BLUE_CITY_POSITION);
         assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION).getTypeString(), is(GameConstants.ARCHER));
@@ -53,6 +59,8 @@ public class TestZetaCiv {
     @Test
     public void shouldNotBeBetaCivWinningConditionIfAfter20Round() {
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.LEGION);
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.LEGION);
         for (int i = 0; i < 41; i++) {
             game.endOfTurn();
@@ -69,6 +77,8 @@ public class TestZetaCiv {
 
     @Test
     public void shouldBeEpsilonCivWinningConditionAfter20Round() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.incrementCurrentPlayersAttackBattlesWon(3);
         for (int i = 0; i < 40; i++) {
             game.endOfTurn();
@@ -82,6 +92,8 @@ public class TestZetaCiv {
 
     @Test
     public void shouldBeEpsilonCivWinningConditionAfter20RoundsButOnlyIfTheRequirementsAreMet() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         for (int i = 0; i < 42; i++) {
             game.endOfTurn();
         }
@@ -91,6 +103,8 @@ public class TestZetaCiv {
 
     @Test
     public void shouldBeEpsilonCivAttackingStratAfter20Rounds() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.incrementCurrentPlayersAttackBattlesWon(3);
         for (int i = 0; i < 50; i++) {
             game.endOfTurn();
