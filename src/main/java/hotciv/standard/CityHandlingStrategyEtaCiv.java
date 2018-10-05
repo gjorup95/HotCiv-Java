@@ -20,7 +20,7 @@ public class CityHandlingStrategyEtaCiv implements CityHandlingStrategy {
 
     @Override
     public int calculateWorkforceProduction(Position city) {
-        HashMap<Position, Boolean> citizenMap = new HashMap<>();
+      /*  HashMap<Position, Boolean> citizenMap = new HashMap<>();
         int cityPopulation = game.getCityAt(city).getSize();
         int production = 0;
         int placedUnits = 0;
@@ -35,6 +35,7 @@ public class CityHandlingStrategyEtaCiv implements CityHandlingStrategy {
                 if (game.getTileAt(p).getTypeString() == GameConstants.MOUNTAINS && citizenMap.get(p) == null) {
                     mostValuableTile = p;
                     citizenMap.put(mostValuableTile, true);
+                    break;
                 }
 
                /* if (game.getTileAt(p).getTypeString() == GameConstants.MOUNTAINS && citizenMap.get(p)== null){
@@ -55,10 +56,10 @@ public class CityHandlingStrategyEtaCiv implements CityHandlingStrategy {
                         break;
                     }
                 }
-            */
+
             }
         }
-        return production;
+       */ return 0;
     }
 
 
