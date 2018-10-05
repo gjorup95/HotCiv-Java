@@ -23,6 +23,8 @@ public class TestBetaCiv {
     public void gameShouldProperlyTestBetaImplementation() {
         assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         for (int i = 0; i < 20; i++) {
             game.endOfTurn();
         }
@@ -33,6 +35,8 @@ public class TestBetaCiv {
     @Test
     public void redShouldBeAbleToConquerBlueCity() {
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
         game.moveUnit(new Position(3, 1), GameConstants.BLUE_CITY_POSITION);
@@ -43,6 +47,8 @@ public class TestBetaCiv {
 
     @Test
     public void blueShouldBeAbleToConquerRedCity() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.moveUnit(GameConstants.LEGION_POSITION_BLUE, new Position(2, 1));
         assertThat(game.getUnitAt(new Position(2, 1)).getTypeString(), is(GameConstants.LEGION));
@@ -56,6 +62,8 @@ public class TestBetaCiv {
     @Test
     public void redShouldWinAfterConqueringAllCities() {
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
         game.moveUnit(new Position(3, 1), GameConstants.BLUE_CITY_POSITION);
@@ -65,6 +73,8 @@ public class TestBetaCiv {
     }
     @Test
     public void blueShouldWinAfterConqueringAllCities() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.moveUnit(GameConstants.LEGION_POSITION_BLUE, new Position(2, 1));
         assertThat(game.getUnitAt(new Position(2, 1)).getTypeString(), is(GameConstants.LEGION));
@@ -78,6 +88,8 @@ public class TestBetaCiv {
 
     @Test
     public void betweenYear4000And100BCAgeShouldIncrementWith100() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         assertThat(game.getAge(), is(GameConstants.STARTING_AGE));
         game.endOfTurn();
         game.endOfTurn();
@@ -87,6 +99,8 @@ public class TestBetaCiv {
     @Test
     public void after78EndOfTurnsShouldBe100BC() {
         assertThat(game.getAge(), is(GameConstants.STARTING_AGE));
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         for (int i = 0; i < 78; i++) {
             game.endOfTurn();
         }
@@ -95,6 +109,8 @@ public class TestBetaCiv {
 
     @Test
     public void untilAge100BCAgeShouldIncrementBy100Years() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         assertThat(game.getAge(), is(GameConstants.STARTING_AGE));
         for (int i = 0; i < 78; i++) {
             game.endOfTurn();
@@ -105,6 +121,8 @@ public class TestBetaCiv {
 
     @Test
     public void atAge100BCShouldincrementYearwith99() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         for (int i = 0; i < 80; i++) {
             game.endOfTurn();
         }
@@ -113,6 +131,8 @@ public class TestBetaCiv {
 
     @Test
     public void atAge1BCShouldIncrementWith2Years() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         for (int i = 0; i < 82; i++) {
             game.endOfTurn();
         }
@@ -121,6 +141,8 @@ public class TestBetaCiv {
 
     @Test
     public void atAge1ShouldIncrementWith49() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         for (int i = 0; i < 84; i++) {
             game.endOfTurn();
         }
@@ -129,6 +151,8 @@ public class TestBetaCiv {
 
     @Test
     public void atAge50ShouldIncrementYearWith50() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         for (int i = 0; i < 86; i++) {
             game.endOfTurn();
         }
@@ -137,6 +161,8 @@ public class TestBetaCiv {
 
     @Test
     public void atAge1750ShouldIncrementWith25Years() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         for (int i = 0; i < 154; i++) {
             game.endOfTurn();
         }
@@ -145,6 +171,8 @@ public class TestBetaCiv {
 
     @Test
     public void atAge1900ShouldIncrementWith5Years() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         for (int i = 0; i < 166; i++) {
             game.endOfTurn();
         }
@@ -153,6 +181,8 @@ public class TestBetaCiv {
 
     @Test
     public void after1970ShouldIncrementWith1Year() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         for (int i = 0; i < 194; i++) {
             game.endOfTurn();
         }
