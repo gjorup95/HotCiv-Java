@@ -78,7 +78,9 @@ public class TestAlphaCiv {
 
     @Test
     public void ageShouldIncrementWith100AtEndOfTurn() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         assertEquals(-3900, game.getAge());
         game.endOfTurn();
@@ -125,7 +127,9 @@ public class TestAlphaCiv {
     @Test
     public void shouldHave6ProductionAtEndTurnRedCity() {
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(0));
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(6));
     }
@@ -133,7 +137,9 @@ public class TestAlphaCiv {
     @Test
     public void shouldHave2ProductionAfterTwoEndTurnRedCity() {
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(0));
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
@@ -143,7 +149,9 @@ public class TestAlphaCiv {
     @Test
     public void shouldHave6ProductionAtEndTurnBlueCity() {
         assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getTreasury(), is(0));
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getTreasury(), is(6));
     }
@@ -151,7 +159,9 @@ public class TestAlphaCiv {
     @Test
     public void shouldHave4ProductionAfter4EndTurnsBlue() {
         assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getTreasury(), is(0));
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
@@ -237,8 +247,11 @@ public class TestAlphaCiv {
     @Test
     public void shouldBeRedPlayerWinningIn3000BC() {
         assertThat(game.getAge(), is(-4000));
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.LEGION);
+        game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.LEGION);
         // for loop that decrements the worldAge by 500 years by calling endOfTurn() five times
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 9; i++) {
             game.endOfTurn();
         }
         assertThat(game.getWinner(), is(not(game.getPlayer(GameConstants.RED))));
@@ -307,6 +320,7 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION), is(nullValue()));
         game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
@@ -319,8 +333,9 @@ public class TestAlphaCiv {
     public void shouldProduceOneArcherUnitAfterTwoEndOfRoundForPlayerBlueAt4_1() {
         assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getTreasury(), is(0));
         assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION), is(nullValue()));
-        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
@@ -335,6 +350,7 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION), is(nullValue()));
         game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.LEGION);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.LEGION);
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
@@ -348,6 +364,7 @@ public class TestAlphaCiv {
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(0));
         game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(6));
         game.endOfTurn();
@@ -365,7 +382,9 @@ public class TestAlphaCiv {
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
         assertThat(game.getUnitAt(new Position(3, 1)).getTypeString(), is(GameConstants.ARCHER));
         // Needs endOfRound to reset Red Players moveCount
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.moveUnit(new Position(3, 1), GameConstants.LEGION_POSITION_BLUE);
         // checking that the red unit moved from its original position
@@ -376,7 +395,9 @@ public class TestAlphaCiv {
 
     @Test
     public void shouldHaveBlueUnitsDestroyingRedUnitsWhenAttacking() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         // moving the blue legion unit closer to the red archer unit
         game.moveUnit(GameConstants.LEGION_POSITION_BLUE, new Position(3, 1));
         assertThat(game.getUnitAt(new Position(3, 1)).getTypeString(), is(GameConstants.LEGION));
@@ -394,6 +415,7 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION), is(nullValue()));
         game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
@@ -414,7 +436,9 @@ public class TestAlphaCiv {
     @Test
     public void redShouldAlwaysProduceUnitOnCityTileIfPossible() {
         assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION), is(nullValue()));
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
@@ -425,7 +449,9 @@ public class TestAlphaCiv {
     @Test
     public void blueShouldAlwaysProduceUnitOnCityTileIfPossible() {
         assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION), is(nullValue()));
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
@@ -435,7 +461,9 @@ public class TestAlphaCiv {
 
     @Test
     public void blueShouldAlwaysProduceUnitNorthOfCityTileIfItIsOccupiedByAUnit() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
@@ -448,8 +476,10 @@ public class TestAlphaCiv {
 
     @Test
     public void redShouldNotBeAbleToSpawnUnitsOnMountains() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION), is(nullValue()));
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.endOfTurn();
         game.endOfTurn();
@@ -485,12 +515,14 @@ public class TestAlphaCiv {
 
     @Test
     public void redShouldNotBeAbleToSpawnUnitsOnOceanTile() {
-        game.changeProductionInCityAt();
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
+        game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         assertThat(game.getUnitAt(new Position(2, 1)), is(nullValue()));
         assertThat(game.getUnitAt(new Position(0, 0)), is(nullValue()));
         assertThat(game.getTileAt(new Position(1, 0)).getTypeString(), is(GameConstants.OCEANS));
         // After 10 endOfRounds the redCity should have accumulated enough production to produce 2 archerUnits
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 19; i++) {
             game.endOfTurn();
         }
         assertThat(game.getUnitAt(GameConstants.OCEAN_POSITION), is(nullValue()));
@@ -511,6 +543,7 @@ public class TestAlphaCiv {
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(0));
         game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(6));
         assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION), is(nullValue()));
@@ -540,8 +573,10 @@ public class TestAlphaCiv {
 
     @Test
     public void unitsShouldHaveTheirMoveCountResetAfterEndOfRound() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(2, 1));
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         assertThat(game.getUnitAt(new Position(2, 1)).getMoveCount(), is(1));
 
@@ -549,8 +584,10 @@ public class TestAlphaCiv {
 
     @Test
     public void shouldNotBePossibleToConquerCitiesInAlphaCiv() {
+        game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 1));
         game.endOfTurn();
+        game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         game.endOfTurn();
         game.moveUnit(new Position(3, 1), GameConstants.BLUE_CITY_POSITION);
         assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION), is(notNullValue()));
