@@ -30,6 +30,6 @@ public class SemiCivFactory implements Factory {
 
     @Override
     public CityHandlingStrategy createCityHandlingStrategy(GameImpl game) {
-        return new CityHandlingStrategyEtaCiv(game);
+        return new CityHandlingStrategyAlphaCiv();
     }
 }
