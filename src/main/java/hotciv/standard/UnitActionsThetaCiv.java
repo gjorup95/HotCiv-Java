@@ -46,7 +46,6 @@ public class UnitActionsThetaCiv implements UnitActions {
 
     @Override
     public void performAction(Position performActionAt) {
-        // todo: IS THERE A BETTER WAY TO Implement this reducing code duplicity?
         if (game.getUnitAt(performActionAt) != null) {
             switch (game.getUnitAt(performActionAt).getTypeString()) {
                 case GameConstants.BOMB:
