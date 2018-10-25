@@ -58,9 +58,10 @@ public class GameImpl implements Game {
     /**
      * ====== ACCESOR METHODS ===========================================
      */
-    public int getUnitCost(String unitType){
+    public int getUnitCost(String unitType) {
         return unitPriceList.get(unitType);
     }
+
     public int getNoOfRounds() {
         return noOfRounds;
     }
@@ -106,6 +107,7 @@ public class GameImpl implements Game {
     }
 
 
+
     /**
      * ====== MUTATOR METHODS ===========================================
      */
@@ -123,7 +125,11 @@ public class GameImpl implements Game {
     public void addUnit(Position placeUnitAt, String unitType, Player owner) {
         unitMap.put(placeUnitAt, new UnitImpl(unitType, owner));
     }
-    public void removeCity(Position p){cityMap.remove(p);}
+
+    public void removeCity(Position p) {
+        cityMap.remove(p);
+    }
+
     public void removeUnit(Position p) {
         unitMap.remove(p);
     }
@@ -158,10 +164,10 @@ public class GameImpl implements Game {
      * First checks whether the unit has sufficient moveCount to move to the destination. Returns false if that's the case.
      */
     public boolean isLegalMove(Position from, Position to) {
-        if (getUnitAt(from).getTypeString() != GameConstants.BOMB){
-        if (tileIsNotLegal(to)) {
-            return false;
-        }
+        if (getUnitAt(from).getTypeString() != GameConstants.BOMB) {
+            if (tileIsNotLegal(to)) {
+                return false;
+            }
         }
         if (playerInTurnIsNotOwnerOfUnit(from)) {
             return false;
@@ -225,7 +231,7 @@ public class GameImpl implements Game {
         for (int i = 0; i < GameConstants.WORLDSIZE; i++)
             for (int j = 0; j < GameConstants.WORLDSIZE; j++)
                 if (cityIsNotNull(new Position(i, j))) {
-                    if (getCityAt(new Position(i, j)).getTreasury() >= getUnitCost(getCityAt(new Position(i,j)).getProduction())) {
+                    if (getCityAt(new Position(i, j)).getTreasury() >= getUnitCost(getCityAt(new Position(i, j)).getProduction())) {
                         placeUnitsForProduction(new UnitImpl(getCityAt(new Position(i, j)).getProduction(), (getCityAt(new Position(i, j)).getOwner())), new Position(i, j));
                         addTreasury(new Position(i, j));
                     }
@@ -254,8 +260,8 @@ public class GameImpl implements Game {
                 if (unitIsNotNull(new Position(i, j))) {
                     getUnitAt(new Position(i, j)).setMoveCount(1);
                     //TODO This should be refactored so that we are able to retrieve the initial movecount for all units somewhere and update units value to that
-                    if (getUnitAt(new Position(i,j)).getTypeString() == GameConstants.BOMB){
-                        getUnitAt(new Position(i,j)).setMoveCount(2);
+                    if (getUnitAt(new Position(i, j)).getTypeString() == GameConstants.BOMB) {
+                        getUnitAt(new Position(i, j)).setMoveCount(2);
                     }
                 }
             }
@@ -264,9 +270,11 @@ public class GameImpl implements Game {
 
     public void changeWorkForceFocusInCityAt(Position p, String balance) {
     }
-    public int calculateWorkforceProduction(Position city){
+
+    public int calculateWorkforceProduction(Position city) {
         return cityHandlingStrategy.calculateWorkforceProduction(city);
     }
+
     public void changeProductionInCityAt(Position p, String unitType) {
         getCityAt(p).setUnitProductionFocus(unitType);
     }
@@ -341,5 +349,3 @@ public class GameImpl implements Game {
         return attackingStrat.attack(from, to);
     }
 }
-
-

@@ -713,6 +713,11 @@ public class TestAlphaCiv {
        assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION).getTypeString(), is(GameConstants.BOMB));
    }
 
+   @Test
+   public void test(){
+        assertThat(game.calculateLegalMove(new Position(-1,5), new Position(0,5)), is(true));
+   }
+
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values
         // 'is' require an exact match
