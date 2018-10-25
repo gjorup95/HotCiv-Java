@@ -715,6 +715,12 @@ public class TestAlphaCiv {
 
        assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION).getTypeString(), is(GameConstants.BOMB));
    }
+
+   @Test
+   public void test(){
+        assertThat(game.calculateLegalMove(new Position(-1,5), new Position(0,5)), is(true));
+   }
+
    @Test
    public void shouldBeAbleToMoveOnHills(){
         game.addUnit(new Position(0,0),GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
@@ -736,6 +742,7 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(4,0)), is(nullValue()));
         assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getTypeString(), is(GameConstants.ARCHER));
    }
+
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values
         // 'is' require an exact match
