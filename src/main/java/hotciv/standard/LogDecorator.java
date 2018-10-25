@@ -13,7 +13,6 @@ public class LogDecorator implements Game {
         this.game = game;
 
     }
-//TODO IMPLEMENT SWITCHING PATTERN FOR THE GAME TO EITHER USE LOGDECORATOR OR STANDARD GAME.
     @Override
     public Tile getTileAt(Position p) {
         return game.getTileAt(p);
