@@ -9,10 +9,11 @@ import hotciv.framework.*;
 public class LogDecorator implements Game {
     private Game game;
 
-    public LogDecorator(Game game) {
+    public LogDecorator(Game game){
         this.game = game;
-    }
 
+    }
+//TODO IMPLEMENT SWITCHING PATTERN FOR THE GAME TO EITHER USE LOGDECORATOR OR STANDARD GAME.
     @Override
     public Tile getTileAt(Position p) {
         return game.getTileAt(p);
