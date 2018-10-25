@@ -742,7 +742,7 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(4,0)), is(nullValue()));
         assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getTypeString(), is(GameConstants.ARCHER));
    }
->>>>>>> c5c7bb7159eaf2cb75039647dc6b9fb6c36d28bd
+
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values
         // 'is' require an exact match
