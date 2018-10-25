@@ -24,4 +24,8 @@ public class Player {
     public void resetAttackingBattlesWon() {
         attackingBattlesWon = 0;
     }
+
+    public String getColor() {
+        return Color;
+    }
 }

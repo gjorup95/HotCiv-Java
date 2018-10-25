@@ -274,6 +274,7 @@ public class TestAlphaCiv {
     @Test
     public void unitsShouldBeAbleToMoveFrom2_0TO3_0() {
         assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(3,0)), is(nullValue()));
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3, 0));
         assertThat(game.getUnitAt(new Position(3, 0)), is(notNullValue()));
     }
@@ -553,6 +554,8 @@ public class TestAlphaCiv {
     public void unitsShouldHaveMoveCount() {
         assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getMoveCount(), is(not(0)));
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getMoveCount(), is(not(0)));
+        assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getMoveCount(), is((1)));
+        assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getMoveCount(), is((1)));
     }
 
     @Test
@@ -718,6 +721,28 @@ public class TestAlphaCiv {
         assertThat(game.calculateLegalMove(new Position(-1,5), new Position(0,5)), is(true));
    }
 
+   @Test
+   public void shouldBeAbleToMoveOnHills(){
+        game.addUnit(new Position(0,0),GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
+        assertThat(game.getUnitAt(new Position(0,0)).getTypeString(), is(GameConstants.ARCHER));
+        game.moveUnit(new Position(0,0), GameConstants.HILLS_POSITION);
+        assertThat(game.getUnitAt(GameConstants.HILLS_POSITION).getTypeString(),is(GameConstants.ARCHER));
+   }
+   @Test
+   public void shouldNotBeAbleToMoveWhenMovecountIs0(){
+        game.getUnitAt(GameConstants.ARCHER_POSITION_RED).setMoveCount(0);
+        assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getMoveCount(), is(0));
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED,new Position(3,0));
+        assertThat(game.getUnitAt(new Position(3,0)), is(nullValue()));
+        assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getTypeString(),is(GameConstants.ARCHER));
+   }
+   @Test
+   public void shouldNotBeAbleToMove2TilesAtOnce(){
+        game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(4,0));
+        assertThat(game.getUnitAt(new Position(4,0)), is(nullValue()));
+        assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getTypeString(), is(GameConstants.ARCHER));
+   }
+>>>>>>> c5c7bb7159eaf2cb75039647dc6b9fb6c36d28bd
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values
         // 'is' require an exact match
