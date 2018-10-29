@@ -27,9 +27,4 @@ public class LoggerStateChangeable implements LoggerState {
 
     }
 
-    @Override
-    public Game returnLogDecorator() {
-        return game;
-    }
-
 }

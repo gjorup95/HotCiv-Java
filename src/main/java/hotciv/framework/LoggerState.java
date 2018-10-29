@@ -6,5 +6,4 @@ package hotciv.framework;
  */
 public interface LoggerState {
     public void setStateOfLogger();
-    public Game returnLogDecorator();
 }
