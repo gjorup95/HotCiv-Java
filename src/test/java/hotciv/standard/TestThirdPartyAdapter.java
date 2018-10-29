@@ -17,7 +17,6 @@ import static org.hamcrest.CoreMatchers.*;
  */
 public class TestThirdPartyAdapter {
     private GameImpl game;
-    private GameConstants gameConstants;
 
     @Before // Before is run before every @Test
     public void setUp() {

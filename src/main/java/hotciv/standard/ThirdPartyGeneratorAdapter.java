@@ -5,16 +5,13 @@ import hotciv.framework.Position;
 import hotciv.framework.WorldCreator;
 import thirdparty.ThirdPartyFractalGenerator;
 
-import java.util.ArrayList;
 
 public class ThirdPartyGeneratorAdapter implements WorldCreator {
-    private ThirdPartyFractalGenerator generator;
     private GameImpl game;
 
     public ThirdPartyGeneratorAdapter(GameImpl game) {
         this.game = game;
         ThirdPartyFractalGenerator generator = new ThirdPartyFractalGenerator();
-        char tileChar;
         String type = null;
 
         for (int r = 0; r < 16; r++) {
