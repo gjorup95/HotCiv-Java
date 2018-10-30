@@ -283,6 +283,16 @@ public class GameImpl implements Game {
         unitActions.performAction(p);
     }
 
+    @Override
+    public void addObserver(GameObserver observer) {
+
+    }
+
+    @Override
+    public void setTileFocus(Position position) {
+
+    }
+
     public boolean tileIsNotLegal(Position p) {
         if (getTileAt(p).getTypeString().equals(GameConstants.MOUNTAINS) || getTileAt(p).getTypeString().equals(GameConstants.OCEANS)) {
             return true;
