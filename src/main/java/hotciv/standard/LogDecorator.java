@@ -45,32 +45,32 @@ public class LogDecorator implements Game {
 
     @Override
     public boolean moveUnit(Position from, Position to) {
-        System.out.println(game.getPlayerInTurn().getColor() + " moves " + getUnitAt(from).getTypeString() + " from " + from + " to " + to + ".");
+        System.out.println(game.getPlayerInTurn() + " moves " + getUnitAt(from).getTypeString() + " from " + from + " to " + to + ".");
         return game.moveUnit(from, to);
     }
 
     @Override
     public void endOfTurn() {
-        System.out.println(game.getPlayerInTurn().getColor() + " ends turn.");
+        System.out.println(game.getPlayerInTurn() + " ends turn.");
         game.endOfTurn();
 
     }
 
     @Override
     public void changeWorkForceFocusInCityAt(Position p, String balance) {
-        System.out.println(game.getPlayerInTurn().getColor() + " changed the work focus in city at " + p + " to " + balance + ".");
+        System.out.println(game.getPlayerInTurn() + " changed the work focus in city at " + p + " to " + balance + ".");
         game.changeWorkForceFocusInCityAt(p, balance);
     }
 
     @Override
     public void changeProductionInCityAt(Position p, String unitType) {
-        System.out.println(game.getPlayerInTurn().getColor() + " changed production in city at " + p + " to " + unitType + ".");
+        System.out.println(game.getPlayerInTurn() + " changed production in city at " + p + " to " + unitType + ".");
         game.changeProductionInCityAt(p, unitType);
     }
 
     @Override
     public void performUnitActionAt(Position p) {
-        System.out.println(game.getPlayerInTurn().getColor() + " performed unit action at " + p + ".");
+        System.out.println(game.getPlayerInTurn() + " performed unit action at " + p + ".");
         game.performUnitActionAt(p);
     }
 

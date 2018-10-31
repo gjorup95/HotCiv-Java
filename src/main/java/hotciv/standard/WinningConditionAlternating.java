@@ -1,6 +1,5 @@
 package hotciv.standard;
 
-import hotciv.framework.AttackingStrat;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.framework.WinningCondition;

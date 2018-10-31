@@ -20,7 +20,7 @@ public class TestEtaCiv {
         game = new GameImpl(new EtaCivFactory());
         // Setting up a test fixture map for testing
         // Red city at 1,4
-        game.addCity(new Position(1,4), game.getPlayer(GameConstants.RED));
+        game.addCity(new Position(1,4), Player.RED);
         // Tiles
         game.addTile(new Position(0,4), GameConstants.PLAINS);
         game.addTile(new Position(0,5), GameConstants.MOUNTAINS);

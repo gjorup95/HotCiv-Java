@@ -30,16 +30,16 @@ public class TestGammaCiv {
     @Test
     public void redShouldBeAbleToPerformSettlerActionAt() {
         assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getTypeString(), is(GameConstants.SETTLER));
-        assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getOwner(), is(Player.RED));
         game.performUnitActionAt(GameConstants.SETTLER_POSITION_RED);
-        assertThat(game.getCityAt(GameConstants.SETTLER_POSITION_RED).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getCityAt(GameConstants.SETTLER_POSITION_RED).getOwner(), is(Player.RED));
         assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED), is(nullValue()));
     }
 
     @Test
     public void blueShouldNotBeAbleToPerformUnitActionsOnRedUnits() {
         assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getTypeString(), is(GameConstants.SETTLER));
-        assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getOwner(), is(Player.RED));
         game.endOfTurn();
         game.performUnitActionAt(GameConstants.SETTLER_POSITION_RED);
         assertThat(game.getCityAt(GameConstants.SETTLER_POSITION_RED), is(nullValue()));
@@ -50,7 +50,7 @@ public class TestGammaCiv {
     @Test
     public void shouldNotBeAbleToSpawnCitiesOnCities() {
         assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getTypeString(), is(GameConstants.SETTLER));
-        assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getOwner(), is(Player.RED));
         game.moveUnit(GameConstants.SETTLER_POSITION_RED, new Position(4, 2));
         assertThat(game.getUnitAt(new Position(4, 2)).getTypeString(), is(gameConstants.SETTLER));
 
@@ -63,14 +63,14 @@ public class TestGammaCiv {
         assertThat(game.getUnitAt(new Position(4, 1)).getTypeString(), is(gameConstants.SETTLER));
         assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION), is(notNullValue()));
         game.performUnitActionAt(GameConstants.BLUE_CITY_POSITION);
-        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
+        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
         assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION).getTypeString(), is(GameConstants.SETTLER));
     }
 
     @Test
     public void shouldRemoveSettlerProperlyAfterSpawnedCity() {
         assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getTypeString(), is(GameConstants.SETTLER));
-        assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getOwner(), is(Player.RED));
         game.performUnitActionAt(GameConstants.SETTLER_POSITION_RED);
         assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED), is(nullValue()));
     }
@@ -78,10 +78,10 @@ public class TestGammaCiv {
     @Test
     public void shouldSpawnCityWithProperAttributesAndOwner() {
         assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getTypeString(), is(GameConstants.SETTLER));
-        assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getUnitAt(GameConstants.SETTLER_POSITION_RED).getOwner(), is(Player.RED));
         game.performUnitActionAt(GameConstants.SETTLER_POSITION_RED);
         assertThat(game.getCityAt(GameConstants.SETTLER_POSITION_RED).getSize(), is(1));
-        assertThat(game.getCityAt(GameConstants.SETTLER_POSITION_RED).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getCityAt(GameConstants.SETTLER_POSITION_RED).getOwner(), is(Player.RED));
     }
 
     @Test
@@ -111,7 +111,7 @@ public class TestGammaCiv {
     @Test
     public void blueShouldNotBeAbleToApplyFortificationOnRedArcher() {
         game.endOfTurn();
-        assertThat(game.getPlayerInTurn(), is(game.getPlayer(GameConstants.BLUE)));
+        assertThat(game.getPlayerInTurn(), is(Player.BLUE));
         game.performUnitActionAt(GameConstants.ARCHER_POSITION_RED);
         assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getDefensiveStrength(), is(1));
         assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getMoveCount(), is(1));

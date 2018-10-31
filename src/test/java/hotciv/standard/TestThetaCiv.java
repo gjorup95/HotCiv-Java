@@ -20,7 +20,7 @@ public class TestThetaCiv {
     public void setUp() {
         game = new GameImpl(new ThetaCivFactory());
         // adding bomb unit i can use in my test cases at 5,1 for red player
-        game.addUnit(new Position(5,0), GameConstants.BOMB, game.getPlayer(GameConstants.RED));
+        game.addUnit(new Position(5,0), GameConstants.BOMB, Player.RED);
         // adding mountain and ocean tiles near the bomb placement. Mountain 4,0 and 5,1 Ocean
         game.addTile(new Position(4,0),GameConstants.MOUNTAINS);
         game.addTile(new Position(5,1), GameConstants.OCEANS);
@@ -59,7 +59,7 @@ public class TestThetaCiv {
     }
     @Test
     public void shouldProperlyImplementStatePattern(){
-        game.addUnit(new Position(8,0), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
+        game.addUnit(new Position(8,0), GameConstants.ARCHER, Player.RED);
         assertThat(game.getUnitAt(new  Position(8,0)).getDefensiveStrength(),is(1));
         game.performUnitActionAt(new Position(8,0));
         assertThat(game.getUnitAt(new Position(8,0)).getDefensiveStrength(), is(2));
@@ -68,11 +68,11 @@ public class TestThetaCiv {
     @Test
     public void bombShouldDestroyAllUnitsAroundItAndItself(){
         //adding units around the bomb
-        game.addUnit(new Position(4,0), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
-        game.addUnit(new Position(4,1), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
-        game.addUnit(new Position(5,1), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
-        game.addUnit(new Position(6,1), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
-        game.addUnit(new Position(6,0), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
+        game.addUnit(new Position(4,0), GameConstants.ARCHER, Player.RED);
+        game.addUnit(new Position(4,1), GameConstants.ARCHER, Player.RED);
+        game.addUnit(new Position(5,1), GameConstants.ARCHER, Player.RED);
+        game.addUnit(new Position(6,1), GameConstants.ARCHER, Player.RED);
+        game.addUnit(new Position(6,0), GameConstants.ARCHER, Player.RED);
         game.performUnitActionAt(new Position(5,0));
         for (Position p: Utility.get8neighborhoodOf(new Position(5,0))){
             assertThat(game.getUnitAt(p), is(nullValue()));
@@ -84,7 +84,7 @@ public class TestThetaCiv {
     public void bombShouldDestroyAdjacentCitiesIfPopulationIs1(){
         // Adding cities to adjacent tiles using iterator
         for (Position p: Utility.get8neighborhoodOf(new Position(5,0))){
-          game.addCity(p, game.getPlayer(GameConstants.RED));
+          game.addCity(p, Player.RED);
           assertThat(game.getCityAt(p), is(notNullValue()));
           assertThat(game.getCityAt(p).getSize(), is(1));
         }
@@ -96,8 +96,8 @@ public class TestThetaCiv {
     }
     @Test
     public void bombShouldDecrementPopulationAndDestroyCityIfBothAreApplicable(){
-        game.addCity(new Position(6,0), game.getPlayer(GameConstants.RED));
-        game.addCity(new Position(4,0), game.getPlayer(GameConstants.RED));
+        game.addCity(new Position(6,0), Player.RED);
+        game.addCity(new Position(4,0), Player.RED);
         game.getCityAt(new Position(4,0)).setPopulation(2);
         game.performUnitActionAt(new Position(5,0));
         assertThat(game.getCityAt(new Position(6,0)), is(nullValue()));

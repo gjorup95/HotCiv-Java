@@ -1,9 +1,7 @@
 package hotciv.standard;
-import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 import hotciv.framework.Unit;
 
-import static hotciv.framework.GameConstants.ARCHER;
 import static hotciv.framework.GameConstants.BOMB;
 
 /**

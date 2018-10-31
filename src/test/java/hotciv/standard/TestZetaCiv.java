@@ -52,8 +52,8 @@ public class TestZetaCiv {
         game.endOfTurn();
         game.moveUnit(new Position(3, 0), GameConstants.BLUE_CITY_POSITION);
         assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION).getTypeString(), is(GameConstants.ARCHER));
-        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.RED)));
-        assertThat(game.getWinner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.RED));
+        assertThat(game.getWinner(), is(Player.RED));
     }
 
     @Test
@@ -71,7 +71,7 @@ public class TestZetaCiv {
         assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION).getTypeString(), is(GameConstants.LEGION));
         game.moveUnit(new Position(3, 0), GameConstants.BLUE_CITY_POSITION);
         assertThat(game.getUnitAt(new Position(4,1)), is(notNullValue()));
-        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
+        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
         assertThat(game.getWinner(), is(nullValue()));
     }
 
@@ -87,7 +87,7 @@ public class TestZetaCiv {
         game.endOfTurn();
         game.getWinner();
         game.incrementCurrentPlayersAttackBattlesWon(3);
-        assertThat(game.getWinner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getWinner(), is(Player.RED));
     }
 
     @Test
@@ -110,13 +110,13 @@ public class TestZetaCiv {
             game.endOfTurn();
         }
         // red units
-        game.addUnit(new Position(5, 1), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
-        game.addUnit(new Position(6, 1), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
-        game.addUnit(new Position(5, 3), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
-        game.addUnit(new Position(6, 3), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
-        game.addUnit(new Position(6, 2), GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
+        game.addUnit(new Position(5, 1), GameConstants.ARCHER, Player.RED);
+        game.addUnit(new Position(6, 1), GameConstants.ARCHER, Player.RED);
+        game.addUnit(new Position(5, 3), GameConstants.ARCHER, Player.RED);
+        game.addUnit(new Position(6, 3), GameConstants.ARCHER, Player.RED);
+        game.addUnit(new Position(6, 2), GameConstants.ARCHER, Player.RED);
         // blue units
-        game.addUnit(new Position(5, 2), GameConstants.LEGION, game.getPlayer(GameConstants.BLUE));
+        game.addUnit(new Position(5, 2), GameConstants.LEGION, Player.BLUE);
         int redWins = 0;
         int blueWins = 0;
         for (int i = 0; i < 10000; i++) {

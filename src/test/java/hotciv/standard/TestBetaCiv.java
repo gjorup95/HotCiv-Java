@@ -21,8 +21,8 @@ public class TestBetaCiv {
 
     @Test
     public void gameShouldProperlyTestBetaImplementation() {
-        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
-        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
+        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED));
         game.changeProductionInCityAt(GameConstants.RED_CITY_POSITION, GameConstants.ARCHER);
         game.changeProductionInCityAt(GameConstants.BLUE_CITY_POSITION, GameConstants.ARCHER);
         for (int i = 0; i < 20; i++) {
@@ -41,7 +41,7 @@ public class TestBetaCiv {
         game.endOfTurn();
         game.moveUnit(new Position(3, 1), GameConstants.BLUE_CITY_POSITION);
         assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION), is(notNullValue()));
-        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.RED));
 
     }
 
@@ -55,7 +55,7 @@ public class TestBetaCiv {
         game.endOfTurn();
         game.endOfTurn();
         game.moveUnit(new Position(2, 1), GameConstants.RED_CITY_POSITION);
-        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
+        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner(), is(Player.BLUE));
 
     }
 
@@ -67,9 +67,9 @@ public class TestBetaCiv {
         game.endOfTurn();
         game.endOfTurn();
         game.moveUnit(new Position(3, 1), GameConstants.BLUE_CITY_POSITION);
-        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.RED)));
-        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.RED)));
-        assertThat(game.getWinner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.RED));
+        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED));
+        assertThat(game.getWinner(), is(Player.RED));
     }
     @Test
     public void blueShouldWinAfterConqueringAllCities() {
@@ -81,9 +81,9 @@ public class TestBetaCiv {
         game.endOfTurn();
         game.endOfTurn();
         game.moveUnit(new Position(2, 1), GameConstants.RED_CITY_POSITION);
-        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
-        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
-        assertThat(game.getWinner(), is(game.getPlayer(GameConstants.BLUE)));
+        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner(), is(Player.BLUE));
+        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
+        assertThat(game.getWinner(), is(Player.BLUE));
     }
 
     @Test

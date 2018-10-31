@@ -31,10 +31,10 @@ package hotciv.framework;
  */
 public class GameConstants {
     // PLAYER COLORS
-    public static final Integer RED = 1;
-    public static final Integer BLUE = 2;
-    public static final Integer YELLOW = 3;
-    public static final Integer GREEN = 4;
+    public static final String RED = "RED";
+    public static final String BLUE = "BLUE";
+    public static final String YELLOW = "YELLOW";
+    public static final String GREEN = "GREEN";
     // The size of the world is set permanently to a 16x16 grid
     public static final int WORLDSIZE = 16;
     // The age which the game begins

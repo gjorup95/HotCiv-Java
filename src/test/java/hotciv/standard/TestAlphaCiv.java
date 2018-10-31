@@ -61,14 +61,14 @@ public class TestAlphaCiv {
     @Test
     public void shouldBeRedAsStartingPlayer() {
         assertThat(game, is(notNullValue()));
-        assertThat(game.getPlayerInTurn(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getPlayerInTurn(), is(Player.RED));
     }
 
     @Test
     public void shouldBeBlueAfterEndTurn() {
         game.endOfTurn();
         assertThat(game, is(notNullValue()));
-        assertThat(game.getPlayerInTurn(), is(game.getPlayer(GameConstants.BLUE)));
+        assertThat(game.getPlayerInTurn(), is(Player.BLUE));
     }
 
     @Test
@@ -100,7 +100,7 @@ public class TestAlphaCiv {
     @Test
     public void shouldHaveRedCityAt11() {
         assertThat(game.getCityAt(new Position(1, 1)), is(notNullValue()));
-        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED));
     }
 
     @Test
@@ -116,7 +116,7 @@ public class TestAlphaCiv {
     @Test
     public void thereShouldBeABlueCityOn41() {
         assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION), is(notNullValue()));
-        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
+        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
     }
 
     @Test
@@ -235,13 +235,13 @@ public class TestAlphaCiv {
     @Test
     public void redShouldOwnAnArcherAt2_0() {
         assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getOwner(), is(notNullValue()));
-        assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getOwner(), is(Player.RED));
     }
 
     @Test
     public void blueShouldOwnALegion3_2() {
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(notNullValue()));
-        assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
+        assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(Player.BLUE));
     }
 
     @Test
@@ -254,13 +254,13 @@ public class TestAlphaCiv {
         for (int i = 0; i < 9; i++) {
             game.endOfTurn();
         }
-        assertThat(game.getWinner(), is(not(game.getPlayer(GameConstants.RED))));
+        assertThat(game.getWinner(), is(not(Player.RED)));
         // for loop that decrements the worldAge by 500 years by calling endOfTurn() five times
         for (int i = 0; i < 10; i++) {
             game.endOfTurn();
         }
         assertThat(game.getAge(), is(-3000));
-        assertThat(game.getWinner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getWinner(), is(Player.RED));
     }
 
     // Testing for unit at (2,0) and moving to (2,1)
@@ -289,7 +289,7 @@ public class TestAlphaCiv {
     @Test
     public void unitsShouldNotBeAbleToMoveOverMountains() {
         assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED), is(notNullValue()));
-        assertThat(game.getPlayerInTurn(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getPlayerInTurn(), is(Player.RED));
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(2, 2));
         // there should be a mountain at (2,2)
         assertThat(game.getUnitAt(new Position(2, 2)), is(nullValue()));
@@ -308,9 +308,9 @@ public class TestAlphaCiv {
 
     @Test
     public void redShouldNotBeAbleToMoveBluesUnits() {
-        assertThat(game.getPlayerInTurn(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getPlayerInTurn(), is(Player.RED));
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE), is(notNullValue()));
-        assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
+        assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(Player.BLUE));
         game.moveUnit(GameConstants.LEGION_POSITION_BLUE, new Position(2, 1));
         assertThat(game.getUnitAt(new Position(2, 1)), is(nullValue()));
     }
@@ -327,7 +327,7 @@ public class TestAlphaCiv {
         game.endOfTurn();
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(2));
         assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION).getTypeString(), is(GameConstants.ARCHER));
-        assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED));
     }
 
     @Test
@@ -342,7 +342,7 @@ public class TestAlphaCiv {
         game.endOfTurn();
         assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getTreasury(), is(2));
         assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION).getTypeString(), is(GameConstants.ARCHER));
-        assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
+        assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
     }
 
     @Test
@@ -357,7 +357,7 @@ public class TestAlphaCiv {
         game.endOfTurn();
         assertThat(game.getCityAt(GameConstants.RED_CITY_POSITION).getTreasury(), is(2));
         assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION).getTypeString(), is(GameConstants.LEGION));
-        assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getUnitAt(GameConstants.RED_CITY_POSITION).getOwner(), is(Player.RED));
     }
 
     @Test
@@ -391,7 +391,7 @@ public class TestAlphaCiv {
         // checking that the red unit moved from its original position
         assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED), is(nullValue()));
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getTypeString(), is(GameConstants.ARCHER));
-        assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE).getOwner(), is(Player.RED));
     }
 
     @Test
@@ -408,7 +408,7 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(GameConstants.LEGION_POSITION_BLUE), is(nullValue()));
         game.moveUnit(new Position(3, 1), GameConstants.ARCHER_POSITION_RED);
         assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getTypeString(), is(GameConstants.LEGION));
-        assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
+        assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getOwner(), is(Player.BLUE));
     }
 
     @Test
@@ -594,7 +594,7 @@ public class TestAlphaCiv {
         game.endOfTurn();
         game.moveUnit(new Position(3, 1), GameConstants.BLUE_CITY_POSITION);
         assertThat(game.getUnitAt(GameConstants.BLUE_CITY_POSITION), is(notNullValue()));
-        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(game.getPlayer(GameConstants.BLUE)));
+        assertThat(game.getCityAt(GameConstants.BLUE_CITY_POSITION).getOwner(), is(Player.BLUE));
     }
 
     @Test
@@ -674,18 +674,14 @@ public class TestAlphaCiv {
     }
     @Test
     public void notAbleToMoveOnToTilesWhereOwnUnitsAre(){
-        game.addUnit(new Position(3,0),GameConstants.LEGION, game.getPlayer(GameConstants.RED));
+        game.addUnit(new Position(3,0),GameConstants.LEGION, Player.RED);
         assertThat(game.getUnitAt(new Position(3,0)).getTypeString(),is(GameConstants.LEGION));
-        assertThat(game.getUnitAt(new Position(3,0)).getOwner(), is(game.getPlayer(GameConstants.RED)));
+        assertThat(game.getUnitAt(new Position(3,0)).getOwner(), is(Player.RED));
         game.moveUnit(GameConstants.ARCHER_POSITION_RED, new Position(3,0));
         assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getTypeString(), is(GameConstants.ARCHER));
         assertThat(game.getUnitAt(new Position(3,0)).getTypeString(), is(GameConstants.LEGION));
     }
 
-    @Test
-    public void getPlayerMapShouldReturnAMapThatHasPlayersInIt() {
-        assertThat(game.getPlayerMap(), is(notNullValue()));
-    }
 
     @Test
     public void shouldReturnFalseWhenCallingPerformSettlerActionAlphaCiv() {
@@ -700,7 +696,7 @@ public class TestAlphaCiv {
     }
    @Test
    public void constructorForUnitsShouldBeAbleToCreateAUniqueBomb(){
-        game.addUnit(new Position(1,1),GameConstants.BOMB, game.getPlayer(GameConstants.RED));
+        game.addUnit(new Position(1,1),GameConstants.BOMB, Player.RED);
         assertThat(game.getUnitAt(new Position(1,1)).getTypeString(), is(GameConstants.BOMB));
         assertThat(game.getUnitAt(new Position(1,1)).getMoveCount(), is(2));
    }
@@ -723,7 +719,7 @@ public class TestAlphaCiv {
 
    @Test
    public void shouldBeAbleToMoveOnHills(){
-        game.addUnit(new Position(0,0),GameConstants.ARCHER, game.getPlayer(GameConstants.RED));
+        game.addUnit(new Position(0,0),GameConstants.ARCHER, Player.RED);
         assertThat(game.getUnitAt(new Position(0,0)).getTypeString(), is(GameConstants.ARCHER));
         game.moveUnit(new Position(0,0), GameConstants.HILLS_POSITION);
         assertThat(game.getUnitAt(GameConstants.HILLS_POSITION).getTypeString(),is(GameConstants.ARCHER));

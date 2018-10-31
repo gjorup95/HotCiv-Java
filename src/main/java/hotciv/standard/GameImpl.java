@@ -20,6 +20,8 @@ public class GameImpl implements Game {
     private int noOfRounds;
     private Factory factory;
     private CityHandlingStrategy cityHandlingStrategy;
+    private int redBattlesWon = 0;
+    private int blueBattlesWon = 0;
 
     /**
      * HashMaps that together make up the World in the Game.
@@ -29,7 +31,7 @@ public class GameImpl implements Game {
     Map<Position, UnitImpl> unitMap = new HashMap<>();
     // Map for Players
     public final Map<String, Integer> unitPriceList = new HashMap<>();
-    Map<Integer, Player> playerMap = new TreeMap<>();
+
 
     /**
      * Constructor
@@ -41,8 +43,6 @@ public class GameImpl implements Game {
         unitPriceList.put(GameConstants.LEGION, GameConstants.ARCHER_COST);
         unitPriceList.put(GameConstants.SETTLER, GameConstants.ARCHER_COST);
         unitPriceList.put(GameConstants.BOMB, GameConstants.BOMB_COST);
-        playerMap.put(GameConstants.RED, new Player("RED"));
-        playerMap.put(GameConstants.BLUE, new Player("BLUE"));
         this.factory = factory;
         this.winningCondition = factory.createWinningCondition(this);
         this.ageing = factory.createAgeingStrategy();
@@ -50,7 +50,7 @@ public class GameImpl implements Game {
         this.unitActions = factory.createUnitActionsStrategy(this);
         this.attackingStrat = factory.createAttackingStrat(this);
         this.cityHandlingStrategy = factory.createCityHandlingStrategy(this);
-        playerInTurn = playerMap.get(GameConstants.RED);
+        playerInTurn = Player.RED;
         age = GameConstants.STARTING_AGE;
         noOfRounds = 0;
     }
@@ -71,11 +71,13 @@ public class GameImpl implements Game {
     }
 
     public int getCurrentPlayersAttackingBattlesWon() {
-        return playerInTurn.getAttackingBattlesWon();
-    }
-
-    public Player getPlayer(Integer player) {
-        return playerMap.get(player);
+        if (playerInTurn == Player.RED){
+            return getRedBattlesWon();
+        }
+        if (playerInTurn == Player.BLUE){
+            return getBlueBattlesWon();
+        }
+        return -1;
     }
 
     public Player getPlayerInTurn() {
@@ -98,9 +100,6 @@ public class GameImpl implements Game {
         return cityMap.get(p);
     }
 
-    public Map<Integer, Player> getPlayerMap() {
-        return playerMap;
-    }
 
     public Collection<CityImpl> getCityMapValues() {
         return cityMap.values();
@@ -113,13 +112,18 @@ public class GameImpl implements Game {
      */
 
     public void resetAttackingBattlesForAllPlayers() {
-        for (Player p : playerMap.values()) {
-            p.resetAttackingBattlesWon();
-        }
+        setRedBattlesWon(0);
+        setBlueBattlesWon(0);
+
     }
 
     public void incrementCurrentPlayersAttackBattlesWon(int battlesWon) {
-        playerInTurn.setAttackingBattlesWon(playerInTurn.getAttackingBattlesWon() + battlesWon);
+        if (playerInTurn == Player.RED){
+            setRedBattlesWon(redBattlesWon + battlesWon);
+        }
+        if (playerInTurn == Player.BLUE){
+            setBlueBattlesWon(blueBattlesWon + battlesWon);
+        }
     }
 
     public void addUnit(Position placeUnitAt, String unitType, Player owner) {
@@ -201,10 +205,11 @@ public class GameImpl implements Game {
     }
 
     public void endOfTurn() {
-        if (getPlayerInTurn().equals(getPlayer(GameConstants.RED))) {
-            playerInTurn = getPlayer(GameConstants.BLUE);
-        } else {
-            playerInTurn = getPlayer(GameConstants.RED);
+        if (getPlayerInTurn().equals(Player.RED)) {
+            playerInTurn = Player.BLUE;
+        }
+        else {
+            playerInTurn = Player.RED;
             endOfRound();
             age += ageing.calculateAge(getAge());
         }
@@ -357,5 +362,21 @@ public class GameImpl implements Game {
 
     public boolean attack(Position from, Position to) {
         return attackingStrat.attack(from, to);
+    }
+
+    public int getBlueBattlesWon() {
+        return blueBattlesWon;
+    }
+
+    public void setBlueBattlesWon(int blueBattlesWon) {
+        this.blueBattlesWon = blueBattlesWon;
+    }
+
+    public int getRedBattlesWon() {
+        return redBattlesWon;
+    }
+
+    public void setRedBattlesWon(int redBattlesWon) {
+        this.redBattlesWon = redBattlesWon;
     }
 }
