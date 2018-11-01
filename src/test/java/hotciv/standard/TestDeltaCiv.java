@@ -17,7 +17,7 @@ public class TestDeltaCiv {
 
     @Before // Before is run before every @Test
     public void setUp() {
-        game = new GameImpl(new DeltaCivFactory());
+        game = new GameImpl(new DeltaCivGameFactory());
 
     }
 

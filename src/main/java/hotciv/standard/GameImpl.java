@@ -18,7 +18,7 @@ public class GameImpl implements Game {
     private UnitActions unitActions;
     private AttackingStrat attackingStrat;
     private int noOfRounds;
-    private Factory factory;
+    private GameFactory gameFactory;
     private CityHandlingStrategy cityHandlingStrategy;
     private int redBattlesWon = 0;
     private int blueBattlesWon = 0;
@@ -37,19 +37,19 @@ public class GameImpl implements Game {
      * Constructor
      */
 
-    public GameImpl(Factory factory) {
+    public GameImpl(GameFactory gameFactory) {
         //TODO This should be refactored with a strategy patteren for the variablity of x number of players.
         unitPriceList.put(GameConstants.ARCHER, GameConstants.ARCHER_COST);
         unitPriceList.put(GameConstants.LEGION, GameConstants.ARCHER_COST);
         unitPriceList.put(GameConstants.SETTLER, GameConstants.ARCHER_COST);
         unitPriceList.put(GameConstants.BOMB, GameConstants.BOMB_COST);
-        this.factory = factory;
-        this.winningCondition = factory.createWinningCondition(this);
-        this.ageing = factory.createAgeingStrategy();
-        this.worldCreator = factory.createWorldCreator(this);
-        this.unitActions = factory.createUnitActionsStrategy(this);
-        this.attackingStrat = factory.createAttackingStrat(this);
-        this.cityHandlingStrategy = factory.createCityHandlingStrategy(this);
+        this.gameFactory = gameFactory;
+        this.winningCondition = gameFactory.createWinningCondition(this);
+        this.ageing = gameFactory.createAgeingStrategy();
+        this.worldCreator = gameFactory.createWorldCreator(this);
+        this.unitActions = gameFactory.createUnitActionsStrategy(this);
+        this.attackingStrat = gameFactory.createAttackingStrat(this);
+        this.cityHandlingStrategy = gameFactory.createCityHandlingStrategy(this);
         playerInTurn = Player.RED;
         age = GameConstants.STARTING_AGE;
         noOfRounds = 0;

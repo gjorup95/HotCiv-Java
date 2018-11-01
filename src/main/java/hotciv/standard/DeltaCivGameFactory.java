@@ -2,7 +2,7 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-public class ThirdPartyAdapterFactory implements Factory {
+public class DeltaCivGameFactory implements GameFactory {
     @Override
     public Ageing createAgeingStrategy() {
         return new AgeingAlphaCiv();
@@ -20,7 +20,7 @@ public class ThirdPartyAdapterFactory implements Factory {
 
     @Override
     public WorldCreator createWorldCreator(GameImpl game) {
-        return new ThirdPartyGeneratorAdapter(game);
+        return new WorldCreatorDeltaCiv(game);
     }
 
     @Override

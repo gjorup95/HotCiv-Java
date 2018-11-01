@@ -2,7 +2,7 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-public class ZetaCivFactory implements Factory {
+public class ZetaCivGameFactory implements GameFactory {
     @Override
     public Ageing createAgeingStrategy() {
         return new AgeingAlphaCiv();

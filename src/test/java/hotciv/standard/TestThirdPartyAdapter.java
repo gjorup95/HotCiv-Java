@@ -1,7 +1,5 @@
 package hotciv.standard;
 
-import thirdparty.ThirdPartyFractalGenerator;
-
 import hotciv.framework.*;
 
 import org.junit.*;
@@ -20,7 +18,7 @@ public class TestThirdPartyAdapter {
 
     @Before // Before is run before every @Test
     public void setUp() {
-        game = new GameImpl(new ThirdPartyAdapterFactory());
+        game = new GameImpl(new ThirdPartyAdapterGameFactory());
     }
 
     @Test
@@ -32,7 +30,7 @@ public class TestThirdPartyAdapter {
                 firstWorldMap.put(new Position(r,c), game.getTileAt(new Position(r,c)).getTypeString());
             }
         }
-        game = new GameImpl(new ThirdPartyAdapterFactory());
+        game = new GameImpl(new ThirdPartyAdapterGameFactory());
         for (int r = 0; r < 16; r++) {
             for (int c = 0; c < 16; c++) {
                 secondWorldMap.put(new Position(r,c), game.getTileAt(new Position(r,c)).getTypeString());

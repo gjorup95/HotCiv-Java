@@ -17,7 +17,7 @@ public class TestEtaCiv {
 
     @Before // Before is run before every @Test
     public void setUp() {
-        game = new GameImpl(new EtaCivFactory());
+        game = new GameImpl(new EtaCivGameFactory());
         // Setting up a test fixture map for testing
         // Red city at 1,4
         game.addCity(new Position(1,4), Player.RED);

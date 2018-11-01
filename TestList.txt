@@ -107,3 +107,6 @@ Test-list for TDD Iteration 1
 [X] make it so bombs have proper resetmovecount to 2 after end of round.
 [X] Implemented all requirements for ThetaCiv, Using parametric design for the bomb variants in gameImpl and using a state pattern for the performAction method making
 a delegate UnitActionsThetaCiv that combines behavior of gamma and adds newly Theta unique behaviour to it.
+
+===================== GUI CIV =========================================================0
+[] Do the 1-4 steps then proceed to 6,5 in the mandatory hints

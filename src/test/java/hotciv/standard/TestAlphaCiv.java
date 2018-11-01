@@ -47,7 +47,7 @@ public class TestAlphaCiv {
 
     @Before // Before is run before every @Test
     public void setUp() {
-        game = new GameImpl(new AlphaCivFactory());
+        game = new GameImpl(new AlphaCivGameFactory());
     }
 
     /**

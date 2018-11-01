@@ -2,34 +2,30 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-/**
- * @ author Troels Gjørup
- * 05-10-2018
- */
-public class ThetaCivFactory implements Factory {
+public class SemiCivGameFactory implements GameFactory {
     @Override
     public Ageing createAgeingStrategy() {
-        return new AgeingAlphaCiv();
+        return new AgeingBetaCiv();
     }
 
     @Override
     public UnitActions createUnitActionsStrategy(GameImpl game) {
-        return new UnitActionsThetaCiv(game, new  UnitActionsGammaCiv(game));
+        return new UnitActionsGammaCiv(game);
     }
 
     @Override
     public WinningCondition createWinningCondition(GameImpl game) {
-        return new WinningConditionAlphaCiv(game);
+        return new WinningConditionEpsilonCiv(game);
     }
 
     @Override
     public WorldCreator createWorldCreator(GameImpl game) {
-        return new WorldCreatorAlphaCiv(game);
+        return new WorldCreatorDeltaCiv(game);
     }
 
     @Override
     public AttackingStrat createAttackingStrat(GameImpl game) {
-        return new AttackingStratAlphaCiv();
+        return new AttackingStratEpsilonCiv(game, new RandomAttackCalculationStrat());
     }
 
     @Override

@@ -18,7 +18,7 @@ public class TestThetaCiv {
 
     @Before // Before is run before every @Test
     public void setUp() {
-        game = new GameImpl(new ThetaCivFactory());
+        game = new GameImpl(new ThetaCivGameFactory());
         // adding bomb unit i can use in my test cases at 5,1 for red player
         game.addUnit(new Position(5,0), GameConstants.BOMB, Player.RED);
         // adding mountain and ocean tiles near the bomb placement. Mountain 4,0 and 5,1 Ocean

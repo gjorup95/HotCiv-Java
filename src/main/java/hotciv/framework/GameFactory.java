@@ -4,7 +4,7 @@ import hotciv.standard.AttackCalculationStrat;
 import hotciv.standard.GameImpl;
 import hotciv.standard.RandomAttackCalculationStrat;
 
-public interface Factory {
+public interface GameFactory {
 
     public Ageing createAgeingStrategy();
 

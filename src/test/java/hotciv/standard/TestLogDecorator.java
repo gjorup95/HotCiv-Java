@@ -4,9 +4,6 @@ import hotciv.framework.*;
 
 import org.junit.*;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-
 
 /**
  * @ author Troels Gjørup
@@ -18,7 +15,7 @@ public class TestLogDecorator {
 
     @Before
     public void setUp(){
-        game = new GameImpl(new AlphaCivFactory());
+        game = new GameImpl(new AlphaCivGameFactory());
         logDecorator = new LogDecorator(game);}
 
         @Test

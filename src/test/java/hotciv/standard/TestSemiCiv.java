@@ -13,7 +13,7 @@ public class TestSemiCiv {
 
     @Before
     public void setUp() {
-        this.game = new GameImpl(new SemiCivFactory());
+        this.game = new GameImpl(new SemiCivGameFactory());
     }
 
     /** ========== BETACIV INTEGRATION ================================ */

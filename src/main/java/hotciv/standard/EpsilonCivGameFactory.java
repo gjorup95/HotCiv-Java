@@ -2,7 +2,7 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-public class EpsilonCivFactory implements Factory {
+public class EpsilonCivGameFactory implements GameFactory {
     @Override
     public Ageing createAgeingStrategy() {
         return new AgeingAlphaCiv();

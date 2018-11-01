@@ -2,10 +2,10 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-public class DeltaCivFactory implements Factory {
+public class BetaCivGameFactory implements GameFactory {
     @Override
     public Ageing createAgeingStrategy() {
-        return new AgeingAlphaCiv();
+        return new AgeingBetaCiv();
     }
 
     @Override
@@ -15,12 +15,12 @@ public class DeltaCivFactory implements Factory {
 
     @Override
     public WinningCondition createWinningCondition(GameImpl game) {
-        return new WinningConditionAlphaCiv(game);
+        return new WinningConditionBetaCiv(game);
     }
 
     @Override
     public WorldCreator createWorldCreator(GameImpl game) {
-        return new WorldCreatorDeltaCiv(game);
+        return new WorldCreatorAlphaCiv(game);
     }
 
     @Override
