@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
+import hotciv.standard.CityImpl;
 import minidraw.framework.*;
 import minidraw.standard.*;
 
@@ -48,6 +49,7 @@ public class CivDrawing
   protected Drawing delegate;
   /** store all moveable figures visible in this drawing = units */
   protected Map<Unit,UnitFigure> figureMap;
+  protected Map<City, CityFigure> cityMap;
 
   /** the Game instance that this UnitDrawing is going to render units
    * from */
@@ -58,6 +60,7 @@ public class CivDrawing
     this.delegate = new StandardDrawing();
     this.game = game;
     this.figureMap = new HashMap<>();
+    this.cityMap = new HashMap<>();
 
     // register this unit drawing as listener to any game state
     // changes...
@@ -65,6 +68,8 @@ public class CivDrawing
     // ... and build up the set of figures associated with
     // units in the game.
     defineUnitMap();
+    //define city map
+    defineCityMap();
     // and the set of 'icons' in the status panel
     defineIcons();
   }
@@ -133,6 +138,51 @@ public class CivDrawing
     }
     figureMap.clear();
   }
+
+  /** Draws the graphical representation of the city map */
+
+  protected void defineCityMap() {
+    // ensure no units of the old list are accidental in
+    // the selection!
+    clearSelection();
+
+    // remove all city figures in this drawing
+    removeAllCityFigures();
+
+    // iterate world, and create a city figure for
+    // each city in the game world, as well as
+    // create an association between the city and
+    // the cityFigure in 'figureMap'.
+    Position p;
+    for ( int r = 0; r < GameConstants.WORLDSIZE; r++ ) {
+      for ( int c = 0; c < GameConstants.WORLDSIZE; c++ ) {
+        p = new Position(r,c);
+        City city = game.getCityAt(p);
+        if ( city != null ) {
+          Player owner = city.getOwner();
+          // convert the unit's Position to (x,y) coordinates
+          Point point = new Point( GfxConstants.getXFromColumn(p.getColumn()), GfxConstants.getYFromRow(p.getRow()) );
+          CityFigure cityFigure = new CityFigure(city, point);
+          cityFigure.addFigureChangeListener(this);
+          cityMap.put(city, cityFigure);
+
+          // also insert in delegate list as it is
+          // this list that is iterated by the
+          // graphics rendering algorithms
+          delegate.add(cityFigure);
+        }
+      }
+    }
+  }
+
+  protected void removeAllCityFigures() {
+    for (City c : cityMap.keySet()) {
+      CityFigure cf = cityMap.get(c);
+      delegate.remove(cf);
+    }
+    cityMap.clear();
+  }
+
   protected ImageFigure unitShieldIcon;
   protected ImageFigure cityShieldIcon;
   protected ImageFigure turnShieldIcon;
