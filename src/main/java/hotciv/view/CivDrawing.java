@@ -47,13 +47,21 @@ public class CivDrawing
   implements Drawing, GameObserver {
   
   protected Drawing delegate;
-  /** store all moveable figures visible in this drawing = units */
+  /** store all moveable figures visible in this drawing = units, citys */
   protected Map<Unit,UnitFigure> figureMap;
   protected Map<City, CityFigure> cityMap;
 
   /** the Game instance that this UnitDrawing is going to render units
    * from */
   protected Game game;
+
+  /** Different kinds of ImageFigures*/
+
+  protected ImageFigure unitShieldIcon;
+  protected ImageFigure cityShieldIcon;
+  protected ImageFigure turnShieldIcon;
+
+  protected TextFigure ageTextIcon;
   
   public CivDrawing( DrawingEditor editor, Game game ) {
     super();
@@ -178,9 +186,6 @@ public class CivDrawing
     cityMap.clear();
   }
 
-  protected ImageFigure unitShieldIcon;
-  protected ImageFigure cityShieldIcon;
-  protected ImageFigure turnShieldIcon;
   protected void defineIcons() {
     // TODO: Further development to include rest of figures needed
     turnShieldIcon = 
@@ -195,11 +200,16 @@ public class CivDrawing
       new ImageFigure("redshield",
               new Point(GfxConstants.CITY_SHIELD_X,
                       GfxConstants.CITY_SHIELD_Y));
+
+    ageTextIcon =
+            new TextFigure("4000BC", new Point(GfxConstants.AGE_TEXT_X, GfxConstants.AGE_TEXT_Y));
     // insert in delegate figure list to ensure graphical
     // rendering.
     delegate.add(unitShieldIcon);
     delegate.add(cityShieldIcon);
     delegate.add(turnShieldIcon);
+
+    delegate.add(ageTextIcon);
 
   }
  
