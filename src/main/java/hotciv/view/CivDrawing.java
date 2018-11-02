@@ -142,17 +142,14 @@ public class CivDrawing
   /** Draws the graphical representation of the city map */
 
   protected void defineCityMap() {
-    // ensure no units of the old list are accidental in
-    // the selection!
+    // ensure no units of the old list are accidental in the selection!
     clearSelection();
 
     // remove all city figures in this drawing
     removeAllCityFigures();
 
-    // iterate world, and create a city figure for
-    // each city in the game world, as well as
-    // create an association between the city and
-    // the cityFigure in 'figureMap'.
+    // iterate world, and create a city figure for each city in the game world, as well as
+    // create an association between the city and the cityFigure in 'figureMap'.
     Position p;
     for ( int r = 0; r < GameConstants.WORLDSIZE; r++ ) {
       for ( int c = 0; c < GameConstants.WORLDSIZE; c++ ) {
@@ -166,9 +163,7 @@ public class CivDrawing
           cityFigure.addFigureChangeListener(this);
           cityMap.put(city, cityFigure);
 
-          // also insert in delegate list as it is
-          // this list that is iterated by the
-          // graphics rendering algorithms
+          // also insert in delegate list as it is this list that is iterated by the graphics rendering algorithms
           delegate.add(cityFigure);
         }
       }
