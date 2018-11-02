@@ -62,6 +62,7 @@ public class CivDrawing
   protected ImageFigure turnShieldIcon;
 
   protected TextFigure ageTextIcon;
+  protected TextFigure moveCountTextIcon;
   
   public CivDrawing( DrawingEditor editor, Game game ) {
     super();
@@ -164,7 +165,6 @@ public class CivDrawing
         p = new Position(r,c);
         City city = game.getCityAt(p);
         if ( city != null ) {
-          Player owner = city.getOwner();
           // convert the unit's Position to (x,y) coordinates
           Point point = new Point( GfxConstants.getXFromColumn(p.getColumn()), GfxConstants.getYFromRow(p.getRow()) );
           CityFigure cityFigure = new CityFigure(city, point);
@@ -203,6 +203,8 @@ public class CivDrawing
 
     ageTextIcon =
             new TextFigure("4000BC", new Point(GfxConstants.AGE_TEXT_X, GfxConstants.AGE_TEXT_Y));
+    moveCountTextIcon =
+            new TextFigure("", new Point(GfxConstants.UNIT_COUNT_X, GfxConstants.UNIT_COUNT_Y));
     // insert in delegate figure list to ensure graphical
     // rendering.
     delegate.add(unitShieldIcon);
@@ -210,6 +212,7 @@ public class CivDrawing
     delegate.add(turnShieldIcon);
 
     delegate.add(ageTextIcon);
+    delegate.add(moveCountTextIcon);
 
   }
  
@@ -235,6 +238,35 @@ public class CivDrawing
   }
 
   public void tileFocusChangedAt(Position position) {
+    if (game.getCityAt(position)!= null){
+      if (game.getCityAt(position).getOwner() == Player.RED){
+        cityShieldIcon.set("redshield",
+                new Point(GfxConstants.CITY_SHIELD_X,GfxConstants.CITY_SHIELD_Y));
+
+      }
+      if (game.getCityAt(position).getOwner() == Player.BLUE){
+        cityShieldIcon.set("blueshield", new Point(GfxConstants.CITY_SHIELD_X, GfxConstants.CITY_SHIELD_Y));
+
+      }
+      delegate.add(cityShieldIcon);
+      delegate.remove(unitShieldIcon);
+      delegate.remove(moveCountTextIcon);
+    }
+
+    if(game.getUnitAt(position)!= null) {
+      moveCountTextIcon.setText("" + game.getUnitAt(position).getMoveCount());
+      delegate.add(moveCountTextIcon);
+
+        if (game.getUnitAt(position).getOwner() == Player.RED) {
+          unitShieldIcon.set("redshield", new Point(GfxConstants.UNIT_SHIELD_X, GfxConstants.UNIT_SHIELD_Y));
+        }
+        if (game.getUnitAt(position).getOwner() == Player.BLUE) {
+          unitShieldIcon.set("blueshield", new Point(GfxConstants.UNIT_SHIELD_X, GfxConstants.UNIT_SHIELD_Y));
+        }
+        delegate.add(unitShieldIcon);
+        delegate.remove(cityShieldIcon);
+      }
+
     // TODO: Implementation pending
     System.out.println( "Fake it: tileFocusChangedAt "+position );
   }
@@ -244,6 +276,7 @@ public class CivDrawing
     // A request has been issued to repaint
     // everything. We simply rebuild the
     // entire Drawing.
+
     defineUnitMap();
     defineIcons();
     defineCityMap();

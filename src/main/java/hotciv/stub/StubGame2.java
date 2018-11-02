@@ -2,6 +2,7 @@ package hotciv.stub;
 
 import hotciv.framework.*;
 import hotciv.standard.CityImpl;
+import hotciv.view.CivDrawing;
 
 import java.util.*;
 
@@ -183,9 +184,8 @@ public class StubGame2 implements Game {
     }
 
     public void setTileFocus(Position position) {
-        // TODO: setTileFocus implementation pending.
-        System.out.println("-- StubGame2 / setTileFocus called.");
-        System.out.println(" *** IMPLEMENTATION PENDING ***");
+        gameObserver.tileFocusChangedAt(position);
+
     }
 
 }
@@ -244,11 +244,11 @@ class StubCity implements City {
 
     @Override
     public String getProduction() {
-        return null;
+        return GameConstants.productionFocus;
     }
 
     @Override
     public String getWorkforceFocus() {
-        return null;
+        return GameConstants.ARCHER;
     }
 }
