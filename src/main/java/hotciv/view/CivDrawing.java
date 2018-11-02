@@ -236,7 +236,7 @@ public class CivDrawing
     turnShieldIcon.set( playername+"shield",
                         new Point( GfxConstants.TURN_SHIELD_X,
                                    GfxConstants.TURN_SHIELD_Y ) );
-    // TODO: Age output pending
+    ageTextIcon.setText(Integer.toString(age).substring(1)+"BC");
   }
 
   public void tileFocusChangedAt(Position position) {

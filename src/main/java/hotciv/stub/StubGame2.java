@@ -51,6 +51,7 @@ public class StubGame2 implements Game {
     private Position pos_bomb_red;
 
     private Unit red_archer;
+    private int age = -4000;
 
     public StubGame2() {
         defineWorld(1);
@@ -120,7 +121,9 @@ public class StubGame2 implements Game {
                 Player.BLUE :
                 Player.RED);
         // no age increments
-        gameObserver.turnEnds(inTurn, -4000);
+
+        gameObserver.turnEnds(inTurn, age);
+        age = age+100;
     }
 
     public Player getPlayerInTurn() {
@@ -167,7 +170,7 @@ public class StubGame2 implements Game {
     }
 
     public int getAge() {
-        return 0;
+        return age;
     }
 
     public void changeWorkForceFocusInCityAt(Position p, String balance) {
