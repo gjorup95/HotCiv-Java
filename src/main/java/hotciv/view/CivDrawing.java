@@ -223,14 +223,9 @@ public class CivDrawing
     removeAllUnitFigures();
     defineUnitMap();
     defineCityMap();
-
-    // TODO: Cities may change on position as well
   }
 
   public void turnEnds(Player nextPlayer, int age) {
-    // TODO: Remove system.out debugging output
-    System.out.println( "CivDrawing: turnEnds for "+
-                        nextPlayer+" at "+age );
     String playername = "red";
     if ( nextPlayer == Player.BLUE ) { playername = "blue"; }
     turnShieldIcon.set( playername+"shield",
@@ -251,7 +246,7 @@ public class CivDrawing
     // entire Drawing.
     defineUnitMap();
     defineIcons();
-    // TODO: Cities pending
+    defineCityMap();
   }
 
   @Override
