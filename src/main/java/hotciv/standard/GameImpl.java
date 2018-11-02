@@ -22,6 +22,7 @@ public class GameImpl implements Game {
     private CityHandlingStrategy cityHandlingStrategy;
     private int redBattlesWon = 0;
     private int blueBattlesWon = 0;
+    ArrayList<GameObserver> observers = new ArrayList<>();
 
     /**
      * HashMaps that together make up the World in the Game.
@@ -288,8 +289,13 @@ public class GameImpl implements Game {
         unitActions.performAction(p);
     }
 
+    public ArrayList<GameObserver> getObservers() {
+        return observers;
+    }
+
     @Override
     public void addObserver(GameObserver observer) {
+        observers.add(observer);
 
     }
 

@@ -738,6 +738,12 @@ public class TestAlphaCiv {
         assertThat(game.getUnitAt(new Position(4,0)), is(nullValue()));
         assertThat(game.getUnitAt(GameConstants.ARCHER_POSITION_RED).getTypeString(), is(GameConstants.ARCHER));
    }
+   @Test
+   public void shouldAddObserver(){
+        assertThat(game.getObservers().size(), is(0));
+        game.addObserver(new GameObserverImpl());
+        assertThat(game.getObservers().get(0), is(notNullValue()));
+   }
 
     public void shouldDefinetelyBeRemoved() {
         // Matching null and not null values
