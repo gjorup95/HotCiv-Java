@@ -133,17 +133,29 @@ public class CivDrawing
     }
     figureMap.clear();
   }
-
+  protected ImageFigure unitShieldIcon;
+  protected ImageFigure cityShieldIcon;
   protected ImageFigure turnShieldIcon;
   protected void defineIcons() {
     // TODO: Further development to include rest of figures needed
     turnShieldIcon = 
       new ImageFigure( "redshield",
                        new Point( GfxConstants.TURN_SHIELD_X,
-                                  GfxConstants.TURN_SHIELD_Y ) ); 
+                                  GfxConstants.TURN_SHIELD_Y ) );
+    unitShieldIcon =
+      new ImageFigure("redshield",
+              new Point(GfxConstants.UNIT_SHIELD_X,
+                        GfxConstants.UNIT_SHIELD_Y));
+    cityShieldIcon =
+      new ImageFigure("redshield",
+              new Point(GfxConstants.CITY_SHIELD_X,
+                      GfxConstants.CITY_SHIELD_Y));
     // insert in delegate figure list to ensure graphical
     // rendering.
+    delegate.add(unitShieldIcon);
+    delegate.add(cityShieldIcon);
     delegate.add(turnShieldIcon);
+
   }
  
   // === Observer Methods ===
