@@ -128,7 +128,7 @@ public class StubGame2 implements Game {
         // no age increments
 
         gameObserver.turnEnds(inTurn, age);
-        age = age+100;
+        age = age + 100;
     }
 
     public Player getPlayerInTurn() {
@@ -185,7 +185,10 @@ public class StubGame2 implements Game {
     }
 
     public void performUnitActionAt(Position p) {
+
+        System.out.println("PERFORMED GLORIOUS ACTION AT: " + p);
     }
+
 
     public void setTileFocus(Position position) {
         gameObserver.tileFocusChangedAt(position);
@@ -243,7 +246,8 @@ class StubCity implements City {
     public int getSize() {
         return size;
     }
-    public void setSize(int size){
+
+    public void setSize(int size) {
         this.size = size;
     }
 
@@ -262,9 +266,10 @@ class StubCity implements City {
         return workforceFocus;
     }
 
-    public void setWorkforceFocus(String workforceFocus){
+    public void setWorkforceFocus(String workforceFocus) {
         this.workforceFocus = workforceFocus;
     }
+
     public void setProductionFocus(String productionFocus) {
         this.productionFocus = productionFocus;
     }

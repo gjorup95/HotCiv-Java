@@ -273,12 +273,10 @@ public class CivDrawing
             if (game.getCityAt(position).getProduction() == GameConstants.productionFocus) {
                 productionIcon.set("hammer",
                                 new Point(GfxConstants.WORKFORCEFOCUS_X, GfxConstants.WORKFORCEFOCUS_Y));
-                delegate.add(productionIcon);
             }
             if (game.getCityAt(position).getProduction() == GameConstants.foodFocus) {
                 productionIcon.set("apple", new Point(GfxConstants.WORKFORCEFOCUS_X, GfxConstants.WORKFORCEFOCUS_Y));
 
-                delegate.add(productionIcon);
             }
 
 
@@ -292,8 +290,9 @@ public class CivDrawing
                 cityShieldIcon.set("blueshield", new Point(GfxConstants.CITY_SHIELD_X, GfxConstants.CITY_SHIELD_Y));
 
             }
-
+            delegate.add(workforceFocusIcon);
             delegate.add(cityShieldIcon);
+            delegate.add(productionIcon);
             delegate.remove(unitShieldIcon);
             delegate.remove(moveCountTextIcon);
 
@@ -314,6 +313,8 @@ public class CivDrawing
         }
         delegate.add(unitShieldIcon);
         delegate.remove(cityShieldIcon);
+        delegate.remove(productionIcon);
+        delegate.remove(workforceFocusIcon);
     }
 
 

@@ -39,6 +39,24 @@ public class ShowEndOfTurn {
     editor.showStatus("Click to shield to see Game's endOfTurn method being called.");
 
     // TODO: Replace the setting of the tool with your EndOfTurnTool implementation.
-    editor.setTool( new NullTool() );
+    editor.setTool( new EndOfTurnTurnTool(editor, game) );
+  }
+}
+
+class EndOfTurnTurnTool extends NullTool{
+  private Game game;
+  private DrawingEditor drawingEditor;
+  public EndOfTurnTurnTool (DrawingEditor drawingEditor, Game game){
+    this.drawingEditor = drawingEditor;
+    this.game = game;
+  }
+
+  @Override
+  public void mouseDown(MouseEvent e, int x, int y) {
+    if (drawingEditor.drawing().findFigure(GfxConstants.TURN_SHIELD_X,GfxConstants.TURN_SHIELD_Y)== drawingEditor.drawing().findFigure(x,y)){
+
+      game.endOfTurn();
+      super.mouseDown(e, x, y);
+    }
   }
 }

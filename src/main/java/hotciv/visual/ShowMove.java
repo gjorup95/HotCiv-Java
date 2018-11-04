@@ -13,18 +13,18 @@ import hotciv.stub.*;
 
 /** Template code for exercise FRS 36.39.
 
-   This source code is from the book 
+   This source code is from the book
      "Flexible, Reliable Software:
        Using Patterns and Agile Development"
      published 2010 by CRC Press.
-   Author: 
-     Henrik B Christensen 
+   Author:
+     Henrik B Christensen
      Computer Science Department
      Aarhus University
-   
-   This source code is provided WITHOUT ANY WARRANTY either 
-   expressed or implied. You may study, use, modify, and 
-   distribute it for non-commercial purposes. For any 
+
+   This source code is provided WITHOUT ANY WARRANTY either
+   expressed or implied. You may study, use, modify, and
+   distribute it for non-commercial purposes. For any
    commercial use, see http://www.baerbak.com/
  */
 public class ShowMove {
@@ -47,8 +47,7 @@ class UnitMoveTool extends SelectionTool {
   private DrawingEditor editor;
   private Game game;
   private Position from;
-  private Position to;
-  private ImageFigure unit;
+
 
   public UnitMoveTool(DrawingEditor editor, Game game) {
     super(editor);
@@ -67,9 +66,10 @@ class UnitMoveTool extends SelectionTool {
 
   @Override
   public void mouseUp(MouseEvent e, int x, int y) {
-    if (game.moveUnit(from, GfxConstants.getPositionFromXY(x,y))) {
-      super.mouseUp(e, x, y);
-    }
+      if(game.getUnitAt(from)!= null) {
+          game.moveUnit(from, GfxConstants.getPositionFromXY(x, y));
+          super.mouseUp(e, x, y);
+      }
   }
 }
 
