@@ -72,6 +72,10 @@ public class StubGame2 implements Game {
 
         red_city = new StubCity(Player.RED);
         blue_city = new StubCity(Player.BLUE);
+        ((StubCity) blue_city).setProductionFocus(GameConstants.productionFocus);
+        ((StubCity) red_city).setWorkforceFocus(GameConstants.SETTLER);
+        ((StubCity) red_city).setSize(3);
+        ((StubCity) blue_city).setSize(6);
     }
 
     public Unit getUnitAt(Position p) {
@@ -222,6 +226,9 @@ class StubUnit implements Unit {
 
 class StubCity implements City {
     private Player owner;
+    private String productionFocus = GameConstants.foodFocus;
+    private String workforceFocus = GameConstants.ARCHER;
+    private int size = 1;
 
     public StubCity(Player owner) {
         this.owner = owner;
@@ -234,7 +241,10 @@ class StubCity implements City {
 
     @Override
     public int getSize() {
-        return 0;
+        return size;
+    }
+    public void setSize(int size){
+        this.size = size;
     }
 
     @Override
@@ -244,11 +254,18 @@ class StubCity implements City {
 
     @Override
     public String getProduction() {
-        return GameConstants.productionFocus;
+        return productionFocus;
     }
 
     @Override
     public String getWorkforceFocus() {
-        return GameConstants.ARCHER;
+        return workforceFocus;
+    }
+
+    public void setWorkforceFocus(String workforceFocus){
+        this.workforceFocus = workforceFocus;
+    }
+    public void setProductionFocus(String productionFocus) {
+        this.productionFocus = productionFocus;
     }
 }
