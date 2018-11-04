@@ -51,12 +51,11 @@ class SetFocusTool extends NullTool {
     this.editor = editor;
   }
 
-  @Override
+
   public void mouseDown(MouseEvent e, int x, int y) {
     if (game.getUnitAt(GfxConstants.getPositionFromXY(x, y)) != null || game.getCityAt(GfxConstants.getPositionFromXY(x, y)) != null) {
       game.setTileFocus(GfxConstants.getPositionFromXY(x,y));
 
-      super.mouseDown(e, x, y);
     }
   }
 }

@@ -67,8 +67,9 @@ class UnitMoveTool extends SelectionTool {
   @Override
   public void mouseUp(MouseEvent e, int x, int y) {
       if(game.getUnitAt(from)!= null) {
-          game.moveUnit(from, GfxConstants.getPositionFromXY(x, y));
           super.mouseUp(e, x, y);
+          game.moveUnit(from, GfxConstants.getPositionFromXY(x, y));
+
       }
   }
 }

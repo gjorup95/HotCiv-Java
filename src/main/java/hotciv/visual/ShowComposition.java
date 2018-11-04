@@ -76,8 +76,7 @@ class CompositionTool extends NullTool {
 
     public void mouseUp(MouseEvent e, int x, int y) {
         if (game.getTileAt(positionFrom) != game.getTileAt(GfxConstants.getPositionFromXY(x, y))) {
-            selectionTool = new UnitMoveTool(drawingEditor,game);
-            selectionTool.mouseUp(e, x, y);
+            game.moveUnit(positionFrom, GfxConstants.getPositionFromXY(x, y));
         }
     }
 }
