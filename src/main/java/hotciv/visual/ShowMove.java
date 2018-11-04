@@ -60,8 +60,7 @@ class UnitMoveTool extends SelectionTool {
     if (game.getUnitAt(GfxConstants.getPositionFromXY(x, y)) != null) {
       from = GfxConstants.getPositionFromXY(x, y);
       super.mouseDown(e, x, y);
-    }
-
+    }// TODO: CHECKING FOR PROPER NOT NULL AND DRAGGING UNITS
   }
 
   @Override
