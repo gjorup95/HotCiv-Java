@@ -202,7 +202,6 @@ public class CivDrawing
     }
 
     protected void defineIcons() {
-        // TODO: Further development to include rest of figures needed
         turnShieldIcon =
                 new ImageFigure("redshield",
                         new Point(GfxConstants.TURN_SHIELD_X,
@@ -249,8 +248,7 @@ public class CivDrawing
     // === Observer Methods ===
 
     public void worldChangedAt(Position pos) {
-        // TODO: Remove system.out debugging output
-        System.out.println("CivDrawing: world changes at " + pos);
+
         clearSelection();
         // this is a really brute-force algorithm: destroy all known units and build up the entire set again
         removeAllUnitFigures();
@@ -318,8 +316,7 @@ public class CivDrawing
         delegate.remove(cityShieldIcon);
     }
 
-    // TODO: Implementation pending
-    System.out.println("Fake it: tileFocusChangedAt "+position );
+
 }
 
     @Override

@@ -28,17 +28,49 @@ import hotciv.stub.*;
    commercial use, see http://www.baerbak.com/
  */
 public class ShowMove {
-  
+
   public static void main(String[] args) {
     Game game = new StubGame2();
 
-    DrawingEditor editor = 
-      new MiniDrawApplication( "Move any unit using the mouse",  
-                               new HotCivFactory4(game) );
+    DrawingEditor editor =
+            new MiniDrawApplication("Move any unit using the mouse",
+                    new HotCivFactory4(game));
     editor.open();
     editor.showStatus("Move units to see Game's moveUnit method being called.");
 
     // TODO: Replace the setting of the tool with your UnitMoveTool implementation.
-    editor.setTool( new SelectionTool(editor) );
+    editor.setTool(new UnitMoveTool(editor, game));
   }
 }
+
+class UnitMoveTool extends SelectionTool {
+  private DrawingEditor editor;
+  private Game game;
+  private Position from;
+  private Position to;
+  private ImageFigure unit;
+
+  public UnitMoveTool(DrawingEditor editor, Game game) {
+    super(editor);
+    this.game = game;
+    this.editor = editor;
+  }
+
+  @Override
+  public void mouseDown(MouseEvent e, int x, int y) {
+    if (game.getUnitAt(GfxConstants.getPositionFromXY(x, y)) != null) {
+      from = GfxConstants.getPositionFromXY(x, y);
+      super.mouseDown(e, x, y);
+    }
+
+  }
+
+  @Override
+  public void mouseUp(MouseEvent e, int x, int y) {
+    if (game.moveUnit(from, GfxConstants.getPositionFromXY(x,y))) {
+      super.mouseUp(e, x, y);
+    }
+  }
+}
+
+
