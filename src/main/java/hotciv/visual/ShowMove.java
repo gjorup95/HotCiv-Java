@@ -10,6 +10,8 @@ import javax.swing.*;
 import hotciv.framework.*;
 import hotciv.view.*;
 import hotciv.stub.*;
+import minidraw.standard.handlers.DragTracker;
+import minidraw.standard.handlers.SelectAreaTracker;
 
 /** Template code for exercise FRS 36.39.
 
@@ -42,7 +44,41 @@ public class ShowMove {
     editor.setTool(new UnitMoveTool(editor, game));
   }
 }
+class UnitMoveTool extends NullTool{
+    private DrawingEditor drawingEditor;
+    private Game game;
+    private Position fromPosition;
+    private Tool unitFigure;
+    private Tool dragFigure;
+    private Tool movingFigure;
+    private Figure lockedFigure;
+    UnitMoveTool(DrawingEditor drawingEditor, Game game){
+        this.drawingEditor= drawingEditor;
+        this.game = game;
+    }
 
+    public void mouseDown(MouseEvent e, int x, int y) {
+        if (game.getUnitAt(GfxConstants.getPositionFromXY(x,y))!= null){
+            fromPosition = GfxConstants.getPositionFromXY(x,y);
+            Drawing model = drawingEditor.drawing();
+            model.lock();
+            lockedFigure = model.findFigure(e.getX(),e.getY());
+            unitFigure = new SelectAreaTracker(drawingEditor);
+            dragFigure = new DragTracker(drawingEditor, lockedFigure);
+
+
+
+        }
+    }
+
+    public void mouseUp(MouseEvent e, int x, int y) {
+        drawingEditor.drawing().unlock();
+        dragFigure = null;
+        game.moveUnit(fromPosition,GfxConstants.getPositionFromXY(x,y));
+
+    }
+}
+/*
 class UnitMoveTool extends SelectionTool {
   private DrawingEditor editor;
   private Game game;
@@ -59,18 +95,19 @@ class UnitMoveTool extends SelectionTool {
   public void mouseDown(MouseEvent e, int x, int y) {
     if (game.getUnitAt(GfxConstants.getPositionFromXY(x, y)) != null) {
       from = GfxConstants.getPositionFromXY(x, y);
-      super.mouseDown(e, x, y);
     }// TODO: CHECKING FOR PROPER NOT NULL AND DRAGGING UNITS
   }
 
   @Override
   public void mouseUp(MouseEvent e, int x, int y) {
-      if(game.getUnitAt(from)!= null) {
-          super.mouseUp(e, x, y);
+
           game.moveUnit(from, GfxConstants.getPositionFromXY(x, y));
 
-      }
+
   }
+
+
 }
+*/
 
 
