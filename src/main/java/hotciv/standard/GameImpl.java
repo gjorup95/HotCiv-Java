@@ -186,7 +186,10 @@ public class GameImpl implements Game {
             return false;
         }
         boolean unitHasSufficientMoveCount = getUnitAt(from).getMoveCount() >= 1;
-        if (unitHasSufficientMoveCount) return true;
+        if (unitHasSufficientMoveCount) {
+
+            return true;
+        }
         return false;
     }
 
@@ -214,9 +217,9 @@ public class GameImpl implements Game {
         else {
             playerInTurn = Player.RED;
             endOfRound();
-            getObservers().forEach(gameObserver -> gameObserver.turnEnds(playerInTurn,age));
             age += ageing.calculateAge(getAge());
         }
+        getObservers().forEach(gameObserver -> gameObserver.turnEnds(playerInTurn,age));
     }
 
     private void endOfRound() {
@@ -224,6 +227,7 @@ public class GameImpl implements Game {
         buyUnitsInAllCitiesForAllPlayers();
         resetMoveCount();
         noOfRounds++;
+        getObservers().forEach(gameObserver -> gameObserver.worldChangedAt(new Position(0,0)));
     }
 
     private void addTreasuryInAllCities() {
