@@ -159,6 +159,8 @@ public class GameImpl implements Game {
                 /** Making sure that the moveCount is decremented by 1 */
                 decrementMoveCount(from, to);
                 removeUnit(from);
+                getObservers().forEach(gameObserver -> gameObserver.worldChangedAt(from));
+                getObservers().forEach(gameObserver -> gameObserver.worldChangedAt(to));
                 return true;
             }
         }
@@ -212,6 +214,7 @@ public class GameImpl implements Game {
         else {
             playerInTurn = Player.RED;
             endOfRound();
+            getObservers().forEach(gameObserver -> gameObserver.turnEnds(playerInTurn,age));
             age += ageing.calculateAge(getAge());
         }
     }
@@ -301,6 +304,7 @@ public class GameImpl implements Game {
 
     @Override
     public void setTileFocus(Position position) {
+        getObservers().forEach(gameObserver -> gameObserver.tileFocusChangedAt(position));
 
     }
 
