@@ -44,15 +44,15 @@ public class ShowComposition {
     }
 }
 
-class CompositionTool extends NullTool {
+class CompositionTool extends SelectionTool {
     private Game game;
     private DrawingEditor drawingEditor;
-    private Position positionFrom;
     private NullTool specificTool;
     private SelectionTool selectionTool;
-
+    private Position from;
 
     public CompositionTool(DrawingEditor editor, Game game) {
+        super(editor);
         this.game = game;
         drawingEditor = editor;
     }
@@ -65,19 +65,24 @@ class CompositionTool extends NullTool {
         if (game.getUnitAt(GfxConstants.getPositionFromXY(x, y)) != null && e.isShiftDown()) {
             specificTool = new ActionTool(drawingEditor, game);
             specificTool.mouseDown(e, x, y);
+
         }
         specificTool = new SetFocusTool(drawingEditor, game);
         specificTool.mouseDown(e, x, y);
-        if (game.getUnitAt(GfxConstants.getPositionFromXY(x, y)) != null) {
-            specificTool = null;
+
         selectionTool = new UnitMoveTool(drawingEditor,game);
         selectionTool.mouseDown(e, x, y);
-            positionFrom = GfxConstants.getPositionFromXY(x, y);
+            from = GfxConstants.getPositionFromXY(x, y);
         }
+
+
+
+    public void mouseDrag(MouseEvent e, int x, int y) {
+        selectionTool.mouseDrag(e, x, y);
     }
 
     public void mouseUp(MouseEvent e, int x, int y) {
-        if (game.getTileAt(positionFrom) != game.getTileAt(GfxConstants.getPositionFromXY(x, y))) {
+        if (game.getTileAt(from) != game.getTileAt(GfxConstants.getPositionFromXY(x, y))) {
             selectionTool.mouseUp(e, x, y);
         }
     }

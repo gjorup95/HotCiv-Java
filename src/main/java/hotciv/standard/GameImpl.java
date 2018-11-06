@@ -164,6 +164,8 @@ public class GameImpl implements Game {
                 return true;
             }
         }
+        getObservers().forEach(gameObserver -> gameObserver.worldChangedAt(from));
+        getObservers().forEach(gameObserver -> gameObserver.worldChangedAt(to));
         return false;
     }
 
@@ -294,6 +296,7 @@ public class GameImpl implements Game {
 
     public void performUnitActionAt(Position p) {
         unitActions.performAction(p);
+        getObservers().forEach(gameObserver -> gameObserver.worldChangedAt(p));
     }
 
     public ArrayList<GameObserver> getObservers() {

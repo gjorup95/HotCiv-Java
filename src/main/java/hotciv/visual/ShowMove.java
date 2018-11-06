@@ -56,6 +56,7 @@ class UnitMoveTool extends SelectionTool {
     protected Figure draggedFigure;
 
 
+
     public UnitMoveTool(DrawingEditor editor, Game game) {
         super(editor);
         this.game = game;
@@ -66,15 +67,19 @@ class UnitMoveTool extends SelectionTool {
     @Override
     public void mouseDown(MouseEvent e, int x, int y) {
         if (game.getUnitAt(GfxConstants.getPositionFromXY(x, y)) != null) {
-            System.out.println("" + game.getUnitAt(GfxConstants.getPositionFromXY(x, y)));
+          //  System.out.println("" + game.getUnitAt(GfxConstants.getPositionFromXY(x, y)));
             Drawing model = editor().drawing();
             model.lock();
             draggedFigure = model.findFigure(e.getX(), e.getY());
-            double pX = draggedFigure.displayBox().getCenterX();
+            if (!e.isAltDown()) {
+                model.clearSelection();
+            }
+
+         /*   double pX = draggedFigure.displayBox().getCenterX();
             double pY = draggedFigure.displayBox().getCenterY();
             System.out.println("" +pX + "     " + pY);
             Position p =  GfxConstants.getPositionFromXY((int)Math.round(pX),(int)Math.round(pY));
-            System.out.println("position is" + p);
+            System.out.println("position is" + p); */
                 fChild = createDragTracker(draggedFigure);
                 fChild.mouseDown(e, x, y);
                 from = GfxConstants.getPositionFromXY(x, y);
@@ -91,18 +96,8 @@ class UnitMoveTool extends SelectionTool {
 
     @Override
     public void mouseUp(MouseEvent e, int x, int y) {
-         if (game.getTileAt(GfxConstants.getPositionFromXY(x, y)) == null ) {
-             System.out.println("" + game.getTileAt(GfxConstants.getPositionFromXY(x, y)));
-             editor.drawing().unlock();
-             Drawing model = editor().drawing();
-             model.requestUpdate();
-             fChild.mouseUp(e, x, y);
-             fChild = cachedNullTool;
-             draggedFigure = null;
-             from = null;
-         }
-             else if (game.getTileAt(GfxConstants.getPositionFromXY(x, y))!= null && game.getTileAt(from)!= null) {
-                 System.out.println("hoppet ned");
+         if (game.getTileAt(GfxConstants.getPositionFromXY(x, y))!= null && game.getTileAt(from)!= null) {
+                 //System.out.println("hoppet ned");
                  game.moveUnit(from, GfxConstants.getPositionFromXY(x, y));
              editor.drawing().unlock();
              fChild.mouseUp(e, x, y);
@@ -110,14 +105,19 @@ class UnitMoveTool extends SelectionTool {
              draggedFigure = null;
              from = null;
              }
+        if (game.getTileAt(GfxConstants.getPositionFromXY(x, y)) == null ) {
+           // System.out.println("" + game.getTileAt(GfxConstants.getPositionFromXY(x, y)));
+            editor.drawing().unlock();
 
-
+            //game.moveUnit(new Position(4, 0), new Position(4, 8));
+            fChild.mouseUp(e, x, y);
+            fChild = cachedNullTool;
+            draggedFigure = null;
+            from = null;
 
         }
+        }
     }
-
-
-
 
 
 
