@@ -108,6 +108,7 @@ class UnitMoveTool extends SelectionTool {
         if (game.getTileAt(GfxConstants.getPositionFromXY(x, y)) == null ) {
            // System.out.println("" + game.getTileAt(GfxConstants.getPositionFromXY(x, y)));
             editor.drawing().unlock();
+// TODO: HOW TO ASK TO UPDATE?
 
             //game.moveUnit(new Position(4, 0), new Position(4, 8));
             fChild.mouseUp(e, x, y);
