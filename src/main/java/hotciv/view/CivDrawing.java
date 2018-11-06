@@ -251,9 +251,11 @@ public class CivDrawing
 
         clearSelection();
         // this is a really brute-force algorithm: destroy all known units and build up the entire set again
+        removeAllCityFigures();
+        defineCityMap();
         removeAllUnitFigures();
         defineUnitMap();
-        defineCityMap();
+
     }
 
     public void turnEnds(Player nextPlayer, int age) {
@@ -325,10 +327,10 @@ public class CivDrawing
         // A request has been issued to repaint
         // everything. We simply rebuild the
         // entire Drawing.
-
-        defineUnitMap();
-        defineIcons();
         defineCityMap();
+        defineUnitMap();
+
+
     }
 
     @Override
