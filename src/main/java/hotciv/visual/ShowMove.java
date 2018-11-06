@@ -101,8 +101,8 @@ class UnitMoveTool extends SelectionTool {
         if (game.getTileAt(GfxConstants.getPositionFromXY(x, y)) == null ) {
 
             editor.drawing().unlock();
-
             fChild.mouseUp(e, x, y);
+            /** Redrawing the picture so that non allowed moves are updated immediately */
             Drawing model = editor().drawing();
             model.requestUpdate();
             fChild = cachedNullTool;
