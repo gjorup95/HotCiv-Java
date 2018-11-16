@@ -70,8 +70,8 @@ public class StubGame2 implements Game {
         pos_city_red = new Position(0, 0);
         pos_city_blue = new Position(1, 1);
 
-        red_city = new StubCity(Player.RED);
-        blue_city = new StubCity(Player.BLUE);
+        red_city = new StubCity(Player.RED,1);
+        blue_city = new StubCity(Player.BLUE,1);
         ((StubCity) blue_city).setProductionFocus(GameConstants.productionFocus);
         ((StubCity) red_city).setWorkforceFocus(GameConstants.SETTLER);
         ((StubCity) red_city).setSize(3);
@@ -197,80 +197,3 @@ public class StubGame2 implements Game {
 
 }
 
-class StubUnit implements Unit {
-    private String type;
-    private Player owner;
-
-    public StubUnit(String type, Player owner) {
-        this.type = type;
-        this.owner = owner;
-    }
-
-    public String getTypeString() {
-        return type;
-    }
-
-    public Player getOwner() {
-        return owner;
-    }
-
-    public int getMoveCount() {
-        return 1;
-    }
-
-    public int getDefensiveStrength() {
-        return 0;
-    }
-
-    public int getAttackingStrength() {
-        return 0;
-    }
-}
-
-class StubCity implements City {
-    private Player owner;
-    private String productionFocus = GameConstants.foodFocus;
-    private String workforceFocus = GameConstants.ARCHER;
-    private int size = 1;
-
-    public StubCity(Player owner) {
-        this.owner = owner;
-    }
-
-    @Override
-    public Player getOwner() {
-        return owner;
-    }
-
-    @Override
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    @Override
-    public int getTreasury() {
-        return 0;
-    }
-
-    @Override
-    public String getProduction() {
-        return productionFocus;
-    }
-
-    @Override
-    public String getWorkforceFocus() {
-        return workforceFocus;
-    }
-
-    public void setWorkforceFocus(String workforceFocus) {
-        this.workforceFocus = workforceFocus;
-    }
-
-    public void setProductionFocus(String productionFocus) {
-        this.productionFocus = productionFocus;
-    }
-}

@@ -1,0 +1,49 @@
+package hotciv.standard.broker;
+
+import frds.broker.ClientProxy;
+import frds.broker.Requestor;
+import hotciv.framework.City;
+import hotciv.framework.Player;
+
+public class CityProxy implements City, ClientProxy {
+
+    private final Requestor requestor;
+
+    public CityProxy(Requestor crh) {
+        this.requestor = crh;
+    }
+
+    @Override
+    public Player getOwner() {
+        Player p = null;
+        p = requestor.sendRequestAndAwaitReply("1", MarshallingConstants.CITY_GET_OWNER, Player.class, "no-arguments");
+        return p;
+    }
+
+    @Override
+    public int getSize() {
+        int size = 0;
+        size = requestor.sendRequestAndAwaitReply("not_used", MarshallingConstants.CITY_GET_SIZE, int.class, "no-arguments");
+        return size;
+    }
+
+    @Override
+    public int getTreasury() {
+        int treasury = 0;
+        treasury = requestor.sendRequestAndAwaitReply("not_used", MarshallingConstants.CITY_GET_TREASURY, int.class, "no-arguments");
+        return treasury;
+    }
+
+    @Override
+    public String getProduction() {
+        String production = null;
+        production = requestor.sendRequestAndAwaitReply("not_used", MarshallingConstants.CITY_GET_PRODUCTION, String.class, "no-arguments");
+        return production;
+    }
+
+    @Override
+    public String getWorkforceFocus() {
+        // Not implemented
+        return null;
+    }
+}

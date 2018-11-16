@@ -40,6 +40,7 @@ dependencies {
     testCompile 'org.hamcrest:hamcrest-library:1.3'
     compile 'com.baerbak.maven:hotciv-fractal:1.0'
     compile 'com.baerbak.maven:minidraw:1.12'
+    compile 'com.baerbak.maven:broker:1.4'
 }
 // === Execution tasks - for running the various integration tests
 //     for manual test-driving the MiniDraw framework customization.
