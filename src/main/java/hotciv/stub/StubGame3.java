@@ -18,6 +18,11 @@ public class StubGame3 implements Game, Servant {
     private GameObserver gameObserver;
     private City green_city;
 
+    // Booleans for testing
+    private boolean productionChanged = false;
+    private boolean endOfTurnHasBeenCalled = false;
+    private boolean performUnitAtHasBeenCalled = false;
+
     // Units
     private Unit green_archer;
 
@@ -75,7 +80,11 @@ public class StubGame3 implements Game, Servant {
 
     @Override
     public void endOfTurn() {
+        endOfTurnHasBeenCalled = true;
+    }
 
+    public boolean hasEndOfTurnBeenCalled() {
+        return endOfTurnHasBeenCalled;
     }
 
     @Override
@@ -85,12 +94,20 @@ public class StubGame3 implements Game, Servant {
 
     @Override
     public void changeProductionInCityAt(Position p, String unitType) {
+        productionChanged = true;
+    }
 
+    public boolean hasProductionChanged() {
+        return productionChanged;
     }
 
     @Override
     public void performUnitActionAt(Position p) {
+        performUnitAtHasBeenCalled = true;
+    }
 
+    public boolean hasPerformUnitActionAtBeenCalled() {
+        return performUnitAtHasBeenCalled;
     }
 
     @Override

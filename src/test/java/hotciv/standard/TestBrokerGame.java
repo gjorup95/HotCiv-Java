@@ -19,11 +19,12 @@ import frds.broker.Invoker;
 public class TestBrokerGame {
 
     private Game game;
+    private Game servant;
 
     @Before
     public void setup() {
 
-        Game servant = new StubGame3();
+        servant = new StubGame3();
         GameObserver nullObserver = new NullObserver();
         servant.addObserver(nullObserver);
 
@@ -57,22 +58,35 @@ public class TestBrokerGame {
 
     @Test
     public void shouldMoveUnit() {
-        game.moveUnit(new Position(5,5), new Position(5,6));
+        boolean movedUnit = false;
+
+        if(game.moveUnit(new Position(5,5), new Position(5,6))) {
+            movedUnit = true;
+        }
+        assertThat(movedUnit, is(true));
     }
 
     @Test
     public void shouldChangeProductionInCity() {
         game.changeProductionInCityAt(new Position(10,10), GameConstants.ARCHER);
+        StubGame3 localStubGame = (StubGame3) servant;
+        assertThat(localStubGame.hasProductionChanged(),is(true ));
     }
 
     @Test
     public void shouldCouldEndOfTurn() {
+        StubGame3 localStubGame = (StubGame3) servant;
+        assertThat(localStubGame.hasEndOfTurnBeenCalled(), is(false));
         game.endOfTurn();
+        assertThat(localStubGame.hasEndOfTurnBeenCalled(), is(true));
     }
 
     @Test
     public void shouldPerformUnitActionAt() {
+        StubGame3 localStubGame = (StubGame3) servant;
+        assertThat(localStubGame.hasPerformUnitActionAtBeenCalled(), is(false));
         game.performUnitActionAt(new Position(12,12));
+        assertThat(localStubGame.hasPerformUnitActionAtBeenCalled(), is(true));
     }
 
 }

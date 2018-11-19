@@ -16,7 +16,7 @@ public class CityProxy implements City, ClientProxy {
     @Override
     public Player getOwner() {
         Player p = null;
-        p = requestor.sendRequestAndAwaitReply("1", MarshallingConstants.CITY_GET_OWNER, Player.class, "no-arguments");
+        p = requestor.sendRequestAndAwaitReply("not_used", MarshallingConstants.CITY_GET_OWNER, Player.class, "no-arguments");
         return p;
     }
 
@@ -30,7 +30,9 @@ public class CityProxy implements City, ClientProxy {
     @Override
     public int getTreasury() {
         int treasury = 0;
-        treasury = requestor.sendRequestAndAwaitReply("not_used", MarshallingConstants.CITY_GET_TREASURY, int.class, "no-arguments");
+        treasury = requestor.sendRequestAndAwaitReply("not_used",
+                MarshallingConstants.CITY_GET_TREASURY,
+                int.class, "no-arguments");
         return treasury;
     }
 

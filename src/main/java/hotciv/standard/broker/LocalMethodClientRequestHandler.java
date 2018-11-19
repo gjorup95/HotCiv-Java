@@ -16,7 +16,8 @@ public class LocalMethodClientRequestHandler implements ClientRequestHandler {
     @Override
     public ReplyObject sendToServer(RequestObject requestObject) {
         System.out.println("--->" + requestObject);
-        ReplyObject reply = invoker.handleRequest(requestObject.getObjectId(), requestObject.getOperationName(), requestObject.getPayload());
+        ReplyObject reply = invoker.handleRequest(requestObject.getObjectId(),
+                requestObject.getOperationName(), requestObject.getPayload());
         System.out.println("<---" + reply);
         return reply;
     }

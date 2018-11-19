@@ -20,6 +20,7 @@ public class HotCivCityInvoker implements Invoker {
     public HotCivCityInvoker() {
         gson = new Gson();
     }
+
     @Override
     public ReplyObject handleRequest(String objectId, String operationName, String payload) {
         ReplyObject reply = null;

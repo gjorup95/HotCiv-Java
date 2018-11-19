@@ -23,7 +23,9 @@ public class GameProxy implements Game, ClientProxy {
     @Override
     public int getAge() {
         int age = 0;
-        age = requestor.sendRequestAndAwaitReply("not_used", MarshallingConstants.GAME_GET_AGE, int.class, "no-argument");
+        age = requestor.sendRequestAndAwaitReply("not_used",
+                MarshallingConstants.GAME_GET_AGE,
+                int.class, "no-argument");
         return age;
     }
 
@@ -37,7 +39,9 @@ public class GameProxy implements Game, ClientProxy {
     @Override
     public boolean moveUnit(Position from, Position to) {
         boolean unitMoved;
-        unitMoved = requestor.sendRequestAndAwaitReply("not_used", "game_move_unit", boolean.class, from, to);
+        unitMoved = requestor.sendRequestAndAwaitReply("not_used",
+                "game_move_unit",
+                boolean.class, from, to);
         return unitMoved;
     }
 

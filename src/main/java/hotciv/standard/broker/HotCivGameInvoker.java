@@ -13,6 +13,7 @@ import frds.broker.ReplyObject;
 import hotciv.framework.Position;
 import hotciv.framework.Tile;
 import hotciv.standard.GameImpl;
+import hotciv.stub.StubGame3;
 import javafx.geometry.Pos;
 
 public class HotCivGameInvoker implements Invoker {
@@ -28,7 +29,7 @@ public class HotCivGameInvoker implements Invoker {
         ReplyObject reply = null;
         Gson gson = new Gson();
 
-        // Demarshall parameters into something useful..
+        // Demarshall arguments into something useful
         JsonParser parser = new JsonParser();
         JsonArray array = parser.parse(payload).getAsJsonArray();
 
@@ -53,17 +54,19 @@ public class HotCivGameInvoker implements Invoker {
         }
 
         if(operationName.equals(MarshallingConstants.GAME_MOVE_UNIT)) {
+            boolean movedUnit = false;
             Position from = gson.fromJson(array.get(0), Position.class);
             Position to = gson.fromJson(array.get(1), Position.class);
-            game.moveUnit(from, to);
-            reply = new ReplyObject((HttpServletResponse.SC_OK), gson.toJson("the unit was moved from" + from + "to " + to));
+            movedUnit = game.moveUnit(from, to);
+            reply = new ReplyObject((HttpServletResponse.SC_OK), gson.toJson(movedUnit));
         }
 
         if(operationName.equals(MarshallingConstants.GAME_CHANGE_PRODUCTION_IN_CITY_AT)) {
+            boolean hasChangedProduction = false;
             Position p = gson.fromJson(array.get(0), Position.class);
             String production = gson.fromJson(array.get(1), String.class);
             game.changeProductionInCityAt(p, production);
-            reply = new ReplyObject((HttpServletResponse.SC_OK), gson.toJson("The production was changed to " + production + " in city at" + p));
+            reply = new ReplyObject((HttpServletResponse.SC_OK), gson.toJson(null));
         }
 
         if(operationName.equals(MarshallingConstants.GAME_PERFORM_UNIT_ACTION_AT)) {
