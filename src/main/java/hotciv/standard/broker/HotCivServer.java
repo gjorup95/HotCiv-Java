@@ -3,6 +3,7 @@ import frds.broker.Invoker;
 import frds.broker.ipc.socket.SocketServerRequestHandler;
 import hotciv.framework.Game;
 import hotciv.standard.AlphaCivGameFactory;
+import hotciv.standard.BetaCivGameFactory;
 import hotciv.standard.GameImpl;
 import hotciv.standard.SemiCivGameFactory;
 
