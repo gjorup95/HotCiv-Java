@@ -17,11 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 public class HotCivCityInvoker implements Invoker {
 
     private Gson gson;
-    // private final ObjectStorage objectStorage;
+    private final ObjectStorage objectStorage;
 
-    public HotCivCityInvoker() {
+    public HotCivCityInvoker(ObjectStorage objectStorage) {
         gson = new Gson();
-        // this.objectStorage = objectStorage;
+        this.objectStorage = objectStorage;
     }
 
     @Override
@@ -34,22 +34,22 @@ public class HotCivCityInvoker implements Invoker {
 
         City city = lookUpCity(objectId);
 
-        if(operationName.equals(MarshallingConstants.CITY_GET_OWNER)) {
+        if (operationName.equals(MarshallingConstants.CITY_GET_OWNER)) {
             Player owner = city.getOwner();
             reply = new ReplyObject((HttpServletResponse.SC_OK), gson.toJson(owner));
         }
 
-        if(operationName.equals(MarshallingConstants.CITY_GET_SIZE)) {
+        if (operationName.equals(MarshallingConstants.CITY_GET_SIZE)) {
             int size = city.getSize();
             reply = new ReplyObject((HttpServletResponse.SC_OK), gson.toJson(size));
         }
 
-        if(operationName.equals(MarshallingConstants.CITY_GET_TREASURY)) {
+        if (operationName.equals(MarshallingConstants.CITY_GET_TREASURY)) {
             int treasury = city.getTreasury();
             reply = new ReplyObject((HttpServletResponse.SC_OK), gson.toJson(treasury));
         }
 
-        if(operationName.equals(MarshallingConstants.CITY_GET_PRODUCTION)) {
+        if (operationName.equals(MarshallingConstants.CITY_GET_PRODUCTION)) {
             String production = city.getProduction();
             reply = new ReplyObject((HttpServletResponse.SC_OK), gson.toJson(production));
         }
@@ -58,8 +58,7 @@ public class HotCivCityInvoker implements Invoker {
     }
 
     private City lookUpCity(String objectId) {
-        // City city = objectStorage.getCity(objectId);
-        City city = new StubCity(Player.GREEN, 7);
+        City city = objectStorage.getCity(objectId);
         return city;
     }
 

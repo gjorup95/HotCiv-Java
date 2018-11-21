@@ -14,9 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 public class HotCivTileInvoker implements Invoker {
 
     private Gson gson;
+    private final ObjectStorage objectStorage;
 
-    public HotCivTileInvoker() {
+    public HotCivTileInvoker(ObjectStorage objectStorage) {
         gson = new Gson();
+        this.objectStorage = objectStorage;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class HotCivTileInvoker implements Invoker {
     }
 
     private Tile lookUpTile(String objectId) {
-        Tile tile = new StubTile(GameConstants.OCEANS);
+        Tile tile = objectStorage.getTile(objectId);
         return tile;
     }
 }

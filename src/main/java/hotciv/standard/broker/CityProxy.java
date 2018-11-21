@@ -22,7 +22,7 @@ public class CityProxy implements City, ClientProxy {
     @Override
     public Player getOwner() {
         Player p = null;
-        p = requestor.sendRequestAndAwaitReply(objectId, MarshallingConstants.CITY_GET_OWNER, Player.class, "no-arguments");
+        p = requestor.sendRequestAndAwaitReply(objectId, MarshallingConstants.CITY_GET_OWNER, String.class, "no-arguments");
         return p;
     }
 

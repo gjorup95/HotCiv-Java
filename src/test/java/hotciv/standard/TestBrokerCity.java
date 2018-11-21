@@ -27,7 +27,7 @@ public class TestBrokerCity {
         GameObserver nullObserver = new NullObserver();
         servant.addObserver(nullObserver);
 
-        Invoker invoker = new HotCivCityInvoker();
+        Invoker invoker = new RootInvoker(servant);
 
         ClientRequestHandler crh = new LocalMethodClientRequestHandler(invoker);
 

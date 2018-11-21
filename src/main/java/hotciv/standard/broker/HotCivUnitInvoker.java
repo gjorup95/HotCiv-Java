@@ -16,9 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 public class HotCivUnitInvoker implements Invoker {
 
     private Gson gson;
+    private final ObjectStorage objectStorage;
 
-    public HotCivUnitInvoker() {
+    public HotCivUnitInvoker(ObjectStorage objectStorage) {
         gson = new Gson();
+        this.objectStorage = objectStorage;
     }
 
     @Override
@@ -59,7 +61,7 @@ public class HotCivUnitInvoker implements Invoker {
     }
 
     private Unit lookUpUnit(String objectId) {
-        Unit unit = new StubUnit(GameConstants.ARCHER, Player.GREEN);
+        Unit unit = objectStorage.getUnit(objectId);
         return unit;
     }
 }

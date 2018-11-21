@@ -9,8 +9,10 @@ import java.util.UUID;
 public class CityServant implements City, Servant {
 
     private final String objectId;
+    private final Player owner;
 
     public CityServant(Player owner) {
+        this.owner = owner;
         objectId = UUID.randomUUID().toString();
     }
 
@@ -20,7 +22,7 @@ public class CityServant implements City, Servant {
 
     @Override
     public Player getOwner() {
-        return null;
+        return owner;
     }
 
     @Override

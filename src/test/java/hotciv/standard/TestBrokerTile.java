@@ -8,10 +8,7 @@ import hotciv.framework.Game;
 import hotciv.framework.GameConstants;
 import hotciv.framework.GameObserver;
 import hotciv.framework.Tile;
-import hotciv.standard.broker.HotCivTileInvoker;
-import hotciv.standard.broker.HotCivUnitInvoker;
-import hotciv.standard.broker.LocalMethodClientRequestHandler;
-import hotciv.standard.broker.TileProxy;
+import hotciv.standard.broker.*;
 import hotciv.stub.StubGame3;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +26,7 @@ public class TestBrokerTile {
         GameObserver nullObserver = new NullObserver();
         servant.addObserver(nullObserver);
 
-        Invoker invoker = new HotCivTileInvoker();
+        Invoker invoker = new RootInvoker(servant);
 
         ClientRequestHandler crh = new LocalMethodClientRequestHandler(invoker);
 

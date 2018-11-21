@@ -4,32 +4,36 @@ public class MarshallingConstants {
 
     // Type prefixes
     public static final String GAME_PREFIX = "game";
+    public static final String CITY_PREFIX = "city";
+    public static final String UNIT_PREFIX = "unit";
+    public static final String TILE_PREFIX = "tile";
 
     // Game methods for marshalling
-    public static final String GAME_GET_WINNER = "game_get_winner";
-    public static final String GAME_GET_AGE = "game_get_age";
-    public static final String GAME_GET_PLAYERINTURN = "game_get_player_in_turn";
-    public static final String GAME_END_OF_TURN = "game_end_of_turn";
-    public static final String GAME_MOVE_UNIT = "game_move_unit";
-    public static final String GAME_CHANGE_PRODUCTION_IN_CITY_AT = "game_change_production_in_city_at";
-    public static final String GAME_PERFORM_UNIT_ACTION_AT = "game_perform_unit_action_at";
-    public static final String GAME_GET_CITY_AT = "game_get_city_at";
-    public static final String GAME_GET_TILE_AT = "game_get_tile_at";
-    public static final String GAME_GET_UNIT_AT = "game_get_unit_at";
+    public static final String GAME_GET_WINNER = GAME_PREFIX + "_get_winner";
+    public static final String GAME_GET_AGE = GAME_PREFIX + "_get_age";
+    public static final String GAME_GET_PLAYERINTURN = GAME_PREFIX + "_get_player_in_turn";
+    public static final String GAME_END_OF_TURN = GAME_PREFIX + "_end_of_turn";
+    public static final String GAME_MOVE_UNIT = GAME_PREFIX + "_move_unit";
+    public static final String GAME_CHANGE_PRODUCTION_IN_CITY_AT = GAME_PREFIX + "_change_production_in_city_at";
+    public static final String GAME_PERFORM_UNIT_ACTION_AT = GAME_PREFIX + "_perform_unit_action_at";
+    public static final String GAME_GET_CITY_AT = GAME_PREFIX + "_get_city_at";
+    public static final String GAME_GET_TILE_AT = GAME_PREFIX + "_get_tile_at";
+    public static final String GAME_GET_UNIT_AT = GAME_PREFIX + "_get_unit_at";
 
     // City methods for marshalling
-    public static final String CITY_GET_OWNER = "city_get_owner";
-    public static final String CITY_GET_SIZE = "city_get_size";
-    public static final String CITY_GET_TREASURY = "city_get_treasury";
-    public static final String CITY_GET_PRODUCTION = "city_get_production";
+    public static final String CITY_GET_OWNER = CITY_PREFIX + "_get_owner";
+    public static final String CITY_GET_SIZE = CITY_PREFIX + "_get_size";
+    public static final String CITY_GET_TREASURY = CITY_PREFIX + "_get_treasury";
+    public static final String CITY_GET_PRODUCTION = CITY_PREFIX + "_get_production";
 
     // Unit methods for marshalling
-    public static final String UNIT_GET_TYPE_STRING = "unit_get_type_string";
-    public static final String UNIT_GET_OWNER = "unit_get_owner";
-    public static final String UNIT_GET_MOVE_COUNT = "unit_get_move_count";
-    public static final String UNIT_GET_DEFENSIVE_STRENGTH = "unit_get_defensive_strength";
-    public static final String UNIT_GET_ATTACK_STRENGTH = "unit_get_attack_strength";
+    public static final String UNIT_GET_TYPE_STRING = UNIT_PREFIX + "_get_type_string";
+    public static final String UNIT_GET_OWNER = UNIT_PREFIX + "_get_owner";
+    public static final String UNIT_GET_MOVE_COUNT = UNIT_PREFIX + "_get_move_count";
+    public static final String UNIT_GET_DEFENSIVE_STRENGTH = UNIT_PREFIX + "_get_defensive_strength";
+    public static final String UNIT_GET_ATTACK_STRENGTH = UNIT_PREFIX + "_get_attack_strength";
 
     // Tile methods for marshalling
-    public static final String TILE_GET_TYPE_STRING = "tile_get_type_string";
+    public static final String TILE_GET_TYPE_STRING = TILE_PREFIX + "_get_type_string";
+
 }

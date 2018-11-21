@@ -26,7 +26,7 @@ public class TestBrokerUnit {
         GameObserver nullObserver = new NullObserver();
         servant.addObserver(nullObserver);
 
-        Invoker invoker = new HotCivUnitInvoker();
+        Invoker invoker = new RootInvoker(servant);
 
         ClientRequestHandler crh = new LocalMethodClientRequestHandler(invoker);
 

@@ -29,7 +29,7 @@ public class HotCivServer {
         // Define the server side delegates
 
         Game game = new GameImpl(new AlphaCivGameFactory());
-        Invoker invoker = new HotCivGameInvoker(game);
+        Invoker invoker = new RootInvoker(game);
 
         SocketServerRequestHandler ssrh = new SocketServerRequestHandler();
         ssrh.setPortAndInvoker(port, invoker);

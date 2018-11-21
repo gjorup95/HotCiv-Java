@@ -16,9 +16,11 @@ import javafx.geometry.Pos;
 public class HotCivGameInvoker implements Invoker {
 
     private final Game game;
+    private final ObjectStorage objectStorage;
 
-    public HotCivGameInvoker(Game servant) {
+    public HotCivGameInvoker(Game servant, ObjectStorage objectStorage) {
         this.game = servant;
+        this.objectStorage = objectStorage;
     }
 
     @Override
@@ -77,6 +79,7 @@ public class HotCivGameInvoker implements Invoker {
             CityServant city = new CityServant(game.getCityAt(p).getOwner());
             String id = city.getObjectId();
             System.out.println(id);
+            objectStorage.putCity(id,city);
 
             reply = new ReplyObject(HttpServletResponse.SC_CREATED, gson.toJson(id));
         }
@@ -86,6 +89,7 @@ public class HotCivGameInvoker implements Invoker {
             TileServant tile = new TileServant(game.getTileAt(p).getTypeString());
             String id = tile.getObjectId();
             System.out.println(id);
+            objectStorage.putTile(id,tile);
 
             reply = new ReplyObject(HttpServletResponse.SC_CREATED, gson.toJson(id));
         }
@@ -95,6 +99,7 @@ public class HotCivGameInvoker implements Invoker {
             UnitServant unit = new UnitServant(game.getUnitAt(p).getTypeString(), game.getUnitAt(p).getOwner());
             String id = unit.getObjectId();
             System.out.println(id);
+            objectStorage.putUnit(id,unit);
 
             reply = new ReplyObject(HttpServletResponse.SC_CREATED, gson.toJson(id));
         }
