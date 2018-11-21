@@ -70,10 +70,14 @@ public class GameProxy implements Game, ClientProxy {
         return null;
     }
 
+
     @Override
     public City getCityAt(Position p) {
-        return null;
+        String id = requestor.sendRequestAndAwaitReply("none", MarshallingConstants.GAME_GET_CITY_AT, String.class, p);
+        City proxy = new CityProxy(id, requestor);
+        return proxy;
     }
+
 
     @Override
     public void changeWorkForceFocusInCityAt(Position p, String balance) {

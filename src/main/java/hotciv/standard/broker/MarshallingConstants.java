@@ -13,6 +13,7 @@ public class MarshallingConstants {
     public static final String GAME_MOVE_UNIT = "game_move_unit";
     public static final String GAME_CHANGE_PRODUCTION_IN_CITY_AT = "game_change_production_in_city_at";
     public static final String GAME_PERFORM_UNIT_ACTION_AT = "game_perform_unit_action_at";
+    public static final String GAME_GET_CITY_AT = "game_get_city_at";
 
     // City methods for marshalling
     public static final String CITY_GET_OWNER = "city_get_owner";

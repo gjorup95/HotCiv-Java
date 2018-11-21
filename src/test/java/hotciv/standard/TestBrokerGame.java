@@ -89,4 +89,9 @@ public class TestBrokerGame {
         assertThat(localStubGame.hasPerformUnitActionAtBeenCalled(), is(true));
     }
 
+    @Test
+    public void shouldReturnCities() {
+        game.getCityAt(new Position(1,1));
+    }
+
 }

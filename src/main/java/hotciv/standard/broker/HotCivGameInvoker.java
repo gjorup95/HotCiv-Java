@@ -2,16 +2,13 @@ package hotciv.standard.broker;
 
 import frds.broker.Invoker;
 import frds.broker.ReplyObject;
-import hotciv.framework.Game;
-import hotciv.framework.Player;
+import hotciv.framework.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import javax.servlet.http.HttpServletResponse;
 import frds.broker.Invoker;
 import frds.broker.ReplyObject;
-import hotciv.framework.Position;
-import hotciv.framework.Tile;
 import hotciv.standard.GameImpl;
 import hotciv.stub.StubGame3;
 import javafx.geometry.Pos;
@@ -74,6 +71,17 @@ public class HotCivGameInvoker implements Invoker {
             game.performUnitActionAt(p);
             reply = new ReplyObject((HttpServletResponse.SC_OK), gson.toJson("The unit performed the action at " + p));
         }
+
+        if(operationName.equals(MarshallingConstants.GAME_GET_CITY_AT)) {
+            Position p = gson.fromJson(array.get(0), Position.class);
+            CityServant city = new CityServant(game.getCityAt(p).getOwner());
+            String id = city.getObjectId();
+            System.out.println(id);
+
+            reply = new ReplyObject(HttpServletResponse.SC_CREATED, gson.toJson(id));
+
+            }
+
 
         return reply;
     }

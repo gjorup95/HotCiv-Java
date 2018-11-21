@@ -10,15 +10,18 @@ import hotciv.framework.Game;
 import hotciv.framework.Player;
 import hotciv.standard.CityImpl;
 import hotciv.stub.StubCity;
+import hotciv.stub.StubGame3;
 
 import javax.servlet.http.HttpServletResponse;
 
 public class HotCivCityInvoker implements Invoker {
 
     private Gson gson;
+    // private final ObjectStorage objectStorage;
 
     public HotCivCityInvoker() {
         gson = new Gson();
+        // this.objectStorage = objectStorage;
     }
 
     @Override
@@ -50,10 +53,12 @@ public class HotCivCityInvoker implements Invoker {
             String production = city.getProduction();
             reply = new ReplyObject((HttpServletResponse.SC_OK), gson.toJson(production));
         }
+
         return reply;
     }
 
     private City lookUpCity(String objectId) {
+        // City city = objectStorage.getCity(objectId);
         City city = new StubCity(Player.GREEN, 7);
         return city;
     }

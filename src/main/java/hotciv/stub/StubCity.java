@@ -4,15 +4,23 @@ import hotciv.framework.City;
 import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 
+import java.util.UUID;
+
 public class StubCity implements City {
     private Player owner;
     private String productionFocus = GameConstants.foodFocus;
     private String workforceFocus = GameConstants.ARCHER;
     private int size;
+    private final String objectId;
 
     public StubCity(Player owner, int size) {
         this.owner = owner;
         this.size = size;
+        objectId = UUID.randomUUID().toString();
+    }
+
+    public String geteObjectId() {
+       return objectId;
     }
 
     @Override
