@@ -7,9 +7,11 @@ import hotciv.framework.Tile;
 public class TileProxy implements Tile, ClientProxy {
 
     private final Requestor requestor;
+    private final String objectId;
 
-    public TileProxy(Requestor crh) {
+    public TileProxy(String objectId, Requestor crh) {
         this.requestor = crh;
+        this.objectId = objectId;
     }
 
     @Override

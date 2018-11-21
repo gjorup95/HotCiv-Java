@@ -79,10 +79,25 @@ public class HotCivGameInvoker implements Invoker {
             System.out.println(id);
 
             reply = new ReplyObject(HttpServletResponse.SC_CREATED, gson.toJson(id));
+        }
 
-            }
+        if(operationName.equals(MarshallingConstants.GAME_GET_TILE_AT)) {
+            Position p = gson.fromJson(array.get(0), Position.class);
+            TileServant tile = new TileServant(game.getTileAt(p).getTypeString());
+            String id = tile.getObjectId();
+            System.out.println(id);
 
+            reply = new ReplyObject(HttpServletResponse.SC_CREATED, gson.toJson(id));
+        }
 
+        if(operationName.equals(MarshallingConstants.GAME_GET_UNIT_AT)) {
+            Position p = gson.fromJson(array.get(0), Position.class);
+            UnitServant unit = new UnitServant(game.getUnitAt(p).getTypeString(), game.getUnitAt(p).getOwner());
+            String id = unit.getObjectId();
+            System.out.println(id);
+
+            reply = new ReplyObject(HttpServletResponse.SC_CREATED, gson.toJson(id));
+        }
         return reply;
     }
 }

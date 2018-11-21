@@ -10,13 +10,27 @@ import java.util.Map;
 import com.google.gson.reflect.*;
 import hotciv.standard.NullObserver;
 import hotciv.standard.TileImpl;
+import javafx.geometry.Pos;
 
 public class StubGame3 implements Game, Servant {
     // Positions
+    // Cities
     private Position position_of_green_city = new Position(1,1);
+    private Position position_of_red_city = new Position(15,15);
+
+    // Units
     private Position position_of_green_archer;
+
+    // Tiles
+    private Position position_of_ocean_tile = new Position(8,8);
+
     private GameObserver gameObserver;
+
+    //
     private City green_city;
+    private City red_city;
+    //
+    private Tile ocean_tile;
 
     // Booleans for testing
     private boolean productionChanged = false;
@@ -32,15 +46,25 @@ public class StubGame3 implements Game, Servant {
         gameObserver = new NullObserver();
 
         green_city = new CityImpl(Player.GREEN);
+        red_city = new CityImpl(Player.RED);
+
+        // tiles
+        ocean_tile = new TileImpl(GameConstants.OCEANS);
     }
 
     @Override
     public Tile getTileAt(Position p) {
+        if(p.equals(position_of_ocean_tile)) {
+            return ocean_tile;
+        }
         return null;
     }
 
     @Override
     public Unit getUnitAt(Position p) {
+        if(p.equals(position_of_green_archer)) {
+            return green_archer;
+        }
         return null;
     }
 
@@ -48,6 +72,9 @@ public class StubGame3 implements Game, Servant {
     public City getCityAt(Position p) {
         if(p.equals(position_of_green_city)) {
             return new StubCity(Player.GREEN, 4);
+        }
+        if(p.equals(position_of_red_city)) {
+            return new StubCity(Player.RED, 7);
         }
         return null;
     }

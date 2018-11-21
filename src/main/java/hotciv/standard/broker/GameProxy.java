@@ -62,12 +62,16 @@ public class GameProxy implements Game, ClientProxy {
 
     @Override
     public Tile getTileAt(Position p) {
-        return null;
+        String id = requestor.sendRequestAndAwaitReply("none", MarshallingConstants.GAME_GET_TILE_AT, String.class, p);
+        Tile proxy = new TileProxy(id, requestor);
+        return proxy;
     }
 
     @Override
     public Unit getUnitAt(Position p) {
-        return null;
+        String id = requestor.sendRequestAndAwaitReply("none", MarshallingConstants.GAME_GET_UNIT_AT, String.class, p);
+        Unit proxy = new UnitProxy(id, requestor);
+        return proxy;
     }
 
 

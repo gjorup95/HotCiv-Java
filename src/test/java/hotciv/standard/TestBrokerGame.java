@@ -92,6 +92,17 @@ public class TestBrokerGame {
     @Test
     public void shouldReturnCities() {
         game.getCityAt(new Position(1,1));
+        game.getCityAt(new Position(15,15));
+    }
+
+    @Test
+    public void shouldReturnTile() {
+        game.getTileAt(new Position(8,8));
+    }
+
+    @Test
+    public void shouldReturnUnit() {
+        game.getUnitAt(new Position(5,5));
     }
 
 }
