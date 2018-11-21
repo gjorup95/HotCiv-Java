@@ -71,7 +71,7 @@ class CompositionTool extends SelectionTool {
         specificTool.mouseDown(e, x, y);
         // TODO make setfocustool of type selectiontool
         selectionTool = new UnitMoveTool(drawingEditor,game);
-        specificTool = null;
+        //specificTool = null;
         selectionTool.mouseDown(e, x, y);
             from = GfxConstants.getPositionFromXY(x, y);
         }
