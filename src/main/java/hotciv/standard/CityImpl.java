@@ -4,6 +4,8 @@ import hotciv.framework.City;
 import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 
+import java.util.UUID;
+
 /**
  * @ author Troels Gjørup
  * 29-08-2018
@@ -14,6 +16,7 @@ public class CityImpl implements City {
     private int population;
     private String unitProductionFocus;
     private String workforceFocus;
+    private final String objectId;
 
 
     public CityImpl(Player owner) {
@@ -21,6 +24,7 @@ public class CityImpl implements City {
         population = 1;
         unitProductionFocus = GameConstants.ARCHER;
         workforceFocus = GameConstants.productionFocus;
+        objectId = UUID.randomUUID().toString();
     }
 
     @Override
@@ -46,6 +50,11 @@ public class CityImpl implements City {
     @Override
     public String getWorkforceFocus() {
         return workforceFocus;
+    }
+
+    @Override
+    public String getId() {
+        return objectId;
     }
 
     public void setUnitProductionFocus(String unitFocus) {

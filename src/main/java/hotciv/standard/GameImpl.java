@@ -306,7 +306,6 @@ public class GameImpl implements Game {
     @Override
     public void addObserver(GameObserver observer) {
         observers.add(observer);
-
     }
 
     @Override

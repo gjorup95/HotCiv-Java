@@ -9,7 +9,10 @@ import com.google.gson.JsonParser;
 import javax.servlet.http.HttpServletResponse;
 import frds.broker.Invoker;
 import frds.broker.ReplyObject;
+import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
+import hotciv.standard.TileImpl;
+import hotciv.standard.UnitImpl;
 import hotciv.stub.StubGame3;
 import javafx.geometry.Pos;
 
@@ -78,8 +81,8 @@ public class HotCivGameInvoker implements Invoker {
             Position p = gson.fromJson(array.get(0), Position.class);
 
             Player owner = game.getCityAt(p).getOwner();
-            CityServant city = new CityServant(owner);
-            String id = city.getObjectId();
+            CityImpl city = new CityImpl(owner);
+            String id = city.getId();
             objectStorage.putCity(id,city);
 
             reply = new ReplyObject(HttpServletResponse.SC_CREATED, gson.toJson(id));
@@ -87,16 +90,21 @@ public class HotCivGameInvoker implements Invoker {
 
         if(operationName.equals(MarshallingConstants.GAME_GET_TILE_AT)) {
             Position p = gson.fromJson(array.get(0), Position.class);
-            TileServant tile = new TileServant(game.getTileAt(p).getTypeString());
-            String id = tile.getObjectId();
+
+            TileImpl tile = new TileImpl(game.getTileAt(p).getTypeString());
+            String id = tile.getId();
             objectStorage.putTile(id,tile);
+
             reply = new ReplyObject(HttpServletResponse.SC_CREATED, gson.toJson(id));
         }
 
         if(operationName.equals(MarshallingConstants.GAME_GET_UNIT_AT)) {
             Position p = gson.fromJson(array.get(0), Position.class);
-            UnitServant unit = new UnitServant(game.getUnitAt(p).getTypeString(), game.getUnitAt(p).getOwner());
-            String id = unit.getObjectId();
+
+            Player owner = game.getUnitAt(p).getOwner();
+            String unitType = game.getUnitAt(p).getTypeString();
+            UnitImpl unit = new UnitImpl(unitType, owner);
+            String id = unit.getId();
             objectStorage.putUnit(id,unit);
 
             reply = new ReplyObject(HttpServletResponse.SC_CREATED, gson.toJson(id));

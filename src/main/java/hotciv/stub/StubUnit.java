@@ -31,4 +31,9 @@ public class StubUnit implements Unit {
     public int getAttackingStrength() {
         return 0;
     }
+
+    @Override
+    public String getId() {
+        return null;
+    }
 }

@@ -28,7 +28,7 @@ public class HotCivServer {
         int port = 3784;
         // Define the server side delegates
 
-        Game game = new GameImpl(new AlphaCivGameFactory());
+        Game game = new GameImpl(new SemiCivGameFactory());
         Invoker invoker = new RootInvoker(game);
 
         SocketServerRequestHandler ssrh = new SocketServerRequestHandler();

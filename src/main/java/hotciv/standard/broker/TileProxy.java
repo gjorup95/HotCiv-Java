@@ -22,4 +22,9 @@ public class TileProxy implements Tile, ClientProxy {
 
         return tileType;
     }
+
+    @Override
+    public String getId() {
+        return objectId;
+    }
 }

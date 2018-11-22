@@ -15,10 +15,6 @@ public class CityProxy implements City, ClientProxy {
         this.objectId = objectId;
     }
 
-    public String getObjectId() {
-        return objectId;
-    }
-
     @Override
     public Player getOwner() {
         Player p = null;
@@ -51,5 +47,10 @@ public class CityProxy implements City, ClientProxy {
     public String getWorkforceFocus() {
         // Not implemented
         return null;
+    }
+
+    @Override
+    public String getId() {
+        return objectId;
     }
 }

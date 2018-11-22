@@ -2,6 +2,8 @@ package hotciv.standard;
 import hotciv.framework.Player;
 import hotciv.framework.Unit;
 
+import java.util.UUID;
+
 import static hotciv.framework.GameConstants.BOMB;
 
 /**
@@ -15,6 +17,7 @@ public class UnitImpl implements Unit {
     private int defensiveStrength;
     private boolean actionUsed;
     private int attackingStrength;
+    private final String objectId;
 
 
     public UnitImpl(String s, Player owner) {
@@ -29,6 +32,7 @@ public class UnitImpl implements Unit {
             defensiveStrength = 1;
             moveCount = 2;
         }
+        objectId = UUID.randomUUID().toString();
     }
     @Override
     public String getTypeString() {
@@ -53,6 +57,11 @@ public class UnitImpl implements Unit {
     @Override
     public int getAttackingStrength() {
         return attackingStrength;
+    }
+
+    @Override
+    public String getId() {
+        return objectId;
     }
 
     public void setMoveCount(int moveCountAfterMovement) {

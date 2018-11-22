@@ -15,7 +15,7 @@ public class UnitProxy implements Unit, ClientProxy {
         this.objectId = objectId;
     }
 
-    public String getObjectId() {
+    public String getId() {
         return objectId;
     }
 

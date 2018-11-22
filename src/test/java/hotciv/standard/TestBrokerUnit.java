@@ -57,12 +57,12 @@ public class TestBrokerUnit {
     @Test
     public void shouldReturnDefensiveStrength() {
         int defStrength = game.getUnitAt(new Position(5,5)).getDefensiveStrength();
-        assertThat(defStrength, is(0));
+        assertThat(defStrength, is(1));
     }
 
     @Test
     public void shouldReturnAttackStrength() {
         int attackStregth = game.getUnitAt(new Position(5,5)).getAttackingStrength();
-        assertThat(attackStregth, is(0));
+        assertThat(attackStregth, is(1));
     }
 }

@@ -23,7 +23,7 @@ public class UnitServant implements Unit, Servant {
 
     }
 
-    public String getObjectId() {
+    public String getId() {
         return objectId;
     }
 

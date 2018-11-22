@@ -83,6 +83,9 @@ class CompositionTool extends SelectionTool {
     }
 
     public void mouseUp(MouseEvent e, int x, int y) {
+        if (drawingEditor.drawing().findFigure(GfxConstants.REFRESH_BUTTON_X,GfxConstants.REFRESH_BUTTON_Y)== drawingEditor.drawing().findFigure(x,y)) {
+            editor.drawing().requestUpdate();
+        }
         if (game.getTileAt(from) != game.getTileAt(GfxConstants.getPositionFromXY(x, y))) {
             selectionTool.mouseUp(e, x, y);
         }

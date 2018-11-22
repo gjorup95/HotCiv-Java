@@ -22,10 +22,6 @@ public class CityServant implements City, Servant {
         unitProductionFocus = GameConstants.ARCHER;
     }
 
-    public String getObjectId() {
-        return objectId;
-    }
-
     @Override
     public Player getOwner() {
         return owner;
@@ -49,5 +45,10 @@ public class CityServant implements City, Servant {
     @Override
     public String getWorkforceFocus() {
         return null;
+    }
+
+    @Override
+    public String getId() {
+        return objectId;
     }
 }

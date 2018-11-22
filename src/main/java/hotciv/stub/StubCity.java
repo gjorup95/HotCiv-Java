@@ -19,10 +19,6 @@ public class StubCity implements City {
         objectId = UUID.randomUUID().toString();
     }
 
-    public String geteObjectId() {
-       return objectId;
-    }
-
     @Override
     public Player getOwner() {
         return owner;
@@ -50,6 +46,11 @@ public class StubCity implements City {
     @Override
     public String getWorkforceFocus() {
         return workforceFocus;
+    }
+
+    @Override
+    public String getId() {
+        return objectId;
     }
 
     public void setWorkforceFocus(String workforceFocus) {

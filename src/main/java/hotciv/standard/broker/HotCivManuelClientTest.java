@@ -18,6 +18,7 @@ public class HotCivManuelClientTest {
     }
 
     public HotCivManuelClientTest(String hostname) {
+
         System.out.println("=== HotCiv MANUEL TEST Client  (Socket)  (host:" + hostname + ") ===");
 
         // Setup broker part
@@ -37,7 +38,7 @@ public class HotCivManuelClientTest {
         System.out.println(" -> Game age      " + game.getAge());
         System.out.println(" -> Game winner   " + game.getWinner());
         System.out.println(" -> Game PIT      " + game.getPlayerInTurn());
-        System.out.println(" -> Game move     " + game.moveUnit(new Position(2, 0), new Position(3,3)));
+        // System.out.println(" -> Game move     " + game.moveUnit(new Position(2, 0), new Position(3,3)));
 
         game.endOfTurn();
         System.out.println(" -> Game PIT after endOfTurn    " + game.getPlayerInTurn());
