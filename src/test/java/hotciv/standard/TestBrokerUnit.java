@@ -18,7 +18,7 @@ import static org.junit.Assert.assertThat;
 
 public class TestBrokerUnit {
 
-    private Unit unit;
+    private Game game;
 
     @Before
     public void setUp() {
@@ -32,36 +32,37 @@ public class TestBrokerUnit {
 
         Requestor requestor = new StandardJSONRequestor(crh);
 
-        unit = new UnitProxy("", requestor);
+        game = new GameProxy(requestor);
     }
 
     @Test
     public void shouldReturnTypeString() {
-        String unitType = unit.getTypeString();
+        // Teststub 3 green_archer_position = new Position(5,5)
+        String unitType = game.getUnitAt(new Position(5,5)).getTypeString();
         assertThat(unitType, is(GameConstants.ARCHER));
     }
 
     @Test
     public void shouldReturnOwner() {
-        Player owner = unit.getOwner();
+        Player owner = game.getUnitAt(new Position(5,5)).getOwner();
         assertThat(owner, is(Player.GREEN));
     }
 
     @Test
     public void shouldReturnMoveCount() {
-        int moveCount = unit.getMoveCount();
+        int moveCount = game.getUnitAt(new Position(5,5)).getMoveCount();
         assertThat(moveCount, is(1));
     }
 
     @Test
     public void shouldReturnDefensiveStrength() {
-        int defStrength = unit.getDefensiveStrength();
+        int defStrength = game.getUnitAt(new Position(5,5)).getDefensiveStrength();
         assertThat(defStrength, is(0));
     }
 
     @Test
     public void shouldReturnAttackStrength() {
-        int attackStregth = unit.getAttackingStrength();
+        int attackStregth = game.getUnitAt(new Position(5,5)).getAttackingStrength();
         assertThat(attackStregth, is(0));
     }
 }

@@ -4,10 +4,7 @@ import frds.broker.ClientRequestHandler;
 import frds.broker.Invoker;
 import frds.broker.Requestor;
 import frds.broker.marshall.json.StandardJSONRequestor;
-import hotciv.framework.Game;
-import hotciv.framework.GameConstants;
-import hotciv.framework.GameObserver;
-import hotciv.framework.Tile;
+import hotciv.framework.*;
 import hotciv.standard.broker.*;
 import hotciv.stub.StubGame3;
 import org.junit.Before;
@@ -18,7 +15,7 @@ import static org.hamcrest.CoreMatchers.*;
 
 public class TestBrokerTile {
 
-    private Tile tile;
+    private Game game;
 
     @Before
     public void setUp() {
@@ -32,12 +29,13 @@ public class TestBrokerTile {
 
         Requestor requestor = new StandardJSONRequestor(crh);
 
-        tile = new TileProxy("", requestor);
+        game = new GameProxy(requestor);
     }
 
     @Test
     public void shouldReturnTileType() {
-        String tileType = tile.getTypeString();
+        // There is ocean tile at (8,8) in StubGame3.
+        String tileType = game.getTileAt(new Position(8,8)).getTypeString();
         assertThat(tileType, is(GameConstants.OCEANS));
     }
 }

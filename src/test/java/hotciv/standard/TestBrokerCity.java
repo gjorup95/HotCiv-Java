@@ -14,10 +14,13 @@ import static org.hamcrest.CoreMatchers.*;
 
 import frds.broker.Invoker;
 
+import java.util.UUID;
+
 import static org.junit.Assert.assertThat;
 
 public class TestBrokerCity {
 
+    private Game game;
     private City city;
 
     @Before
@@ -33,30 +36,31 @@ public class TestBrokerCity {
 
         Requestor requestor = new StandardJSONRequestor(crh);
 
-        city = new CityProxy("", requestor);
+        game = new GameProxy(requestor);
     }
 
     @Test
     public void shouldReturnGreenOwnerOfCity() {
-        Player owner = city.getOwner();
+        // Teststub 3 has a green city on position (1,1)
+        Player owner = game.getCityAt(new Position(1,1)).getOwner();
         assertThat(owner, is(Player.GREEN));
     }
 
     @Test
     public void shouldReturnSizeOfCity() {
-        int size = city.getSize();
-        assertThat(size, is(7));
+        int size = game.getCityAt(new Position(1,1)).getSize();
+        assertThat(size, is(1));
     }
 
     @Test
     public void shouldReturnTreasuryOfCity() {
-        int treasury = city.getTreasury();
-        assertThat(treasury, is(47));
+        int treasury = game.getCityAt(new Position(1,1)).getTreasury();
+        assertThat(treasury, is(0));
     }
 
     @Test
     public void shouldReturnProductionFocus() {
-        String production = city.getProduction();
-        assertThat(production, is(GameConstants.foodFocus));
+        String production = game.getCityAt(new Position(1,1)).getProduction();
+        assertThat(production, is(GameConstants.ARCHER));
     }
 }

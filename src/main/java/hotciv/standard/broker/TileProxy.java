@@ -17,7 +17,7 @@ public class TileProxy implements Tile, ClientProxy {
     @Override
     public String getTypeString() {
         String tileType = null;
-        tileType = requestor.sendRequestAndAwaitReply("not_used", MarshallingConstants.TILE_GET_TYPE_STRING,
+        tileType = requestor.sendRequestAndAwaitReply(objectId, MarshallingConstants.TILE_GET_TYPE_STRING,
                 String.class, "no-arguments");
 
         return tileType;

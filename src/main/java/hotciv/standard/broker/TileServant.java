@@ -21,6 +21,6 @@ public class TileServant implements Tile, Servant {
 
     @Override
     public String getTypeString() {
-        return null;
+        return tileType;
     }
 }

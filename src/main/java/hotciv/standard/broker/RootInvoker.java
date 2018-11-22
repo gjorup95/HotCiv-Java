@@ -32,10 +32,6 @@ public class RootInvoker implements Invoker {
         invokerMap.put(MarshallingConstants.TILE_PREFIX, tileInvoker);
         Invoker unitInvoker = new HotCivUnitInvoker(objectStorage);
         invokerMap.put(MarshallingConstants.UNIT_PREFIX, unitInvoker);
-
-
-
-
     }
 
     @Override

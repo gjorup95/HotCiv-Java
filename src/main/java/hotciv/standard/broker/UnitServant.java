@@ -11,11 +11,16 @@ public class UnitServant implements Unit, Servant {
     private final String unitType;
     private final Player owner;
     private final String objectId;
+    private int defensiveStrength;
+    private int attackStrength;
 
     public UnitServant(String s, Player owner) {
         this.unitType = s;
         this.owner = owner;
         objectId = UUID.randomUUID().toString();
+        defensiveStrength = 1;
+        attackStrength = 1;
+
     }
 
     public String getObjectId() {
@@ -24,26 +29,26 @@ public class UnitServant implements Unit, Servant {
 
     @Override
     public String getTypeString() {
-        return null;
+        return unitType;
     }
 
     @Override
     public Player getOwner() {
-        return null;
+        return owner;
     }
 
     @Override
     public int getMoveCount() {
-        return 0;
+        return 1;
     }
 
     @Override
     public int getDefensiveStrength() {
-        return 0;
+        return defensiveStrength;
     }
 
     @Override
     public int getAttackingStrength() {
-        return 0;
+        return attackStrength;
     }
 }

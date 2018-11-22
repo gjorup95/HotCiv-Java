@@ -76,9 +76,10 @@ public class HotCivGameInvoker implements Invoker {
 
         if(operationName.equals(MarshallingConstants.GAME_GET_CITY_AT)) {
             Position p = gson.fromJson(array.get(0), Position.class);
-            CityServant city = new CityServant(game.getCityAt(p).getOwner());
+
+            Player owner = game.getCityAt(p).getOwner();
+            CityServant city = new CityServant(owner);
             String id = city.getObjectId();
-            System.out.println(id);
             objectStorage.putCity(id,city);
 
             reply = new ReplyObject(HttpServletResponse.SC_CREATED, gson.toJson(id));
@@ -88,9 +89,7 @@ public class HotCivGameInvoker implements Invoker {
             Position p = gson.fromJson(array.get(0), Position.class);
             TileServant tile = new TileServant(game.getTileAt(p).getTypeString());
             String id = tile.getObjectId();
-            System.out.println(id);
             objectStorage.putTile(id,tile);
-
             reply = new ReplyObject(HttpServletResponse.SC_CREATED, gson.toJson(id));
         }
 
@@ -98,7 +97,6 @@ public class HotCivGameInvoker implements Invoker {
             Position p = gson.fromJson(array.get(0), Position.class);
             UnitServant unit = new UnitServant(game.getUnitAt(p).getTypeString(), game.getUnitAt(p).getOwner());
             String id = unit.getObjectId();
-            System.out.println(id);
             objectStorage.putUnit(id,unit);
 
             reply = new ReplyObject(HttpServletResponse.SC_CREATED, gson.toJson(id));
