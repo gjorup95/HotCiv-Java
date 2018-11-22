@@ -5,6 +5,7 @@ import frds.broker.Requestor;
 import frds.broker.ClientProxy;
 import hotciv.framework.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
 public class GameProxy implements Game, ClientProxy {
@@ -76,23 +77,46 @@ public class GameProxy implements Game, ClientProxy {
 
     @Override
     public Tile getTileAt(Position p) {
-        String id = requestor.sendRequestAndAwaitReply("none", MarshallingConstants.GAME_GET_TILE_AT, String.class, p);
-        Tile proxy = new TileProxy(id, requestor);
+        Tile proxy = null;
+        try {
+            String id = requestor.sendRequestAndAwaitReply("none", MarshallingConstants.GAME_GET_TILE_AT, String.class, p);
+            proxy = new TileProxy(id, requestor);
+        } catch(IPCException exc) {
+            if (exc.getStatusCode() != HttpServletResponse.SC_NOT_FOUND) {
+                throw exc;
+            }
+        }
         return proxy;
     }
 
     @Override
     public Unit getUnitAt(Position p) {
-        String id = requestor.sendRequestAndAwaitReply("none", MarshallingConstants.GAME_GET_UNIT_AT, String.class, p);
-        Unit proxy = new UnitProxy(id, requestor);
-        return proxy;
+        Unit proxy = null;
+        try {
+            String id = requestor.sendRequestAndAwaitReply("none", MarshallingConstants.GAME_GET_UNIT_AT, String.class, p);
+            proxy = new UnitProxy(id, requestor);
+        }catch (IPCException exc){
+            if(exc.getStatusCode()!= HttpServletResponse.SC_NOT_FOUND){
+                throw exc;
+            }
+            System.out.println("Dårligt kald");
+        }
+            return proxy;
     }
 
 
     @Override
     public City getCityAt(Position p) {
+        City proxy = null;
+        try {
         String id = requestor.sendRequestAndAwaitReply("none", MarshallingConstants.GAME_GET_CITY_AT, String.class, p);
-        City proxy = new CityProxy(id, requestor);
+        proxy = new CityProxy(id, requestor);
+        }catch (IPCException exc){
+            if(exc.getStatusCode()!= HttpServletResponse.SC_NOT_FOUND){
+                throw exc;
+            }
+            System.out.println("Dårligt kald");
+        }
         return proxy;
     }
 

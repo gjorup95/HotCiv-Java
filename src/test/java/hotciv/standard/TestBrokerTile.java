@@ -30,6 +30,7 @@ public class TestBrokerTile {
         Requestor requestor = new StandardJSONRequestor(crh);
 
         game = new GameProxy(requestor);
+        game.addObserver(nullObserver);
     }
 
     @Test

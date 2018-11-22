@@ -201,6 +201,10 @@ public class CivDrawing
         cityMap.clear();
     }
 
+    protected void removeText() {
+        delegate.remove(ageTextIcon);
+    }
+
     protected void defineIcons() {
         turnShieldIcon =
                 new ImageFigure("redshield",
@@ -327,6 +331,7 @@ public class CivDrawing
         // A request has been issued to repaint
         // everything. We simply rebuild the
         // entire Drawing.
+        // defineIcons();
         defineCityMap();
         defineUnitMap();
 
