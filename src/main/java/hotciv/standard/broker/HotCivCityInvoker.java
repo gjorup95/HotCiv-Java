@@ -54,6 +54,11 @@ public class HotCivCityInvoker implements Invoker {
             reply = new ReplyObject((HttpServletResponse.SC_OK), gson.toJson(production));
         }
 
+        if(operationName.equals(MarshallingConstants.CITY_GET_WORKFORCE_FOCUS)) {
+            String workforceFocus = city.getWorkforceFocus();
+            reply = new ReplyObject((HttpServletResponse.SC_OK), gson.toJson(workforceFocus));
+        }
+
         return reply;
     }
 

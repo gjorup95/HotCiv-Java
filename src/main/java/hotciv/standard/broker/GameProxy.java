@@ -99,7 +99,6 @@ public class GameProxy implements Game, ClientProxy {
             if(exc.getStatusCode()!= HttpServletResponse.SC_NOT_FOUND){
                 throw exc;
             }
-            System.out.println("Dårligt kald");
         }
             return proxy;
     }
@@ -115,7 +114,6 @@ public class GameProxy implements Game, ClientProxy {
             if(exc.getStatusCode()!= HttpServletResponse.SC_NOT_FOUND){
                 throw exc;
             }
-            System.out.println("Dårligt kald");
         }
         return proxy;
     }
@@ -134,7 +132,6 @@ public class GameProxy implements Game, ClientProxy {
     @Override
     public void setTileFocus(Position position) {
         getObservers().forEach(gameObserver -> gameObserver.tileFocusChangedAt(position));
-
     }
 
     public ArrayList<GameObserver> getObservers() {

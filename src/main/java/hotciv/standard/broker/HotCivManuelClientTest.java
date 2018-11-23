@@ -52,9 +52,7 @@ public class HotCivManuelClientTest {
 
         }
 
-
-
-    /*private void parseCommandlineParameters(String[] args) {
+    private void parseCommandlineParameters(String[] args) {
         if (args.length < 4) {
             explainAndFail();
         }

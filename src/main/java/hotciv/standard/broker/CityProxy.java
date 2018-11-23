@@ -45,8 +45,9 @@ public class CityProxy implements City, ClientProxy {
 
     @Override
     public String getWorkforceFocus() {
-        // Not implemented
-        return null;
+        String workforceFocus = null;
+        workforceFocus = requestor.sendRequestAndAwaitReply(objectId, MarshallingConstants.CITY_GET_PRODUCTION, String.class, "no-arguments");
+        return workforceFocus;
     }
 
     @Override

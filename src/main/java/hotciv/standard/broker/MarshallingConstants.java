@@ -25,6 +25,7 @@ public class MarshallingConstants {
     public static final String CITY_GET_SIZE = CITY_PREFIX + "_get_size";
     public static final String CITY_GET_TREASURY = CITY_PREFIX + "_get_treasury";
     public static final String CITY_GET_PRODUCTION = CITY_PREFIX + "_get_production";
+    public static final String CITY_GET_WORKFORCE_FOCUS = CITY_PREFIX + "_get_workforce_focus";
 
     // Unit methods for marshalling
     public static final String UNIT_GET_TYPE_STRING = UNIT_PREFIX + "_get_type_string";
