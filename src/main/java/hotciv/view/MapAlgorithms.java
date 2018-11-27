@@ -64,7 +64,7 @@ class MapAlgorithms {
       p = new Position( row+offsetRow[i], col+offsetCol[i]);
       if ( p.getRow() >= 0 && p.getRow() < GameConstants.WORLDSIZE &&
            p.getColumn() >= 0 && p.getColumn() < GameConstants.WORLDSIZE &&
-           game.getTileAt(p).getTypeString() != GameConstants.OCEANS ) {
+           !game.getTileAt(p).getTypeString().equals(GameConstants.OCEANS) ) {
         coding[i] = '1';
       }
     }

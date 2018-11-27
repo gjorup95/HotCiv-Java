@@ -33,7 +33,6 @@ public class HotCivManuelClientTest {
 
         // Setup broker part
 
-
         ClientRequestHandler crh = new SocketClientRequestHandler();
         crh.setServer(hostname, 3784);
 
@@ -41,7 +40,6 @@ public class HotCivManuelClientTest {
 
         Game game = new GameProxy(requestor);
         // testSimpleMethods(game);
-
 
             DrawingEditor editor =
                     new MiniDrawApplication("The SemiCiv game",
