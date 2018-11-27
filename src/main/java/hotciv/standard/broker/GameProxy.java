@@ -20,7 +20,7 @@ public class GameProxy implements Game, ClientProxy {
     @Override
     public Player getWinner() {
         Player p = null;
-        p = requestor.sendRequestAndAwaitReply("not_used",MarshallingConstants.GAME_GET_WINNER, Player.class, "no_argument");
+        p = requestor.sendRequestAndAwaitReply("not_used", MarshallingConstants.GAME_GET_WINNER, Player.class, "no_argument");
         return p;
     }
 
@@ -46,7 +46,7 @@ public class GameProxy implements Game, ClientProxy {
         unitMoved = requestor.sendRequestAndAwaitReply("not_used",
                 "game_move_unit",
                 boolean.class, from, to);
-        if(unitMoved) {
+        if (unitMoved) {
             getObservers().forEach(gameObserver -> gameObserver.worldChangedAt(from));
             getObservers().forEach(gameObserver -> gameObserver.worldChangedAt(to));
         }
@@ -60,7 +60,7 @@ public class GameProxy implements Game, ClientProxy {
     @Override
     public void endOfTurn() {
         requestor.sendRequestAndAwaitReply("not_used", MarshallingConstants.GAME_END_OF_TURN, null, "no-arguments");
-        getObservers().forEach(gameObserver -> gameObserver.turnEnds(getPlayerInTurn(),getAge()));
+        getObservers().forEach(gameObserver -> gameObserver.turnEnds(getPlayerInTurn(), getAge()));
     }
 
 
@@ -81,7 +81,7 @@ public class GameProxy implements Game, ClientProxy {
         try {
             String id = requestor.sendRequestAndAwaitReply("none", MarshallingConstants.GAME_GET_TILE_AT, String.class, p);
             proxy = new TileProxy(id, requestor);
-        } catch(IPCException exc) {
+        } catch (IPCException exc) {
             if (exc.getStatusCode() != HttpServletResponse.SC_NOT_FOUND) {
                 throw exc;
             }
@@ -93,31 +93,33 @@ public class GameProxy implements Game, ClientProxy {
     public Unit getUnitAt(Position p) {
         Unit proxy = null;
         try {
-            String id = requestor.sendRequestAndAwaitReply("none", MarshallingConstants.GAME_GET_UNIT_AT, String.class, p);
+            String id = requestor.sendRequestAndAwaitReply("none",
+                    MarshallingConstants.GAME_GET_UNIT_AT,
+                    String.class, p);
             proxy = new UnitProxy(id, requestor);
-        }catch (IPCException exc){
-            if(exc.getStatusCode()!= HttpServletResponse.SC_NOT_FOUND){
-                throw exc;
-            }
-        }
-            return proxy;
-    }
-
-
-    @Override
-    public City getCityAt(Position p) {
-        City proxy = null;
-        try {
-        String id = requestor.sendRequestAndAwaitReply("none", MarshallingConstants.GAME_GET_CITY_AT, String.class, p);
-        proxy = new CityProxy(id, requestor);
-        }catch (IPCException exc){
-            if(exc.getStatusCode()!= HttpServletResponse.SC_NOT_FOUND){
+        } catch (IPCException exc) {
+            if (exc.getStatusCode() != HttpServletResponse.SC_NOT_FOUND) {
                 throw exc;
             }
         }
         return proxy;
     }
 
+    @Override
+    public City getCityAt(Position p) {
+        City proxy = null;
+        try {
+            String id = requestor.sendRequestAndAwaitReply("none",
+                    MarshallingConstants.GAME_GET_CITY_AT,
+                    String.class, p);
+            proxy = new CityProxy(id, requestor);
+        } catch (IPCException exc) {
+            if (exc.getStatusCode() != HttpServletResponse.SC_NOT_FOUND) {
+                throw exc;
+            }
+        }
+        return proxy;
+    }
 
     @Override
     public void changeWorkForceFocusInCityAt(Position p, String balance) {

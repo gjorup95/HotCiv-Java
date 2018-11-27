@@ -70,6 +70,7 @@ public class MapView
     ImageManager im = ImageManager.getSingleton();
     Image img;
     Position p;
+
     
     // draw the map as a matrix of tiles with cities on top
     for ( int r = 0; r < GameConstants.WORLDSIZE; r++ ) {
@@ -81,8 +82,8 @@ public class MapView
         Tile t = game.getTileAt(p);
         String image_name = t.getTypeString();
         // special handling of ocean coasts
-        if ( image_name == GameConstants.OCEANS ) {
-          image_name = image_name + 
+        if ( image_name.equals(GameConstants.OCEANS)) {
+          image_name = image_name +
             MapAlgorithms.getCoastlineCoding(game, p );
         }
         img = im.getImage( image_name );

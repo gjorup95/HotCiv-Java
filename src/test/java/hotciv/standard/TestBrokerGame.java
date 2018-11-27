@@ -61,7 +61,7 @@ public class TestBrokerGame {
     public void shouldMoveUnit() {
         boolean movedUnit = false;
 
-        if(game.moveUnit(new Position(5,5), new Position(5,6))) {
+        if (game.moveUnit(new Position(5, 5), new Position(5, 6))) {
             movedUnit = true;
         }
         assertThat(movedUnit, is(true));
@@ -69,9 +69,9 @@ public class TestBrokerGame {
 
     @Test
     public void shouldChangeProductionInCity() {
-        game.changeProductionInCityAt(new Position(10,10), GameConstants.ARCHER);
+        game.changeProductionInCityAt(new Position(10, 10), GameConstants.ARCHER);
         StubGame3 localStubGame = (StubGame3) servant;
-        assertThat(localStubGame.hasProductionChanged(),is(true ));
+        assertThat(localStubGame.hasProductionChanged(), is(true));
     }
 
     @Test
@@ -86,24 +86,45 @@ public class TestBrokerGame {
     public void shouldPerformUnitActionAt() {
         StubGame3 localStubGame = (StubGame3) servant;
         assertThat(localStubGame.hasPerformUnitActionAtBeenCalled(), is(false));
-        game.performUnitActionAt(new Position(12,12));
+        game.performUnitActionAt(new Position(12, 12));
         assertThat(localStubGame.hasPerformUnitActionAtBeenCalled(), is(true));
     }
 
     @Test
     public void shouldReturnCities() {
-        game.getCityAt(new Position(1,1));
-        game.getCityAt(new Position(15,15));
+        // This method uses StubGame3 which has GREEN_CITY on position (1,1)
+        // And RED_CITY on position (15,15)
+        assertThat(game.getCityAt(new Position(1, 1)), is(notNullValue()));
+        assertThat(game.getCityAt(new Position(1, 5)), is(nullValue()));
+
+        // Testing simple getOwner() methods.
+        Player player = game.getCityAt(new Position(15, 15)).getOwner();
+        assertThat(player, is(notNullValue()));
+        assertThat(player, is(Player.RED));
     }
 
     @Test
     public void shouldReturnTile() {
-        game.getTileAt(new Position(8,8));
+        // This method uses StubGame3 which has OCEAN_TILE on position (8,8)
+        assertThat(game.getTileAt(new Position(8, 8)), is(notNullValue()));
+        assertThat(game.getTileAt(new Position(2, 9)), is(nullValue()));
+
+        // Testing simple getTypeString() methods.
+        String tileType = game.getTileAt(new Position(8, 8)).getTypeString();
+        assertThat(tileType, is(notNullValue()));
+        assertThat(tileType, is(GameConstants.OCEANS));
     }
 
     @Test
     public void shouldReturnUnit() {
-        game.getUnitAt(new Position(5,5));
+        // This method uses StubGame3 which has GREEN UNIT on position (5,5)
+        assertThat(game.getUnitAt(new Position(5, 5)), is(notNullValue()));
+        assertThat((game.getUnitAt(new Position(6, 6))), is(nullValue()));
+
+        // Testing simple getOwner() method
+        Player player = game.getUnitAt(new Position(5, 5)).getOwner();
+        assertThat(game.getUnitAt(new Position(5, 5)).getOwner(), is(notNullValue()));
+        assertThat(game.getUnitAt(new Position(5, 5)).getOwner(), is(Player.GREEN));
     }
 
 }
