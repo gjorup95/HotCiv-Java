@@ -5,6 +5,10 @@ import hotciv.framework.Game;
 import hotciv.standard.AlphaCivGameFactory;
 import hotciv.standard.GameImpl;
 import hotciv.standard.SemiCivGameFactory;
+import hotciv.visual.CompositionTool;
+import hotciv.visual.HotCivFactory4;
+import minidraw.framework.DrawingEditor;
+import minidraw.standard.MiniDrawApplication;
 
 public class HotCivServer {
 
@@ -34,6 +38,12 @@ public class HotCivServer {
         SocketServerRequestHandler ssrh = new SocketServerRequestHandler();
         ssrh.setPortAndInvoker(port, invoker);
 
+        DrawingEditor editor =
+                new MiniDrawApplication("The SemiCiv game",
+                        new HotCivFactory4(game));
+        editor.open();
+        editor.setTool(new CompositionTool(editor,game));
+        editor.showStatus("Play semiCiv");
         System.out.println("=== HotCiv Socket based Server Request Handler (port:"
                 + port + ") ===");
         System.out.println(" Use ctrl-c to terminate!");

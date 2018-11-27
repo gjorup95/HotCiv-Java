@@ -34,13 +34,15 @@ public class HotCivManuelClientTest {
         // Setup broker part
 
 
-        ClientRequestHandler crh = new SocketClientRequestHandler();
+       /* ClientRequestHandler crh = new SocketClientRequestHandler();
         crh.setServer(hostname, 3784);
 
-        Requestor requestor = new StandardJSONRequestor(crh);
+        Requestor requestor = new StandardJSONRequestor(crh); */
+        ClientRequestHandler clientRequestHandler
+                = new SocketClientRequestHandler(hostname, 3784);
+        Requestor requestor = new StandardJSONRequestor(clientRequestHandler);
 
         Game game = new GameProxy(requestor);
-        // testSimpleMethods(game);
 
 
             DrawingEditor editor =
@@ -49,6 +51,7 @@ public class HotCivManuelClientTest {
             editor.open();
             editor.setTool(new CompositionTool(editor, game));
             editor.showStatus("Play semiCiv");
+
 
         }
 
