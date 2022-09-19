@@ -73,8 +73,8 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-HotCiv is a java project featuring different design patterns such as: Strategy-, Factory-, Observer-, Builder patterns and more.
-The project realises a budget version of the popular game civilization and is developed to facilitate a learning space for java development, unit testing, refactoring and the implementation of different design patterns to modularize the code base into a fitting Object oriented manner.
+HotCiv is a java project featuring different design patterns such as: Strategy-, Factory-, Observer-, Builder patterns and more. <br />
+The project realises a budget version of the popular game civilization and is developed to facilitate a learning space for java development, unit testing, refactoring and the implementation of different design patterns to modularize the code base into a fitting object oriented manner.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
