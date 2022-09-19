@@ -18,7 +18,7 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
-
+[![Product Name Screen Shot][product-screenshot]]
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -105,4 +105,5 @@ Project Link: [https://github.com/gjorup95/HotCiv-Java](https://github.com/gjoru
 [license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/troels-hune-gj%C3%B8rup-88566410b/
-[product-screenshot]: images/hotciv.png
+[
+-screenshot]: images/hotciv.png
