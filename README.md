@@ -17,14 +17,13 @@
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-
+[product-screenshot]
 
 
 <br />
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
- [![product][product-screenshot]]
   </a>
  
  
