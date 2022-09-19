@@ -18,7 +18,7 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
-[![Product Name Screen Shot][product-screenshot]]
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
