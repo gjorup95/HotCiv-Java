@@ -73,7 +73,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 HotCiv is a java project featuring different design patterns such as: Strategy-, Factory-, Observer-, Builder patterns and more. <br />
-The project realises a budget version of the popular game civilization and is developed to facilitate a learning space for java development, unit testing, refactoring and the implementation of different design patterns to modularize the code base into a fitting object oriented manner.
+The project realises a budget version of the popular game civilization and is developed to facilitate a learning space for java development, unit testing, refactoring and the implementation of different design patterns to modularize the code base into a fitting object oriented manner. <br/>
+The codebase is developed using the test driven development methodology where the writing of an automated test takes precedence over the immediate creation of functional code.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -81,7 +82,7 @@ The project realises a budget version of the popular game civilization and is de
 
 
 ### Built With
-
+Project is built with Maven & Gradle which are the sole organisers of dependencies in the project.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -89,31 +90,16 @@ The project realises a budget version of the popular game civilization and is de
 
 <!-- GETTING STARTED -->
 ## Getting Started
+To run the project <br/>
+Build with gradle <br/>
+Run HotCivServer <br/>
+Run HotCivClient <br/>
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+JAVA SDK
+Gradle
+Maven
 
 <!-- LICENSE -->
 ## License
