@@ -17,7 +17,7 @@
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-[product-screenshot]
+[![product-screenshot][product-screenshot]
 
 
 <br />
