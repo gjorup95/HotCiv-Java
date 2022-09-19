@@ -16,9 +16,11 @@
 
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
-<div align="center">
-[![product-screenshot][product-screenshot]
-</div>
+
+<p align="center">
+  <img src="https://github.com/gjorup95/HotCiv-Java/blob/master/images/Hotciv.png" />
+</p>
+
 
 <br />
 <!-- PROJECT LOGO -->
