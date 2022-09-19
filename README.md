@@ -17,16 +17,16 @@
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-<div align="center">
-  <img src="https://github.com/gjorup95/HotCiv-Java/blob/master/images/Hotciv.png" />
-</div>
+
 
 <h3 align="center">HotCiv</h3>
 
   <p align="center">
    Java project that follows the principles of the famous game Civilization and uses it as a learning ground for exploring different developer practices in the java language.
     <br />
-   
+   <div align="center">
+  <img src="https://github.com/gjorup95/HotCiv-Java/blob/master/images/Hotciv.png" />
+</div>
 </div>
 
 
