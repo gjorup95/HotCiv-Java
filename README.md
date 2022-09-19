@@ -19,7 +19,6 @@
 
 [![Product][product-screenshot]
 
-[![Product Name Screen Shot][product-screenshot]
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
