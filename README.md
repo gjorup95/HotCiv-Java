@@ -29,7 +29,7 @@
 <h3 align="center">HotCiv</h3>
 
   <p align="center">
-   Java project that follows the principles of the famous game Civilization and uses it as alearning ground for exploring different developer practices in the java language.
+   Java project that follows the principles of the famous game Civilization and uses it as a learning ground for exploring different developer practices in the java language.
     <br />
    
 </div>
