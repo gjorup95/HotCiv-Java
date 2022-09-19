@@ -21,8 +21,9 @@
 
 
 <br />
+ [![Product][product-screenshot]
 <div align="center">
-  [![Product][product-screenshot]
+ 
  
 
 <h3 align="center">HotCiv</h3>
