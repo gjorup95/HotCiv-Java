@@ -24,7 +24,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
- [![product][product-screenshot]
+ [![product][product-screenshot]]
   </a>
  
  
