@@ -1,12 +1,6 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
+
 
 
 
@@ -82,10 +76,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+HotCiv is a java project featuring different design patterns such as: Strategy-, Factory-, Observer-, Builder patterns and more.
+The project realises a budget version of the popular game civilization and is developed to facilitate a learning space for java development, unit testing, refactoring and the implementation of different design patterns to modularize the code base into a fitting Object oriented manner.
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
